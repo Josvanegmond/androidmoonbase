@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">moonville</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_new_game">NewGameActivity</string>
+    <string name="title_activity_available_resources">AvailableResourcesActivity</string>
+    <string name="title_activity_all_resources">AllResourcesActivity</string>
+    <string name="title_activity_dummy">DummyActivity</string>
+    <string name="title_activity_new_company">NewCompanyActivity</string>
+    <string name="title_activity_base_overview">BaseOverviewActivity</string>
+    <string name="title_activity_resources">ResourcesActivity</string>
+    <string name="title_activity_mega_project">MegaProjectActivity</string>
+    <string name="title_activity_buildings">BuildingsActivity</string>
+    <string name="title_activity_company_info">CompanyInfoActivity</string>
+    <string name="title_activity_building_info">BuildingInfoActivity</string>
+
+</resources>

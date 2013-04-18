@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="spaceappschallenge.moonville"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="spaceappschallenge.moonville.MainMenuActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.NewGameActivity"
+            android:label="@string/title_activity_new_game" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.AvailableResourcesActivity"
+            android:label="@string/title_activity_available_resources" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.AllResourcesActivity"
+            android:label="@string/title_activity_all_resources" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.activities.DummyActivity"
+            android:label="@string/title_activity_dummy" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.NewCompanyActivity"
+            android:label="@string/title_activity_new_company" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.BaseOverviewActivity"
+            android:label="@string/title_activity_base_overview" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.ResourcesActivity"
+            android:label="@string/title_activity_resources" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.MegaProjectActivity"
+            android:label="@string/title_activity_mega_project" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.BuildingsActivity"
+            android:label="@string/title_activity_buildings" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.CompanyInfoActivity"
+            android:label="@string/title_activity_company_info" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.activities.BuildingInfoActivity"
+            android:label="@string/title_activity_building_info" >
+        </activity>
+    </application>
+
+</manifest>
