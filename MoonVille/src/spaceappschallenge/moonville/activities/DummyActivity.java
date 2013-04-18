@@ -53,7 +53,7 @@ public class DummyActivity extends Activity {
 	protected void initMoonBase(){
 		initResources();
 		initBuildings();
-		initialMoonBase=new MoonBase(10, 10,10, initialResources, 100000, initialBuildings);
+		//initialMoonBase=new MoonBase(10, 10,10, initialResources, 100000, initialBuildings);
 	}
 	public void initUI() {
 		newCompanyButton = (Button) this.findViewById(R.id.newCompanyButton);

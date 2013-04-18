@@ -2,7 +2,8 @@ package spaceappschallenge.moonville.businessmodels;
 
 import java.util.List;
 
-public class Building {
+public class Building
+{
 	protected String name;
 	protected String info;
 	protected int amount;
@@ -36,9 +37,12 @@ public class Building {
 			
 		}
 	}
-	
-	
-	
+
+	public String getName()
+	{
+		return name;
+	}
+
 	
 	
 }

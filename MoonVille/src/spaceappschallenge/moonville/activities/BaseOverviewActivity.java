@@ -1,12 +1,18 @@
 package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.R;
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.HorizontalScrollView;
+import android.widget.ScrollView;
 
 public class BaseOverviewActivity extends Activity {
 
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -20,4 +26,33 @@ public class BaseOverviewActivity extends Activity {
 		return true;
 	}
 
+	
+
+	
+	//methods called by onClick property of button in xml
+	public void showBaseOverviewScreen( View view )
+	{
+		//we are already here
+		//view.getContext().startActivity( new Intent( this, BaseOverviewActivity.class ) );
+		//this.finish();
+	}
+	
+	public void showBuildingScreen( View view )
+	{
+		view.getContext().startActivity( new Intent( this, BuildingsActivity.class) );
+		this.finish();
+	}
+	
+	public void showResourcesScreen( View view )
+	{
+		view.getContext().startActivity( new Intent( this, ResourcesActivity.class ) );
+		this.finish();
+	}
+
+	
+	public void showExportScreen( View view )
+	{
+		view.getContext().startActivity( new Intent( this, ResourcesActivity.class ) );
+		this.finish();
+	}
 }

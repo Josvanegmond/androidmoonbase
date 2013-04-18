@@ -3,46 +3,45 @@
  */
 package spaceappschallenge.moonville.activities;
 
-import android.os.Bundle;
+import spaceappschallenge.moonville.R;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.businessmodels.*;
-import spaceappschallenge.moonville.managers.MoonBaseManager;
 
 
-public class NewCompanyActivity extends Activity {
+public class NewCompanyActivity extends Activity
+{
 
-	protected Button mNewCompanyButton;
-	protected MoonBaseManager mMoonBaseManager;
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_company);
-		initUI();
-		
+
+		initModel();
 	}
 	
-	protected void initUI(){
-		mNewCompanyButton= (Button)findViewById(R.id.newCompanyButton);
-		mNewCompanyButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				
-				
-			}
-		});
-	}
 	
-	protected void initModels(){
+	
+	protected void initModel()
+	{
 		//Dummy models
 		
 		//MoonBase moonBase = new MoonBase()
+		//MoonBase should become a singleton I think, best way to make it easily accessible -Jos
 	}
+	
+
+	//I changed the init method to this one, which is triggered by the onClick property in the xml of the button
+	//since we are using separate activities, this is a very easy way to implement navigation IMO.
+	public void showBaseOverviewScreen(View view)
+	{	
+		view.getContext().startActivity( new Intent( this, BaseOverviewActivity.class ) );
+		this.finish();
+	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
