@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="11.5.1">
+  <zoom_level>9</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>801</x>
+      <y>495</y>
+      <w>144</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;business class&gt;&gt;
+Building
+bg=green
+--
+- name
+- info
+- amount
+- inputResources
+- outputResources
+- requiredBuildings
+- requiredResources
+- powerInput
+- powerOutput</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>504</x>
+      <y>216</y>
+      <w>153</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;business class&gt;&gt;
+MoonBase
+bg=green
+--
+- researchLabSize
+- researchPoints
+- prospectingLevel
+- storedResources
+- chosenMoonSite
+- money
+- reputation
+- builtBuildings
+- builtMegaProjects
+- pendingImportCompanies
+- importResourceList
+- transportationSystem</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>954</x>
+      <y>297</y>
+      <w>135</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;business class&gt;&gt;
+Resource
+bg=green
+--
+- type
+- amount
+- quality</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1026</x>
+      <y>180</y>
+      <w>126</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;factory&gt;&gt;
+Resources
+bg=orange
+--
+- allResources
+- startingResources</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>576</x>
+      <y>414</y>
+      <w>242</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>m2= 1
+m1=*
+exists of &gt;</panel_attributes>
+    <additional_attributes>225;135;54;135;54;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1044</x>
+      <y>225</y>
+      <w>44</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;27;27;72</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>603</x>
+      <y>612</y>
+      <w>135</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;business class&gt;&gt;
+MegaProject
+bg=green
+--
+- name
+- requiredMegaProject
+- requiredResources</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>522</x>
+      <y>414</y>
+      <w>104</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>m1=0..5
+realises &gt;</panel_attributes>
+    <additional_attributes>81;216;54;216;54;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>810</x>
+      <y>423</y>
+      <w>107</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes>m1=0..*
+requires &gt;</panel_attributes>
+    <additional_attributes>90;72;90;45;27;45;27;72</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>612</x>
+      <y>540</y>
+      <w>107</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes>m1=0..1
+requires &gt;</panel_attributes>
+    <additional_attributes>90;72;90;45;27;45;27;72</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>630</x>
+      <y>270</y>
+      <w>341</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>m2=*
+stores &gt;</panel_attributes>
+    <additional_attributes>27;45;324;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>711</x>
+      <y>621</y>
+      <w>107</w>
+      <h>71</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;</panel_attributes>
+    <additional_attributes>90;27;45;27;27;54</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>810</x>
+      <y>189</y>
+      <w>135</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;business class&gt;&gt;
+ImportCompany
+bg=green
+--
+- info
+- demandingResources
+- payment</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>918</x>
+      <y>216</y>
+      <w>111</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>m1=*
+m2= *
+imports &gt;</panel_attributes>
+    <additional_attributes>27;45;63;45;63;81</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>630</x>
+      <y>216</y>
+      <w>197</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>attracts &gt;
+m2=*</panel_attributes>
+    <additional_attributes>27;45;180;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>918</x>
+      <y>360</y>
+      <w>178</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>inputs and outputs &gt;
+m1=0..*</panel_attributes>
+    <additional_attributes>99;27;99;198;27;198</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1035</x>
+      <y>630</y>
+      <w>117</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;factory&gt;&gt;
+Buildings
+bg=orange
+--
+- allBuildings
+- availableBuildings</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>918</x>
+      <y>621</y>
+      <w>134</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>117;27;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>144</x>
+      <y>693</y>
+      <w>144</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UI&gt;&gt;
+BuildingsScreen
+bg=yellow
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>63</x>
+      <y>468</y>
+      <w>135</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UI&gt;&gt;
+BaseOverviewScreen
+bg=yellow
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>117</x>
+      <y>288</y>
+      <w>107</w>
+      <h>71</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;54;90;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>144</x>
+      <y>549</y>
+      <w>144</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UI&gt;&gt;
+ResourcesScreen
+bg=yellow
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>63</x>
+      <y>486</y>
+      <w>98</w>
+      <h>107</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>81;90;27;90;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>288</x>
+      <y>216</y>
+      <w>144</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UseCase&gt;&gt;
+NextTurn
+bg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>0</x>
+      <y>324</y>
+      <w>144</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UI&gt;&gt;
+ProspectScreen
+bg=yellow
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>144</x>
+      <y>621</y>
+      <w>144</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UI&gt;&gt;
+MegaProjectScreen
+bg=yellow
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>63</x>
+      <y>486</y>
+      <w>98</w>
+      <h>179</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;27;27;162;81;162</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>207</x>
+      <y>297</y>
+      <w>144</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UseCase&gt;&gt;
+StartNewGame
+bg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>324</x>
+      <y>270</y>
+      <w>197</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>create new &gt;</panel_attributes>
+    <additional_attributes>27;45;180;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>99</x>
+      <y>306</y>
+      <w>125</w>
+      <h>179</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>108;27;27;162</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>216</x>
+      <y>378</y>
+      <w>117</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UseCase&gt;&gt;
+ContinueGame
+bg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>63</x>
+      <y>486</y>
+      <w>98</w>
+      <h>251</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>81;234;27;234;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>144</x>
+      <y>378</y>
+      <w>89</w>
+      <h>107</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>72;27;27;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>315</x>
+      <y>621</y>
+      <w>108</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UseCase&gt;&gt;
+StartMegaProject
+bg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>315</x>
+      <y>549</y>
+      <w>108</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UseCase&gt;&gt;
+Import
+bg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>396</x>
+      <y>414</y>
+      <w>134</w>
+      <h>161</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;144;117;144;117;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>261</x>
+      <y>549</y>
+      <w>71</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;27;54;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>396</x>
+      <y>630</y>
+      <w>224</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;27;207;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>261</x>
+      <y>621</y>
+      <w>71</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;27;54;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>315</x>
+      <y>693</y>
+      <w>108</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UseCase&gt;&gt;
+BuildBuilding
+bg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>261</x>
+      <y>693</y>
+      <w>63</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>54;27;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>396</x>
+      <y>630</y>
+      <w>485</w>
+      <h>107</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;90;468;90;468;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>396</x>
+      <y>414</y>
+      <w>143</w>
+      <h>233</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;216;126;216;126;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>918</x>
+      <y>774</y>
+      <w>144</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UI&gt;&gt;
+BuildingInfoScreen
+bg=yellow
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>927</x>
+      <y>711</y>
+      <w>108</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UseCase&gt;&gt;
+ViewBuildingInfo
+bg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>918</x>
+      <y>639</y>
+      <w>44</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;27;27;72</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>954</x>
+      <y>729</y>
+      <w>36</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;27;27;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>45</x>
+      <y>0</y>
+      <w>351</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UseCase&gt;&gt; might be a separate class, method or inner
+class, depending on the platform it is implemented on.
+ 
+E.g. in Android they could be AsyncTask objects to make
+threaded application possible without interfering UI.
+ 
+&lt;&lt;factory&gt;&gt; are static classes that manages list(s) of
+their related business class.
+ 
+&lt;&lt;business class&gt;&gt; classes are part of the
+business/domain model. </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>9</x>
+      <y>243</y>
+      <w>144</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UI&gt;&gt;
+NewCompanyScreen
+bg=yellow
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>126</x>
+      <y>243</y>
+      <w>98</w>
+      <h>89</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;27;81;72</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>144</x>
+      <y>765</y>
+      <w>144</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UI&gt;&gt;
+ResourcesScreen
+bg=yellow
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>315</x>
+      <y>765</y>
+      <w>108</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UseCase&gt;&gt;
+Export
+bg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>63</x>
+      <y>486</y>
+      <w>98</w>
+      <h>323</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>81;306;27;306;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>261</x>
+      <y>765</y>
+      <w>63</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;27;54;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>396</x>
+      <y>414</y>
+      <w>161</w>
+      <h>377</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;360;144;360;144;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>450</x>
+      <y>90</y>
+      <w>153</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;static&gt;&gt;
+MoonBaseManager
+bg=orange
+--
+- currentMoonBase
+--
++ getCurrentMoonBase()
++ setCurrentMoonBase()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>531</x>
+      <y>153</y>
+      <w>44</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>m1=1</panel_attributes>
+    <additional_attributes>27;63;27;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>306</x>
+      <y>342</y>
+      <w>215</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>load &gt;</panel_attributes>
+    <additional_attributes>27;45;198;45</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>405</x>
+      <y>216</y>
+      <w>116</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;27;99;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>396</x>
+      <y>414</y>
+      <w>152</w>
+      <h>305</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;288;135;288;135;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>864</x>
+      <y>9</y>
+      <w>144</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UI&gt;&gt;
+CompanyInfoScreen
+bg=yellow
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>819</x>
+      <y>90</y>
+      <w>108</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;UseCase&gt;&gt;
+ViewCompanyInfo
+bg=red
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>855</x>
+      <y>27</y>
+      <w>54</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>45;27;27;63</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>846</x>
+      <y>108</y>
+      <w>44</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>27;27;27;81</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>675</x>
+      <y>450</y>
+      <w>143</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>speeds &gt;
+m1=*
+</panel_attributes>
+    <additional_attributes>126;63;54;63;54;27</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>693</x>
+      <y>378</y>
+      <w>135</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;business class&gt;&gt;
+Transportation
+bg=green
+--
+- type
+- researchLevel
+- infrastructureLevel
+- vehicles</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
