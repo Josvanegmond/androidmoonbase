@@ -7,7 +7,19 @@
         </requiredResources>
 
         <requiredBuildings>
-            <building name="wheels" amount="4" inputPower="20" > </building>
+            <requiredBuilding name="wheels" info="wheels info" amount="4" inputPower="20" ></requiredBuilding>
+        </requiredBuildings>
+    </building>
+    
+    <building name="plant2" amount="4" inputPower="20" outputPower="200" >
+        <requiredResources>
+            <resource name="Regolith" amount="100" quality="0.1" ></resource>
+            <resource name="Regolitha" amount="1002" quality="0.12" ></resource>
+        </requiredResources>
+
+        <requiredBuildings>
+            <requiredBuilding name="wheel2" info="wheels2 info" amount="24" inputPower="220" ></requiredBuilding>
+            <requiredBuilding name="wheel3" info="wheels3 info" amount="242" inputPower="2220" ></requiredBuilding>
         </requiredBuildings>
     </building>
 
