@@ -25,7 +25,7 @@ public class ApplicationService{
 		ApplicationService.applicationContext=applicationContext;
 	}
 	
-	public static Context getApplicationContext(){
+	public Context getApplicationContext(){
 		return ApplicationService.applicationContext;
 	}
 }

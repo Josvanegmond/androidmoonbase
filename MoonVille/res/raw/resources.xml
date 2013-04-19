@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <resource name="Regolith" amount="100" quality="0.1" ></resource>
-    <resource name="Helium-3" amount="200" quality="0.2" ></resource>
+    <resource name="Regolith" amount="1" quality="0.1" ></resource>
+    <resource name="Oxygen" amount="1" quality="0.1" ></resource>
+    <resource name="Silicon" amount="1" quality="0.1" ></resource>
+    <resource name="Metal" amount="1" quality="0.1" ></resource>
+    <resource name="Metal plates" amount="1" quality="0.1" ></resource>
 
 </resources>

@@ -1,26 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <buildings>
 
-    <building name="plant" amount="2" inputPower="200" outputPower="300" >
-        <requiredResources>
-            <resource name="Regolith" amount="100" quality="0.1" ></resource>
-        </requiredResources>
-
+    <building name="Regolithmine" amount="1" inputPower="200" outputPower="300" >
+        
+        <inputResources>
+        </inputResources>
+        
+        <outputResources>
+            <resource name="Regolith" amount="35" quality="0.1" ></resource>
+        </outputResources>
+        
         <requiredBuildings>
-            <requiredBuilding name="wheels" info="wheels info" amount="4" inputPower="20" ></requiredBuilding>
         </requiredBuildings>
+        
     </building>
     
-    <building name="plant2" amount="4" inputPower="20" outputPower="200" >
-        <requiredResources>
+    
+    <building name="Processingplant" amount="1" inputPower="20" outputPower="200" >
+        
+        <inputResources>
             <resource name="Regolith" amount="100" quality="0.1" ></resource>
-            <resource name="Regolitha" amount="1002" quality="0.12" ></resource>
-        </requiredResources>
-
+        </inputResources>
+        
+        <outputResources>
+            <resource name="Oxygen" amount="9" quality="0.3" ></resource>
+            <resource name="Metal" amount="3" quality="0.5" ></resource>
+            <resource name="Silicon" amount="2" quality="0.2" ></resource>
+        </outputResources>
+        
         <requiredBuildings>
-            <requiredBuilding name="wheel2" info="wheels2 info" amount="24" inputPower="220" ></requiredBuilding>
-            <requiredBuilding name="wheel3" info="wheels3 info" amount="242" inputPower="2220" ></requiredBuilding>
         </requiredBuildings>
+        
+    </building>
+    
+    
+    <building name="Metal assembly plant" amount="1" inputPower="20" outputPower="200" >
+        
+        <inputResources>
+            <resource name="Metal" amount="5" quality="0.5" ></resource>
+        </inputResources>
+        
+        <outputResources>
+            <resource name="Metal plates" amount="1" quality="0.4" ></resource>
+        </outputResources>
+        
+        <requiredBuildings>
+        </requiredBuildings>
+        
     </building>
 
 </buildings>
