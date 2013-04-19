@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreditsActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:layout_margin="20dp" >
+
+        <TextView
+            android:id="@+id/developersTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Programmers" />
+
+        <TextView
+            android:id="@+id/graphicsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Graphic Designers" 
+            android:layout_marginTop="20dp"/>
+        
+        <TextView
+            android:id="@+id/soundTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sound Engineers" 
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

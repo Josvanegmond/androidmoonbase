@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<buildings>
+
+    <building name="plant" amount="2" inputPower="200" outputPower="300" >
+        <requiredResources>
+            <resource name="Regolith" amount="100" quality="0.1" ></resource>
+        </requiredResources>
+
+        <requiredBuildings>
+            <building name="wheels" amount="4" inputPower="20" > </building>
+        </requiredBuildings>
+    </building>
+
+</buildings>

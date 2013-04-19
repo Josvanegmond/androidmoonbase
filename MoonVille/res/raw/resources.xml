@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <resource name="Regolith" amount="100" quality="0.1" ></resource>
+    <resource name="Helium-3" amount="200" quality="0.2" ></resource>
+
+</resources>
