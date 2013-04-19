@@ -1,5 +1,5 @@
 /*
- * Parses XML containing information about Resources and adds them to static instance of Resources
+ * Parses XML containing information about Resources
  */
 package spaceappschallenge.moonville.xml_parsers;
 

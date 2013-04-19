@@ -1,13 +1,25 @@
 package spaceappschallenge.moonville.factories;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import android.content.Context;
+import android.util.Log;
+
+import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Building;
+import spaceappschallenge.moonville.businessmodels.Resource;
+import spaceappschallenge.moonville.managers.ApplicationService;
+import spaceappschallenge.moonville.xml_parsers.BuildingXMLParser;
 
 //singleton class
 public class Buildings
 {
 	private static Buildings instance;
+	protected static Context context;
 
 	//a list of all possible buildings
 	private ArrayList<Building> allBuildings;
@@ -15,6 +27,8 @@ public class Buildings
 	//a list of buildings that the player can build
 	private ArrayList<Building> availableBuildings;
 	
+	protected InputStream inputStream = null;
+
 	
 	private Buildings()
 	{	
@@ -22,23 +36,52 @@ public class Buildings
 		
 		this.availableBuildings = new ArrayList<Building>();
 
+		Buildings.context = ApplicationService.getInstance().getApplicationContext();
 		
-		//TODO: hardcoding buildings... yeah... xml or other source would be better :)
-		this.allBuildings.add(
-				new Building( "Lunar Base",
-					"Heart of operations, your entire industry revolves around this base." +
-					"It provides all communications to and from Earth and other space industry companies," +
-					"as well as a research lab to conduct groundbreaking research on efficiency," +
-					"quality and unlocking new exotic materials.",
-					0, null, null, null, null, 0, 0 )
-		);
+		Log.i("Buildings","initializing all buildings");
+		initAllBuildings();
+		
+	}
+	
+	protected void initAllBuildings(){
+		inputStream = context.getResources().openRawResource(R.raw.buildings);
 
-		this.allBuildings.add(
-				new Building( "Regolith Mine",
-					"This is your most important building. The Regolith mine will provide you with" +
-					"the dirtlayer covering the moon to extract the basic elements from.",
-					0, null, null, null, null, 0, 0 )
-		);
+		try {
+			BuildingXMLParser xmlParser = new BuildingXMLParser(inputStream);
+			try {
+				Log.i("Buildings","parsing.....");
+				this.allBuildings = xmlParser.parse();
+				Log.i("Buildings","printing.....");
+				printAllBuildings();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				Log.e("Buildings","There was problem while parsing the xml file");
+				//e.printStackTrace();
+			}
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			Log.e("Buildings","XMLParser could not be instantiated");
+			//e.printStackTrace();
+		}
+	}
+	
+	public void printAllBuildings(){
+		for(int i=0;i<this.allBuildings.size();i++){
+			Building building = this.allBuildings.get(i);
+			
+			Log.i("Buildings",building.getName());
+			ArrayList<Building> buildings = building.getRequiredBuildings();
+			Log.i("LENGTH","size:"+buildings.size());
+			for(Building rbuilding: buildings){
+				Log.i("Buildings rb",rbuilding.getName());
+			}
+			ArrayList<Resource> resources= building.getRequiredResources();
+			Log.i("LENGTH","reqd resource size:"+resources.size());
+			for(Resource rResource:resources){
+				Log.i("Buildings rr",rResource.getName());
+			}
+			Log.i("Buildings","object: "+building);
+		}
 	}
 	
 	
