@@ -6,27 +6,31 @@
     android:background="@drawable/mainscreen" >
 
     <Button
-        android:id="@+id/Button01"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/Button02"
-        android:onClick="showBaseOverviewScreen" />
-
-    <Button
-        android:id="@+id/Button03"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/Button01" />
-
-    <Button
-        android:id="@+id/Button02"
+        android:id="@+id/newGameButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="131dp"
-        android:onClick="showNewCompanyScreen" />
+        android:onClick="showNewGameScreen" 
+        android:text="New Game"/>
+
+    <Button
+        android:id="@+id/loadGameButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/newGameButton"
+        android:onClick="showBaseOverviewScreen" 
+        android:text="Load Game"/>
+
+    <Button
+        android:id="@+id/creditsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/loadGameButton" 
+        android:onClick="showCreditsScreen"
+        android:text="Credits"/>
 
 </RelativeLayout>

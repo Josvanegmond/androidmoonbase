@@ -15,16 +15,16 @@ public class Advancement{
 	public static int INFRASTRUCTURE=1;
 	
 	protected float advancement[][];//efficiency[TRANSPORT][RESEARCH]
-	private Advancement instance=null;
+	private static Advancement instance=null;
 	
 	protected Advancement(){
 		advancement = new float[3][2];
 	}
 	
-	public Advancement getInstance(){
+	public static Advancement getInstance(){
 		if(instance==null)
 			instance=new Advancement();
-		return this.instance;
+		return instance;
 	}
 	
 	public void setAdvancement(int area, int method, float advancementLevel){

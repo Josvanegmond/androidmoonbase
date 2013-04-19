@@ -15,5 +15,9 @@
     <string name="title_activity_buildings">BuildingsActivity</string>
     <string name="title_activity_company_info">CompanyInfoActivity</string>
     <string name="title_activity_building_info">BuildingInfoActivity</string>
+    <string name="title_activity_credits">CreditsActivity</string>
+     <string name="difficulty_easy">Easy</string>
+     <string name="difficulty_medium">Medium</string>
+     <string name="difficulty_hard">Hard</string>
 
 </resources>

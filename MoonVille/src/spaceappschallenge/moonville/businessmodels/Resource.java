@@ -5,9 +5,9 @@ public class Resource {
 	protected int amount;
 	protected double quality;
 	
-	public Resource(String type, int amount, double quality) {
+	public Resource(String name, int amount, double quality) {
 		super();
-		this.name = type;
+		this.name = name;
 		this.amount = amount;
 		this.quality = quality;
 	}

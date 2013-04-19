@@ -28,7 +28,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/userNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10" >
@@ -45,29 +45,31 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <RadioGroup
-            android:id="@+id/radioGroup1"
+            android:id="@+id/difficultyRadioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal" 
+            >
 
             <RadioButton
-                android:id="@+id/radio0"
+                android:id="@+id/easyRadio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="Easy" />
+                android:text="@string/difficulty_easy" 
+                />
 
             <RadioButton
-                android:id="@+id/radio1"
+                android:id="@+id/mediumRadio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Medium" />
+                android:text="@string/difficulty_medium" />
 
             <RadioButton
-                android:id="@+id/radio2"
+                android:id="@+id/hardRadio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hard" />
+                android:text="@string/difficulty_hard" />
         </RadioGroup>
 
         <Button
@@ -76,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginTop="20dp"
-            android:onClick="showBaseOverviewScreen"
+            android:onClick="startNewGame"
             android:text="Start new company" />
 
     </LinearLayout>

@@ -12,7 +12,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+     >
         <activity
             android:name="spaceappschallenge.moonville.activities.MainMenuActivity"
             android:label="@string/app_name" >
@@ -22,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- 
+        <!--
         <activity
             android:name="spaceappschallenge.moonville.NewGameActivity"
             android:label="@string/title_activity_new_game" >
@@ -34,15 +35,15 @@
         <activity
             android:name="spaceappschallenge.moonville.AllResourcesActivity"
             android:label="@string/title_activity_all_resources" >
-        </activity>
+        </activity>
         -->
-        
+
         <activity
             android:name="spaceappschallenge.moonville.activities.DummyActivity"
             android:label="@string/title_activity_dummy" >
         </activity>
         <activity
-            android:name="spaceappschallenge.moonville.activities.NewCompanyActivity"
+            android:name="spaceappschallenge.moonville.activities.NewGameActivity"
             android:label="@string/title_activity_new_company" >
         </activity>
         <activity
@@ -68,6 +69,10 @@
         <activity
             android:name="spaceappschallenge.moonville.activities.BuildingInfoActivity"
             android:label="@string/title_activity_building_info" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.CreditsActivity"
+            android:label="@string/title_activity_credits" >
         </activity>
     </application>
 
