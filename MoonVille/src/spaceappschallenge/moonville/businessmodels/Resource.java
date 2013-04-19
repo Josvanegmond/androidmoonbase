@@ -1,22 +1,22 @@
 package spaceappschallenge.moonville.businessmodels;
 
 public class Resource {
-	protected String type;
+	protected String name;
 	protected int amount;
-	protected float quality;
+	protected double quality;
 	
-	public Resource(String type, int amount, float quality) {
+	public Resource(String name, int amount, double quality) {
 		super();
-		this.type = type;
+		this.name = name;
 		this.amount = amount;
 		this.quality = quality;
 	}
 	
-	public String getType() {
-		return type;
+	public String getName() {
+		return name;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getAmount() {
 		return amount;
@@ -24,10 +24,10 @@ public class Resource {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	public float getQuality() {
+	public double getQuality() {
 		return quality;
 	}
-	public void setQuality(float quality) {
+	public void setQuality(double quality) {
 		this.quality = quality;
 	}
 	

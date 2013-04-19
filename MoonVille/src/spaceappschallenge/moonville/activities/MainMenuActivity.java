@@ -1,10 +1,11 @@
 package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.managers.MoonBaseManager;
+import spaceappschallenge.moonville.managers.ApplicationService;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
@@ -14,6 +15,13 @@ public class MainMenuActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mainmenu);
+		// The following line allows us to share the application context
+		// throughout the application
+		// Other classes can access the context through ApplicationService
+		Log.i("Main","trying to get instance");
+		ApplicationService app = ApplicationService.getInstance();
+		Log.i("Main","trying to get context");
+		app.setApplicationContext(this.getApplicationContext());
 	}
 
 	@Override
@@ -22,24 +30,21 @@ public class MainMenuActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_base_overview, menu);
 		return true;
 	}
-	
 
-	//methods called by onClick property of button in xml
-	public void showBaseOverviewScreen( View view )
-	{
-		MoonBaseManager.loadSavedMoonbase();
-		view.getContext().startActivity( new Intent( this, BaseOverviewActivity.class ) );
-	}
-	
-	public void showNewCompanyScreen( View view )
-	{
-		view.getContext().startActivity( new Intent( this, NewCompanyActivity.class ) );
+	// methods called by onClick property of button in xml
+	public void showBaseOverviewScreen(View view) {
+		view.getContext().startActivity(
+				new Intent(this, BaseOverviewActivity.class));
 	}
 
-//	public void showCreditsScreen( View view )
-//	{
-//		view.getContext().startActivity( new Intent( this, CreditsActivity.class ) );
-//	}
-	
+	public void showNewGameScreen(View view) {
+		view.getContext()
+				.startActivity(new Intent(this, NewGameActivity.class));
+	}
+
+	public void showCreditsScreen(View view) {
+		view.getContext()
+				.startActivity(new Intent(this, CreditsActivity.class));
+	}
 
 }
