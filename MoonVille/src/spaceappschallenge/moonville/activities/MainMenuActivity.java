@@ -1,6 +1,7 @@
 package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.R;
+import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class MainMenuActivity extends Activity {
 	//methods called by onClick property of button in xml
 	public void showBaseOverviewScreen( View view )
 	{
+		MoonBaseManager.loadSavedMoonbase();
 		view.getContext().startActivity( new Intent( this, BaseOverviewActivity.class ) );
 	}
 	

@@ -4,6 +4,7 @@
 package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.R;
+import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,10 +28,8 @@ public class NewCompanyActivity extends Activity
 	
 	protected void initModel()
 	{
-		//Dummy models
-		
-		//MoonBase moonBase = new MoonBase()
-		//MoonBase should become a singleton I think, best way to make it easily accessible -Jos
+		//create the new moonbase
+		MoonBaseManager.createNewMoonBase( 0, 0, 40000000 ); //$40.000.000.000, but it's an int... so per thousand :)
 	}
 	
 

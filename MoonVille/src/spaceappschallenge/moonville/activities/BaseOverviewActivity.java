@@ -1,6 +1,7 @@
 package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.R;
+import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +31,23 @@ public class BaseOverviewActivity extends Activity {
 
 	
 	//methods called by onClick property of button in xml
+	public void nextTurn( View view )
+	{
+		//calculate resources from all buildings, starting at the bottom of the building tree
+		//per building:
+		//are required buildings still available?
+		//is required power available?
+		//are there enough required resources?
+		//calculate output in combination with research and prospecting bonus
+		//add output resources via resources factory
+		//drain power
+		//calculate reputation
+		
+		//last step, save to file
+		MoonBaseManager.saveMoonBase();
+	}
+	
+	
 	public void showBaseOverviewScreen( View view )
 	{
 		//we are already here
