@@ -45,6 +45,8 @@ public class BuildingXMLParser {
 	String buildingInfo = "";
 	int buildingAmount = 0;
 	int buildingInputPower = 0, buildingOutputPower = 0;
+	int buildingMonetaryCost = 0, buildingRegolithCost = 0;
+	int buildingRequiredTurns = 0;
 	ArrayList<Resource> requiredResources;
 	ArrayList<Building> requiredBuildings;
 
@@ -58,6 +60,12 @@ public class BuildingXMLParser {
 				"inputPower"));
 		buildingOutputPower = Integer.parseInt(xpp.getAttributeValue(null,
 				"outputPower"));
+		buildingMonetaryCost = Integer.parseInt(xpp.getAttributeValue(null,
+				"monetaryCost"));
+		buildingRegolithCost = Integer.parseInt(xpp.getAttributeValue(null,
+				"regolithCost"));
+		buildingRequiredTurns = Integer.parseInt(xpp.getAttributeValue(null,
+				"requiredTurns"));
 		Log.i("XML", "buildingName: " + buildingName);
 	}
 
@@ -67,10 +75,7 @@ public class BuildingXMLParser {
 		String reqdResName = xpp.getAttributeValue(null, "name");
 		int reqdResAmount = Integer.parseInt(xpp.getAttributeValue(null,
 				"amount"));
-		double reqdResQuality = Double.parseDouble(xpp.getAttributeValue(null,
-				"quality"));
-		requiredResources.add(new Resource(reqdResName, reqdResAmount,
-				reqdResQuality));
+		requiredResources.add(new Resource(reqdResName, reqdResAmount, 0f));
 		Log.i("XML", "required resource " + reqdResName);
 	}
 
@@ -164,7 +169,9 @@ public class BuildingXMLParser {
 								break;
 							}
 
-							addRequiredResource(xpp, requiredResources);
+							if (xpp.getAttributeCount() > 0) {
+								addRequiredResource(xpp, requiredResources);
+							}
 							eventType = xpp.next();
 						}// atRequiredResource
 
@@ -216,7 +223,9 @@ public class BuildingXMLParser {
 				}// while atBuilding
 				this.buildings.add(new Building(buildingName, buildingInfo,
 						buildingAmount, buildingInputPower,
-						buildingOutputPower, requiredBuildings));
+						buildingOutputPower, buildingMonetaryCost,
+						buildingRegolithCost, buildingRequiredTurns,
+						requiredResources, requiredBuildings));
 			}// if building
 
 			eventType = xpp.next();

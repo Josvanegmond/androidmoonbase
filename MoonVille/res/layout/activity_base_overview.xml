@@ -83,7 +83,7 @@
                 android:id="@+id/Button01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="showBuildingScreen"
+                android:onClick="showResourcesScreen"
                 android:text="Resources"
                 android:textSize="@dimen/tinyButtonText" />
 

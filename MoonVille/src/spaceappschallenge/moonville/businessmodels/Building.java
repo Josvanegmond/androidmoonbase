@@ -18,6 +18,12 @@ public class Building {
 	protected boolean hasRequiredBuildings;
 	protected boolean hasResources;
 
+	private int monetaryCost;
+	private int regolithCost;
+	private int requiredTurns;
+	private ArrayList<Resource> requiredResources;
+
+	// required buildings
 	public Building(String name, String info, int amount, int inputPower) {
 		initBuilding(name, info, amount, inputPower);
 	}
@@ -29,43 +35,19 @@ public class Building {
 		this.amount = amount;
 		this.inputPower = inputPower;
 	}
-	
-	public Building(String name, String info, int amount, int inputPower, int outputPower) {
-		initBuilding(name, info, amount, inputPower);
-		this.outputPower=outputPower;
-	}
 
-
+	// buildings
 	public Building(String name, String info, int amount, int inputPower,
-			int outputPower, ArrayList<Building> requiredBuildings) {
-		initBuilding(name, info, amount, inputPower, outputPower,
-				requiredBuildings);
-
-	}
-
-	protected void initBuilding(String name, String info, int amount,
-			int inputPower, int outputPower, 
+			int outputPower, int monetaryCost, int regolithCost,
+			int requiredTurns, ArrayList<Resource> requiredResources,
 			ArrayList<Building> requiredBuildings) {
 		initBuilding(name, info, amount, inputPower);
 		this.outputPower = outputPower;
+		this.monetaryCost = monetaryCost;
+		this.regolithCost = regolithCost;
+		this.requiredTurns = requiredTurns;
+		this.requiredResources = requiredResources;
 		this.requiredBuildings = requiredBuildings;
-	}
-
-	public Building(String name, String info, int amount, int inputPower,
-			int outputPower, ArrayList<Resource> requiredResources,
-			ArrayList<Building> requiredBuildings, ArrayList<Resource> outputResources) {
-		super();
-		initBuilding(name, info, amount, inputPower, outputPower,
-				requiredBuildings, outputResources);
-	}
-
-	protected void initBuilding(String name, String info, int amount,
-			int inputPower, int outputPower, 
-			ArrayList<Building> requiredBuildings, ArrayList<Resource> outputResources) {
-		initBuilding(name, info, amount, inputPower, outputPower,
-				requiredBuildings);
-		this.outputResources = outputResources;
-
 	}
 
 	// Increases amount, if input resources/buildings fulfill required
@@ -76,48 +58,76 @@ public class Building {
 	public String getName() {
 		return name;
 	}
-	
-	public ArrayList<Building>getRequiredBuildings(){
+
+	public ArrayList<Building> getRequiredBuildings() {
 		return this.requiredBuildings;
 	}
-	
+
 	public int getOutputPower() {
 		return outputPower;
 	}
-	
+
 	public int getInputPower() {
 		return inputPower;
 	}
-	
+
 	public void setHasPower(boolean hasPower) {
 		this.hasPower = hasPower;
 	}
-	
+
 	public boolean getHasPower() {
 		return hasPower;
 	}
-	
+
 	public void setHasRequiredBuildings(boolean hasRequiredBuildings) {
 		this.hasRequiredBuildings = hasRequiredBuildings;
 	}
-	
+
 	public boolean getHasRequiredBuildings() {
 		return hasRequiredBuildings;
 	}
-	
+
 	public List<Resource> getOutputResources() {
 		return outputResources;
 	}
-	
+
 	public List<Resource> getInputResources() {
 		return inputResources;
 	}
-	
+
 	public void setHasResources(boolean hasResources) {
 		this.hasResources = hasResources;
 	}
-	
+
 	public boolean getHasResources() {
 		return hasResources;
+	}
+
+	public int getMonetaryCost() {
+		return monetaryCost;
+	}
+
+	public void setMonetaryCost(int monetaryCost) {
+		this.monetaryCost = monetaryCost;
+	}
+
+	public int getRegolithCost() {
+		return regolithCost;
+	}
+
+	public void setRegolithCost(int regolithCost) {
+		this.regolithCost = regolithCost;
+	}
+
+	public int getRequiredTurns() {
+		return requiredTurns;
+	}
+
+	public void setRequiredTurns(int requiredTurns) {
+		this.requiredTurns = requiredTurns;
+	}
+
+	public ArrayList<Resource> getRequiredResources() {
+		return requiredResources;
 	}
 }

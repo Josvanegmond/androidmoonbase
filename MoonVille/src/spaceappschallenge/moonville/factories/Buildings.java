@@ -37,7 +37,7 @@ public class Buildings
 		Buildings.context = ApplicationService.getInstance().getApplicationContext();
 		
 		Log.i("Buildings","initializing all buildings");
-		//initAllBuildings();
+		initAllBuildings();
 		
 	}
 	
