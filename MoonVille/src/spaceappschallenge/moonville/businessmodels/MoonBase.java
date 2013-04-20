@@ -17,6 +17,8 @@ public class MoonBase implements Serializable {
 	protected BuildingTree builtBuildings;
 	protected List<MegaProject> builtMegaProjects;
 
+	protected GameDetails gameDetails;
+
 	public MoonBase(int researchPoints, int prospectingLevel, int money) {
 		this.researchLabSize = 1;
 		this.researchPoints = researchPoints;
@@ -29,6 +31,8 @@ public class MoonBase implements Serializable {
 		this.builtBuildings = new BuildingTree();
 		this.builtBuildings.add(Buildings.getInstance().getBuilding(
 				"Lunar Base"));
+
+		this.gameDetails = GameDetails.getInstance();
 	}
 
 	public boolean canSpend(int expenditure) {
@@ -36,7 +40,7 @@ public class MoonBase implements Serializable {
 			return true;
 		} else
 			return false;
-}
+	}
 
 	//
 	public boolean spend(int expenditure) {
@@ -86,15 +90,15 @@ public class MoonBase implements Serializable {
 	public void setMoney(int money) {
 		this.money = money;
 	}
-	
+
 	public BuildingTree getBuiltBuildings() {
 		return builtBuildings;
 	}
-	
+
 	public void setBuiltBuildings(BuildingTree builtBuildings) {
 		this.builtBuildings = builtBuildings;
 	}
-	
+
 	public List<MegaProject> getBuiltMegaProjects() {
 		return builtMegaProjects;
 	}
@@ -102,7 +106,5 @@ public class MoonBase implements Serializable {
 	public void setBuiltMegaProjects(List<MegaProject> builtMegaProjects) {
 		this.builtMegaProjects = builtMegaProjects;
 	}
-	
-	
 
 }
