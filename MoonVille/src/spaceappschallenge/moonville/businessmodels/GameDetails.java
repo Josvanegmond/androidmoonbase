@@ -1,16 +1,19 @@
 package spaceappschallenge.moonville.businessmodels;
 
+import spaceappschallenge.moonville.managers.Reference;
+
 public class GameDetails {
-	String username="";
-	String difficultyLevel="";
-	private static GameDetails instance=null;
-	protected GameDetails(){
-		
+	String username = "";
+	int difficultyLevel = Reference.DIF_EASY;
+	private static GameDetails instance = null;
+
+	protected GameDetails() {
+
 	}
-	
-	public static GameDetails getInstance(){
-		if(GameDetails.instance==null){
-			GameDetails.instance=new GameDetails();
+
+	public static GameDetails getInstance() {
+		if (GameDetails.instance == null) {
+			GameDetails.instance = new GameDetails();
 		}
 		return GameDetails.instance;
 	}
@@ -23,12 +26,12 @@ public class GameDetails {
 		this.username = username;
 	}
 
-	public String getDifficultyLevel() {
+	public int getDifficultyLevel() {
 		return difficultyLevel;
 	}
 
-	public void setDifficultyLevel(String difficultyLevel) {
+	public void setDifficultyLevel(int difficultyLevel) {
 		this.difficultyLevel = difficultyLevel;
 	}
-	
+
 }
