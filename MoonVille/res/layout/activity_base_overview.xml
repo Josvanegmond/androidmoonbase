@@ -1,97 +1,109 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
+    android:id="@+id/overview_horizontal_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".BaseOverviewActivity" >
+    android:layout_height="match_parent" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#000"
-	    android:padding="10dp" >        
-	    <LinearLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content" >
-	
-	        <Button
-	            android:id="@+id/Button02"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1"
-	            android:onClick="showBaseOverviewScreen"
-	            android:text="Overview"
-	            android:textSize="@dimen/tinyButtonText" />
-	
-	        <Button
-	            android:id="@+id/Button01"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1"
-	            android:onClick="showBuildingScreen"
-	            android:text="Building"
-	            android:textSize="@dimen/tinyButtonText" />
-	
-	        <Button
-	            android:id="@+id/button1"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1"
-	            android:onClick="showResourcesScreen"
-	            android:text="Resources"
-	            android:textSize="@dimen/tinyButtonText" />
-	
-	    </LinearLayout>
-	
-	    <LinearLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_marginTop="10dp" >
-	
-	        <TextView
-	            android:id="@+id/buildingname"
-	            android:layout_width="0dip"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="center_vertical"
-	            android:layout_weight="1"
-	            android:text="OVERVIEW SCREEN"
-	            android:textAppearance="?android:attr/textAppearanceLarge" />
-	
-	        <Button
-	            android:id="@+id/button2"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:onClick="nextTurn"
-	            android:text="Next Turn" />
-	
-	    </LinearLayout>
-    </LinearLayout>
-
-    <HorizontalScrollView
-        android:id="@+id/hScroll"
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:descendantFocusability="beforeDescendants" >
+        android:layout_weight="1"
+        android:orientation="vertical"
+        tools:context=".BaseOverviewActivity" >
 
-        <ScrollView
-            android:id="@+id/vScroll"
+        <HorizontalScrollView
+            android:id="@+id/hScroll"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:descendantFocusability="beforeDescendants" >
 
-            <ImageView
-                android:id="@+id/imageView1"
+            <ScrollView
+                android:id="@+id/vScroll"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" >
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="false"
+                    android:scaleType="matrix"
+                    android:scrollbars="horizontal|vertical"
+                    android:src="@drawable/equator_backdrop" />
+            </ScrollView>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/buildingname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="false"
-                android:cropToPadding="false"
-                android:scaleType="matrix"
-                android:scrollbars="horizontal|vertical"
-                android:src="@drawable/baseoverview_640" />
+                android:layout_weight="1"
+                android:text="Funds: $100.000.000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        </ScrollView>
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Month: 1"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+    </RelativeLayout>
 
-    </HorizontalScrollView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/Button02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="showBaseOverviewScreen"
+                android:text="Menu"
+                android:textSize="@dimen/tinyButtonText" />
+
+            <Button
+                android:id="@+id/Button01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="showBuildingScreen"
+                android:text="Resources"
+                android:textSize="@dimen/tinyButtonText" />
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="showResourcesScreen"
+                android:text="Export"
+                android:textSize="@dimen/tinyButtonText" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/Button03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showResourcesScreen"
+            android:text="Next Month"
+            android:textSize="@dimen/tinyButtonText" />
+
+    </LinearLayout>
 
 </LinearLayout>

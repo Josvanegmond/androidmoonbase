@@ -62,11 +62,6 @@ public class BaseOverviewActivity extends GameActivity {
 		//this.finish();
 	}
 	
-	public void showBuildingScreen( View view )
-	{
-		view.getContext().startActivity( new Intent( this, BuildingsActivity.class) );
-		this.finish();
-	}
 	
 	public void showResourcesScreen( View view )
 	{

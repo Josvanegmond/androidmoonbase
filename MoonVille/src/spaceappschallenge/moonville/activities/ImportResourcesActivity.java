@@ -42,10 +42,6 @@ public class ImportResourcesActivity extends GameActivity {
 				new Intent(this, BaseOverviewActivity.class));
 	}
 
-	public void showBuildingScreen(View view) {
-		view.getContext().startActivity(
-				new Intent(this, BuildingsActivity.class));
-	}
 
 	public void showResourcesScreen( View view )
 	{
