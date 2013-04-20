@@ -142,8 +142,7 @@ public class BuildingTree {
 			power += b.getOutputPower();
 		for (BuildingTree c : childs)
 			power += c.computeTotalPowerOutput();
-		return power;
-		
+		return power;		
 	}
 	
 	/**
@@ -174,5 +173,55 @@ public class BuildingTree {
 			for (BuildingTree c : childs)
 				c.checkRequiredBuildings(true);
 		}
+	}
+	
+	/**
+	 * Recursively checks how much resources are available in total, 
+	 * considering resources used by buildings and non-working buildings.
+	 * 
+	 * @param resourceAvailable Previous amount of resources.
+	 * @return List of resources that are available from buildings.
+	 */
+	public List<Resource> checkResources(List<Resource> resourceAvailable) {
+		for (Building b : buildings) {
+			if (!b.getHasPower() || !b.getHasRequiredBuildings())
+				continue;
+			List<Resource> oldAmount = resourceAvailable;
+			for (Resource resourceNeed : b.getInputResources()) {
+				if (subtractBuildingResources(resourceAvailable, resourceNeed)) {
+					b.setHasResources(true);
+					resourceAvailable = Resource.merge(resourceAvailable, 
+							b.getOutputResources());				
+				}
+				else {
+					// Reset resources so we don't remove part of the resources 
+					// for a building that can't work.
+					resourceAvailable = oldAmount;
+					b.setHasResources(false);
+				}
+			}
+		}
+		for (BuildingTree c : childs) 
+			Resource.merge(resourceAvailable, c.checkResources(resourceAvailable));
+		return resourceAvailable;
+	}
+
+	/**
+	 * If enough resources are available, those are removed from resource pool.
+	 * 
+	 * @return True if enough resources are available of each type.
+	 */
+	private boolean subtractBuildingResources(List<Resource> resourceAvailable,
+			Resource resourceNeed) {
+		for (Resource resourceHave : resourceAvailable) {
+			if (resourceNeed.getName().equals(resourceHave.getName())) {
+				if (resourceHave.getAmount() >= resourceNeed.getAmount())
+					resourceHave.setAmount(resourceHave.getAmount() - 
+							resourceNeed.getAmount());
+				else
+					return false;
+			}
+		}
+		return true;
 	}
 }
