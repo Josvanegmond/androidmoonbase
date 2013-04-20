@@ -41,7 +41,7 @@
     <building
         name="Regolith Processor"
         amount="10"
-        info="Processes regolith "
+        info="Processes regolith"
         inputPower="20"
         monetaryCost="20"
         outputPower="0"
@@ -50,11 +50,13 @@
         <outputResources>
             <resource
                 name="Regolith"
-                amount="10" >
+                amount="10"
+                quality="0.5" >
             </resource>
             <resource
                 name="Helium-3"
-                amount="10" >
+                amount="10"
+                quality="0.5" >
             </resource>
         </outputResources>
     </building>
@@ -70,7 +72,8 @@
         <requiredResources>
             <resource
                 name="Helium-3"
-                amount="50" >
+                amount="50"
+                quality="0.5" >
             </resource>
         </requiredResources>
     </building>
@@ -86,18 +89,21 @@
         <requiredResources>
             <resource
                 name="Water"
-                amount="50" >
+                amount="50"
+                quality="0.5" >
             </resource>
         </requiredResources>
 
         <outputResources>
             <resource
                 name="Oxygen"
-                amount="10" >
+                amount="10"
+                quality="0.5" >
             </resource>
             <resource
                 name="Hydrogen"
-                amount="20" >
+                amount="20"
+                quality="0.5" >
             </resource>
         </outputResources>
     </building>
@@ -113,22 +119,26 @@
         <requiredResources>
             <resource
                 name="Regolith"
-                amount="50" >
+                amount="50"
+                quality="0.5" >
             </resource>
         </requiredResources>
 
         <outputResources>
             <resource
                 name="Oxygen"
-                amount="10" >
+                amount="10"
+                quality="0.5" >
             </resource>
             <resource
                 name="Metal"
-                amount="20" >
+                amount="20"
+                quality="0.5" >
             </resource>
             <resource
                 name="Minerals"
-                amount="30" >
+                amount="30"
+                quality="0.5" >
             </resource>
         </outputResources>
     </building>
@@ -144,18 +154,21 @@
         <requiredResources>
             <resource
                 name="Hydrogen"
-                amount="50" >
+                amount="50"
+                quality="0.5" >
             </resource>
             <resource
                 name="Oxygen"
-                amount="60" >
+                amount="60"
+                quality="0.5" >
             </resource>
         </requiredResources>
 
         <outputResources>
             <resource
                 name="Fuel"
-                amount="10" >
+                amount="10"
+                quality="0.5" >
             </resource>
         </outputResources>
     </building>
@@ -171,14 +184,16 @@
         <requiredResources>
             <resource
                 name="Metal"
-                amount="50" >
+                amount="50"
+                quality="0.5" >
             </resource>
         </requiredResources>
 
         <outputResources>
             <resource
                 name="Electronics"
-                amount="20" >
+                amount="20"
+                quality="0.5" >
             </resource>
         </outputResources>
     </building>
@@ -194,18 +209,21 @@
         <requiredResources>
             <resource
                 name="Metal"
-                amount="50" >
+                amount="50"
+                quality="0.5" >
             </resource>
             <resource
                 name="Electronics"
-                amount="50" >
+                amount="50"
+                quality="0.5" >
             </resource>
         </requiredResources>
 
         <outputResources>
             <resource
                 name="Robot"
-                amount="20" >
+                amount="20"
+                quality="0.5" >
             </resource>
         </outputResources>
     </building>
