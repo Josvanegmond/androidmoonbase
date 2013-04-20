@@ -75,11 +75,13 @@ public class Buildings
 			for(Building rbuilding: buildings){
 				Log.i("Buildings rb",rbuilding.getName());
 			}
+			/*
 			ArrayList<Resource> resources= building.getRequiredResources();
 			Log.i("LENGTH","reqd resource size:"+resources.size());
 			for(Resource rResource:resources){
 				Log.i("Buildings rr",rResource.getName());
 			}
+			*/
 			Log.i("Buildings","object: "+building);
 		}
 	}

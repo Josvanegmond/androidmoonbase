@@ -216,8 +216,7 @@ public class BuildingXMLParser {
 				}// while atBuilding
 				this.buildings.add(new Building(buildingName, buildingInfo,
 						buildingAmount, buildingInputPower,
-						buildingOutputPower, requiredResources,
-						requiredBuildings));
+						buildingOutputPower, requiredBuildings));
 			}// if building
 
 			eventType = xpp.next();

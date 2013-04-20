@@ -9,7 +9,6 @@ public class Building {
 	protected int amount;
 	protected ArrayList<Resource> inputResources;
 	protected ArrayList<Building> inputBuildings;
-	protected ArrayList<Resource> requiredResources;
 	protected ArrayList<Building> requiredBuildings;
 	protected ArrayList<Resource> outputResources;
 	protected int inputPower;
@@ -34,19 +33,17 @@ public class Building {
 
 
 	public Building(String name, String info, int amount, int inputPower,
-			int outputPower, ArrayList<Resource> requiredResources,
-			ArrayList<Building> requiredBuildings) {
+			int outputPower, ArrayList<Building> requiredBuildings) {
 		initBuilding(name, info, amount, inputPower, outputPower,
-				requiredResources, requiredBuildings);
+				requiredBuildings);
 
 	}
 
 	protected void initBuilding(String name, String info, int amount,
-			int inputPower, int outputPower, ArrayList<Resource> requiredResources,
+			int inputPower, int outputPower, 
 			ArrayList<Building> requiredBuildings) {
 		initBuilding(name, info, amount, inputPower);
 		this.outputPower = outputPower;
-		this.requiredResources = requiredResources;
 		this.requiredBuildings = requiredBuildings;
 	}
 
@@ -55,14 +52,14 @@ public class Building {
 			ArrayList<Building> requiredBuildings, ArrayList<Resource> outputResources) {
 		super();
 		initBuilding(name, info, amount, inputPower, outputPower,
-				requiredResources, requiredBuildings, outputResources);
+				requiredBuildings, outputResources);
 	}
 
 	protected void initBuilding(String name, String info, int amount,
-			int inputPower, int outputPower, ArrayList<Resource> requiredResources,
+			int inputPower, int outputPower, 
 			ArrayList<Building> requiredBuildings, ArrayList<Resource> outputResources) {
 		initBuilding(name, info, amount, inputPower, outputPower,
-				requiredResources, requiredBuildings);
+				requiredBuildings);
 		this.outputResources = outputResources;
 
 	}
@@ -70,21 +67,18 @@ public class Building {
 	// Increases amount, if input resources/buildings fulfill required
 	// resources/buildings
 	public void build() {
-		for (int i = requiredResources.size() - 1; i >= 0; i--) {
-
-		}
 	}
 
 	public String getName() {
 		return name;
 	}
 	
-	public ArrayList<Resource>getRequiredResources(){
-		return this.requiredResources;
-	}
-	
 	public ArrayList<Building>getRequiredBuildings(){
 		return this.requiredBuildings;
+	}
+	
+	public int getNetPower() {
+		return inputPower - outputPower;
 	}
 
 }
