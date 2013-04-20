@@ -4,12 +4,14 @@
 package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.R;
+import spaceappschallenge.moonville.businessmodels.Difficulty;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.RadioGroup;
 
 
 public class NewCompanyActivity extends Activity
@@ -28,8 +30,12 @@ public class NewCompanyActivity extends Activity
 	
 	protected void initModel()
 	{
-		//create the new moonbase
-		MoonBaseManager.createNewMoonBase( 0, 0, 40000000 ); //$40.000.000.000, but it's an int... so per thousand :)
+		RadioGroup group = (RadioGroup) findViewById(R.id.difficultyRadioGroup);
+		int id = group.getCheckedRadioButtonId();
+		View button = group.findViewById(id);
+		int index = group.indexOfChild(button);
+		
+		MoonBaseManager.createNewMoonBase(new Difficulty(index));
 	}
 	
 
