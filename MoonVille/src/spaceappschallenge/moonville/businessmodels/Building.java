@@ -1,6 +1,7 @@
 package spaceappschallenge.moonville.businessmodels;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Building {
 	protected String name;
@@ -15,6 +16,7 @@ public class Building {
 	// These are computed each time they are needed, so no init necessary.
 	protected boolean hasPower;
 	protected boolean hasRequiredBuildings;
+	protected boolean hasResources;
 
 	public Building(String name, String info, int amount, int inputPower) {
 		initBuilding(name, info, amount, inputPower);
@@ -101,5 +103,21 @@ public class Building {
 	
 	public boolean getHasRequiredBuildings() {
 		return hasRequiredBuildings;
+	}
+	
+	public List<Resource> getOutputResources() {
+		return outputResources;
+	}
+	
+	public List<Resource> getInputResources() {
+		return inputResources;
+	}
+	
+	public void setHasResources(boolean hasResources) {
+		this.hasResources = hasResources;
+	}
+	
+	public boolean getHasResources() {
+		return hasResources;
 	}
 }
