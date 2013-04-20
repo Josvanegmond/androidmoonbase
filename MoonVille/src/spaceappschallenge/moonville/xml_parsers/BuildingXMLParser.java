@@ -189,12 +189,12 @@ public class BuildingXMLParser {
 															// <requiredBuilding>
 															// might be absent
 						if (eventType == XmlPullParser.START_TAG
-								&& xpp.getName().equalsIgnoreCase("requiredBuilding")) {
+								&& xpp.getName().equalsIgnoreCase("building")) {
 							atRequiredBuilding = true;
 						}// requiredBuilding
 
 						while (atRequiredBuilding) {
-							if (eventType == XmlPullParser.END_TAG&& xpp.getName().equalsIgnoreCase("requiredBuilding")) {
+							if (eventType == XmlPullParser.END_TAG&& xpp.getName().equalsIgnoreCase("building")) {
 								atRequiredBuilding = false;
 								break;
 							}

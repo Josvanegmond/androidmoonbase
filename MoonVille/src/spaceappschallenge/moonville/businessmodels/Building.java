@@ -26,6 +26,12 @@ public class Building {
 		this.amount = amount;
 		this.inputPower = inputPower;
 	}
+	
+	public Building(String name, String info, int amount, int inputPower, int outputPower) {
+		initBuilding(name, info, amount, inputPower);
+		this.outputPower=outputPower;
+	}
+
 
 	public Building(String name, String info, int amount, int inputPower,
 			int outputPower, ArrayList<Resource> requiredResources,
