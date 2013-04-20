@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="spaceappschallenge.moonville"
+    android:installLocation="preferExternal"
     android:versionCode="1"
-    android:versionName="1.0" android:installLocation="preferExternal">
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -10,13 +11,14 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-     android:hardwareAccelerated="true">
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         <activity
             android:name="spaceappschallenge.moonville.activities.MainMenuActivity"
-            android:label="@string/app_name" android:screenOrientation="landscape">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,44 +37,57 @@
         <activity
             android:name="spaceappschallenge.moonville.AllResourcesActivity"
             android:label="@string/title_activity_all_resources" >
-        </activity>
+        </activity>
         -->
 
         <activity
             android:name="spaceappschallenge.moonville.activities.DummyActivity"
-            android:label="@string/title_activity_dummy" android:screenOrientation="landscape">
+            android:label="@string/title_activity_dummy"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="spaceappschallenge.moonville.activities.NewGameActivity"
-            android:label="@string/title_activity_new_company" android:screenOrientation="landscape">
+            android:label="@string/title_activity_new_company"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="spaceappschallenge.moonville.activities.BaseOverviewActivity"
-            android:label="@string/title_activity_base_overview" android:screenOrientation="landscape">
+            android:label="@string/title_activity_base_overview"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="spaceappschallenge.moonville.activities.ResourcesActivity"
-            android:label="@string/title_activity_resources" android:screenOrientation="landscape">
+            android:label="@string/title_activity_resources"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="spaceappschallenge.moonville.activities.MegaProjectActivity"
-            android:label="@string/title_activity_mega_project" android:screenOrientation="landscape">
+            android:label="@string/title_activity_mega_project"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="spaceappschallenge.moonville.activities.BuildingsActivity"
-            android:label="@string/title_activity_buildings" android:screenOrientation="landscape">
+            android:label="@string/title_activity_buildings"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="spaceappschallenge.moonville.activities.CompanyInfoActivity"
-            android:label="@string/title_activity_company_info" android:screenOrientation="landscape">
+            android:label="@string/title_activity_company_info"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="spaceappschallenge.moonville.activities.BuildingInfoActivity"
-            android:label="@string/title_activity_building_info" android:screenOrientation="landscape">
+            android:label="@string/title_activity_building_info"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="spaceappschallenge.moonville.activities.CreditsActivity"
-            android:label="@string/title_activity_credits" android:screenOrientation="landscape">
+            android:label="@string/title_activity_credits"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.activities.ImportResourcesActivity"
+            android:label="@string/title_activity_import_resources" >
         </activity>
     </application>
 
