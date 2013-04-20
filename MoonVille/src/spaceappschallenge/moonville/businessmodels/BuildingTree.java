@@ -1,5 +1,6 @@
 package spaceappschallenge.moonville.businessmodels;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @author Felix
  *
  */
-public class BuildingTree {
+public class BuildingTree implements Serializable {
 	String buildingName;
 	List<Building> buildings = new ArrayList<Building>();
 	List<BuildingTree> childs = new ArrayList<BuildingTree>();
