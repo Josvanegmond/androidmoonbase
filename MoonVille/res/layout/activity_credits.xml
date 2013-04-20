@@ -10,7 +10,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:orientation="vertical"
-        android:layout_margin="20dp" >
+        android:layout_margin="10dp" >
 
         <TextView
             android:id="@+id/developersTextView"
