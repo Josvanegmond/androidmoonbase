@@ -13,6 +13,7 @@ public class Building {
 	protected ArrayList<Resource> outputResources;
 	protected int inputPower;
 	protected int outputPower;
+	protected boolean hasPower;
 
 	public Building(String name, String info, int amount, int inputPower) {
 		initBuilding(name, info, amount, inputPower);
@@ -79,6 +80,14 @@ public class Building {
 	
 	public int getNetPower() {
 		return inputPower - outputPower;
+	}
+	
+	public void setHasPower(boolean hasPower) {
+		this.hasPower = hasPower;
+	}
+	
+	public boolean getHasPower() {
+		return hasPower;
 	}
 
 }

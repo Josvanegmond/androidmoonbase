@@ -1,6 +1,11 @@
 package spaceappschallenge.moonville.activities;
 
+import java.util.List;
+
 import spaceappschallenge.moonville.R;
+import spaceappschallenge.moonville.businessmodels.BuildingTree;
+import spaceappschallenge.moonville.businessmodels.MoonBase;
+import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.app.Activity;
 import android.content.Intent;
@@ -35,10 +40,12 @@ public class BaseOverviewActivity extends Activity {
 	//methods called by onClick property of button in xml
 	public void nextTurn( View view )
 	{
+		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
+		BuildingTree tree = moonBase.getBuiltBuildings();
+		tree.computeNetPower();
 		//calculate resources from all buildings, starting at the bottom of the building tree
 		//per building:
 		//are required buildings still available?
-		//is required power available?
 		//are there enough required resources?
 		//calculate output in combination with research and prospecting bonus
 		//add output resources via resources factory

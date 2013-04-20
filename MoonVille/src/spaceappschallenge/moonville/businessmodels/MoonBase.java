@@ -86,6 +86,15 @@ public class MoonBase implements Serializable {
 	public void setMoney(int money) {
 		this.money = money;
 	}
+	
+	public BuildingTree getBuiltBuildings() {
+		return builtBuildings;
+	}
+	
+	public void setBuiltBuildings(BuildingTree builtBuildings) {
+		this.builtBuildings = builtBuildings;
+	}
+	
 	public List<MegaProject> getBuiltMegaProjects() {
 		return builtMegaProjects;
 	}
@@ -93,5 +102,7 @@ public class MoonBase implements Serializable {
 	public void setBuiltMegaProjects(List<MegaProject> builtMegaProjects) {
 		this.builtMegaProjects = builtMegaProjects;
 	}
+	
+	
 
 }

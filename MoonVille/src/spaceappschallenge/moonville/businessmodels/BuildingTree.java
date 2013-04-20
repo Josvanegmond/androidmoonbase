@@ -100,4 +100,29 @@ public class BuildingTree {
 	public List<BuildingTree> getChilds() {
 		return childs;
 	}
+	
+	/**
+	 * Interface function for computeNetPower(int).
+	 */
+	public void computeNetPower() {
+		computeNetPower(0);
+	}
+	
+	/**
+	 * Computes the amount of power available to each building and shuts down 
+	 * those that don't have enough power.
+	 * 
+	 * @param parentPower Total net power of the parent node.
+	 * @return Total net power of current node and all child nodes.
+	 */
+	private int computeNetPower(int parentPower) {
+		for (Building b : buildings) {
+			parentPower += b.getNetPower();
+			b.setHasPower(parentPower >= 0);
+		}
+		for (BuildingTree c : childs) {
+			parentPower += c.computeNetPower(parentPower);
+		}
+		return parentPower;
+	}
 }
