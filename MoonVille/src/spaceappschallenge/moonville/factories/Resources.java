@@ -3,21 +3,18 @@
  */
 package spaceappschallenge.moonville.factories;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import spaceappschallenge.moonville.R;
-import android.content.Context;
-import android.util.Log;
-
-import spaceappschallenge.moonville.businessmodels.*;
+import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.managers.ApplicationService;
 import spaceappschallenge.moonville.xml_parsers.ResourceXMLParser;
+import android.content.Context;
+import android.util.Log;
 
 public class Resources {
 	private static Resources instance = null;

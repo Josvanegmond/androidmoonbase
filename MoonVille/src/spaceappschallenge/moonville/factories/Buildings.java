@@ -6,14 +6,12 @@ import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.content.Context;
-import android.util.Log;
-
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Building;
-import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.managers.ApplicationService;
 import spaceappschallenge.moonville.xml_parsers.BuildingXMLParser;
+import android.content.Context;
+import android.util.Log;
 
 //singleton class
 public class Buildings

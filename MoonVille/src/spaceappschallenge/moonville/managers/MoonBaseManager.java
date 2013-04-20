@@ -10,14 +10,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
-import android.content.Context;
-import android.provider.OpenableColumns;
-import android.widget.Toast;
 
 import spaceappschallenge.moonville.businessmodels.Difficulty;
 import spaceappschallenge.moonville.businessmodels.MoonBase;
+import android.content.Context;
+import android.widget.Toast;
 
 public class MoonBaseManager {
 	// added static since there is only 1 moonbase

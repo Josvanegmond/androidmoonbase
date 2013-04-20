@@ -3,11 +3,11 @@
  */
 package spaceappschallenge.moonville.activities;
 
+import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Difficulty;
 import spaceappschallenge.moonville.businessmodels.GameDetails;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-public class NewGameActivity extends Activity {
+public class NewGameActivity extends GameActivity {
 	protected GameDetails gameDetails;
 
 	@Override

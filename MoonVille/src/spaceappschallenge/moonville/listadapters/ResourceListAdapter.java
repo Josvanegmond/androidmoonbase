@@ -1,6 +1,7 @@
 package spaceappschallenge.moonville.listadapters;
 
 import java.util.ArrayList;
+
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Resources;

@@ -2,19 +2,19 @@ package spaceappschallenge.moonville.activities;
 
 import java.util.ArrayList;
 
+import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.listadapters.ImportResourceListAdapter;
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
 
-public class ImportResourcesActivity extends Activity {
+public class ImportResourcesActivity extends GameActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

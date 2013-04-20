@@ -1,13 +1,11 @@
 package spaceappschallenge.moonville.activities;
 
+import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.R.layout;
-import spaceappschallenge.moonville.R.menu;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 
-public class CreditsActivity extends Activity {
+public class CreditsActivity extends GameActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

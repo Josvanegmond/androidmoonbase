@@ -5,7 +5,7 @@ package spaceappschallenge.moonville.managers;
 
 import java.util.List;
 
-import spaceappschallenge.moonville.businessmodels.*;
+import spaceappschallenge.moonville.businessmodels.Resource;
 
 public class ResourceManager {
 	private static ResourceManager instance = null;

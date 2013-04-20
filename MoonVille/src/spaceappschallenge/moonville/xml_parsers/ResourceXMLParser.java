@@ -7,20 +7,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import spaceappschallenge.moonville.R;
+import spaceappschallenge.moonville.businessmodels.Resource;
+import spaceappschallenge.moonville.managers.ApplicationService;
 import android.content.Context;
 import android.util.Log;
-
-import spaceappschallenge.moonville.businessmodels.Resource;
-import spaceappschallenge.moonville.factories.Resources;
-import spaceappschallenge.moonville.managers.ApplicationService;
 
 public class ResourceXMLParser {
 	protected Context context = null;

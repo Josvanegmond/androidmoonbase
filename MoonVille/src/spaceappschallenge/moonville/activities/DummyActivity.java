@@ -3,16 +3,18 @@ package spaceappschallenge.moonville.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.businessmodels.*;
+import spaceappschallenge.moonville.businessmodels.Building;
+import spaceappschallenge.moonville.businessmodels.MoonBase;
+import spaceappschallenge.moonville.businessmodels.Resource;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class DummyActivity extends Activity {
+public class DummyActivity extends GameActivity {
 	protected Button newCompanyButton;
 	protected List<Resource> initialResources;
 	protected List<Building> initialBuildings;

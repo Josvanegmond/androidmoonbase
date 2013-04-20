@@ -1,7 +1,6 @@
 package spaceappschallenge.moonville.businessmodels;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Building {
 	protected String name;

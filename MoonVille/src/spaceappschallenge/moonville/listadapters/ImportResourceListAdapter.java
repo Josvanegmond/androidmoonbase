@@ -1,8 +1,8 @@
 package spaceappschallenge.moonville.listadapters;
 
 import java.util.ArrayList;
+
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.businessmodels.MoonBase;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.SeekBar;
-import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ImportResourceListAdapter extends BaseAdapter {
 	private ArrayList<Resource> allResources;

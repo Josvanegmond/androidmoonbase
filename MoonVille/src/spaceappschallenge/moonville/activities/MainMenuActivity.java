@@ -1,5 +1,6 @@
 package spaceappschallenge.moonville.activities;
 
+import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.managers.ApplicationService;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
@@ -9,7 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-public class MainMenuActivity extends Activity {
+public class MainMenuActivity extends GameActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,6 @@ public class MainMenuActivity extends Activity {
 
 	public void exitGame(View view) {
 		finish();
-		System.exit(0);
 	}
 
 }
