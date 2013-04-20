@@ -80,8 +80,12 @@ public class Building {
 		return this.requiredBuildings;
 	}
 	
-	public int getNetPower() {
-		return inputPower - outputPower;
+	public int getOutputPower() {
+		return outputPower;
+	}
+	
+	public int getInputPower() {
+		return inputPower;
 	}
 	
 	public void setHasPower(boolean hasPower) {

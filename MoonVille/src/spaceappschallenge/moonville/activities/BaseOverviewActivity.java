@@ -42,7 +42,7 @@ public class BaseOverviewActivity extends Activity {
 	{
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 		BuildingTree tree = moonBase.getBuiltBuildings();
-		tree.computeNetPower();
+		tree.checkPower();
 		tree.checkRequiredBuildings();
 		//calculate resources from all buildings, starting at the bottom of the building tree
 		//per building:
