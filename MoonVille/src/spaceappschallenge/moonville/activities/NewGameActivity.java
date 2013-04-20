@@ -4,11 +4,11 @@
 package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.R;
+import spaceappschallenge.moonville.businessmodels.Difficulty;
 import spaceappschallenge.moonville.businessmodels.GameDetails;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 public class NewGameActivity extends Activity {
 	protected GameDetails gameDetails;
@@ -46,20 +45,18 @@ public class NewGameActivity extends Activity {
 		int radioButtonId = difficultyRadioGroup.getCheckedRadioButtonId();
 		RadioButton selectedButton = (RadioButton) difficultyRadioGroup
 				.findViewById(radioButtonId);
+		int difficulty = difficultyRadioGroup.indexOfChild(selectedButton);
 
-		String difficultyLevel = selectedButton.getText().toString();
-		gameDetails.setDifficultyLevel(difficultyLevel);
-		Log.i("Difficulty:", gameDetails.getDifficultyLevel());
+		gameDetails.setDifficultyLevel(difficulty);
+		Log.i("Difficulty:", "" + gameDetails.getDifficultyLevel());
 	}
 
 	protected void initModel() {
-		MoonBaseManager.createNewMoonBase(0, 0, 40000000); // $40.000.000.000,
-															// but it's an
-															// int... so per
-															// thousand :)
 		// Dummy models
 
-		// MoonBase moonBase = new MoonBase()
+		Difficulty diff = new Difficulty(gameDetails.getDifficultyLevel());
+
+		MoonBaseManager.createNewMoonBase(diff);
 		// MoonBase should become a singleton I think, best way to make it
 		// easily accessible -Jos
 	}
