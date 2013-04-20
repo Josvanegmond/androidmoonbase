@@ -27,7 +27,8 @@ public class Resources {
 	protected InputStream inputStream = null;
 
 	protected Resources() {
-		Resources.context = ApplicationService.getInstance().getApplicationContext();
+		Resources.context = ApplicationService.getInstance()
+				.getApplicationContext();
 		// I think during construction, it should read "allResources" from a
 		// file or db
 		this.allResources = new ArrayList<Resource>();
@@ -38,13 +39,13 @@ public class Resources {
 		// this.allResources.add(new Resource("Regolith", 20, 0.2));
 		//
 		// // Sample resources present at some stage of the game.
-		this.availableResources.add(new Resource("Helium-3", 10, 0.1));
-		this.availableResources.add(new Resource("Regolith", 10, 0.2));
+		this.availableResources.add(new Resource("Helium-3", 10, 0.1, 10));
+		this.availableResources.add(new Resource("Regolith", 10, 0.2, 10));
 		initAllResources();
 
 	}
-	
-	protected void initAllResources(){
+
+	protected void initAllResources() {
 		inputStream = context.getResources().openRawResource(R.raw.resources);
 
 		try {
@@ -53,12 +54,13 @@ public class Resources {
 				allResources = xmlParser.parse();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				Log.e("Resources","There was problem while parsing the xml file");
+				Log.e("Resources",
+						"There was problem while parsing the xml file");
 				e.printStackTrace();
 			}
 		} catch (XmlPullParserException e) {
 			// TODO Auto-generated catch block
-			Log.e("Resources","XMLParser could not be instantiated");
+			Log.e("Resources", "XMLParser could not be instantiated");
 			e.printStackTrace();
 		}
 	}
@@ -92,12 +94,11 @@ public class Resources {
 		Resource foundResource = null;
 
 		for (Resource resource : this.allResources) {
-			if (resource.getName().equals(name)) {
+			if (resource.getName().equalsIgnoreCase(name)) {
 				foundResource = resource;
 				break;
 			}
 		}
-
 		return foundResource;
 	}
 }

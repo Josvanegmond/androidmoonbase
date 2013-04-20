@@ -67,23 +67,28 @@ public class BuildingXMLParser {
 				"amount"));
 		double reqdResQuality = Double.parseDouble(xpp.getAttributeValue(null,
 				"quality"));
+		int reqdUnitCost = Integer.parseInt(xpp.getAttributeValue(null,
+				"unitCost"));
 		requiredResources.add(new Resource(reqdResName, reqdResAmount,
 				reqdResQuality));
 		Log.i("XML", "required resource " + reqdResName);
 	}
 
-	public void addRequiredBuilding(XmlPullParser xpp,ArrayList<Building> requiredBuildings) {
+	public void addRequiredBuilding(XmlPullParser xpp,
+			ArrayList<Building> requiredBuildings) {
 		String reqdBuildName = xpp.getAttributeValue(null, "name");
 		String reqdBuildInfo = xpp.getAttributeValue(null, "info");
 		int reqdBuildAmount = 0;
 		try {
-			reqdBuildAmount = Integer.parseInt(xpp.getAttributeValue(null,"amount"));
+			reqdBuildAmount = Integer.parseInt(xpp.getAttributeValue(null,
+					"amount"));
 		} catch (Exception e) {
 			Log.e("XMLError", "reqdBuildAmount");
 		}
 		int reqdBuildInputPower = 0;
 		try {
-			reqdBuildInputPower = Integer.parseInt(xpp.getAttributeValue(null,"inputPower"));
+			reqdBuildInputPower = Integer.parseInt(xpp.getAttributeValue(null,
+					"inputPower"));
 		} catch (Exception e) {
 			Log.e("XMLError", "reqdBuildInputPower");
 		}
@@ -114,7 +119,6 @@ public class BuildingXMLParser {
 				readBuildingAttributes();
 				requiredBuildings = new ArrayList<Building>();
 				requiredResources = new ArrayList<Resource>();
-				
 
 				// For Nested elements
 				while (atBuilding) {// <building>
@@ -194,7 +198,9 @@ public class BuildingXMLParser {
 						}// requiredBuilding
 
 						while (atRequiredBuilding) {
-							if (eventType == XmlPullParser.END_TAG&& xpp.getName().equalsIgnoreCase("building")) {
+							if (eventType == XmlPullParser.END_TAG
+									&& xpp.getName().equalsIgnoreCase(
+											"building")) {
 								atRequiredBuilding = false;
 								break;
 							}
@@ -209,12 +215,13 @@ public class BuildingXMLParser {
 					eventType = xpp.next();
 				}// while atBuilding
 				this.buildings.add(new Building(buildingName, buildingInfo,
-						buildingAmount, buildingInputPower, buildingOutputPower,
-						requiredResources, requiredBuildings));
+						buildingAmount, buildingInputPower,
+						buildingOutputPower, requiredResources,
+						requiredBuildings));
 			}// if building
 
-				eventType = xpp.next();
-			
+			eventType = xpp.next();
+
 		}// end
 		return this.buildings;
 

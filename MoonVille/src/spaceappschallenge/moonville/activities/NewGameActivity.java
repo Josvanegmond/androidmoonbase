@@ -5,6 +5,7 @@ package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.GameDetails;
+import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 public class NewGameActivity extends Activity {
 	protected GameDetails gameDetails;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -27,31 +29,34 @@ public class NewGameActivity extends Activity {
 		// initModel();//Model is dependent on the difficulty level right?
 	}
 
-	
-
 	public void startNewGame(View view) {
-		gameDetails =GameDetails.getInstance();
+		gameDetails = GameDetails.getInstance();
 		retrieveUserInputs();
 		initModel();
 		showBaseOverviewScreen(view);
 	}
 
-	//Retrieve user name and difficulty level
+	// Retrieve user name and difficulty level
 	protected void retrieveUserInputs() {
 		EditText userNameEditText = (EditText) findViewById(R.id.userNameEditText);
 		String userName = userNameEditText.getText().toString();
 		gameDetails.setUsername(userName);
-		
+
 		RadioGroup difficultyRadioGroup = (RadioGroup) findViewById(R.id.difficultyRadioGroup);
 		int radioButtonId = difficultyRadioGroup.getCheckedRadioButtonId();
-		RadioButton selectedButton = (RadioButton) difficultyRadioGroup.findViewById(radioButtonId);
-		
+		RadioButton selectedButton = (RadioButton) difficultyRadioGroup
+				.findViewById(radioButtonId);
+
 		String difficultyLevel = selectedButton.getText().toString();
 		gameDetails.setDifficultyLevel(difficultyLevel);
-		Log.i("Difficulty:",gameDetails.getDifficultyLevel());
+		Log.i("Difficulty:", gameDetails.getDifficultyLevel());
 	}
-	
+
 	protected void initModel() {
+		MoonBaseManager.createNewMoonBase(0, 0, 40000000); // $40.000.000.000,
+															// but it's an
+															// int... so per
+															// thousand :)
 		// Dummy models
 
 		// MoonBase moonBase = new MoonBase()
