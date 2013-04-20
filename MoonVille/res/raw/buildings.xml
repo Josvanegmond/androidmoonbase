@@ -1,52 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
 <buildings>
 
-    <building name="Regolithmine" amount="1" inputPower="200" outputPower="300" >
-        
-        <inputResources>
-        </inputResources>
-        
-        <outputResources>
-            <resource name="Regolith" amount="35" quality="0.1" ></resource>
-        </outputResources>
-        
-        <requiredBuildings>
+	<building name="Greenhouse" info="Produces food for living habitat" amount="1" inputPower="200" outputPower="0" requiredTurns="6" regolithCost="10" monetaryCost="5000" >
+		<requiredResources>
+			<resource name="Carbon dioxide" amount="10" quality="0.1"></resource>
+			<resource name="Cement" amount="10" quality="0.1"></resource>
+			<resource name="Iron" amount="10" quality="0.5"></resource>
+			<resource name="Glass" amount="10" quality="0.1"></resource>
+			<resource name="Oxygen" amount="10" quality="0.1"></resource>
+			<resource name="Steel" amount="10" quality="0.1"></resource>
+		</requiredResources>
+		<requiredBuildings>
+			<building name="Rover" amount="5" quality="0.2"></building>
+		</requiredBuildings>
+		<outputResources>
+			<resource name="Food" amount="5" quality="0.2"></resource>
+		</outputResources>
+	</building>
+	
+	<building name="Electrolyzer" info="Processes minerals to create cement, basalt and glass" amount="1" inputPower="100" outputPower="0" requiredTurns="4" regolithCost="4" monetaryCost="1000" >
+		<requiredResources>
+			<resource name="Metal" amount="20" quality="0.1"></resource>
+		</requiredResources>
+		
+		<requiredBuildings>
+		</requiredBuildings>
+		
+		<outputResources>
+			<resource name="Basalt" amount="1" quality="0.1" ></resource>
+			<resource name="Cement" amount="1" quality="0.1" ></resource>
+			<resource name="Glass" amount="1" quality="0.1" ></resource>
+    	</outputResources>
+		
+	</building>
+	
+	<building name="Helium Tank" info="Stores Helium" amount="1" inputPower="100" outputPower="0" requiredTurns="2" regolithCost="2" monetaryCost="2000" >
+		<requiredResources>
+			<resource name="Cement" amount="20" quality="0.1"></resource>
+			<resource name="Iron" amount="1" quality="0.1"></resource>
+			<resource name="Helium" amount="10" quality="0.1"></resource>
+		</requiredResources>
+		
+		<requiredBuildings></requiredBuildings>
+		
+		<outputResources>
+			<resource name="Helium" amount="10" quality="0.1"></resource>
+		</outputResources>
+		
+	</building>	
+	
+	<building name="Hydrogen Tank"  info="Stores Hydrogen" amount="1" inputPower="100" outputPower="0" requiredTurns="2" regolithCost="2" monetaryCost="2000" >
+		<requiredResources>
+			<resource name="Cement" amount="20" quality="0.1"></resource>
+			<resource name="Iron" amount="1" quality="0.1"></resource>
+			<resource name="Hydrogen" amount="10" quality="0.1"></resource>
+		</requiredResources>
+		
+		<requiredBuildings></requiredBuildings>
+		
+		<outputResources>
+			<resource name="Hydrogen" amount="10" quality="0.1"></resource>
+		</outputResources>
+		
+	</building>	
+	
+	<building name="Iron Tank"  info="Stores Iron" amount="1" inputPower="100" outputPower="0" requiredTurns="3" regolithCost="20" monetaryCost="3000" >
+		<requiredResources>
+			<resource name="Cement" amount="20" quality="0.1"></resource>
+			<resource name="Iron" amount="100" quality="0.1"></resource>
+		</requiredResources>
+		
+		<requiredBuildings></requiredBuildings>
+		
+		<outputResources>
+			<resource name="Iron" amount="100" quality="0.1"></resource>
+		</outputResources>
+		
+	</building>	
+	
+	<building name="Launch Pad" info="Enables export of products" amount="1" inputPower="100" outputPower="0" requiredTurns="10" regolithCost="10000" monetaryCost="500000" >
+		<requiredResources>
+			<resource name="Cement" amount="20" quality="0.1"></resource>
+			<resource name="Iron" amount="1" quality="0.1"></resource>
+		</requiredResources>
+		
+		<requiredBuildings>
+			<building name="Robot" amount="200" quality="0.5"></building>
+		</requiredBuildings>
+		
+		<outputResources>
+		</outputResources>
+		
+	</building>	
+	
+	<building name="Living Habitat" info="Provides living accomodations" amount="1" inputPower="200" outputPower="0" requiredTurns="6" regolithCost="100" monetaryCost="100000" >
+		<requiredResources>
+			<resource name="Cement" amount="10" quality="0.1"></resource>
+			<resource name="Food" amount="10" quality="0.5"></resource>
+			<resource name="Glass" amount="10" quality="0.1"></resource>
+			<resource name="Iron" amount="10" quality="0.1"></resource>
+			<resource name="Nickel" amount="10" quality="0.1"></resource>
+			<resource name="Oxygen" amount="10" quality="0.1"></resource>
+			<resource name="Steel" amount="10" quality="0.1"></resource>
+		</requiredResources>
+		<requiredBuildings>
+			<building name="Robot" amount="5" quality="0.2"></building>
+		</requiredBuildings>
+	</building>
+	
+	<building name="Nickel Tank" info="Stores Nickel" amount="1" inputPower="100" outputPower="0" requiredTurns="2" regolithCost="10" monetaryCost="2000" >
+		<requiredResources>
+			<resource name="Cement" amount="20" quality="0.1"></resource>
+			<resource name="Iron" amount="1" quality="0.1"></resource>
+			<resource name="Nickel" amount="10" quality="0.1"></resource>
+		</requiredResources>
+		
+		<requiredBuildings></requiredBuildings>
+		
+		<outputResources>
+			<resource name="Nickel" amount="10" quality="0.1"></resource>
+		</outputResources>
+		
+	</building>	
+	
+	<building name="Nitrogen Tank" info="Stores Nitrogen" amount="1" inputPower="100" outputPower="0" requiredTurns="2" regolithCost="10" monetaryCost="2000" >
+		<requiredResources>
+			<resource name="Cement" amount="20" quality="0.1"></resource>
+			<resource name="Iron" amount="1" quality="0.1"></resource>
+			<resource name="Nitrogen" amount="10" quality="0.1"></resource>
+		</requiredResources>
+		
+		<requiredBuildings></requiredBuildings>
+		
+		<outputResources>
+			<resource name="Nitrogen" amount="10" quality="0.1"></resource>
+		</outputResources>
+		
+	</building>	
+	
+	<building name="Oxygen Processing Plant" info="Stores Oxygen" amount="1" inputPower="200" outputPower="0" requiredTurns="2" regolithCost="10" monetaryCost="2000" >
+		<requiredResources></requiredResources>
+		<requiredBuildings></requiredBuildings>
+		<outputResources>
+			<resource name="Oxygen" amount="60" quality="0.1"></resource>
+		</outputResources>
+	</building>
+	
+	<building name="OxygenTank" info="Stores Oxygen" amount="1" inputPower="100" outputPower="0" requiredTurns="2" regolithCost="10" monetaryCost="2000" >
+		<requiredResources>
+			<resource name="Cement" amount="20" quality="0.1"></resource>
+			<resource name="Iron" amount="1" quality="0.1"></resource>
+			<resource name="Oxygen" amount="10" quality="0.1"></resource>
+		</requiredResources>
+		
+		<requiredBuildings></requiredBuildings>
+		
+		<outputResources>
+			<resource name="Oxygen" amount="10" quality="0.1"></resource>
+		</outputResources>
+		
+	</building>
+	
+	<building name="Regolith Processing Plant" info="Processes regolith to produce resources including: cement and oxygen" amount="1" inputPower="1000" outputPower="0"  requiredTurns="6" regolithCost="500" monetaryCost="80000" >
+    	
+		<requiredResources>
+			<resource name="Regolith" amount="200" quality="0.1"></resource>
+		</requiredResources>
+		
+		<requiredBuildings>
+			<building name="Heater" amount="5"></building>
+			<building name="Metal Cast" amount="2"></building>
         </requiredBuildings>
         
-    </building>
-    
-    
-    <building name="Processingplant" amount="1" inputPower="20" outputPower="200" >
-        
-        <inputResources>
-            <resource name="Regolith" amount="100" quality="0.1" ></resource>
-        </inputResources>
-        
         <outputResources>
-            <resource name="Oxygen" amount="9" quality="0.3" ></resource>
-            <resource name="Metal" amount="3" quality="0.5" ></resource>
-            <resource name="Silicon" amount="2" quality="0.2" ></resource>
+            <resource name="Oxygen" amount="10" quality="0.1" ></resource>
+            <resource name="Hydrogen" amount="20" quality="0.1" ></resource>
+            <resource name="Helium" amount="20" quality="0.1" ></resource>
+            <resource name="Nitrogen" amount="10" quality="0.1" ></resource>
+            <resource name="Iron" amount="15" quality="0.1" ></resource>
+            <resource name="Nickel" amount="15" quality="0.1" ></resource>
         </outputResources>
-        
-        <requiredBuildings>
-        </requiredBuildings>
-        
     </building>
-    
-    
-    <building name="Metal assembly plant" amount="1" inputPower="20" outputPower="200" >
-        
-        <inputResources>
-            <resource name="Metal" amount="5" quality="0.5" ></resource>
-        </inputResources>
-        
-        <outputResources>
-            <resource name="Metal plates" amount="1" quality="0.4" ></resource>
-        </outputResources>
-        
-        <requiredBuildings>
-        </requiredBuildings>
-        
-    </building>
+	
+	<building name="Robot" info="Processes minerals to create basalt, cement and glass" amount="1" inputPower="100" outputPower="0" requiredTurns="5" regolithCost="10" monetaryCost="5000" >
+		<requiredResources>
+			<resource name="Metal" amount="20" quality="0.1"></resource>
+			<resource name="Helium" amount="1" quality="0.1" ></resource>
+    	</requiredResources>
+		
+		<requiredBuildings>
+			<building name="Solar Panel Array" amount="1" inputPower="0" outputPower="100"></building>
+		</requiredBuildings>
+		
+		<outputResources>
+			<resource name="Basalt" amount="1" ></resource>
+			<resource name="Cement" amount="1"></resource>
+			<resource name="Glass" amount="1"></resource>
+    	</outputResources>
+		
+	</building>
+	
+	<building name="Rock Crusher"  info="Crushes moon rock to provide minerals" amount="2" inputPower="200" outputPower="0" requiredTurns="5" regolithCost="100" monetaryCost="20000" >
+		<requiredResources>
+			<resource name="Glass" amount="10" quality="0.1"></resource>
+			<resource name="Iron" amount="10" quality="0.1"></resource>
+			<resource name="Steel" amount="10" quality="0.1"></resource>			
+		</requiredResources>
+		
+		<requiredBuildings></requiredBuildings>
+		
+		<outputResources>
+			<resource name="Water" amount="10" quality="0.1"></resource>
+		</outputResources>
+	</building>
+	
+	<building name="Smelting Facility"  info="Produces metals from ore" amount="1" inputPower="200" outputPower="0" requiredTurns="5" regolithCost="200" monetaryCost="50000" >
+		<requiredResources>
+			<resource name="Processed Regolith" amount="10" quality="0.1"></resource>
+		</requiredResources>
+		
+		<requiredBuildings></requiredBuildings>
+		
+		<outputResources>
+			<resource name="Cement" amount="10" quality="0.1"></resource>
+			<resource name="Basalt" amount="10" quality="0.1"></resource>
+			<resource name="Glass" amount="10" quality="0.1"></resource>
+		</outputResources>
+	</building>
+	
+	<building name="Solar Panel Array" info="Provides power to robots and other facilities" amount="1" inputPower="0" outputPower="100" requiredTurns="2" regolithCost="100" monetaryCost="20000" >
+		<requiredResources></requiredResources>
+		<requiredBuildings></requiredBuildings>
+		<outputResources></outputResources>
+	</building>
+	
+	<building name="Water Processing Facility" info="Produces water from processed regolith" amount="1" inputPower="200" outputPower="0" requiredTurns="3" regolithCost="100" monetaryCost="2000" >
+		<requiredResources>
+			<resource name="Processed Regolith" amount="10" quality="0.1"></resource>
+		</requiredResources>
+				
+		<requiredBuildings></requiredBuildings>
+		
+		<outputResources>
+			<resource name="Water" amount="10" quality="0.1"></resource>
+		</outputResources>
+	</building>
 
+	<building name="Water Tank" info="Stores Water" amount="1" inputPower="100" outputPower="0" requiredTurns="2" regolithCost="50" monetaryCost="2000" >
+		<requiredResources>
+			<resource name="Cement" amount="20" quality="0.1"></resource>
+			<resource name="Iron" amount="1" quality="0.1"></resource>
+			<resource name="Water" amount="10" quality="0.1"></resource>
+		</requiredResources>
+		
+		<requiredBuildings></requiredBuildings>
+		
+		<outputResources>
+			<resource name="Water" amount="10" quality="0.1"></resource>
+		</outputResources>
+		
+	</building>
+	
 </buildings>
