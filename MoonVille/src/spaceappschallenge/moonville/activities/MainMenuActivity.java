@@ -26,7 +26,7 @@ public class MainMenuActivity extends Activity {
 
 	// methods called by onClick property of button in xml
 	public void showBaseOverviewScreen(View view) {
-		MoonBaseManager.loadSavedMoonbase();
+		MoonBaseManager.loadSavedMoonbase(this);
 		view.getContext().startActivity(
 				new Intent(this, BaseOverviewActivity.class));
 	}
