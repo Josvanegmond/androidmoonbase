@@ -31,7 +31,9 @@ public class BuildingTree {
 	 * @return True if the building was inserted successfully.
 	 */
 	public boolean add(Building b) {
-		if (b.getName() == buildingName) {
+		if (b == null)
+			return true;
+		if (b.getName().equals(buildingName)) {
 			buildings.add(b);
 			return true;
 		}
@@ -43,47 +45,47 @@ public class BuildingTree {
 			}
 		}
 		// Make sure buildings are inserted at the correct level.
-		if (buildingName == "Moon Base" && 
-				(b.getName() == "Solarpanel Array" || 
-				b.getName() == "Ice Mine" || 
-				b.getName() == "Regolith Processor")) {
+		if (buildingName.equals("Moon Base") && 
+				(b.getName().equals("Solarpanel Array") || 
+				b.getName().equals("Ice Mine") || 
+				b.getName().equals("Regolith Processor"))) {
 			childs.add(new BuildingTree(b));
 			return true;
 		}
-		else if (buildingName == "Ice Mine" && 
-				b.getName() == "Water Processor") {
+		else if (buildingName.equals("Ice Mine") && 
+				b.getName().equals("Water Processor")) {
 			childs.add(new BuildingTree(b));	
 			return true;		
 		}
-		else if (buildingName == "Water Processor" && 
-				b.getName() == "Propellant Factory") {
+		else if (buildingName.equals("Water Processor") && 
+				b.getName().equals("Propellant Factory")) {
 			childs.add(new BuildingTree(b));
 			return true;			
 		}
-		else if (buildingName == "Propellant Factory" && 
-				b.getName() == "Spaceport") {
+		else if (buildingName.equals("Propellant Factory") && 
+				b.getName().equals("Spaceport")) {
 			childs.add(new BuildingTree(b));
 			return true;			
 		}
-		else if (buildingName == "Regolith Processor" && 
-				(b.getName() == "Smelting Facility" || 
-				b.getName() == "Nuclear Plant")) {
+		else if (buildingName.equals("Regolith Processor") && 
+				(b.getName().equals("Smelting Facility") || 
+				b.getName().equals("Nuclear Plant"))) {
 			childs.add(new BuildingTree(b));
 			return true;			
 		}
-		else if (buildingName == "Smelting Facility" && 
-				b.getName() == "Electronics Factory") {
+		else if (buildingName.equals("Smelting Facility") && 
+				b.getName().equals("Electronics Factory")) {
 			childs.add(new BuildingTree(b));
 			return true;			
 		}
-		else if (buildingName == "Electronics Factory" && 
-				(b.getName() == "Robot Factory" || 
-				b.getName() == "Maglev Train Transport")) {
+		else if (buildingName.equals("Electronics Factory") && 
+				(b.getName().equals("Robot Factory") || 
+				b.getName().equals("Maglev Train Transport"))) {
 			childs.add(new BuildingTree(b));	
 			return true;		
 		}
-		else if (buildingName == "Robot Factory" && 
-				b.getName() == "Asteroid Defense") {
+		else if (buildingName.equals("Robot Factory") && 
+				b.getName().equals("Asteroid Defense")) {
 			childs.add(new BuildingTree(b));	
 			return true;		
 		}
