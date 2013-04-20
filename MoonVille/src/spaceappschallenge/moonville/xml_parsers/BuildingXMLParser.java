@@ -67,8 +67,6 @@ public class BuildingXMLParser {
 				"amount"));
 		double reqdResQuality = Double.parseDouble(xpp.getAttributeValue(null,
 				"quality"));
-		int reqdUnitCost = Integer.parseInt(xpp.getAttributeValue(null,
-				"unitCost"));
 		requiredResources.add(new Resource(reqdResName, reqdResAmount,
 				reqdResQuality));
 		Log.i("XML", "required resource " + reqdResName);
