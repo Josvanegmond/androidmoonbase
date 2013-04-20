@@ -46,5 +46,10 @@ public class MainMenuActivity extends Activity {
 		view.getContext()
 				.startActivity(new Intent(this, CreditsActivity.class));
 	}
+	
+	public void exitGame(View view) {
+        finish();
+        System.exit(0);	
+	}
 
 }
