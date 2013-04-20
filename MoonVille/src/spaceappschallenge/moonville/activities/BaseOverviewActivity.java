@@ -46,7 +46,7 @@ public class BaseOverviewActivity extends Activity {
 		//calculate reputation
 		
 		//last step, save to file
-		MoonBaseManager.saveMoonBase();
+		MoonBaseManager.saveMoonBase(view.getContext());
 	}
 	
 	
