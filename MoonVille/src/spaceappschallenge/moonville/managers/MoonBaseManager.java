@@ -3,11 +3,16 @@
  */
 package spaceappschallenge.moonville.managers;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+import android.content.Context;
+import android.provider.OpenableColumns;
 
 import spaceappschallenge.moonville.businessmodels.Difficulty;
 import spaceappschallenge.moonville.businessmodels.MoonBase;
@@ -26,14 +31,14 @@ public class MoonBaseManager {
 		MoonBaseManager.currentMoonBase = new MoonBase(
 				diff.getResearchPoints(), diff.getProspectingLevel(),
 				diff.getMoney());
-		MoonBaseManager.saveMoonBase();
 	}
 
-	public static void loadSavedMoonbase() {
+	public static void loadSavedMoonbase(Context context) {
 		MoonBase currentMoonBase = null;
 
 		try {
-			FileInputStream fis = new FileInputStream("lastsavedmoonbase.sav");
+			FileInputStream fis = new FileInputStream(context.getFilesDir()
+					+ File.separator + Reference.SAVE_FILE);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 
 			currentMoonBase = (MoonBase) ois.readObject();
@@ -43,17 +48,20 @@ public class MoonBaseManager {
 		}
 
 		catch (IOException e) {
+			e.printStackTrace();
 		}
 
 		catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
 
 		MoonBaseManager.currentMoonBase = currentMoonBase;
 	}
 
-	public static void saveMoonBase() {
+	public static void saveMoonBase(Context context) {
 		try {
-			FileOutputStream fos = new FileOutputStream("lastsavedmoonbase.sav");
+			FileOutputStream fos = new FileOutputStream(context.getFilesDir()
+					+ File.separator + Reference.SAVE_FILE);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(MoonBaseManager.currentMoonBase);
@@ -63,6 +71,7 @@ public class MoonBaseManager {
 		}
 
 		catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

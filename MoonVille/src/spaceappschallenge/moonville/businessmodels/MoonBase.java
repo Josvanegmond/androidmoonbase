@@ -1,11 +1,12 @@
 package spaceappschallenge.moonville.businessmodels;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import spaceappschallenge.moonville.factories.Buildings;
 
-public class MoonBase {
+public class MoonBase implements Serializable {
 	protected int researchLabSize;
 	protected int researchPoints;
 	protected int prospectingLevel;
@@ -26,7 +27,8 @@ public class MoonBase {
 
 		// only add starting base
 		this.builtBuildings = new ArrayList<Building>();
-		//this.builtBuildings.add(Buildings.getInstance().getBuilding("Lunar Base"));
+		this.builtBuildings.add(Buildings.getInstance().getBuilding(
+				"Lunar Base"));
 	}
 
 	public boolean canSpend(int expenditure) {
@@ -34,7 +36,7 @@ public class MoonBase {
 			return true;
 		} else
 			return false;
-	}
+}
 
 	//
 	public boolean spend(int expenditure) {
