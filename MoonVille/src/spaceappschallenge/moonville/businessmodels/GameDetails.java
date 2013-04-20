@@ -1,8 +1,10 @@
 package spaceappschallenge.moonville.businessmodels;
 
+import java.io.Serializable;
+
 import spaceappschallenge.moonville.managers.Reference;
 
-public class GameDetails {
+public class GameDetails implements Serializable{
 	String username = "";
 	int difficultyLevel = Reference.DIF_EASY;
 	private static GameDetails instance = null;
