@@ -1,7 +1,58 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/resourcesParentLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical"
     tools:context=".ResourcesActivity" >
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/ar_showBaseOverviewButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="showBaseOverviewScreen"
+            android:text="Overview"
+            android:textSize="@dimen/tinyButtonText" />
+
+        <Button
+            android:id="@+id/ar_showBuildingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="showBuildingScreen"
+            android:text="Building"
+            android:textSize="@dimen/tinyButtonText" />
+
+        <Button
+            android:id="@+id/ar_showResourcesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="showResourcesScreen"
+            android:text="Resources"
+            android:textSize="@dimen/tinyButtonText" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/resourceName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="RESOURCE SCREEN"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ListView
+        android:id="@+id/resourceslist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
+
+    </ListView>
+
+</LinearLayout>

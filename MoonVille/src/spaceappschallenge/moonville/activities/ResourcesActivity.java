@@ -5,20 +5,25 @@ import java.util.ArrayList;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Resources;
+import spaceappschallenge.moonville.listadapters.ResourceListAdapter;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ListView;
 
 public class ResourcesActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ArrayList<Resource> resources = Resources.getInstance().getAllResources();
 		setContentView(R.layout.activity_resources);
+		
+		ArrayList<Resource> resources = Resources.getInstance().getAllResources();
+		ResourceListAdapter resourceListAdapter = new ResourceListAdapter();
+		ListView resourceListView = (ListView)this.findViewById(R.id.resourceslist);
+		resourceListView.setAdapter(resourceListAdapter);
 	}
 
 	@Override
@@ -27,9 +32,6 @@ public class ResourcesActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_resources, menu);
 		return true;
 	}
-	
-
-
 	
 	//methods called by onClick property of button in xml
 	public void showBaseOverviewScreen( View view )

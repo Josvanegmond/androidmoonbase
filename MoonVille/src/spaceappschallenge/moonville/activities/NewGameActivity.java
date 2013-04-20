@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -43,13 +44,11 @@ public class NewGameActivity extends Activity {
 		
 		RadioGroup difficultyRadioGroup = (RadioGroup) findViewById(R.id.difficultyRadioGroup);
 		int radioButtonId = difficultyRadioGroup.getCheckedRadioButtonId();
-		RadioButton selectedButton = (RadioButton) difficultyRadioGroup
-				.findViewById(radioButtonId);
+		RadioButton selectedButton = (RadioButton) difficultyRadioGroup.findViewById(radioButtonId);
+		
 		String difficultyLevel = selectedButton.getText().toString();
 		gameDetails.setDifficultyLevel(difficultyLevel);
-		
-		Toast toast = Toast.makeText(this, gameDetails.getDifficultyLevel(), 2000);
-		toast.show();
+		Log.i("Difficulty:",gameDetails.getDifficultyLevel());
 	}
 	
 	protected void initModel() {
