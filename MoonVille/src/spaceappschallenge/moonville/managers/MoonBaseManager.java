@@ -5,6 +5,7 @@ package spaceappschallenge.moonville.managers;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 
 import android.content.Context;
 import android.provider.OpenableColumns;
+import android.widget.Toast;
 
 import spaceappschallenge.moonville.businessmodels.Difficulty;
 import spaceappschallenge.moonville.businessmodels.MoonBase;
@@ -47,11 +49,12 @@ public class MoonBaseManager {
 			fis.close();
 		}
 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		catch (ClassNotFoundException e) {
+		catch (FileNotFoundException e) {
+			Toast t = Toast.makeText(context,
+					"There is no saved Game - Please start a new one.",
+					Toast.LENGTH_LONG);
+			t.show();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
