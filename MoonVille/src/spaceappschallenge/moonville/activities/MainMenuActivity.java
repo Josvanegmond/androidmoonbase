@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 
 public class MainMenuActivity extends Activity {
@@ -22,13 +21,6 @@ public class MainMenuActivity extends Activity {
 		ApplicationService app = ApplicationService.getInstance();
 		Log.i("Main","trying to get context");
 		app.setApplicationContext(this.getApplicationContext());
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_base_overview, menu);
-		return true;
 	}
 
 	// methods called by onClick property of button in xml

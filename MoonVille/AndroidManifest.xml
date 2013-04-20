@@ -71,7 +71,7 @@
             android:label="@string/title_activity_building_info" android:screenOrientation="landscape">
         </activity>
         <activity
-            android:name="spaceappschallenge.moonville.CreditsActivity"
+            android:name="spaceappschallenge.moonville.activities.CreditsActivity"
             android:label="@string/title_activity_credits" android:screenOrientation="landscape">
         </activity>
     </application>
