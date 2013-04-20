@@ -4,7 +4,6 @@ import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.managers.ApplicationService;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;

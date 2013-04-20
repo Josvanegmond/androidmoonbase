@@ -1,9 +1,13 @@
 package spaceappschallenge.moonville.activities;
 
+import java.util.ArrayList;
+
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.BuildingTree;
 import spaceappschallenge.moonville.businessmodels.MoonBase;
+import spaceappschallenge.moonville.businessmodels.Resource;
+import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,12 +41,14 @@ public class BaseOverviewActivity extends GameActivity {
 		BuildingTree tree = moonBase.getBuiltBuildings();
 		tree.checkPower();
 		tree.checkRequiredBuildings();
-		//calculate resources from all buildings, starting at the bottom of the building tree
-		//per building:
-		//are there enough required resources?
-		//calculate output in combination with research and prospecting bonus
-		//add output resources via resources factory
-		//calculate reputation
+		
+		Resources resources = Resources.getInstance();
+		ArrayList<Resource> available = (ArrayList<Resource>) 
+				tree.checkResources(resources.getAvailableResources());
+		resources.setAvailableResources(available);
+		
+		// TODO: factor in research and prospecting bonus
+		// TODO: calculate reputation
 		
 		//last step, save to file
 		MoonBaseManager.saveMoonBase(view.getContext());
