@@ -14,7 +14,7 @@ public class MoonBase implements Serializable {
 
 	// chosenMoonSite
 	protected int money;
-	protected List<Building> builtBuildings;
+	protected BuildingTree builtBuildings;
 	protected List<MegaProject> builtMegaProjects;
 
 	public MoonBase(int researchPoints, int prospectingLevel, int money) {
@@ -26,7 +26,7 @@ public class MoonBase implements Serializable {
 		this.money = money;
 
 		// only add starting base
-		this.builtBuildings = new ArrayList<Building>();
+		this.builtBuildings = new BuildingTree();
 		this.builtBuildings.add(Buildings.getInstance().getBuilding(
 				"Lunar Base"));
 	}
@@ -86,15 +86,6 @@ public class MoonBase implements Serializable {
 	public void setMoney(int money) {
 		this.money = money;
 	}
-
-	public List<Building> getBuiltBuildings() {
-		return builtBuildings;
-	}
-
-	public void setBuiltBuildings(List<Building> builtBuildings) {
-		this.builtBuildings = builtBuildings;
-	}
-
 	public List<MegaProject> getBuiltMegaProjects() {
 		return builtMegaProjects;
 	}
