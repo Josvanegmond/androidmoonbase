@@ -47,12 +47,7 @@ public class ResourcesActivity extends Activity {
 				new Intent(this, BuildingsActivity.class));
 	}
 
-	//
-	public void showResourcesScreen(View view) {
-		// we are already here
-		// view.getContext().startActivity( new Intent( this,
-		// ResourcesActivity.class ) );
-	}
+	
 
 	public void showImportResourcesScreen(View view) {
 		Log.i("ResourcesActivity", "showing import resources screen..");
@@ -63,7 +58,18 @@ public class ResourcesActivity extends Activity {
 	public void showExportResourcesScreen(View view) {
 		// Not implemented yet
 		view.getContext().startActivity(
-				new Intent(this, ResourcesActivity.class));
+				new Intent(this, ResourcesActivity.class));}
+	
+	public void showResourcesScreen( View view )
+	{
+		//we are already here
+		//view.getContext().startActivity( new Intent( this, ResourcesActivity.class ) );
+	}
+
+	
+	public void showExportScreen( View view )
+	{
+		view.getContext().startActivity( new Intent( this, ResourcesActivity.class ) );
 	}
 
 }
