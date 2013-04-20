@@ -43,12 +43,12 @@ public class ResourcesActivity extends Activity {
 	{
 		view.getContext().startActivity( new Intent( this, BuildingsActivity.class) );
 	}
-//	
-//	public void showResourcesScreen( View view )
-//	{
-//		//we are already here
-//		//view.getContext().startActivity( new Intent( this, ResourcesActivity.class ) );
-//	}
+	
+	public void showResourcesScreen( View view )
+	{
+		//we are already here
+		//view.getContext().startActivity( new Intent( this, ResourcesActivity.class ) );
+	}
 
 	
 	public void showExportScreen( View view )
