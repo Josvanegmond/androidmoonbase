@@ -125,4 +125,38 @@ public class BuildingTree {
 		}
 		return parentPower;
 	}
+	
+	/**
+	 * Interface function for checkrequiredBuildings(boolean)
+	 */
+	public void checkRequiredBuildings() {
+		// Moon Base has no required buildings.
+		checkRequiredBuildings(false);
+	}
+	
+	/**
+	 * Checks if each building has its required buildings. This is true if 
+	 * no higher node in the tree is empty.
+	 * 
+	 * @param isParentEmpty True if the parent node is empty. Means required 
+	 * 						buildings are not available.
+	 */
+	private void checkRequiredBuildings(boolean isParentEmpty) {
+		if (!isParentEmpty) {
+			for (Building b : buildings) {
+				b.setHasRequiredBuildings(true);
+			}			
+			for (BuildingTree c : childs) {
+				c.checkRequiredBuildings(false);
+			}		
+		}
+		else {
+			for (Building b : buildings) {
+				b.setHasRequiredBuildings(false);
+			}			
+			for (BuildingTree c : childs) {
+				c.checkRequiredBuildings(true);
+			}				
+		}
+	}
 }

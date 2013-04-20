@@ -43,13 +43,12 @@ public class BaseOverviewActivity extends Activity {
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 		BuildingTree tree = moonBase.getBuiltBuildings();
 		tree.computeNetPower();
+		tree.checkRequiredBuildings();
 		//calculate resources from all buildings, starting at the bottom of the building tree
 		//per building:
-		//are required buildings still available?
 		//are there enough required resources?
 		//calculate output in combination with research and prospecting bonus
 		//add output resources via resources factory
-		//drain power
 		//calculate reputation
 		
 		//last step, save to file

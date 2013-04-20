@@ -13,7 +13,9 @@ public class Building {
 	protected ArrayList<Resource> outputResources;
 	protected int inputPower;
 	protected int outputPower;
+	// These are computed each time they are needed, so no init necessary.
 	protected boolean hasPower;
+	protected boolean hasRequiredBuildings;
 
 	public Building(String name, String info, int amount, int inputPower) {
 		initBuilding(name, info, amount, inputPower);
@@ -89,5 +91,12 @@ public class Building {
 	public boolean getHasPower() {
 		return hasPower;
 	}
-
+	
+	public void setHasRequiredBuildings(boolean hasRequiredBuildings) {
+		this.hasRequiredBuildings = hasRequiredBuildings;
+	}
+	
+	public boolean getHasRequiredBuildings() {
+		return hasRequiredBuildings;
+	}
 }
