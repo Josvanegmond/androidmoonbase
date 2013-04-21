@@ -66,20 +66,6 @@ public class BuildingTree implements Serializable {
 	}
 	
 	/**
-	 * Returns the building in this node.
-	 */
-	public Building getBuilding() {
-		return building;
-	}
-	
-	/**
-	 * Returns all direct childs of this node.
-	 */
-	public List<BuildingTree> getChilds() {
-		return childs;
-	}
-	
-	/**
 	 * Gets the total power produced by all buildings, then does a 
 	 * breadth-first traversal over the tree, powering buildings 
 	 * near the root first, setting Building.hasPower accordingly.
