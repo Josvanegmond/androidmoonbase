@@ -52,21 +52,25 @@ public class ExportResourcesActivity extends GameActivity {
 	public void showBaseOverviewScreen(View view) {
 		view.getContext().startActivity(
 				new Intent(this, BaseOverviewActivity.class));
+		this.finish();
 	}
 
 	public void showBuildingScreen(View view) {
 		view.getContext().startActivity(
 				new Intent(this, BaseOverviewActivity.class));
+		this.finish();
 	}
 
 	public void showResourcesScreen(View view) {
 		view.getContext().startActivity(
 				new Intent(this, ResourcesActivity.class));
+		this.finish();
 	}
 
 	public void showExportScreen(View view) {
 		view.getContext().startActivity(
 				new Intent(this, ExportResourcesActivity.class));
+		this.finish();
 	}
 
 }

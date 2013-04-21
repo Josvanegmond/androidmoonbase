@@ -142,13 +142,13 @@ public class BuildingTree implements Serializable {
 		
 		List<BuildingTree> q = new ArrayList<BuildingTree>();
 		q.add(this);
-		while (!q.isEmpty() && buildingList == null ) {
+		while (!q.isEmpty() ) {
 			BuildingTree v = q.get(0);
 			q.remove(v);
     		for (Building b : v.buildings) {
     			if ( b.getName().equals( building.getName() ) ) {
     				buildingList = v.getBuildings();
-    				break;
+    				return buildingList;
     			}
     			else
     				b.setHasPower(false);
@@ -156,8 +156,7 @@ public class BuildingTree implements Serializable {
 			for (BuildingTree c : v.childs)
 				q.add(c);
 		}
-		
-		return buildingList;
+		return null;
 	}
 	
 	/**
