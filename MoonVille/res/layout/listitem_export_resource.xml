@@ -41,7 +41,6 @@
                 android:id="@+id/exportResourceCostTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="0" />
@@ -66,7 +65,6 @@
                 android:id="@+id/exportResourceQuantityTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="0" />
