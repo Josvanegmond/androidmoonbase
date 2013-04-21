@@ -1,57 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/AbsoluteLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mainscreen"
-    android:orientation="vertical" >
+    android:background="@drawable/mainmenu" >
+
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3" />
+        android:id="@+id/view1"
+        android:layout_width="226dp"
+        android:layout_height="57dp"
+        android:layout_x="42dp"
+        android:layout_y="178dp"
+        android:onClick="showNewGameScreen" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal" >
+    <View
+        android:id="@+id/View01"
+        android:layout_width="214dp"
+        android:layout_height="57dp"
+        android:layout_x="286dp"
+        android:layout_y="177dp"
+        android:onClick="showBaseOverviewScreen" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" 
-            android:orientation="vertical">
+    <View
+        android:id="@+id/View02"
+        android:layout_width="119dp"
+        android:layout_height="37dp"
+        android:layout_x="408dp"
+        android:layout_y="280dp"
+        android:onClick="showCreditsScreen" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="showNewGameScreen"
-                android:text="New Game" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="showBaseOverviewScreen"
-                android:text="Load Game" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="showCreditsScreen"
-                android:text="Credits" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="exitGame"
-                android:text="Exit" />
-            
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-</LinearLayout>
+</AbsoluteLayout>

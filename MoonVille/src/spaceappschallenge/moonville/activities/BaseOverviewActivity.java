@@ -17,10 +17,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsoluteLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ScrollView;
 
 public class BaseOverviewActivity extends GameActivity {
 
@@ -36,6 +39,7 @@ public class BaseOverviewActivity extends GameActivity {
 		Log.i("Base", "showing buildings");
 		updateUI();
 		showBuildings();
+		fixHVScrollViews();
 	}
 
 	@Override
@@ -131,5 +135,50 @@ public class BaseOverviewActivity extends GameActivity {
 		view.getContext().startActivity(
 				new Intent(this, ExportResourcesActivity.class));
 		this.finish();
+	}
+	
+	
+	
+	//some scrollbar fix for scrolling
+	private void fixHVScrollViews()
+	{
+	    final HorizontalScrollView hScroll = (HorizontalScrollView) findViewById(R.id.moonsurface_hscrollview);
+	    final ScrollView vScroll = (ScrollView) findViewById(R.id.moonsurface_vscrollview);
+	    vScroll.setOnTouchListener(new View.OnTouchListener() { //inner scroll listener         
+	        @Override
+	        public boolean onTouch(View v, MotionEvent event) {
+	            return false;
+	        }
+	    });
+	    hScroll.setOnTouchListener(new View.OnTouchListener() { //outer scroll listener         
+	        private float mx, my, curX, curY;
+	        private boolean started = false;
+
+	        @Override
+	        public boolean onTouch(View v, MotionEvent event) {
+	            curX = event.getX();
+	            curY = event.getY();
+	            int dx = (int) (mx - curX);
+	            int dy = (int) (my - curY);
+	            switch (event.getAction()) {
+	                case MotionEvent.ACTION_MOVE:
+	                    if (started) {
+	                        vScroll.scrollBy(0, dy);
+	                        hScroll.scrollBy(dx, 0);
+	                    } else {
+	                        started = true;
+	                    }
+	                    mx = curX;
+	                    my = curY;
+	                    break;
+	                case MotionEvent.ACTION_UP: 
+	                    vScroll.scrollBy(0, dy);
+	                    hScroll.scrollBy(dx, 0);
+	                    started = false;
+	                    break;
+	            }
+	            return true;
+	        }
+	    });
 	}
 }
