@@ -1,10 +1,11 @@
 //Note-Many constructors are unnecessary. Should remove them.
 package spaceappschallenge.moonville.businessmodels;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Building {
+public class Building implements Serializable
+{
 	protected String name = "";
 	protected String info = "";
 	protected int amount = 0;

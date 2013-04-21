@@ -63,14 +63,17 @@ public class BaseOverviewActivity extends GameActivity {
 
 		List<Building> buildings = Buildings.getInstance().getAllBuildings();
 
-		for (Building building : buildings) {
+		for (final Building building : buildings)
+		{
 			ImageView buildingImage = new ImageView(this);
+			
 			buildingImage.setOnClickListener(new OnClickListener() {
 				@Override
-				public void onClick(View view) {
-					view.getContext().startActivity(
-							new Intent(BaseOverviewActivity.this,
-									BuildingInfoActivity.class));
+				public void onClick(View view)
+				{
+					Intent intent = new Intent(BaseOverviewActivity.this, BuildingInfoActivity.class);
+					intent.putExtra( "Building", building );
+					view.getContext().startActivity( intent );
 					BaseOverviewActivity.this.finish();
 				}
 			});
@@ -91,16 +94,27 @@ public class BaseOverviewActivity extends GameActivity {
 					buildingDrawable.getIntrinsicWidth(),
 					buildingDrawable.getIntrinsicHeight(),
 					building.getXPos() * 2, building.getYPos() * 2);
-			/*
-			 * boolean canBeBuild = true; for( Building requiredBuilding :
-			 * building.getRequiredBuildings() ) { if(
-			 * requiredBuilding.isBuilt() == false ) { canBeBuild = false;
-			 * break; } }
-			 * 
-			 * buildingImage.setClickable( canBeBuild ); if( canBeBuild == false
-			 * ) { }
-			 */
-
+			
+			boolean canBeBuild = true;
+			
+			for( Building requiredBuilding : building.getRequiredBuildings() )
+			{
+				if( MoonBaseManager.getCurrentMoonBase().getBuiltBuildings().getBuildings().contains( requiredBuilding ) == false )
+				{
+					canBeBuild = false;
+					break;
+				}
+			}
+			buildingImage.setClickable( canBeBuild );
+			if( canBeBuild == false )
+			{
+				buildingImage.setAlpha( 50 );
+			}
+			else
+			{
+				buildingImage.setAlpha( 100 );
+			}
+			
 			buildingImage.setLayoutParams(buildingParams);
 
 			moonSurfaceLayout.addView(buildingImage);
