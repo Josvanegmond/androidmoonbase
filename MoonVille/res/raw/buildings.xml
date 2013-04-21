@@ -9,7 +9,9 @@
         monetaryCost="1000"
         outputPower="0"
         regolithCost="0"
-        requiredTurns="20" >
+        requiredTurns="20"
+        x="20"
+        y="220" >
     </building>
     <building
         name="Solar Panel Array"
@@ -19,7 +21,9 @@
         monetaryCost="20"
         outputPower="10"
         regolithCost="0"
-        requiredTurns="2" >
+        requiredTurns="2"
+        x="80"
+        y="110" >
     </building>
     <building
         name="Ice Mine"
@@ -29,7 +33,9 @@
         monetaryCost="20"
         outputPower="0"
         regolithCost="0"
-        requiredTurns="2" >
+        requiredTurns="2"
+        x="200"
+        y="20" >
         <outputResources>
             <resource
                 name="Water"
@@ -41,22 +47,22 @@
     <building
         name="Regolith Processor"
         amount="10"
-        info="Processes regolith"
+        info="Processes regolith "
         inputPower="20"
         monetaryCost="20"
         outputPower="0"
         regolithCost="0"
-        requiredTurns="4" >
+        requiredTurns="4"
+        x="280"
+        y="220" >
         <outputResources>
             <resource
                 name="Regolith"
-                amount="10"
-                quality="0.5" >
+                amount="10" >
             </resource>
             <resource
                 name="Helium-3"
-                amount="10"
-                quality="0.5" >
+                amount="10" >
             </resource>
         </outputResources>
     </building>
@@ -68,12 +74,13 @@
         monetaryCost="100"
         outputPower="50"
         regolithCost="0"
-        requiredTurns="10" >
+        requiredTurns="10"
+        x="170"
+        y="370">
         <requiredResources>
             <resource
                 name="Helium-3"
-                amount="50"
-                quality="0.5" >
+                amount="50" >
             </resource>
         </requiredResources>
     </building>
@@ -85,25 +92,24 @@
         monetaryCost="15"
         outputPower="0"
         regolithCost="0"
-        requiredTurns="4" >
+        requiredTurns="4"
+        x="385"
+        y="70">
         <requiredResources>
             <resource
                 name="Water"
-                amount="50"
-                quality="0.5" >
+                amount="50" >
             </resource>
         </requiredResources>
 
         <outputResources>
             <resource
                 name="Oxygen"
-                amount="10"
-                quality="0.5" >
+                amount="10" >
             </resource>
             <resource
                 name="Hydrogen"
-                amount="20"
-                quality="0.5" >
+                amount="20" >
             </resource>
         </outputResources>
     </building>
@@ -115,30 +121,28 @@
         monetaryCost="25"
         outputPower="0"
         regolithCost="0"
-        requiredTurns="5" >
+        requiredTurns="5"
+        x="535"
+        y="260" >
         <requiredResources>
             <resource
                 name="Regolith"
-                amount="50"
-                quality="0.5" >
+                amount="50" >
             </resource>
         </requiredResources>
 
         <outputResources>
             <resource
                 name="Oxygen"
-                amount="10"
-                quality="0.5" >
+                amount="10" >
             </resource>
             <resource
                 name="Metal"
-                amount="20"
-                quality="0.5" >
+                amount="20" >
             </resource>
             <resource
                 name="Minerals"
-                amount="30"
-                quality="0.5" >
+                amount="30" >
             </resource>
         </outputResources>
     </building>
@@ -150,25 +154,24 @@
         monetaryCost="30"
         outputPower="0"
         regolithCost="0"
-        requiredTurns="5" >
+        requiredTurns="5"
+        x="570"
+        y="40" >
         <requiredResources>
             <resource
                 name="Hydrogen"
-                amount="50"
-                quality="0.5" >
+                amount="50" >
             </resource>
             <resource
                 name="Oxygen"
-                amount="60"
-                quality="0.5" >
+                amount="60" >
             </resource>
         </requiredResources>
 
         <outputResources>
             <resource
                 name="Fuel"
-                amount="10"
-                quality="0.5" >
+                amount="10" >
             </resource>
         </outputResources>
     </building>
@@ -180,20 +183,20 @@
         monetaryCost="10"
         outputPower="0"
         regolithCost="0"
-        requiredTurns="3" >
+        requiredTurns="3"
+        x="670"
+        y="160" >
         <requiredResources>
             <resource
                 name="Metal"
-                amount="50"
-                quality="0.5" >
+                amount="50" >
             </resource>
         </requiredResources>
 
         <outputResources>
             <resource
                 name="Electronics"
-                amount="20"
-                quality="0.5" >
+                amount="20" >
             </resource>
         </outputResources>
     </building>
@@ -205,25 +208,24 @@
         monetaryCost="15"
         outputPower="0"
         regolithCost="0"
-        requiredTurns="6" >
+        requiredTurns="6"
+        x="570"
+        y="380" >
         <requiredResources>
             <resource
                 name="Metal"
-                amount="50"
-                quality="0.5" >
+                amount="50" >
             </resource>
             <resource
                 name="Electronics"
-                amount="50"
-                quality="0.5" >
+                amount="50" >
             </resource>
         </requiredResources>
 
         <outputResources>
             <resource
                 name="Robot"
-                amount="20"
-                quality="0.5" >
+                amount="20" >
             </resource>
         </outputResources>
     </building>

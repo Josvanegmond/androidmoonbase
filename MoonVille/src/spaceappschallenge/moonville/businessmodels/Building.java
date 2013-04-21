@@ -22,6 +22,8 @@ public class Building {
 	private int regolithCost;
 	private int requiredTurns;
 	private ArrayList<Resource> requiredResources;
+	
+	private int xPos, yPos;
 
 	// required buildings
 	public Building(String name, String info, int amount, int inputPower) {
@@ -40,7 +42,8 @@ public class Building {
 	public Building(String name, String info, int amount, int inputPower,
 			int outputPower, int monetaryCost, int regolithCost,
 			int requiredTurns, ArrayList<Resource> requiredResources,
-			ArrayList<Building> requiredBuildings) {
+			ArrayList<Building> requiredBuildings,
+			int xPos, int yPos ) {
 		initBuilding(name, info, amount, inputPower);
 		this.outputPower = outputPower;
 		this.monetaryCost = monetaryCost;
@@ -48,6 +51,8 @@ public class Building {
 		this.requiredTurns = requiredTurns;
 		this.requiredResources = requiredResources;
 		this.requiredBuildings = requiredBuildings;
+		this.xPos = xPos;
+		this.yPos = yPos;
 	}
 
 	// Increases amount, if input resources/buildings fulfill required

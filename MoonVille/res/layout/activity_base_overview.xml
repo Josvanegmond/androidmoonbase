@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/overview_horizontal_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content" >
 
     <RelativeLayout
         android:id="@+id/RelativeLayout1"
@@ -14,7 +14,7 @@
 
         <HorizontalScrollView
             android:id="@+id/hScroll"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:descendantFocusability="beforeDescendants" >
 
@@ -23,15 +23,62 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" >
 
-                <ImageView
-                    android:id="@+id/imageView1"
+                <AbsoluteLayout
+                    android:id="@+id/AbsoluteLayout1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="false"
-                    android:cropToPadding="false"
-                    android:scaleType="matrix"
-                    android:scrollbars="horizontal|vertical"
-                    android:src="@drawable/equator_backdrop" />
+                    android:layout_height="wrap_content" >
+
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="false"
+                        android:cropToPadding="false"
+                        android:scaleType="matrix"
+                        android:scrollbars="horizontal|vertical"
+                        android:src="@drawable/equator_backdrop" />
+
+                    <ImageView
+                        android:id="@+id/ImageView02"
+                        android:layout_width="128dp"
+                        android:layout_height="78dp"
+                        android:layout_x="227dp"
+                        android:layout_y="96dp"
+                        android:src="@drawable/ref_moonbase" />
+
+                    <ImageView
+                        android:id="@+id/ImageView03"
+                        android:layout_width="128dp"
+                        android:layout_height="78dp"
+                        android:layout_x="77dp"
+                        android:layout_y="19dp"
+                        android:src="@drawable/ref_smelthingfacility" />
+
+                    <ImageView
+                        android:id="@+id/ImageView04"
+                        android:layout_width="128dp"
+                        android:layout_height="78dp"
+                        android:layout_x="42dp"
+                        android:layout_y="156dp"
+                        android:src="@drawable/ref_solarpanelarray" />
+
+                    <ImageView
+                        android:id="@+id/ImageView05"
+                        android:layout_width="128dp"
+                        android:layout_height="78dp"
+                        android:layout_x="234dp"
+                        android:layout_y="240dp"
+                        android:src="@drawable/ref_icemine" />
+
+                    <ImageView
+                        android:id="@+id/ImageView01"
+                        android:layout_width="128dp"
+                        android:layout_height="78dp"
+                        android:layout_x="555dp"
+                        android:layout_y="216dp"
+                        android:src="@drawable/ref_regolithprocessor" />
+
+                </AbsoluteLayout>
             </ScrollView>
         </HorizontalScrollView>
 
@@ -103,7 +150,6 @@
             android:onClick="showResourcesScreen"
             android:text="Next Month"
             android:textSize="@dimen/tinyButtonText" />
-
     </LinearLayout>
 
 </LinearLayout>

@@ -47,6 +47,8 @@ public class BuildingXMLParser {
 	int buildingInputPower = 0, buildingOutputPower = 0;
 	int buildingMonetaryCost = 0, buildingRegolithCost = 0;
 	int buildingRequiredTurns = 0;
+	int buildingXPos = 0;
+	int buildingYPos = 0;
 	ArrayList<Resource> requiredResources;
 	ArrayList<Building> requiredBuildings;
 
@@ -66,6 +68,10 @@ public class BuildingXMLParser {
 				"regolithCost"));
 		buildingRequiredTurns = Integer.parseInt(xpp.getAttributeValue(null,
 				"requiredTurns"));
+		buildingXPos = Integer.parseInt(xpp.getAttributeValue(null,
+				"x"));
+		buildingYPos = Integer.parseInt(xpp.getAttributeValue(null,
+				"y"));
 		Log.i("XML", "buildingName: " + buildingName);
 	}
 
@@ -225,7 +231,8 @@ public class BuildingXMLParser {
 						buildingAmount, buildingInputPower,
 						buildingOutputPower, buildingMonetaryCost,
 						buildingRegolithCost, buildingRequiredTurns,
-						requiredResources, requiredBuildings));
+						requiredResources, requiredBuildings,
+						buildingXPos, buildingYPos));
 			}// if building
 
 			eventType = xpp.next();

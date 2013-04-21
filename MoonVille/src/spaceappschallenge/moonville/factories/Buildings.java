@@ -3,6 +3,7 @@ package spaceappschallenge.moonville.factories;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -40,6 +41,22 @@ public class Buildings
 		initAllBuildings();
 		
 	}
+	
+	
+	public List<Building> getBuildingsByRequiredBuilding( Building requiredBuilding )
+	{
+		List<Building> buildingList = new ArrayList<Building>();
+		for( Building building : allBuildings )
+		{
+			if( building.getRequiredBuildings().contains( requiredBuilding ) )
+			{
+				buildingList.add( building );
+			}
+		}
+		
+		return buildingList;
+	}
+	
 	
 	protected void initAllBuildings()
 	{
