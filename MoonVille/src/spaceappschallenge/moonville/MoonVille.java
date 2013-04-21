@@ -1,6 +1,7 @@
 package spaceappschallenge.moonville;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Handler;
 
@@ -13,6 +14,8 @@ import android.os.Handler;
 public class MoonVille extends Application {
 	
 	public static String PREFERENCE_FILE = "preferences";
+	public static String PREFERENCE_BACKGROUND_MUSIC = 
+			"moonvile_background_music";
 
 	MediaPlayer player = null;
 	
@@ -45,7 +48,10 @@ public class MoonVille extends Application {
 	{
 	    @Override
 	    public void run() {
-			if (currentActivityCount > 0) {
+			SharedPreferences settings = 
+					getSharedPreferences(PREFERENCE_FILE, 0);
+			if (currentActivityCount > 0 && 
+					settings.getBoolean(PREFERENCE_BACKGROUND_MUSIC, true)) {
 				if (player == null) {
 					player = MediaPlayer.create(MoonVille.this, 
 				    		R.raw.moonloop1reformated_small);

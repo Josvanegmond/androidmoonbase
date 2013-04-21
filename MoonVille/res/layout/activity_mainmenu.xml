@@ -58,6 +58,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
+	    <CheckBox
+	        android:id="@+id/cb_background_music"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.65"
+	        android:text="Enable Music"
+	        android:onClick="toggleBackgroundMusic" />
+
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
