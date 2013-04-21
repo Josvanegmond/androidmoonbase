@@ -38,7 +38,6 @@ public class BuildingXMLParser {
 		xmlFactory.setNamespaceAware(true);
 		xpp = xmlFactory.newPullParser();
 		this.buildings = new ArrayList<Building>();
-		Log.i("BuildingXMLParser", "Done initializing parser");
 	}
 
 	String buildingName = "";
@@ -118,17 +117,15 @@ public class BuildingXMLParser {
 			Log.e("XMLError", "reqdBuildAmount");
 		}
 		requiredBuildings.add(new Building(reqdBuildName, reqdBuildAmount));
+		Log.i("XML","required building "+reqdBuildName);
 	}
 
 	// Create "Building" objects by parsing input stream
 	public ArrayList<Building> parse() throws XmlPullParserException,
 			IOException {
-		Log.i("XML", "bufferedreader....");
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				this.inputStream));
-		Log.i("XML", "bufferedreader done....");
 		xpp.setInput(br);
-		Log.i("XML", "xpp done");
 		int eventType = xpp.getEventType();
 
 		// Parse the xml file to create "building" objects
@@ -247,6 +244,7 @@ public class BuildingXMLParser {
 							&& xpp.getName().equalsIgnoreCase(
 									"requiredBuildings")) {
 						atRequiredBuildings = true;
+						//Log.i("XML","required buildings tag found");
 					}
 					while (atRequiredBuildings) {
 						// Break the loop when the end tag: </building> is
