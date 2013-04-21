@@ -27,6 +27,7 @@ import android.widget.ScrollView;
 public class BaseOverviewActivity extends GameActivity {
 
 	private AbsoluteLayout moonSurfaceLayout;
+	private ArrayList<ImageView> buildingImageList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,8 @@ public class BaseOverviewActivity extends GameActivity {
 		moonSurfaceLayout = (AbsoluteLayout) this
 				.findViewById(R.id.moonsurface_relativelayout);
 		Log.i("Base","showing buildings");
+		
+		this.buildingImageList = new ArrayList<ImageView>();
 		
 		showBuildings();
 		fixHVScrollViews();
@@ -49,14 +52,18 @@ public class BaseOverviewActivity extends GameActivity {
 	}
 
 	private void showBuildings() {
-		Log.i("Base","getting buildings");
+
+		buildingImageList.clear();
 		
 		List<Building> buildings = Buildings.getInstance().getAllBuildings();
 		
-		for (Building building : buildings) {
+		for (Building building : buildings)
+		{
 			ImageView buildingImage = new ImageView(this);
+			buildingImageList.add( buildingImage );
+			
 			android.content.res.Resources res = this.getResources();
-			Log.d("debug", building.getName().replace(" ", "_").toLowerCase());
+
 			int resID = res
 					.getIdentifier("ref_"
 							+ building.getName().replace(" ", "_")
@@ -69,9 +76,28 @@ public class BaseOverviewActivity extends GameActivity {
 					buildingDrawable.getIntrinsicWidth(),
 					buildingDrawable.getIntrinsicHeight(),
 					building.getXPos() * 2, building.getYPos() * 2);
+/*
+			boolean canBeBuild = true;
+			for( Building requiredBuilding :  building.getRequiredBuildings() )
+			{
+				if( requiredBuilding.isBuilt() == false )
+				{
+					canBeBuild = false;
+					break;
+				}
+			}
+			
 
+			buildingImage.setClickable( canBeBuild );
+			if( canBeBuild == false )
+			{
+				
+			}*/
+			
 			buildingImage.setLayoutParams(buildingParams);
 
+			
+			
 			moonSurfaceLayout.addView(buildingImage);
 		}
 	}

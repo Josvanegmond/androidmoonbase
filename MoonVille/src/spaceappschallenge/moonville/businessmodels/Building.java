@@ -10,6 +10,7 @@ public class Building {
 	protected int amount = 0;
 	protected ArrayList<Resource> requiredResources;
 	protected ArrayList<Resource> outputResources;
+	protected ArrayList<Building> requiredBuildings;
 	protected int inputPower = 0;
 	protected int outputPower = 0;
 	protected int requiredTurns = 0;
@@ -42,45 +43,48 @@ public class Building {
 	}
 
 	public Building(String name, String info, int amount, int inputPower,
-			int outputPower, ArrayList<Resource> requiredResources) {
+			int outputPower, ArrayList<Resource> requiredResources, ArrayList<Building> requiredBuildings) {
 		initBuilding(name, info, amount, inputPower, outputPower,
-				requiredResources);
+				requiredResources, requiredBuildings);
 	}
 
 	// buildings
 	public Building(String name, String info, int amount, int inputPower,
 			int outputPower, int monetaryCost, int regolithCost,
 			int requiredTurns, ArrayList<Resource> requiredResources,
-			ArrayList<Resource> outputResources, int xPos, int yPos) {
+			ArrayList<Resource> outputResources,  ArrayList<Building> requiredBuildings, int xPos, int yPos) {
 		initBuilding(name, info, amount, inputPower, outputPower,
-				requiredResources);
+				requiredResources, requiredBuildings);
 		this.monetaryCost = monetaryCost;
 		this.regolithCost = regolithCost;
 		this.requiredTurns = requiredTurns;
 		this.outputResources = outputResources;
+		this.requiredBuildings = requiredBuildings;
 		this.xPos = xPos;
 		this.yPos = yPos;
 	}
 
 	protected void initBuilding(String name, String info, int amount,
 			int inputPower, int outputPower,
-			ArrayList<Resource> requiredResources) {
+			ArrayList<Resource> requiredResources, ArrayList<Building> requiredBuildings ) {
 		initBuilding(name, info, amount, inputPower);
 		this.outputPower = outputPower;
 		this.requiredResources = requiredResources;
+		this.requiredBuildings = requiredBuildings;
 
 	}
 
 	public Building(String name, String info, int amount, int inputPower,
 			int outputPower, int requiredTurns, int regolithCost,
 			int monetaryCost, ArrayList<Resource> requiredResources,
-			ArrayList<Resource> outputResources) {
+			ArrayList<Resource> outputResources, ArrayList<Building> requiredBuildings) {
 		initBuilding(name, info, amount, inputPower, outputPower,
-				requiredResources);
+				requiredResources, requiredBuildings);
 		this.requiredTurns = requiredTurns;
 		this.regolithCost = regolithCost;
 		this.monetaryCost = monetaryCost;
 		this.outputResources = outputResources;
+		this.requiredBuildings = requiredBuildings;
 
 	}
 
@@ -125,6 +129,11 @@ public class Building {
 		this.outputResources = outputResources;
 	}
 
+	public ArrayList<Building> getRequiredBuildings()
+	{
+		return this.requiredBuildings;
+	}
+	
 	public int getInputPower() {
 		return inputPower;
 	}

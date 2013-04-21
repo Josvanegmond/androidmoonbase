@@ -1,33 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/AbsoluteLayout1"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mainmenu" >
+    android:background="@drawable/mainmenu"
+    android:orientation="vertical" >
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:orientation="horizontal" >
 
-    <View
-        android:id="@+id/view1"
-        android:layout_width="226dp"
-        android:layout_height="57dp"
-        android:layout_x="42dp"
-        android:layout_y="178dp"
-        android:onClick="showNewGameScreen" />
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:onClick="showNewGameScreen"
+            android:src="@drawable/newgamebutton" />
 
-    <View
-        android:id="@+id/View01"
-        android:layout_width="214dp"
-        android:layout_height="57dp"
-        android:layout_x="286dp"
-        android:layout_y="177dp"
-        android:onClick="showBaseOverviewScreen" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
+            android:layout_weight="1"
+            android:onClick="showGameOverviewScreen"
+            android:src="@drawable/continuebutton" />
 
-    <View
-        android:id="@+id/View02"
-        android:layout_width="119dp"
-        android:layout_height="37dp"
-        android:layout_x="408dp"
-        android:layout_y="280dp"
-        android:onClick="showCreditsScreen" />
+    </LinearLayout>
 
-</AbsoluteLayout>
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="150dp"
+        android:layout_height="68dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp"
+        android:onClick="showCreditsScreen"
+        android:src="@drawable/creditsbutton" />
+
+</LinearLayout>

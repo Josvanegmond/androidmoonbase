@@ -224,6 +224,9 @@ public class BuildingXMLParser {
 
 						eventType = xpp.next();
 					}// atOutputResources
+					
+					
+					
 
 					eventType = xpp.next();
 				}// while atBuilding
@@ -231,7 +234,7 @@ public class BuildingXMLParser {
 						buildingAmount, buildingInputPower,
 						buildingOutputPower, buildingMonetaryCost,
 						buildingRegolithCost, buildingRequiredTurns,
-						requiredResources, outputResources, buildingXPos,
+						requiredResources, outputResources, null, buildingXPos,
 						buildingYPos));
 			}// if building
 
