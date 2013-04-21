@@ -15,7 +15,13 @@ import spaceappschallenge.moonville.xml_parsers.BuildingXMLParser;
 import android.content.Context;
 import android.util.Log;
 
-//singleton class
+/**
+ * Singleton class, handles buildings.
+ * 
+ * As opposed to BuildingTree, this handles all buildings that exist in 
+ * the game (defined by xml), independent from what is built in the world.
+ *
+ */
 public class Buildings
 {
 	private static Buildings instance;

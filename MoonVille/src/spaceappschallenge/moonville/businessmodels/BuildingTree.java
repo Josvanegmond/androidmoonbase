@@ -8,6 +8,8 @@ import java.util.List;
  * Contains all buildings per level as of 
  * https://www.facebook.com/photo.php?fbid=10151316698507504
  * 
+ * As opposed to Buildings, this handles buildings that actually are placed in the world.
+ * 
  * @author Felix
  *
  */
