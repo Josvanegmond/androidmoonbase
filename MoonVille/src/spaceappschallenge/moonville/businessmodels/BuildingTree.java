@@ -25,6 +25,8 @@ public class BuildingTree implements Serializable {
 		buildingName = b.getName();
 	}
 	
+	
+	
 	/**
 	 * Insert a building into the tree. Only call this method on the root 
 	 * node of a tree.
@@ -132,6 +134,30 @@ public class BuildingTree implements Serializable {
 			for (BuildingTree c : v.childs)
 				q.add(c);
 		}
+	}
+	
+	public List<Building> getBuildingsByType( Building building )
+	{
+		List<Building> buildingList = null;
+		
+		List<BuildingTree> q = new ArrayList<BuildingTree>();
+		q.add(this);
+		while (!q.isEmpty() && buildingList == null ) {
+			BuildingTree v = q.get(0);
+			q.remove(v);
+    		for (Building b : v.buildings) {
+    			if ( b.getName().equals( building.getName() ) ) {
+    				buildingList = v.getBuildings();
+    				break;
+    			}
+    			else
+    				b.setHasPower(false);
+    		}
+			for (BuildingTree c : v.childs)
+				q.add(c);
+		}
+		
+		return buildingList;
 	}
 	
 	/**

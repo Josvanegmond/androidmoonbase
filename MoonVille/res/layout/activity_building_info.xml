@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Current scale: 1"
+                android:text="Current scale: 0"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
@@ -46,7 +46,8 @@
                 android:layout_height="33dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Scale up" />
+                android:onClick="build"
+                android:text="Construct building" />
 
         </LinearLayout>
 

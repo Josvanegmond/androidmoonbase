@@ -44,7 +44,7 @@ public class Buildings
 	}
 	
 	
-	/*public List<Building> getBuildingsByRequiredBuilding( Building requiredBuilding )
+	public List<Building> getBuildingsByRequiredBuilding( Building requiredBuilding )
 	{
 		List<Building> buildingList = new ArrayList<Building>();
 		for( Building building : allBuildings )
@@ -56,7 +56,7 @@ public class Buildings
 		}
 		
 		return buildingList;
-	}*/
+	}
 	
 	
 	protected void initAllBuildings()

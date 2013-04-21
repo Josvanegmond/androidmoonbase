@@ -62,7 +62,7 @@ public class BaseOverviewActivity extends GameActivity {
 		buildingImageList.clear();
 
 		List<Building> buildings = Buildings.getInstance().getAllBuildings();
-
+		
 		for (final Building building : buildings)
 		{
 			ImageView buildingImage = new ImageView(this);
@@ -99,7 +99,7 @@ public class BaseOverviewActivity extends GameActivity {
 			
 			for( Building requiredBuilding : building.getRequiredBuildings() )
 			{
-				if( MoonBaseManager.getCurrentMoonBase().getBuiltBuildings().getBuildings().contains( requiredBuilding ) == false )
+				if( MoonBaseManager.getCurrentMoonBase().getBuildingsByType( requiredBuilding ) == false )
 				{
 					canBeBuild = false;
 					break;

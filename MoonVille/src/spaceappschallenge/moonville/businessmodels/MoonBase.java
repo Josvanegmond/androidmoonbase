@@ -104,6 +104,14 @@ public class MoonBase implements Serializable {
 	public void setBuiltBuildings(BuildingTree builtBuildings) {
 		this.builtBuildings = builtBuildings;
 	}
+	
+	public void setBuiltBuilding( Building building )
+	{
+		if( builtBuildings.getBuildings().contains( building ) == false )
+		{
+			this.builtBuildings.add( building );
+		}
+	}
 
 	public List<MegaProject> getBuiltMegaProjects() {
 		return builtMegaProjects;
