@@ -2,7 +2,11 @@ package spaceappschallenge.moonville.businessmodels;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+
+import android.util.Log;
 
 /**
  * Contains all buildings per level as of 
@@ -212,7 +216,12 @@ public class BuildingTree implements Serializable {
 		for (Building b : buildings) {
 			if (!b.getHasPower() || !b.getHasRequiredResources())
 				continue;
-			List<Resource> oldAmount = resourceAvailable;
+			// Save values in case we need to reset available resources (if a 
+			// building has some but not all of its resources available).
+			List<Resource> oldAmount = new ArrayList<Resource>();
+			for (Resource r : resourceAvailable)
+				oldAmount.add(new Resource(r));
+			
 			for (Resource resourceNeed : b.getRequiredResources()) {
 				if (subtractBuildingResources(resourceAvailable, resourceNeed)) {
 					b.setHasRequiredResources(true);
