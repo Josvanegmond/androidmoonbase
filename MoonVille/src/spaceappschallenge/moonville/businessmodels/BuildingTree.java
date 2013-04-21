@@ -12,8 +12,9 @@ import java.util.List;
  *
  */
 public class BuildingTree implements Serializable {
-	String buildingName;
+	
 	Building building;
+	
 	List<BuildingTree> childs = new ArrayList<BuildingTree>();
 	
 	/**
@@ -23,84 +24,45 @@ public class BuildingTree implements Serializable {
 	}
 	
 	/**
-	 * Creates a tree using the paramter as value.
+	 * Creates a tree using the parameter as value.
 	 */
 	private BuildingTree(Building building) {
 		this.building = building;
-		buildingName = building.getName();
 	}
 	
 	/**
 	 * Insert a building into the tree. Only call this method on the root 
 	 * node of a tree.
 	 * 
+	 * @param b The building to insert.
 	 * @return True if the building was inserted successfully.
 	 */
 	public boolean add(Building b) {
 		if (b == null)
 			return true;
-		if (b.getName().equals(buildingName)) {
-			building = b;
-			return true;
-		}
-		else {
-			for (BuildingTree bt : childs) {
-				if (bt.add(b)) {
-					return true;
-				}
-			}
-		}
-		// Make sure buildings are inserted at the correct level.
-		if (buildingName.equals("Moon Base") && 
-				(b.getName().equals("Solarpanel Array") || 
-				b.getName().equals("Ice Mine") || 
-				b.getName().equals("Regolith Processor"))) {
-			childs.add(new BuildingTree(b));
-			return true;
-		}
-		else if (buildingName.equals("Ice Mine") && 
-				b.getName().equals("Water Processor")) {
-			childs.add(new BuildingTree(b));	
-			return true;		
-		}
-		else if (buildingName.equals("Water Processor") && 
-				b.getName().equals("Propellant Factory")) {
-			childs.add(new BuildingTree(b));
-			return true;			
-		}
-		else if (buildingName.equals("Propellant Factory") && 
-				b.getName().equals("Spaceport")) {
-			childs.add(new BuildingTree(b));
-			return true;			
-		}
-		else if (buildingName.equals("Regolith Processor") && 
-				(b.getName().equals("Smelting Facility") || 
-				b.getName().equals("Nuclear Plant"))) {
-			childs.add(new BuildingTree(b));
-			return true;			
-		}
-		else if (buildingName.equals("Smelting Facility") && 
-				b.getName().equals("Electronics Factory")) {
-			childs.add(new BuildingTree(b));
-			return true;			
-		}
-		else if (buildingName.equals("Electronics Factory") && 
-				(b.getName().equals("Robot Factory") || 
-				b.getName().equals("Maglev Train Transport"))) {
-			childs.add(new BuildingTree(b));	
-			return true;		
-		}
-		else if (buildingName.equals("Robot Factory") && 
-				b.getName().equals("Asteroid Defense")) {
-			childs.add(new BuildingTree(b));	
-			return true;		
-		}
-		else {
-			// Either the building was not initially inserted in the tree 
-			// root, or the cases above are incorrect.
+		if (b.getName().equals(building.getName())) {
+			// Inserted the same building multiple times.
 			assert(false);
 			return false;
 		}
+		// First see if the building belongs in an existing child node.
+		for (BuildingTree bt : childs) {
+			if (bt.add(b)) {
+				return true;
+			}
+		}
+		// The building is in a new direct child node if building in 
+		// this node is a requirement.
+		ArrayList<Building> required = b.getRequiredBuildings();
+		for (Building r : required) {
+			if (r.getName().equals(building.getName())) {
+				childs.add(new BuildingTree(b));
+				return true;
+			}
+		}
+		// Insertion went completely wrong.
+		assert(false);
+		return false;
 	}
 	
 	/**
