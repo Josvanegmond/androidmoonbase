@@ -94,7 +94,7 @@ public class ExportResourceListAdapter extends BaseAdapter {
 						Resource currentResource = Resources.getInstance()
 								.getResource(resourceName);
 						if (currentResource == null) {
-							Log.i("null", resourceName + "not found");
+							Log.i("null export resource", resourceName + "not found");
 							return;
 						}
 						int unitProfit = currentResource.getExportUnitCost();

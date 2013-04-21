@@ -62,6 +62,7 @@ public class ResourceXMLParser {
 							"quality"));
 					unitCost = Integer.parseInt(xpp.getAttributeValue(null,
 							"unitCost"));
+					Log.i("unitCost of resource ",""+unitCost);
 					resource = new Resource(name, amount, quality, unitCost);
 					resources.add(resource);
 					Log.i("ResourceXML", "name: " + name);

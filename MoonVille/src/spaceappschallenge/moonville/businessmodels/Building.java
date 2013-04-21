@@ -10,6 +10,7 @@ public class Building {
 	protected int amount = 0;
 	protected ArrayList<Resource> requiredResources;
 	protected ArrayList<Resource> outputResources;
+	protected ArrayList<Building> requiredBuildings;
 	protected int inputPower = 0;
 	protected int outputPower = 0;
 	protected int requiredTurns = 0;
@@ -19,8 +20,14 @@ public class Building {
 	// These are computed each time they are needed, so no init necessary.
 	protected boolean hasPower;
 	protected boolean hasRequiredResources;
+	protected boolean hasRequiredBuildings;
 
 	private int xPos, yPos;
+
+	public Building(String name, int amount) {
+		this.name = name;
+		this.amount = amount;
+	}
 
 	// required buildings
 	public Building(String name, String info, int amount, int inputPower) {
@@ -51,13 +58,15 @@ public class Building {
 	public Building(String name, String info, int amount, int inputPower,
 			int outputPower, int monetaryCost, int regolithCost,
 			int requiredTurns, ArrayList<Resource> requiredResources,
-			ArrayList<Resource> outputResources, int xPos, int yPos) {
+			ArrayList<Resource> outputResources,
+			ArrayList<Building> requiredBuildings, int xPos, int yPos) {
 		initBuilding(name, info, amount, inputPower, outputPower,
 				requiredResources);
 		this.monetaryCost = monetaryCost;
 		this.regolithCost = regolithCost;
 		this.requiredTurns = requiredTurns;
 		this.outputResources = outputResources;
+		this.requiredBuildings = requiredBuildings;
 		this.xPos = xPos;
 		this.yPos = yPos;
 	}
@@ -195,6 +204,22 @@ public class Building {
 
 	public void setYPos(int yPos) {
 		this.yPos = yPos;
+	}
+
+	public ArrayList<Building> getRequiredBuildings() {
+		return requiredBuildings;
+	}
+
+	public void setRequiredBuildings(ArrayList<Building> requiredBuildings) {
+		this.requiredBuildings = requiredBuildings;
+	}
+
+	public void setHasRequiredBuildings(boolean a) {
+		this.hasRequiredBuildings = a;
+	}
+
+	public boolean getHasRequiredBuildings() {
+		return this.hasRequiredBuildings;
 	}
 
 }

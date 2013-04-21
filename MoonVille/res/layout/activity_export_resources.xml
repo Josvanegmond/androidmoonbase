@@ -48,17 +48,18 @@
             android:id="@+id/exportTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="left"
             android:text="EXPORT"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge" 
+            android:layout_weight="1"
+            />
 
         <TextView
             android:id="@+id/exportBudgetTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/budgetTitle"
-            android:layout_alignBottom="@+id/budgetTitle"
+            android:layout_alignBaseline="@+id/exportBudgetTitle"
+            android:layout_alignBottom="@+id/exportBudgetTitle"
             android:layout_alignParentRight="true"
             android:layout_weight="1"
             android:gravity="right"
@@ -66,15 +67,15 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/budgetTitle"
+            android:id="@+id/exportBudgetTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="20dp"
             android:layout_toLeftOf="@+id/budgetTextView"
             android:layout_weight="1"
             android:gravity="right"
             android:text="Budget"
+            android:layout_marginRight="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 

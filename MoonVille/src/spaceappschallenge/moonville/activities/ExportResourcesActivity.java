@@ -27,7 +27,7 @@ public class ExportResourcesActivity extends GameActivity {
 		ArrayList<Resource> resources = Resources.getInstance()
 				.getAllResources();
 		ExportResourceListAdapter resourceListAdapter = new ExportResourceListAdapter();
-		Log.i("ResourcesActivity", "showing import resources screen..");
+		Log.i("ResourcesActivity", "showing export resources screen..");
 		ListView resourceListView = (ListView) this
 				.findViewById(R.id.exportResourceslist);
 		resourceListView.setAdapter(resourceListAdapter);

@@ -51,6 +51,7 @@ public class BuildingXMLParser {
 	int buildingYPos = 0;
 	ArrayList<Resource> requiredResources;
 	ArrayList<Resource> outputResources;
+	ArrayList<Building> requiredBuildings;
 
 	public void readBuildingAttributes() {
 		// Read the attributes for each building
@@ -106,6 +107,19 @@ public class BuildingXMLParser {
 		Log.i("XML", "out resource " + outResName);
 	}
 
+	public void addRequiredBuilding(XmlPullParser xpp,
+			ArrayList<Building> requiredBuildings) {
+		String reqdBuildName = xpp.getAttributeValue(null, "name");
+		int reqdBuildAmount = 0;
+		try {
+			reqdBuildAmount = Integer.parseInt(xpp.getAttributeValue(null,
+					"amount"));
+		} catch (Exception e) {
+			Log.e("XMLError", "reqdBuildAmount");
+		}
+		requiredBuildings.add(new Building(reqdBuildName, reqdBuildAmount));
+	}
+
 	// Create "Building" objects by parsing input stream
 	public ArrayList<Building> parse() throws XmlPullParserException,
 			IOException {
@@ -127,6 +141,7 @@ public class BuildingXMLParser {
 				readBuildingAttributes();
 				outputResources = new ArrayList<Resource>();
 				requiredResources = new ArrayList<Resource>();
+				requiredBuildings = new ArrayList<Building>();
 
 				// For Nested elements
 				while (atBuilding) {// <building>
@@ -225,14 +240,58 @@ public class BuildingXMLParser {
 						eventType = xpp.next();
 					}// atOutputResources
 
+					boolean atRequiredBuildings = false;// The tag:
+					// <requiredBuildings>
+					// might be absent
+					if (eventType == XmlPullParser.START_TAG
+							&& xpp.getName().equalsIgnoreCase(
+									"requiredBuildings")) {
+						atRequiredBuildings = true;
+					}
+					while (atRequiredBuildings) {
+						// Break the loop when the end tag: </building> is
+						// reached
+						if (eventType == XmlPullParser.END_TAG
+								&& xpp.getName().equalsIgnoreCase(
+										"requiredBuildings")) {
+							atRequiredBuildings = false;
+							break;
+						}
+
+						boolean atRequiredBuilding = false;// The tag:
+						// <requiredBuilding>
+						// might be absent
+						if (eventType == XmlPullParser.START_TAG
+								&& xpp.getName().equalsIgnoreCase("building")) {
+							atRequiredBuilding = true;
+						}// requiredBuilding
+
+						while (atRequiredBuilding) {
+							if (eventType == XmlPullParser.END_TAG
+									&& xpp.getName().equalsIgnoreCase(
+											"building")) {
+								atRequiredBuilding = false;
+								break;
+							}
+							if (xpp.getAttributeCount() > 0) {
+								addRequiredBuilding(xpp, requiredBuildings);
+
+							}
+
+							eventType = xpp.next();
+						}// atRequiredBuilding
+
+						eventType = xpp.next();
+					}
+
 					eventType = xpp.next();
 				}// while atBuilding
 				this.buildings.add(new Building(buildingName, buildingInfo,
 						buildingAmount, buildingInputPower,
 						buildingOutputPower, buildingMonetaryCost,
 						buildingRegolithCost, buildingRequiredTurns,
-						requiredResources, outputResources, buildingXPos,
-						buildingYPos));
+						requiredResources, outputResources, requiredBuildings,
+						buildingXPos, buildingYPos));
 			}// if building
 
 			eventType = xpp.next();
