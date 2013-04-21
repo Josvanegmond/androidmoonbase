@@ -19,15 +19,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.ScrollView;
 
 public class BaseOverviewActivity extends GameActivity {
 
 	private AbsoluteLayout moonSurfaceLayout;
+	private ArrayList<ImageView> buildingImageList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,9 @@ public class BaseOverviewActivity extends GameActivity {
 		moonSurfaceLayout = (AbsoluteLayout) this
 				.findViewById(R.id.moonsurface_relativelayout);
 		Log.i("Base", "showing buildings");
-		updateUI();
+
+		this.buildingImageList = new ArrayList<ImageView>();
+
 		showBuildings();
 		fixHVScrollViews();
 	}
@@ -49,28 +52,33 @@ public class BaseOverviewActivity extends GameActivity {
 		return true;
 	}
 
-	public void updateUI() {
-		TextView fundsTextView = (TextView) (this
-				.findViewById(R.id.baseOverviewFundsTextView));
-		fundsTextView.setText("Funds: $"
-				+ MoonBaseManager.getCurrentMoonBase().getMoney());
-
-		TextView baseOverviewMonthTextView = (TextView) (this
-				.findViewById(R.id.txtMonth));
-		baseOverviewMonthTextView.setText(""
-				+ MoonBaseManager.getCurrentMoonBase().getMonth());
-
-	}
-
 	private void showBuildings() {
-		Log.i("Base", "getting buildings");
+
+		for (ImageView buildingImage : buildingImageList) {
+			((AbsoluteLayout) buildingImage.getParent())
+					.removeView(buildingImage);
+		}
+
+		buildingImageList.clear();
 
 		List<Building> buildings = Buildings.getInstance().getAllBuildings();
 
 		for (Building building : buildings) {
 			ImageView buildingImage = new ImageView(this);
+			buildingImage.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					view.getContext().startActivity(
+							new Intent(BaseOverviewActivity.this,
+									BuildingInfoActivity.class));
+					BaseOverviewActivity.this.finish();
+				}
+			});
+
+			buildingImageList.add(buildingImage);
+
 			android.content.res.Resources res = this.getResources();
-			Log.d("debug", building.getName().replace(" ", "_").toLowerCase());
+
 			int resID = res
 					.getIdentifier("ref_"
 							+ building.getName().replace(" ", "_")
@@ -83,6 +91,15 @@ public class BaseOverviewActivity extends GameActivity {
 					buildingDrawable.getIntrinsicWidth(),
 					buildingDrawable.getIntrinsicHeight(),
 					building.getXPos() * 2, building.getYPos() * 2);
+			/*
+			 * boolean canBeBuild = true; for( Building requiredBuilding :
+			 * building.getRequiredBuildings() ) { if(
+			 * requiredBuilding.isBuilt() == false ) { canBeBuild = false;
+			 * break; } }
+			 * 
+			 * buildingImage.setClickable( canBeBuild ); if( canBeBuild == false
+			 * ) { }
+			 */
 
 			buildingImage.setLayoutParams(buildingParams);
 
@@ -106,10 +123,7 @@ public class BaseOverviewActivity extends GameActivity {
 		// TODO: calculate reputation
 
 		// last step, save to file
-		MoonBaseManager.getCurrentMoonBase().incrementMonth();
-		updateUI();
 		MoonBaseManager.saveMoonBase(view.getContext());
-
 	}
 
 	public void showBaseOverviewScreen(View view) {
@@ -125,60 +139,53 @@ public class BaseOverviewActivity extends GameActivity {
 		this.finish();
 	}
 
-	public void showResourceImportScreen(View view) {
+	public void showExportScreen(View view) {
 		view.getContext().startActivity(
-				new Intent(this, ImportResourcesActivity.class));
+				new Intent(this, ResourcesActivity.class));
 		this.finish();
 	}
 
-	public void showExportResourcesScreen(View view) {
-		view.getContext().startActivity(
-				new Intent(this, ExportResourcesActivity.class));
-		this.finish();
-	}
-	
-	
-	
-	//some scrollbar fix for scrolling
-	private void fixHVScrollViews()
-	{
-	    final HorizontalScrollView hScroll = (HorizontalScrollView) findViewById(R.id.moonsurface_hscrollview);
-	    final ScrollView vScroll = (ScrollView) findViewById(R.id.moonsurface_vscrollview);
-	    vScroll.setOnTouchListener(new View.OnTouchListener() { //inner scroll listener         
-	        @Override
-	        public boolean onTouch(View v, MotionEvent event) {
-	            return false;
-	        }
-	    });
-	    hScroll.setOnTouchListener(new View.OnTouchListener() { //outer scroll listener         
-	        private float mx, my, curX, curY;
-	        private boolean started = false;
+	// some scrollbar fix for scrolling
+	private void fixHVScrollViews() {
+		final HorizontalScrollView hScroll = (HorizontalScrollView) findViewById(R.id.moonsurface_hscrollview);
+		final ScrollView vScroll = (ScrollView) findViewById(R.id.moonsurface_vscrollview);
+		vScroll.setOnTouchListener(new View.OnTouchListener() { // inner scroll
+																// listener
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				return false;
+			}
+		});
+		hScroll.setOnTouchListener(new View.OnTouchListener() { // outer scroll
+																// listener
+			private float mx, my, curX, curY;
+			private boolean started = false;
 
-	        @Override
-	        public boolean onTouch(View v, MotionEvent event) {
-	            curX = event.getX();
-	            curY = event.getY();
-	            int dx = (int) (mx - curX);
-	            int dy = (int) (my - curY);
-	            switch (event.getAction()) {
-	                case MotionEvent.ACTION_MOVE:
-	                    if (started) {
-	                        vScroll.scrollBy(0, dy);
-	                        hScroll.scrollBy(dx, 0);
-	                    } else {
-	                        started = true;
-	                    }
-	                    mx = curX;
-	                    my = curY;
-	                    break;
-	                case MotionEvent.ACTION_UP: 
-	                    vScroll.scrollBy(0, dy);
-	                    hScroll.scrollBy(dx, 0);
-	                    started = false;
-	                    break;
-	            }
-	            return true;
-	        }
-	    });
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				curX = event.getX();
+				curY = event.getY();
+				int dx = (int) (mx - curX);
+				int dy = (int) (my - curY);
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_MOVE:
+					if (started) {
+						vScroll.scrollBy(0, dy);
+						hScroll.scrollBy(dx, 0);
+					} else {
+						started = true;
+					}
+					mx = curX;
+					my = curY;
+					break;
+				case MotionEvent.ACTION_UP:
+					vScroll.scrollBy(0, dy);
+					hScroll.scrollBy(dx, 0);
+					started = false;
+					break;
+				}
+				return true;
+			}
+		});
 	}
 }
