@@ -12,26 +12,26 @@
         android:orientation="vertical"
         tools:context=".BaseOverviewActivity" >
 
-        <ScrollView
-            android:id="@+id/vScroll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+        <HorizontalScrollView
+            android:id="@+id/moonsurface_hscrollview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="beforeDescendants" >
 
-            <HorizontalScrollView
-                android:id="@+id/hScroll"
+            <ScrollView
+                android:id="@+id/moonsurface_vscrollview"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:descendantFocusability="beforeDescendants" >
+                android:layout_height="match_parent" >
 
                 <AbsoluteLayout
                     android:id="@+id/moonsurface_relativelayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/equator_backdrop" >
-
                 </AbsoluteLayout>
-            </HorizontalScrollView>
-        </ScrollView>
+            </ScrollView>
+
+        </HorizontalScrollView>
 
         <LinearLayout
             android:id="@+id/LinearLayout2"
