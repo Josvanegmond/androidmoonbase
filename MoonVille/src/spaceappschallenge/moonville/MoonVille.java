@@ -11,6 +11,8 @@ import android.os.Handler;
  *
  */
 public class MoonVille extends Application {
+	
+	public static String PREFERENCE_FILE = "preferences";
 
 	MediaPlayer player = null;
 	
