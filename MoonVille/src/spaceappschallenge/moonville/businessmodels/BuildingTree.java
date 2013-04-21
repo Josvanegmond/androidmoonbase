@@ -149,10 +149,10 @@ public class BuildingTree implements Serializable {
 	/**
 	 * Interface function for checkrequiredBuildings(boolean)
 	 */
-	public void checkRequiredBuildings() {
+	/*public void checkRequiredBuildings() {
 		// Moon Base has no required buildings.
 		checkRequiredBuildings(false);
-	}
+	}*/
 	
 	/**
 	 * Checks if each building has its required buildings. This is true if 
@@ -161,7 +161,7 @@ public class BuildingTree implements Serializable {
 	 * @param isParentEmpty True if the parent node is empty. Means required 
 	 * 						buildings are not available.
 	 */
-	private void checkRequiredBuildings(boolean isParentEmpty) {
+	/*private void checkRequiredBuildings(boolean isParentEmpty) {
 		if (!isParentEmpty) {
 			for (Building b : buildings)
 				b.setHasRequiredBuildings(true);
@@ -174,7 +174,7 @@ public class BuildingTree implements Serializable {
 			for (BuildingTree c : childs)
 				c.checkRequiredBuildings(true);
 		}
-	}
+	}*/
 	
 	/**
 	 * Recursively checks how much resources are available in total, 
@@ -185,12 +185,12 @@ public class BuildingTree implements Serializable {
 	 */
 	public List<Resource> checkResources(List<Resource> resourceAvailable) {
 		for (Building b : buildings) {
-			if (!b.getHasPower() || !b.getHasRequiredBuildings())
+			if (!b.getHasPower() || !b.getHasRequiredResources())
 				continue;
 			List<Resource> oldAmount = resourceAvailable;
-			for (Resource resourceNeed : b.getInputResources()) {
+			for (Resource resourceNeed : b.getRequiredResources()) {
 				if (subtractBuildingResources(resourceAvailable, resourceNeed)) {
-					b.setHasResources(true);
+					b.setHasRequiredResources(true);
 					resourceAvailable = Resource.merge(resourceAvailable, 
 							b.getOutputResources());				
 				}
@@ -198,7 +198,7 @@ public class BuildingTree implements Serializable {
 					// Reset resources so we don't remove part of the resources 
 					// for a building that can't work.
 					resourceAvailable = oldAmount;
-					b.setHasResources(false);
+					b.setHasRequiredResources(false);
 				}
 			}
 		}

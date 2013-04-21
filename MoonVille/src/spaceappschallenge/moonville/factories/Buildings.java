@@ -9,6 +9,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Building;
+import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.managers.ApplicationService;
 import spaceappschallenge.moonville.xml_parsers.BuildingXMLParser;
 import android.content.Context;
@@ -43,7 +44,7 @@ public class Buildings
 	}
 	
 	
-	public List<Building> getBuildingsByRequiredBuilding( Building requiredBuilding )
+	/*public List<Building> getBuildingsByRequiredBuilding( Building requiredBuilding )
 	{
 		List<Building> buildingList = new ArrayList<Building>();
 		for( Building building : allBuildings )
@@ -55,7 +56,7 @@ public class Buildings
 		}
 		
 		return buildingList;
-	}
+	}*/
 	
 	
 	protected void initAllBuildings()
@@ -86,18 +87,14 @@ public class Buildings
 			Building building = this.allBuildings.get(i);
 			
 			Log.i("Buildings",building.getName());
-			ArrayList<Building> buildings = building.getRequiredBuildings();
-			Log.i("LENGTH","size:"+buildings.size());
-			for(Building rbuilding: buildings){
-				Log.i("Buildings rb",rbuilding.getName());
-			}
-			/*
+		
+			
 			ArrayList<Resource> resources= building.getRequiredResources();
 			Log.i("LENGTH","reqd resource size:"+resources.size());
 			for(Resource rResource:resources){
 				Log.i("Buildings rr",rResource.getName());
 			}
-			*/
+			
 			Log.i("Buildings","object: "+building);
 		}
 	}

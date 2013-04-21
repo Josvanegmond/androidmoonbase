@@ -39,8 +39,7 @@
         <outputResources>
             <resource
                 name="Water"
-                amount="10"
-                quality="0.5" >
+                amount="10">
             </resource>
         </outputResources>
     </building>

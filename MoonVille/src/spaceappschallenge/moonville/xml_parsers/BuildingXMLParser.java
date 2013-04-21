@@ -50,7 +50,7 @@ public class BuildingXMLParser {
 	int buildingXPos = 0;
 	int buildingYPos = 0;
 	ArrayList<Resource> requiredResources;
-	ArrayList<Building> requiredBuildings;
+	ArrayList<Resource> outputResources;
 
 	public void readBuildingAttributes() {
 		// Read the attributes for each building
@@ -68,10 +68,8 @@ public class BuildingXMLParser {
 				"regolithCost"));
 		buildingRequiredTurns = Integer.parseInt(xpp.getAttributeValue(null,
 				"requiredTurns"));
-		buildingXPos = Integer.parseInt(xpp.getAttributeValue(null,
-				"x"));
-		buildingYPos = Integer.parseInt(xpp.getAttributeValue(null,
-				"y"));
+		buildingXPos = Integer.parseInt(xpp.getAttributeValue(null, "x"));
+		buildingYPos = Integer.parseInt(xpp.getAttributeValue(null, "y"));
 		Log.i("XML", "buildingName: " + buildingName);
 	}
 
@@ -81,35 +79,34 @@ public class BuildingXMLParser {
 		String reqdResName = xpp.getAttributeValue(null, "name");
 		int reqdResAmount = Integer.parseInt(xpp.getAttributeValue(null,
 				"amount"));
-		requiredResources.add(new Resource(reqdResName, reqdResAmount, 0f));
+		requiredResources.add(new Resource(reqdResName, reqdResAmount));
 		Log.i("XML", "required resource " + reqdResName);
 	}
 
-	public void addRequiredBuilding(XmlPullParser xpp,
-			ArrayList<Building> requiredBuildings) {
-		String reqdBuildName = xpp.getAttributeValue(null, "name");
-		String reqdBuildInfo = xpp.getAttributeValue(null, "info");
-		int reqdBuildAmount = 0;
+	public void addOutputResource(XmlPullParser xpp,
+			ArrayList<Resource> outputResources) {
+		String outResName = xpp.getAttributeValue(null, "name");
+
+		int outResAmount = 0;
 		try {
-			reqdBuildAmount = Integer.parseInt(xpp.getAttributeValue(null,
+			outResAmount = Integer.parseInt(xpp.getAttributeValue(null,
 					"amount"));
 		} catch (Exception e) {
-			Log.e("XMLError", "reqdBuildAmount");
+			Log.e("XMLError", "outResAmount");
 		}
-		int reqdBuildInputPower = 0;
+		double outResQuality = 0.0;
 		try {
-			reqdBuildInputPower = Integer.parseInt(xpp.getAttributeValue(null,
-					"inputPower"));
+			outResQuality = Double.parseDouble(xpp.getAttributeValue(null,
+					"quality"));
 		} catch (Exception e) {
-			Log.e("XMLError", "reqdBuildInputPower");
+			Log.e("XMLError", "outResQuality");
 		}
-		requiredBuildings.add(new Building(reqdBuildName, reqdBuildInfo,
-				reqdBuildAmount, reqdBuildInputPower));
-		Log.i("XML", "reqd  building " + reqdBuildName);
+		outputResources.add(new Resource(outResName, outResAmount,
+				outResQuality));
+		Log.i("XML", "out resource " + outResName);
 	}
 
 	// Create "Building" objects by parsing input stream
-	// This is the longest function I have written in my entire life : Robik
 	public ArrayList<Building> parse() throws XmlPullParserException,
 			IOException {
 		Log.i("XML", "bufferedreader....");
@@ -128,7 +125,7 @@ public class BuildingXMLParser {
 					&& xpp.getName().equalsIgnoreCase("building")) {
 				atBuilding = true;
 				readBuildingAttributes();
-				requiredBuildings = new ArrayList<Building>();
+				outputResources = new ArrayList<Resource>();
 				requiredResources = new ArrayList<Resource>();
 
 				// For Nested elements
@@ -142,8 +139,8 @@ public class BuildingXMLParser {
 					}
 
 					boolean atRequiredResources = false;// The tag:
-														// <requiredResources>
-														// may be absent
+					// <requiredResources>
+					// may be absent
 					if (eventType == XmlPullParser.START_TAG
 							&& xpp.getName().equalsIgnoreCase(
 									"requiredResources")) {
@@ -160,8 +157,8 @@ public class BuildingXMLParser {
 						}
 
 						boolean atRequiredResource = false;// The tag:
-															// <requiredResource>
-															// might be absent
+						// <requiredResource>
+						// might be absent
 						if (eventType == XmlPullParser.START_TAG
 								&& xpp.getName().equalsIgnoreCase("resource")) {
 							atRequiredResource = true;
@@ -184,46 +181,49 @@ public class BuildingXMLParser {
 						eventType = xpp.next();
 					}// atRequiredResources
 
-					boolean atRequiredBuildings = false;// The tag:
-														// <requiredBuildings>
-														// might be absent
+					boolean atOutputResources = false;// The tag:
+					// <outputResources>
+					// might be absent
 					if (eventType == XmlPullParser.START_TAG
-							&& xpp.getName().equalsIgnoreCase(
-									"requiredBuildings")) {
-						atRequiredBuildings = true;
+							&& xpp.getName()
+									.equalsIgnoreCase("outputResources")) {
+						atOutputResources = true;
 					}
-					while (atRequiredBuildings) {
+					while (atOutputResources) {
 						// Break the loop when the end tag: </building> is
 						// reached
 						if (eventType == XmlPullParser.END_TAG
 								&& xpp.getName().equalsIgnoreCase(
-										"requiredBuildings")) {
-							atRequiredBuildings = false;
+										"outputResources")) {
+							atOutputResources = false;
 							break;
 						}
 
-						boolean atRequiredBuilding = false;// The tag:
-															// <requiredBuilding>
-															// might be absent
+						boolean atOutputResource = false;// The tag:
+						// <requiredBuilding>
+						// might be absent
 						if (eventType == XmlPullParser.START_TAG
-								&& xpp.getName().equalsIgnoreCase("building")) {
-							atRequiredBuilding = true;
+								&& xpp.getName().equalsIgnoreCase("resource")) {
+							atOutputResource = true;
 						}// requiredBuilding
 
-						while (atRequiredBuilding) {
+						while (atOutputResource) {
 							if (eventType == XmlPullParser.END_TAG
 									&& xpp.getName().equalsIgnoreCase(
-											"building")) {
-								atRequiredBuilding = false;
+											"resource")) {
+								atOutputResource = false;
 								break;
 							}
-							addRequiredBuilding(xpp, requiredBuildings);
+							if (xpp.getAttributeCount() > 0) {
+								addOutputResource(xpp, outputResources);
+
+							}
 
 							eventType = xpp.next();
-						}// atRequiredBuilding
+						}// atOutputResource
 
 						eventType = xpp.next();
-					}// atRequiredBuildings
+					}// atOutputResources
 
 					eventType = xpp.next();
 				}// while atBuilding
@@ -231,8 +231,8 @@ public class BuildingXMLParser {
 						buildingAmount, buildingInputPower,
 						buildingOutputPower, buildingMonetaryCost,
 						buildingRegolithCost, buildingRequiredTurns,
-						requiredResources, requiredBuildings,
-						buildingXPos, buildingYPos));
+						requiredResources, outputResources, buildingXPos,
+						buildingYPos));
 			}// if building
 
 			eventType = xpp.next();

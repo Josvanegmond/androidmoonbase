@@ -32,6 +32,7 @@ public class NewGameActivity extends GameActivity {
 		gameDetails = GameDetails.getInstance();
 		retrieveUserInputs();
 		initModel();
+		Log.i("NewGame","showing base overview");
 		showBaseOverviewScreen(view);
 	}
 

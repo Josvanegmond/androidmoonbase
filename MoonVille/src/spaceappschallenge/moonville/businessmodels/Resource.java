@@ -10,6 +10,12 @@ public class Resource implements Serializable {
 	protected int importUnitCost;
 	protected int exportUnitCost;
 
+	public Resource(String name, int amount) {
+		super();
+		this.name = name;
+		this.amount = amount;
+	}
+
 	public Resource(String name, int amount, double quality) {
 		super();
 		this.name = name;
