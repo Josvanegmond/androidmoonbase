@@ -151,6 +151,7 @@ public class BaseOverviewActivity extends GameActivity {
 		// last step, save to file
 		MoonBaseManager.getCurrentMoonBase().setMonth(
 				MoonBaseManager.getCurrentMoonBase().getMonth() + 1);
+		updateUI();
 		MoonBaseManager.saveMoonBase(view.getContext());
 	}
 
