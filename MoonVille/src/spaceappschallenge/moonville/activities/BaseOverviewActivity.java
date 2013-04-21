@@ -152,6 +152,8 @@ public class BaseOverviewActivity extends GameActivity {
 		MoonBaseManager.getCurrentMoonBase().setMonth(
 				MoonBaseManager.getCurrentMoonBase().getMonth() + 1);
 		MoonBaseManager.saveMoonBase(view.getContext());
+
+		updateUI();
 	}
 
 	public void showImportResourcesScreen(View view) {
