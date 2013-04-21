@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
@@ -53,6 +54,11 @@ public class BaseOverviewActivity extends GameActivity {
 
 	private void showBuildings() {
 
+		for( ImageView buildingImage: buildingImageList )
+		{
+			((AbsoluteLayout)buildingImage.getParent()).removeView( buildingImage );
+		}
+		
 		buildingImageList.clear();
 		
 		List<Building> buildings = Buildings.getInstance().getAllBuildings();
@@ -60,6 +66,19 @@ public class BaseOverviewActivity extends GameActivity {
 		for (Building building : buildings)
 		{
 			ImageView buildingImage = new ImageView(this);
+			buildingImage.setOnClickListener(
+					new OnClickListener()
+					{
+						@Override
+						public void onClick(View view)
+						{
+							view.getContext().startActivity(
+									new Intent(BaseOverviewActivity.this, BuildingInfoActivity.class));
+							BaseOverviewActivity.this.finish();
+						}
+					}
+			);
+			
 			buildingImageList.add( buildingImage );
 			
 			android.content.res.Resources res = this.getResources();
