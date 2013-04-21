@@ -50,10 +50,6 @@ public class MainMenuActivity extends GameActivity {
 		view.getContext()
 				.startActivity(new Intent(this, CreditsActivity.class));
 	}
-
-	public void exitGame(View view) {
-		finish();
-	}
 	
 	public void toggleBackgroundMusic(View view) {
 		SharedPreferences.Editor editor = 
