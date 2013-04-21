@@ -15,7 +15,7 @@
     </building>
     <building
         name="Solar Panel Array"
-        amount="10"
+        amount="0"
         info="Provides electric energy by utilizing sunling"
         inputPower="0"
         monetaryCost="20"
@@ -24,14 +24,14 @@
         requiredTurns="2"
         x="80"
         y="110" >
-        
         <requiredBuildings>
-            <Building name="Moon Base"></Building>
+            <Building name="Moon Base" >
+            </Building>
         </requiredBuildings>
     </building>
     <building
         name="Ice Mine"
-        amount="2"
+        amount="0"
         info="Produces water from ice"
         inputPower="10"
         monetaryCost="20"
@@ -40,21 +40,21 @@
         requiredTurns="2"
         x="200"
         y="20" >
-        
         <requiredBuildings>
-            <Building name="Moon Base"></Building>
+            <Building name="Moon Base" >
+            </Building>
         </requiredBuildings>
-        
+
         <outputResources>
             <resource
                 name="Water"
-                amount="10">
+                amount="10" >
             </resource>
         </outputResources>
     </building>
     <building
         name="Regolith Processor"
-        amount="10"
+        amount="0"
         info="Processes regolith "
         inputPower="20"
         monetaryCost="20"
@@ -63,11 +63,11 @@
         requiredTurns="4"
         x="280"
         y="220" >
-        
         <requiredBuildings>
-            <Building name="Moon Base"></Building>
+            <Building name="Moon Base" >
+            </Building>
         </requiredBuildings>
-        
+
         <outputResources>
             <resource
                 name="Regolith"
@@ -81,7 +81,7 @@
     </building>
     <building
         name="Nuclear Plant"
-        amount="1"
+        amount="0"
         info="Utilizes Helium-3 to provide energy"
         inputPower="0"
         monetaryCost="100"
@@ -89,12 +89,12 @@
         regolithCost="0"
         requiredTurns="10"
         x="170"
-        y="370">
-        
+        y="370" >
         <requiredBuildings>
-            <Building name="Regolith Processor"></Building>
+            <Building name="Regolith Processor" >
+            </Building>
         </requiredBuildings>
-        
+
         <requiredResources>
             <resource
                 name="Helium-3"
@@ -104,7 +104,7 @@
     </building>
     <building
         name="Water Processor"
-        amount="1"
+        amount="0"
         info="Processes water to yield oxygen and hydrogen"
         inputPower="10"
         monetaryCost="15"
@@ -112,12 +112,12 @@
         regolithCost="0"
         requiredTurns="4"
         x="385"
-        y="70">
-        
+        y="70" >
         <requiredBuildings>
-            <Building name="Ice Mine"></Building>
+            <Building name="Ice Mine" >
+            </Building>
         </requiredBuildings>
-        
+
         <requiredResources>
             <resource
                 name="Water"
@@ -138,7 +138,7 @@
     </building>
     <building
         name="Smelting Facility"
-        amount="1"
+        amount="0"
         info="Provides metals and minerals"
         inputPower="50"
         monetaryCost="25"
@@ -147,11 +147,11 @@
         requiredTurns="5"
         x="535"
         y="260" >
-        
         <requiredBuildings>
-            <Building name="Regolith Processor"></Building>
+            <Building name="Regolith Processor" >
+            </Building>
         </requiredBuildings>
-        
+
         <requiredResources>
             <resource
                 name="Regolith"
@@ -176,7 +176,7 @@
     </building>
     <building
         name="Propellant Factory"
-        amount="1"
+        amount="0"
         info="Produces fuel"
         inputPower="50"
         monetaryCost="30"
@@ -185,11 +185,11 @@
         requiredTurns="5"
         x="570"
         y="40" >
-        
         <requiredBuildings>
-            <Building name="Water Processor"></Building>
+            <Building name="Water Processor" >
+            </Building>
         </requiredBuildings>
-        
+
         <requiredResources>
             <resource
                 name="Hydrogen"
@@ -210,7 +210,7 @@
     </building>
     <building
         name="Electronics Factory"
-        amount="2"
+        amount="0"
         info="Manufactures electronics supply"
         inputPower="20"
         monetaryCost="10"
@@ -219,11 +219,11 @@
         requiredTurns="3"
         x="670"
         y="160" >
-        
         <requiredBuildings>
-            <Building name="Smelting Factory"></Building>
+            <Building name="Smelting Factory" >
+            </Building>
         </requiredBuildings>
-        
+
         <requiredResources>
             <resource
                 name="Metal"
@@ -240,7 +240,7 @@
     </building>
     <building
         name="Robot Factory"
-        amount="2"
+        amount="0"
         info="Manufactures robots"
         inputPower="50"
         monetaryCost="15"
@@ -249,11 +249,11 @@
         requiredTurns="6"
         x="570"
         y="380" >
-        
         <requiredBuildings>
-            <Building name="Electronics Factory"></Building>
+            <Building name="Electronics Factory" >
+            </Building>
         </requiredBuildings>
-        
+
         <requiredResources>
             <resource
                 name="Metal"

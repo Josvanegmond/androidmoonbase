@@ -7,8 +7,10 @@ public class Resource implements Serializable {
 	protected String name;
 	protected int amount;
 	protected double quality;
-	protected int importUnitCost;
-	protected int exportUnitCost;
+	protected int unitCost;// import value
+	protected int unitValue;// export value //Better change the name here and in
+							// xml huh!! Robik :-)
+	protected int weight;
 
 	public Resource(String name, int amount) {
 		super();
@@ -23,13 +25,15 @@ public class Resource implements Serializable {
 		this.quality = quality;
 	}
 
-	public Resource(String name, int amount, double quality, int unitCost) {
+	public Resource(String name, int amount, double quality, int unitCost,
+			int unitValue, int weight) {
 		super();
 		this.name = name;
 		this.amount = amount;
 		this.quality = quality;
-		this.importUnitCost = unitCost;
-		this.exportUnitCost = Math.round(unitCost * .75f);
+		this.unitCost = unitCost;
+		this.unitValue = unitValue;
+		this.weight = weight;
 	}
 
 	/**
@@ -49,6 +53,7 @@ public class Resource implements Serializable {
 		return a;
 	}
 
+	// Getters and Setters
 	public String getName() {
 		return name;
 	}
@@ -73,20 +78,28 @@ public class Resource implements Serializable {
 		this.quality = quality;
 	}
 
-	public void setImportUnitCost(int unitCost) {
-		this.importUnitCost = unitCost;
+	public int getUnitCost() {
+		return unitCost;
 	}
 
-	public int getImportUnitCost() {
-		return this.importUnitCost;
+	public void setUnitCost(int unitCost) {
+		this.unitCost = unitCost;
 	}
 
-	public void setExportUnitCost(int unitCost) {
-		this.exportUnitCost = unitCost;
+	public int getUnitValue() {
+		return unitValue;
 	}
 
-	public int getExportUnitCost() {
-		return this.exportUnitCost;
+	public void setUnitValue(int unitValue) {
+		this.unitValue = unitValue;
+	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 
 }

@@ -94,10 +94,11 @@ public class ExportResourceListAdapter extends BaseAdapter {
 						Resource currentResource = Resources.getInstance()
 								.getResource(resourceName);
 						if (currentResource == null) {
-							Log.i("null export resource", resourceName + "not found");
+							Log.i("null export resource", resourceName
+									+ "not found");
 							return;
 						}
-						int unitProfit = currentResource.getExportUnitCost();
+						int unitProfit = currentResource.getUnitValue();
 						int maxExportQuantity = 0;
 						List<Resource> list = MoonBaseManager
 								.getCurrentMoonBase().getStoredResources();
@@ -116,12 +117,12 @@ public class ExportResourceListAdapter extends BaseAdapter {
 						Log.i("quantity", "export quantity " + quantity);
 
 						((TextView) convertView
-								.findViewById(R.id.resourceQuantityTextView))
+								.findViewById(R.id.exportResourceQuantityTextView))
 								.setText("" + quantity);
 
 						int totalProfit = unitProfit * quantity;
 						((TextView) convertView
-								.findViewById(R.id.resourceCostTextView))
+								.findViewById(R.id.exportResourceCostTextView))
 								.setText("" + totalProfit);
 
 						Log.i("yes", "quantity set " + quantity);
@@ -145,10 +146,10 @@ public class ExportResourceListAdapter extends BaseAdapter {
 				Resource currentResource = Resources.getInstance().getResource(
 						resourceName);
 
-				int unitProfit = currentResource.getExportUnitCost();
+				int unitProfit = currentResource.getUnitValue();
 				int quantity = Integer.parseInt(((TextView) convertView
-						.findViewById(R.id.resourceQuantityTextView)).getText()
-						.toString());
+						.findViewById(R.id.exportResourceQuantityTextView))
+						.getText().toString());
 				int totalProfit = unitProfit * quantity;
 				Toast toast;
 				toast = Toast.makeText(v.getContext(),
@@ -167,6 +168,7 @@ public class ExportResourceListAdapter extends BaseAdapter {
 					}
 				}
 				moonBase.sell(totalProfit);
+				
 				Log.i("profit", " total profit is:" + totalProfit);
 
 				// update budget shown on screen
