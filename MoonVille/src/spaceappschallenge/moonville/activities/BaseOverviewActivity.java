@@ -29,11 +29,11 @@ public class BaseOverviewActivity extends GameActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_base_overview);
-		Log.i("Base","showing moon");
+		Log.i("Base", "showing moon");
 		moonSurfaceLayout = (AbsoluteLayout) this
 				.findViewById(R.id.moonsurface_relativelayout);
-		Log.i("Base","showing buildings");
-		
+		Log.i("Base", "showing buildings");
+
 		showBuildings();
 	}
 
@@ -45,10 +45,10 @@ public class BaseOverviewActivity extends GameActivity {
 	}
 
 	private void showBuildings() {
-		Log.i("Base","getting buildings");
-		
+		Log.i("Base", "getting buildings");
+
 		List<Building> buildings = Buildings.getInstance().getAllBuildings();
-		
+
 		for (Building building : buildings) {
 			ImageView buildingImage = new ImageView(this);
 			android.content.res.Resources res = this.getResources();
@@ -77,7 +77,7 @@ public class BaseOverviewActivity extends GameActivity {
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 		BuildingTree tree = moonBase.getBuiltBuildings();
 		tree.checkPower();
-		//tree.checkRequiredBuildings();
+		// tree.checkRequiredBuildings();
 
 		Resources resources = Resources.getInstance();
 		ArrayList<Resource> available = (ArrayList<Resource>) tree
@@ -101,6 +101,12 @@ public class BaseOverviewActivity extends GameActivity {
 	public void showResourcesScreen(View view) {
 		view.getContext().startActivity(
 				new Intent(this, ResourcesActivity.class));
+		this.finish();
+	}
+
+	public void showResourceImportScreen(View view) {
+		view.getContext().startActivity(
+				new Intent(this, ImportResourcesActivity.class));
 		this.finish();
 	}
 
