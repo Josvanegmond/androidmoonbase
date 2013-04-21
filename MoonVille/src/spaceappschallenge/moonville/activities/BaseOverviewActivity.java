@@ -111,16 +111,17 @@ public class BaseOverviewActivity extends GameActivity {
 			
 			for( Building requiredBuilding : building.getRequiredBuildings() )
 			{
-				if( MoonBaseManager.getCurrentMoonBase().getBuiltBuildings().getBuildingsByType( requiredBuilding ) != null )
+				if( MoonBaseManager.getCurrentMoonBase().getBuildBuildingsList().contains( requiredBuilding ) == false )
 				{
 					canBeBuild = false;
 					break;
 				}
 			}
-			buildingImage.setClickable( canBeBuild );
+			
+			//buildingImage.setClickable( canBeBuild );
 			if( canBeBuild == false )
 			{
-				buildingImage.setAlpha( 50 );
+				buildingImage.setAlpha( 30 );
 			}
 			else
 			{

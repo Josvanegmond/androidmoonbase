@@ -37,7 +37,7 @@
             android:layout_marginRight="40dp"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:onClick="showGameOverviewScreen"
+            android:onClick="showBaseOverviewScreen"
             android:scaleType="fitXY"
             android:src="@drawable/continuebutton" />
     </LinearLayout>

@@ -64,7 +64,7 @@ public class BuildingInfoActivity extends GameActivity {
 	    if ((keyCode == KeyEvent.KEYCODE_BACK))
 	    {
 			startActivity(
-					new Intent(BuildingInfoActivity.this, BaseOverviewActivity.class));
+					new Intent(this, BaseOverviewActivity.class));
 	        finish();
 	    }
 	    return super.onKeyDown(keyCode, event);

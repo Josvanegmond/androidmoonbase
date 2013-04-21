@@ -11,6 +11,7 @@ import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -77,6 +78,20 @@ public class NewGameActivity extends GameActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_new_game, menu);
 		return true;
+	}
+	
+
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+	    if ((keyCode == KeyEvent.KEYCODE_BACK))
+	    {
+			startActivity(
+					new Intent(this, MainMenuActivity.class));
+	        finish();
+	    }
+	    return super.onKeyDown(keyCode, event);
 	}
 
 }

@@ -17,6 +17,7 @@ public class MoonBase implements Serializable {
 	private int inMonth = 0;
 
 	protected BuildingTree builtBuildings;
+	protected List<Building> builtBuildingsList; //couldnt work with tree, not enough functionality, not enough time to understand -Jos
 	protected List<MegaProject> builtMegaProjects;
 
 	protected GameDetails gameDetails;
@@ -27,6 +28,7 @@ public class MoonBase implements Serializable {
 		this.prospectingLevel = prospectingLevel;
 		this.storedResources = new ArrayList<Resource>(); // or hashmap? not
 															// sure yet...
+		this.builtBuildingsList = new ArrayList<Building>();
 		this.money = money;
 
 		// only add starting base
@@ -100,6 +102,11 @@ public class MoonBase implements Serializable {
 	public BuildingTree getBuiltBuildings() {
 		return builtBuildings;
 	}
+	
+	public List<Building> getBuildBuildingsList()
+	{
+		return this.builtBuildingsList;
+	}
 
 	public void setBuiltBuildings(BuildingTree builtBuildings) {
 		this.builtBuildings = builtBuildings;
@@ -107,10 +114,12 @@ public class MoonBase implements Serializable {
 	
 	public void setBuiltBuilding( Building building )
 	{
-		if( builtBuildings.getBuildings().contains( building ) == false )
-		{
-			this.builtBuildings.add( building );
-		}
+//		if( builtBuildings.getBuildings().contains( building ) == false )
+//		{
+//			this.builtBuildings.add( building );
+//		}
+		
+		this.builtBuildingsList.add( building );
 	}
 
 	public List<MegaProject> getBuiltMegaProjects() {
