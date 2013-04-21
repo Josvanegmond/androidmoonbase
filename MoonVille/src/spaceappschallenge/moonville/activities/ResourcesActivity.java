@@ -10,6 +10,7 @@ import spaceappschallenge.moonville.listadapters.ResourceListAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
@@ -77,4 +78,18 @@ public class ResourcesActivity extends GameActivity {
 				new Intent(this, ExportResourcesActivity.class));
 	}
 
+
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+	    if ((keyCode == KeyEvent.KEYCODE_BACK))
+	    {
+			startActivity(
+					new Intent(this, BaseOverviewActivity.class));
+	        finish();
+	    }
+	    return super.onKeyDown(keyCode, event);
+	}
+	
 }

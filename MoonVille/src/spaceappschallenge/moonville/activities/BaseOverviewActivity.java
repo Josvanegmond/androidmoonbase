@@ -111,7 +111,7 @@ public class BaseOverviewActivity extends GameActivity {
 			
 			for( Building requiredBuilding : building.getRequiredBuildings() )
 			{
-				if( MoonBaseManager.getCurrentMoonBase().getBuiltBuildings().getBuildingsByType( requiredBuilding ) != null )
+				if( MoonBaseManager.getCurrentMoonBase().getBuiltBuildings().getBuildingsByType( requiredBuilding ) == null )
 				{
 					canBeBuild = false;
 					break;
