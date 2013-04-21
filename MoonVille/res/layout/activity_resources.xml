@@ -1,84 +1,62 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/resourcesParentLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
     android:orientation="vertical"
     tools:context=".ResourcesActivity" >
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <Button
-            android:id="@+id/ar_showBaseOverviewButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="showBaseOverviewScreen"
-            android:text="Overview"
-            android:textSize="@dimen/tinyButtonText" />
-
-        <Button
-            android:id="@+id/ar_showBuildingsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="showBuildingScreen"
-            android:text="Building"
-            android:textSize="@dimen/tinyButtonText" />
-
-        <Button
-            android:id="@+id/ar_showResourcesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="showResourcesScreen"
-            android:text="Resources"
-            android:textSize="@dimen/tinyButtonText" />
-    </LinearLayout>
-
-    <RelativeLayout
         android:id="@+id/resourcesRelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" >
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/resourceName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RESOURCE"
+            android:text="RESOURCES"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
-          <Button
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <Button
             android:id="@+id/importButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/exportButton"
-            android:text="Import" 
+            android:layout_weight="1"
             android:onClick="showImportResourcesScreen"
-            android:layout_marginRight="20dp"/>
+            android:text="Import" />
+
         <Button
             android:id="@+id/exportButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
+            android:layout_weight="1"
             android:onClick="showExportResourcesScreen"
             android:text="Export" />
+        </LinearLayout>
+    </LinearLayout>
 
-      
-
-    </RelativeLayout>
-
-    <ListView
+     <Button
+            android:id="@+id/ar_showBaseOverviewButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showBaseOverviewScreen"
+            android:text="Back to Overview"
+            android:textSize="@dimen/tinyButtonText"
+            android:layout_alignParentBottom="true" />
+     
+     <ListView
         android:id="@+id/resourceslist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="5dp"
+        android:layout_above="@id/ar_showBaseOverviewButton"
+        android:layout_below="@id/resourcesRelativeLayout" >
     </ListView>
-
-</LinearLayout>
+    
+</RelativeLayout>

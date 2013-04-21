@@ -35,11 +35,18 @@ public class ResourcesActivity extends GameActivity {
 		getMenuInflater().inflate(R.menu.activity_resources, menu);
 		return true;
 	}
+	
+	@Override
+	public void onBackPressed() {
+		//this does the same thing as the "back to Overview" Button
+		this.showBaseOverviewScreen(this.findViewById(R.id.ar_showBaseOverviewButton));
+	}
 
 	// methods called by onClick property of button in xml
 	public void showBaseOverviewScreen(View view) {
 		view.getContext().startActivity(
 				new Intent(this, BaseOverviewActivity.class));
+		this.finish();
 	}
 
 	public void showImportResourcesScreen(View view) {

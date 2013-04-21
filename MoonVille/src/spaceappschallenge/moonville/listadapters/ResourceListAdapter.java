@@ -53,7 +53,8 @@ public class ResourceListAdapter extends BaseAdapter
 		
 		TextView resourceName = (TextView) convertView.findViewById( R.id.resourceNameTextView );
 		resourceName.setText( resource.getName() );
-		
+		TextView resourceAmount = (TextView) convertView.findViewById( R.id.resourceAmountTextView );
+		resourceAmount.setText( "Available\nAmount: "+resource.getAmount() );
 		return convertView;
 	}
 
