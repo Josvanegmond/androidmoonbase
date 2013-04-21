@@ -8,12 +8,14 @@ import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.listadapters.ExportResourceListAdapter;
 import spaceappschallenge.moonville.listadapters.ImportResourceListAdapter;
+import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class ExportResourcesActivity extends GameActivity {
 
@@ -29,6 +31,14 @@ public class ExportResourcesActivity extends GameActivity {
 		ListView resourceListView = (ListView) this
 				.findViewById(R.id.exportResourceslist);
 		resourceListView.setAdapter(resourceListAdapter);
+		updateUI();
+	}
+
+	public void updateUI() {
+		TextView exportBudgetTextView = (TextView) (this
+				.findViewById(R.id.exportBudgetTextView));
+		exportBudgetTextView.setText(""
+				+ MoonBaseManager.getCurrentMoonBase().getMoney());
 	}
 
 	@Override

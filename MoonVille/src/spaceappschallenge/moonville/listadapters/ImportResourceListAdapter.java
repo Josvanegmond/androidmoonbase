@@ -3,6 +3,7 @@ package spaceappschallenge.moonville.listadapters;
 import java.util.ArrayList;
 
 import spaceappschallenge.moonville.R;
+import spaceappschallenge.moonville.activities.ImportResourcesActivity;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
@@ -44,6 +45,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int index, View convertView, ViewGroup parent) {
 		Resource resource = this.allResources.get(index);
+		
 
 		if (convertView == null) {
 			LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -55,7 +57,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				.findViewById(R.id.importResourceNameTextView);
 		resourceName.setText(resource.getName());
 		addListenerToSeekBar(convertView);
-		addListenerToBuyButton(convertView);
+		addListenerToBuyButton(convertView, parent);
 		return convertView;
 	}
 
@@ -115,7 +117,8 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				});
 	}
 
-	protected void addListenerToBuyButton(final View convertView) {
+	protected void addListenerToBuyButton(final View convertView,
+			final ViewGroup parent) {
 		Button importButton = (Button) convertView
 				.findViewById(R.id.importButton);
 		importButton.setOnClickListener(new OnClickListener() {
@@ -146,7 +149,15 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				toast.show();
 
 				Log.i("cost", " total cost is:" + totalCost);
-
+				try {
+					((TextView) ((View) (parent.getParent().getParent()))
+							.findViewById(R.id.budgetTextView)).setText(""
+							+ MoonBaseManager.getCurrentMoonBase().getMoney());
+				} catch (Exception e) {
+					Log.e("ImportResourceListAdapter",
+							"Could not update budget in text view");
+					
+				}
 				MoonBaseManager.saveMoonBase(v.getContext());
 			}
 		});

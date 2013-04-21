@@ -27,7 +27,8 @@
                     android:id="@+id/moonsurface_relativelayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/equator_backdrop" >
+                    android:background="@drawable/equator_backdrop" 
+                    >
 
                 </AbsoluteLayout>
             </HorizontalScrollView>
@@ -42,15 +43,15 @@
             android:padding="10dp" >
 
             <TextView
-                android:id="@+id/buildingname"
+                android:id="@+id/baseOverviewFundsTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Funds: $100.000.000"
+                android:text="Funds: "
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/TextView01"
+                android:id="@+id/month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Month:"
@@ -103,7 +104,7 @@
                 android:id="@+id/button1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="showResourcesScreen"
+                android:onClick="showExportResourcesScreen"
                 android:text="Export"
                 android:textSize="@dimen/tinyButtonText" />
         </LinearLayout>

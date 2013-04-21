@@ -120,5 +120,9 @@ public class MoonBase implements Serializable {
 	public void setMonth(int inMonth) {
 		this.inMonth = inMonth;
 	}
+	
+	public void incrementMonth(){
+		++this.inMonth;
+	}
 
 }

@@ -54,7 +54,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/budgetTextView"
+            android:id="@+id/exportBudgetTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/budgetTitle"

@@ -7,12 +7,14 @@ import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.listadapters.ImportResourceListAdapter;
+import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class ImportResourcesActivity extends GameActivity {
 
@@ -20,13 +22,22 @@ public class ImportResourcesActivity extends GameActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_import_resources);
-		Log.i("ImportResourcesActivity","gathering resources..");
-		ArrayList<Resource> resources = Resources.getInstance().getAllResources();
+		Log.i("ImportResourcesActivity", "gathering resources..");
+		ArrayList<Resource> resources = Resources.getInstance()
+				.getAllResources();
 		ImportResourceListAdapter resourceListAdapter = new ImportResourceListAdapter();
-		Log.i("ResourcesActivity","showing import resources screen..");
+		Log.i("ResourcesActivity", "showing import resources screen..");
 		ListView resourceListView = (ListView) this
 				.findViewById(R.id.importResourceslist);
 		resourceListView.setAdapter(resourceListAdapter);
+		updateUI();
+	}
+
+	public void updateUI() {
+		TextView budgetTextView = (TextView) (this
+				.findViewById(R.id.budgetTextView));
+		budgetTextView.setText(""
+				+ MoonBaseManager.getCurrentMoonBase().getMoney());
 	}
 
 	@Override
@@ -41,16 +52,15 @@ public class ImportResourcesActivity extends GameActivity {
 		view.getContext().startActivity(
 				new Intent(this, BaseOverviewActivity.class));
 	}
-	
+
 	public void showBuildingScreen(View view) {
 		view.getContext().startActivity(
 				new Intent(this, BaseOverviewActivity.class));
 	}
 
-
-	public void showResourcesScreen( View view )
-	{
-		view.getContext().startActivity( new Intent( this, ResourcesActivity.class ) );
+	public void showResourcesScreen(View view) {
+		view.getContext().startActivity(
+				new Intent(this, ResourcesActivity.class));
 	}
 
 	public void showExportScreen(View view) {

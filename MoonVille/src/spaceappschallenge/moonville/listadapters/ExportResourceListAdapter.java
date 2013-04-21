@@ -61,7 +61,7 @@ public class ExportResourceListAdapter extends BaseAdapter {
 				.findViewById(R.id.exportResourceNameTextView);
 		resourceName.setText(resource.getName());
 		addListenerToSeekBar(convertView);
-		addListenerToSellButton(convertView);
+		addListenerToSellButton(convertView, parent);
 		return convertView;
 	}
 
@@ -108,11 +108,12 @@ public class ExportResourceListAdapter extends BaseAdapter {
 								break;
 							}
 						}
-						Log.i("maxQuantity", "maxQuantity " + maxExportQuantity);
+						Log.i("maxQuantity", "export maxQuantity "
+								+ maxExportQuantity);
 						float position = (float) progress / 100;
-						Log.i("position", "position " + position);
+						Log.i("position", "export position " + position);
 						int quantity = (int) (position * maxExportQuantity);
-						Log.i("quantity", "quantity " + quantity);
+						Log.i("quantity", "export quantity " + quantity);
 
 						((TextView) convertView
 								.findViewById(R.id.resourceQuantityTextView))
@@ -129,7 +130,8 @@ public class ExportResourceListAdapter extends BaseAdapter {
 				});
 	}
 
-	protected void addListenerToSellButton(final View convertView) {
+	protected void addListenerToSellButton(final View convertView,
+			final ViewGroup parent) {
 		Button importButton = (Button) convertView
 				.findViewById(R.id.exportButton);
 		importButton.setOnClickListener(new OnClickListener() {
@@ -166,6 +168,19 @@ public class ExportResourceListAdapter extends BaseAdapter {
 				}
 				moonBase.sell(totalProfit);
 				Log.i("profit", " total profit is:" + totalProfit);
+
+				// update budget shown on screen
+				try {
+					((TextView) ((View) (parent.getParent().getParent()))
+							.findViewById(R.id.exportBudgetTextView))
+							.setText(""
+									+ MoonBaseManager.getCurrentMoonBase()
+											.getMoney());
+				} catch (Exception e) {
+					Log.e("ExportResourceListAdapter",
+							"Could not update budget in text view");
+
+				}
 
 				MoonBaseManager.saveMoonBase(v.getContext());
 			}

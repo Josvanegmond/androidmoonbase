@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class BaseOverviewActivity extends GameActivity {
 
@@ -33,7 +34,7 @@ public class BaseOverviewActivity extends GameActivity {
 		moonSurfaceLayout = (AbsoluteLayout) this
 				.findViewById(R.id.moonsurface_relativelayout);
 		Log.i("Base", "showing buildings");
-
+		updateUI();
 		showBuildings();
 	}
 
@@ -42,6 +43,19 @@ public class BaseOverviewActivity extends GameActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_base_overview, menu);
 		return true;
+	}
+
+	public void updateUI() {
+		TextView fundsTextView = (TextView) (this
+				.findViewById(R.id.baseOverviewFundsTextView));
+		fundsTextView.setText("Funds: $"
+				+ MoonBaseManager.getCurrentMoonBase().getMoney());
+
+		TextView baseOverviewMonthTextView = (TextView) (this
+				.findViewById(R.id.txtMonth));
+		baseOverviewMonthTextView.setText(""
+				+ MoonBaseManager.getCurrentMoonBase().getMonth());
+
 	}
 
 	private void showBuildings() {
@@ -88,7 +102,10 @@ public class BaseOverviewActivity extends GameActivity {
 		// TODO: calculate reputation
 
 		// last step, save to file
+		MoonBaseManager.getCurrentMoonBase().incrementMonth();
+		updateUI();
 		MoonBaseManager.saveMoonBase(view.getContext());
+
 	}
 
 	public void showBaseOverviewScreen(View view) {
@@ -110,9 +127,9 @@ public class BaseOverviewActivity extends GameActivity {
 		this.finish();
 	}
 
-	public void showExportScreen(View view) {
+	public void showExportResourcesScreen(View view) {
 		view.getContext().startActivity(
-				new Intent(this, ResourcesActivity.class));
+				new Intent(this, ExportResourcesActivity.class));
 		this.finish();
 	}
 }
