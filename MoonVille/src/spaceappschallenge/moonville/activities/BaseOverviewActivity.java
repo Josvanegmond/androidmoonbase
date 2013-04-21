@@ -170,7 +170,7 @@ public class BaseOverviewActivity extends GameActivity {
 			//buildingImage.setClickable( canBeBuild );
 			if( canBeBuild == false )
 			{
-				buildingImage.setAlpha( 30 );
+				buildingImage.setAlpha( 50 );
 			}
 			else
 			{
