@@ -1,11 +1,17 @@
 package spaceappschallenge.moonville.listadapters;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.xml.datatype.Duration;
 
 import spaceappschallenge.moonville.R;
+import spaceappschallenge.moonville.businessmodels.MoonBase;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
+import android.text.InputFilter.LengthFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +24,10 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ImportResourceListAdapter extends BaseAdapter {
+public class ExportResourceListAdapter extends BaseAdapter {
 	private ArrayList<Resource> allResources;
 
-	public ImportResourceListAdapter() {
+	public ExportResourceListAdapter() {
 		// get the resources via the factory
 		this.allResources = Resources.getInstance().getAllResources();
 	}
@@ -47,15 +53,15 @@ public class ImportResourceListAdapter extends BaseAdapter {
 
 		if (convertView == null) {
 			LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-			convertView = inflater.inflate(R.layout.listitem_import_resource,
+			convertView = inflater.inflate(R.layout.listitem_export_resource,
 					parent, false);
 		}
 
 		TextView resourceName = (TextView) convertView
-				.findViewById(R.id.importResourceNameTextView);
+				.findViewById(R.id.exportResourceNameTextView);
 		resourceName.setText(resource.getName());
 		addListenerToSeekBar(convertView);
-		addListenerToBuyButton(convertView);
+		addListenerToSellButton(convertView);
 		return convertView;
 	}
 
@@ -82,7 +88,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 							int progress, boolean fromUser) {
 
 						String resourceName = ((TextView) convertView
-								.findViewById(R.id.importResourceNameTextView))
+								.findViewById(R.id.exportResourceNameTextView))
 								.getText().toString();
 
 						Resource currentResource = Resources.getInstance()
@@ -91,23 +97,31 @@ public class ImportResourceListAdapter extends BaseAdapter {
 							Log.i("null", resourceName + "not found");
 							return;
 						}
-						int unitCost = currentResource.getImportUnitCost();
-						int maxQuantity = MoonBaseManager.getCurrentMoonBase()
-								.getMoney() / unitCost;// 100=maxAmount
-						Log.i("maxQuantity", "maxQuantity " + maxQuantity);
+						int unitProfit = currentResource.getExportUnitCost();
+						int maxExportQuantity = 0;
+						List<Resource> list = MoonBaseManager
+								.getCurrentMoonBase().getStoredResources();
+						for (Resource res : list) {
+							if (res.getName().equalsIgnoreCase(
+									currentResource.getName())) {
+								maxExportQuantity = res.getAmount();
+								break;
+							}
+						}
+						Log.i("maxQuantity", "maxQuantity " + maxExportQuantity);
 						float position = (float) progress / 100;
 						Log.i("position", "position " + position);
-						int quantity = (int) (position * maxQuantity);
+						int quantity = (int) (position * maxExportQuantity);
 						Log.i("quantity", "quantity " + quantity);
 
 						((TextView) convertView
 								.findViewById(R.id.resourceQuantityTextView))
 								.setText("" + quantity);
 
-						int totalCost = unitCost * quantity;
+						int totalProfit = unitProfit * quantity;
 						((TextView) convertView
 								.findViewById(R.id.resourceCostTextView))
-								.setText("" + totalCost);
+								.setText("" + totalProfit);
 
 						Log.i("yes", "quantity set " + quantity);
 
@@ -115,37 +129,43 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				});
 	}
 
-	protected void addListenerToBuyButton(final View convertView) {
+	protected void addListenerToSellButton(final View convertView) {
 		Button importButton = (Button) convertView
-				.findViewById(R.id.importButton);
+				.findViewById(R.id.exportButton);
 		importButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 
 				String resourceName = ((TextView) convertView
-						.findViewById(R.id.importResourceNameTextView))
+						.findViewById(R.id.exportResourceNameTextView))
 						.getText().toString();
 				Resource currentResource = Resources.getInstance().getResource(
 						resourceName);
 
-				int unitCost = currentResource.getImportUnitCost();
+				int unitProfit = currentResource.getExportUnitCost();
 				int quantity = Integer.parseInt(((TextView) convertView
 						.findViewById(R.id.resourceQuantityTextView)).getText()
 						.toString());
-				int totalCost = unitCost * quantity;
+				int totalProfit = unitProfit * quantity;
 				Toast toast;
-				if (MoonBaseManager.getCurrentMoonBase().spend(totalCost)) {
-					toast = Toast.makeText(v.getContext(), "Spent: "
-							+ totalCost, 2000);
-
-				} else {
-					toast = Toast.makeText(v.getContext(),
-							"Can't spend so much!", 2000);
-				}
+				toast = Toast.makeText(v.getContext(),
+						"Profit: " + totalProfit, Toast.LENGTH_SHORT);
 				toast.show();
-
-				Log.i("cost", " total cost is:" + totalCost);
+				MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
+				Resource[] list = moonBase.getStoredResources().toArray(
+						new Resource[moonBase.getStoredResources().size()]);
+				for (int i = 0; i < list.length; i++) {
+					if (list[i].getName().equalsIgnoreCase(
+							currentResource.getName())) {
+						currentResource.setAmount(list[i].getAmount()
+								- quantity);
+						moonBase.getStoredResources().set(i, currentResource);
+						break;
+					}
+				}
+				moonBase.sell(totalProfit);
+				Log.i("profit", " total profit is:" + totalProfit);
 
 				MoonBaseManager.saveMoonBase(v.getContext());
 			}

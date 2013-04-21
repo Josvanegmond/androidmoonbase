@@ -33,14 +33,14 @@ public class MoonBaseManager {
 	}
 
 	public static void loadSavedMoonbase(Context context) {
-		MoonBase currentMoonBase = null;
+		MoonBase loadedMoonBase = null;
 
 		try {
 			FileInputStream fis = new FileInputStream(context.getFilesDir()
 					+ File.separator + Reference.SAVE_FILE);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 
-			currentMoonBase = (MoonBase) ois.readObject();
+			loadedMoonBase = (MoonBase) ois.readObject();
 
 			ois.close();
 			fis.close();
@@ -55,7 +55,7 @@ public class MoonBaseManager {
 			e.printStackTrace();
 		}
 
-		MoonBaseManager.currentMoonBase = currentMoonBase;
+		MoonBaseManager.currentMoonBase = loadedMoonBase;
 	}
 
 	public static void saveMoonBase(Context context) {
@@ -65,6 +65,9 @@ public class MoonBaseManager {
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(MoonBaseManager.currentMoonBase);
+
+			Toast t = Toast.makeText(context, "Saved.", Toast.LENGTH_LONG);
+			t.show();
 
 			oos.close();
 			fos.close();

@@ -14,6 +14,8 @@ public class MoonBase implements Serializable {
 
 	// chosenMoonSite
 	protected int money;
+	private int inMonth = 0;
+
 	protected BuildingTree builtBuildings;
 	protected List<MegaProject> builtMegaProjects;
 
@@ -49,6 +51,10 @@ public class MoonBase implements Serializable {
 			return true;
 		} else
 			return false;
+	}
+
+	public void sell(int income) {
+		this.money += income;
 	}
 
 	public int getResearchLabSize() {
@@ -105,6 +111,14 @@ public class MoonBase implements Serializable {
 
 	public void setBuiltMegaProjects(List<MegaProject> builtMegaProjects) {
 		this.builtMegaProjects = builtMegaProjects;
+	}
+
+	public int getMonth() {
+		return inMonth;
+	}
+
+	public void setMonth(int inMonth) {
+		this.inMonth = inMonth;
 	}
 
 }

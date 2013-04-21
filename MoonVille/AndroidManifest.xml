@@ -38,7 +38,7 @@
         <activity
             android:name="spaceappschallenge.moonville.AllResourcesActivity"
             android:label="@string/title_activity_all_resources" >
-        </activity>
+        </activity>
         -->
 
         <activity
@@ -89,6 +89,11 @@
         <activity
             android:name="spaceappschallenge.moonville.activities.ImportResourcesActivity"
             android:label="@string/title_activity_import_resources"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.activities.ExportResourcesActivity"
+            android:label="@string/title_activity_export_resources"
             android:screenOrientation="landscape" >
         </activity>
     </application>

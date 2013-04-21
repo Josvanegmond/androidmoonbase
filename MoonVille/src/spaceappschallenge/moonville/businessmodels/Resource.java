@@ -1,12 +1,14 @@
 package spaceappschallenge.moonville.businessmodels;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Resource {
+public class Resource implements Serializable {
 	protected String name;
 	protected int amount;
 	protected double quality;
-	protected int unitCost;
+	protected int importUnitCost;
+	protected int exportUnitCost;
 
 	public Resource(String name, int amount, double quality) {
 		super();
@@ -20,11 +22,12 @@ public class Resource {
 		this.name = name;
 		this.amount = amount;
 		this.quality = quality;
-		this.unitCost = unitCost;
+		this.importUnitCost = unitCost;
+		this.exportUnitCost = Math.round(unitCost * .75f);
 	}
-	
+
 	/**
-	 * Merges two lists of resources, by merging identical resources and adding 
+	 * Merges two lists of resources, by merging identical resources and adding
 	 * up their amount. Assumes no identical resources within a list.
 	 */
 	public static List<Resource> merge(List<Resource> a, List<Resource> b) {
@@ -37,7 +40,7 @@ public class Resource {
 			}
 		}
 		a.addAll(b);
-		return a;		
+		return a;
 	}
 
 	public String getName() {
@@ -64,12 +67,20 @@ public class Resource {
 		this.quality = quality;
 	}
 
-	public void setUnitCost(int unitCost) {
-		this.unitCost = unitCost;
+	public void setImportUnitCost(int unitCost) {
+		this.importUnitCost = unitCost;
 	}
 
-	public int getUnitCost() {
-		return this.unitCost;
+	public int getImportUnitCost() {
+		return this.importUnitCost;
+	}
+
+	public void setExportUnitCost(int unitCost) {
+		this.exportUnitCost = unitCost;
+	}
+
+	public int getExportUnitCost() {
+		return this.exportUnitCost;
 	}
 
 }

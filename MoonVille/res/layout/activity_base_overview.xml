@@ -53,7 +53,13 @@
                 android:id="@+id/TextView01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Month: 1"
+                android:text="Month:"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/txtMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
     </RelativeLayout>
@@ -98,7 +104,7 @@
             android:id="@+id/Button03"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="showResourcesScreen"
+            android:onClick="nextTurn"
             android:text="Next Month"
             android:textSize="@dimen/tinyButtonText" />
     </LinearLayout>

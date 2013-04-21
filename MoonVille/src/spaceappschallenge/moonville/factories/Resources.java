@@ -12,6 +12,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.managers.ApplicationService;
+import spaceappschallenge.moonville.managers.MoonBaseManager;
 import spaceappschallenge.moonville.xml_parsers.ResourceXMLParser;
 import android.content.Context;
 import android.util.Log;
@@ -36,8 +37,8 @@ public class Resources {
 		// this.allResources.add(new Resource("Regolith", 20, 0.2));
 		//
 		// // Sample resources present at some stage of the game.
-		this.availableResources.add(new Resource("Helium-3", 10, 0.1, 10));
-		this.availableResources.add(new Resource("Regolith", 10, 0.2, 10));
+
+		this.setAvailableResources(availableResources);
 		initAllResources();
 
 	}
@@ -85,6 +86,8 @@ public class Resources {
 
 	public void setAvailableResources(ArrayList<Resource> availableResources) {
 		this.availableResources = availableResources;
+		MoonBaseManager.getCurrentMoonBase().setStoredResources(
+				availableResources);
 	}
 
 	public Resource getResource(String name) {
