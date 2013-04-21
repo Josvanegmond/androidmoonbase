@@ -45,7 +45,6 @@ public class ImportResourceListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int index, View convertView, ViewGroup parent) {
 		Resource resource = this.allResources.get(index);
-		
 
 		if (convertView == null) {
 			LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -93,7 +92,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 							Log.i("null", resourceName + "not found");
 							return;
 						}
-						int unitCost = currentResource.getImportUnitCost();
+						int unitCost = currentResource.getUnitCost();
 						int maxQuantity = MoonBaseManager.getCurrentMoonBase()
 								.getMoney() / unitCost;// 100=maxAmount
 						Log.i("maxQuantity", "maxQuantity " + maxQuantity);
@@ -132,13 +131,21 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				Resource currentResource = Resources.getInstance().getResource(
 						resourceName);
 
-				int unitCost = currentResource.getImportUnitCost();
+				int unitCost = currentResource.getUnitCost();
 				int quantity = Integer.parseInt(((TextView) convertView
 						.findViewById(R.id.resourceQuantityTextView)).getText()
 						.toString());
 				int totalCost = unitCost * quantity;
 				Toast toast;
 				if (MoonBaseManager.getCurrentMoonBase().spend(totalCost)) {
+					ArrayList<Resource> newList = new ArrayList<Resource>();
+					newList.add(new Resource(resourceName, quantity));
+					ArrayList<Resource> resourceAvailable = (ArrayList<Resource>) Resource
+							.merge(MoonBaseManager.getCurrentMoonBase()
+									.getStoredResources(), newList);
+
+					MoonBaseManager.getCurrentMoonBase().setStoredResources(
+							resourceAvailable);
 					toast = Toast.makeText(v.getContext(), "Spent: "
 							+ totalCost, 2000);
 
@@ -156,7 +163,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				} catch (Exception e) {
 					Log.e("ImportResourceListAdapter",
 							"Could not update budget in text view");
-					
+
 				}
 				MoonBaseManager.saveMoonBase(v.getContext());
 			}

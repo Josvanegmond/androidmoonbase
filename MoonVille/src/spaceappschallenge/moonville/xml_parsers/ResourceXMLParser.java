@@ -48,6 +48,8 @@ public class ResourceXMLParser {
 		int amount = 0;
 		double quality = 0.0;
 		int unitCost = 0;
+		int unitValue = 0;
+		int weight = 0;
 
 		// Parse the xml file to create "resource" objects
 		while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -62,8 +64,13 @@ public class ResourceXMLParser {
 							"quality"));
 					unitCost = Integer.parseInt(xpp.getAttributeValue(null,
 							"unitCost"));
-					Log.i("unitCost of resource ",""+unitCost);
-					resource = new Resource(name, amount, quality, unitCost);
+					unitValue = Integer.parseInt(xpp.getAttributeValue(null,
+							"unitValue"));
+					weight = Integer.parseInt(xpp.getAttributeValue(null,
+							"weight"));
+
+					Log.i("unitCost of resource ", "" + unitCost);
+					resource = new Resource(name, amount, quality, unitCost, unitValue, weight);
 					resources.add(resource);
 					Log.i("ResourceXML", "name: " + name);
 				}

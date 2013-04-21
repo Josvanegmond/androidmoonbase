@@ -24,6 +24,7 @@ import android.widget.AbsoluteLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 public class BaseOverviewActivity extends GameActivity {
 
@@ -43,6 +44,17 @@ public class BaseOverviewActivity extends GameActivity {
 
 		showBuildings();
 		fixHVScrollViews();
+		updateUI();
+	}
+
+	public void updateUI() {
+		TextView baseOverviewFundsTextView = (TextView) (this
+				.findViewById(R.id.baseOverviewFundsTextView));
+		baseOverviewFundsTextView.setText("Funds: "
+				+ MoonBaseManager.getCurrentMoonBase().getMoney());
+
+		TextView txtMonth = (TextView) (this.findViewById(R.id.txtMonth));
+		txtMonth.setText("" + MoonBaseManager.getCurrentMoonBase().getMonth());
 	}
 
 	@Override
@@ -137,7 +149,22 @@ public class BaseOverviewActivity extends GameActivity {
 		// TODO: calculate reputation
 
 		// last step, save to file
+		MoonBaseManager.getCurrentMoonBase().setMonth(
+				MoonBaseManager.getCurrentMoonBase().getMonth() + 1);
 		MoonBaseManager.saveMoonBase(view.getContext());
+	}
+
+	public void showImportResourcesScreen(View view) {
+		view.getContext().startActivity(
+				new Intent(this, ImportResourcesActivity.class));
+		this.finish();
+	}
+
+	public void showExportResourcesScreen(View view) {
+		view.getContext().startActivity(
+				new Intent(this, ExportResourcesActivity.class));
+		this.finish();
+
 	}
 
 	public void showBaseOverviewScreen(View view) {
