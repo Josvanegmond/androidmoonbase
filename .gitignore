@@ -16,5 +16,6 @@ MoonVille/gen/
 local.properties
 
 # Eclipse project files
-#.classpath
-#.project
+MoonVille/.classpath
+MoonVille/.project
+MoonVille/.settings
