@@ -8,6 +8,9 @@
 # Java class files
 *.class
 
+#library files
+*.jar
+
 # generated files
 MoonVille/bin/
 MoonVille/gen/
@@ -16,5 +19,6 @@ MoonVille/gen/
 local.properties
 
 # Eclipse project files
-#.classpath
-#.project
+MoonVille/.classpath
+MoonVille/.project
+MoonVille/.settings
