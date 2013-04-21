@@ -135,4 +135,12 @@ public class Building {
 	public ArrayList<Resource> getRequiredResources() {
 		return requiredResources;
 	}
+
+	public int getXPos() {
+		return this.xPos;
+	}
+
+	public int getYPos() {
+		return this.yPos;
+	}
 }

@@ -1,21 +1,30 @@
 package spaceappschallenge.moonville.activities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
+import spaceappschallenge.moonville.businessmodels.Building;
 import spaceappschallenge.moonville.businessmodels.BuildingTree;
 import spaceappschallenge.moonville.businessmodels.MoonBase;
 import spaceappschallenge.moonville.businessmodels.Resource;
+import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AbsoluteLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 public class BaseOverviewActivity extends GameActivity {
 
+	private AbsoluteLayout moonSurfaceLayout;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -23,6 +32,9 @@ public class BaseOverviewActivity extends GameActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_base_overview);
 		
+		moonSurfaceLayout = (AbsoluteLayout)this.findViewById( R.id.moonsurface_relativelayout );
+		
+		showBuildings();
 	}
 
 	@Override
@@ -33,6 +45,30 @@ public class BaseOverviewActivity extends GameActivity {
 	}
 
 	
+	private void showBuildings()
+	{
+		List<Building> buildings = Buildings.getInstance().getAllBuildings();
+		
+		for( Building building : buildings )
+		{
+			ImageView buildingImage = new ImageView(this);
+			android.content.res.Resources res = this.getResources();
+			Log.d("debug", building.getName().replace(" ", "_").toLowerCase());
+			int resID = res.getIdentifier( "ref_" + building.getName().replace(" ", "_").toLowerCase(), "drawable", getPackageName() );
+			Drawable buildingDrawable = res.getDrawable( resID );
+			buildingImage.setImageDrawable( buildingDrawable );
+
+			AbsoluteLayout.LayoutParams buildingParams = new AbsoluteLayout.LayoutParams(
+				buildingDrawable.getIntrinsicWidth(),
+				buildingDrawable.getIntrinsicHeight(),
+				building.getXPos()*2, building.getYPos()*2
+			);
+
+			buildingImage.setLayoutParams( buildingParams );
+			
+			moonSurfaceLayout.addView(buildingImage);
+		}
+	}
 
 	
 	//methods called by onClick property of button in xml

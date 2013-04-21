@@ -5,82 +5,33 @@
     android:layout_height="wrap_content" >
 
     <RelativeLayout
-        android:id="@+id/RelativeLayout1"
+        android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
         tools:context=".BaseOverviewActivity" >
 
-        <HorizontalScrollView
-            android:id="@+id/hScroll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:descendantFocusability="beforeDescendants" >
+        <ScrollView
+            android:id="@+id/vScroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
 
-            <ScrollView
-                android:id="@+id/vScroll"
+            <HorizontalScrollView
+                android:id="@+id/hScroll"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" >
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants" >
 
                 <AbsoluteLayout
-                    android:id="@+id/AbsoluteLayout1"
+                    android:id="@+id/moonsurface_relativelayout"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <ImageView
-                        android:id="@+id/imageView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="false"
-                        android:cropToPadding="false"
-                        android:scaleType="matrix"
-                        android:scrollbars="horizontal|vertical"
-                        android:src="@drawable/equator_backdrop" />
-
-                    <ImageView
-                        android:id="@+id/ImageView02"
-                        android:layout_width="128dp"
-                        android:layout_height="78dp"
-                        android:layout_x="227dp"
-                        android:layout_y="96dp"
-                        android:src="@drawable/ref_moonbase" />
-
-                    <ImageView
-                        android:id="@+id/ImageView03"
-                        android:layout_width="128dp"
-                        android:layout_height="78dp"
-                        android:layout_x="77dp"
-                        android:layout_y="19dp"
-                        android:src="@drawable/ref_smelthingfacility" />
-
-                    <ImageView
-                        android:id="@+id/ImageView04"
-                        android:layout_width="128dp"
-                        android:layout_height="78dp"
-                        android:layout_x="42dp"
-                        android:layout_y="156dp"
-                        android:src="@drawable/ref_solarpanelarray" />
-
-                    <ImageView
-                        android:id="@+id/ImageView05"
-                        android:layout_width="128dp"
-                        android:layout_height="78dp"
-                        android:layout_x="234dp"
-                        android:layout_y="240dp"
-                        android:src="@drawable/ref_icemine" />
-
-                    <ImageView
-                        android:id="@+id/ImageView01"
-                        android:layout_width="128dp"
-                        android:layout_height="78dp"
-                        android:layout_x="555dp"
-                        android:layout_y="216dp"
-                        android:src="@drawable/ref_regolithprocessor" />
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/equator_backdrop" >
 
                 </AbsoluteLayout>
-            </ScrollView>
-        </HorizontalScrollView>
+            </HorizontalScrollView>
+        </ScrollView>
 
         <LinearLayout
             android:id="@+id/LinearLayout2"
