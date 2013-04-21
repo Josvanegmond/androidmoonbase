@@ -25,19 +25,13 @@
             android:text="Regolith"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <LinearLayout
+            <TextView
+            android:id="@+id/resourceAmountTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <Button
-                android:id="@+id/increaseButton"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Increase: $5.000" />
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Available\nAmount: 500"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </LinearLayout>
 

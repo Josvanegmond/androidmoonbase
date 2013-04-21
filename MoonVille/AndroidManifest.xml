@@ -57,9 +57,9 @@
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name="spaceappschallenge.moonville.activities.ResourcesActivity"
+            android:name=".activities.ResourcesActivity"
             android:label="@string/title_activity_resources"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape">
         </activity>
         <activity
             android:name="spaceappschallenge.moonville.activities.MegaProjectActivity"
