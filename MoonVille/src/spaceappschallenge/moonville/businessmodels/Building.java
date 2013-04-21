@@ -49,9 +49,10 @@ public class Building {
 	}
 
 	public Building(String name, String info, int amount, int inputPower,
-			int outputPower, ArrayList<Resource> requiredResources) {
+			int outputPower, ArrayList<Resource> requiredResources,
+			ArrayList<Building> requiredBuildings) {
 		initBuilding(name, info, amount, inputPower, outputPower,
-				requiredResources);
+				requiredResources, requiredBuildings);
 	}
 
 	// buildings
@@ -60,8 +61,9 @@ public class Building {
 			int requiredTurns, ArrayList<Resource> requiredResources,
 			ArrayList<Resource> outputResources,
 			ArrayList<Building> requiredBuildings, int xPos, int yPos) {
+
 		initBuilding(name, info, amount, inputPower, outputPower,
-				requiredResources);
+				requiredResources, requiredBuildings);
 		this.monetaryCost = monetaryCost;
 		this.regolithCost = regolithCost;
 		this.requiredTurns = requiredTurns;
@@ -73,23 +75,27 @@ public class Building {
 
 	protected void initBuilding(String name, String info, int amount,
 			int inputPower, int outputPower,
-			ArrayList<Resource> requiredResources) {
+			ArrayList<Resource> requiredResources,
+			ArrayList<Building> requiredBuildings) {
 		initBuilding(name, info, amount, inputPower);
 		this.outputPower = outputPower;
 		this.requiredResources = requiredResources;
+		this.requiredBuildings = requiredBuildings;
 
 	}
 
 	public Building(String name, String info, int amount, int inputPower,
 			int outputPower, int requiredTurns, int regolithCost,
 			int monetaryCost, ArrayList<Resource> requiredResources,
-			ArrayList<Resource> outputResources) {
+			ArrayList<Resource> outputResources,
+			ArrayList<Building> requiredBuildings) {
 		initBuilding(name, info, amount, inputPower, outputPower,
-				requiredResources);
+				requiredResources, requiredBuildings);
 		this.requiredTurns = requiredTurns;
 		this.regolithCost = regolithCost;
 		this.monetaryCost = monetaryCost;
 		this.outputResources = outputResources;
+		this.requiredBuildings = requiredBuildings;
 
 	}
 
@@ -132,6 +138,10 @@ public class Building {
 
 	public void setOutputResources(ArrayList<Resource> outputResources) {
 		this.outputResources = outputResources;
+	}
+
+	public ArrayList<Building> getRequiredBuildings() {
+		return this.requiredBuildings;
 	}
 
 	public int getInputPower() {
@@ -204,10 +214,6 @@ public class Building {
 
 	public void setYPos(int yPos) {
 		this.yPos = yPos;
-	}
-
-	public ArrayList<Building> getRequiredBuildings() {
-		return requiredBuildings;
 	}
 
 	public void setRequiredBuildings(ArrayList<Building> requiredBuildings) {

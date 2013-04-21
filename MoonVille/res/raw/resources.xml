@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <resource name="Basalt" amount="1" quality="0.1" unitCost="20"></resource>
-    <resource name="Carbon dioxide" amount="1" quality="0.1" unitCost="20"></resource>
-    <resource name="Cement" amount="1" quality="0.1" unitCost="50"></resource>
-    <resource name="Food" amount="20" quality="0.5" unitCost="10"></resource>
-    <resource name="Glass" amount="1" quality="0.1" unitCost="40"></resource>
-    <resource name="Helium" amount="1" quality="0.1" unitCost="80"></resource>
-    <resource name="Hydrogen" amount="1" quality="0.1" unitCost="50"></resource>
-    <resource name="Iron" amount="1" quality="0.1" unitCost="50"></resource>
-    <resource name="Metal" amount="1" quality="0.1" unitCost="40"></resource>
-    <resource name="Metal plates" amount="1" quality="0.1" unitCost="40"></resource>
-    <resource name="Nickel" amount="1" quality="0.1" unitCost="30"></resource>
-    <resource name="Nitrogen" amount="1" quality="0.1" unitCost="30"></resource>
-	<resource name="Oxygen" amount="1" quality="0.1" unitCost="30"></resource>
-	<resource name="Processed Regolith" amount="1" quality="0.1" unitCost="10"></resource>
-    <resource name="Regolith" amount="1" quality="0.1" unitCost="20"></resource>
-    <resource name="Rock" amount="1" quality="0.1" unitCost="10"></resource>
-    <resource name="Silicon" amount="1" quality="0.1" unitCost="30"></resource>
-    <resource name="Steel" amount="1" quality="0.1" unitCost="50"></resource>
-    <resource name="Soil" amount="1" quality="0.1" unitCost="30"></resource>
-    <resource name="Water" amount="1" quality="0.1" unitCost="10"></resource>
+    <resource name="Water" amount="1" quality="0.1" unitCost="200" unitValue="100" weight="5"></resource>
+    <resource name="Regolith" amount="1" quality="0.1" unitCost="100000" unitValue="5000" weight="3"></resource>
+    <resource name="Helium-3" amount="1" quality="0.1" unitCost="100000" unitValue="10000" weight="1"></resource>
+    <resource name="Oxygen" amount="1" quality="0.1" unitCost="50" unitValue="10" weight="1"></resource>
+    <resource name="Hydrogen" amount="1" quality="0.1" unitCost="150" unitValue="100" weight="3"></resource>
+    <resource name="Metal" amount="1" quality="0.1" unitCost="20" unitValue="10" weight="7"></resource>
+    <resource name="Minerals" amount="1" quality="0.1" unitCost="100" unitValue="10" weight="4"></resource>
+    <resource name="Fuel" amount="1" quality="0.1" unitCost="10" unitValue="1000" weight="5"></resource>
+    <resource name="Electronics" amount="1" quality="0.1" unitCost="200" unitValue="10000" weight="3"></resource>
+    <resource name="Robot" amount="1" quality="0.1" unitCost="10000" unitValue="10000" weight="9"></resource>
 	
     
 </resources>

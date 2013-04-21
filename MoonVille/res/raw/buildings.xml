@@ -24,6 +24,10 @@
         requiredTurns="2"
         x="80"
         y="110" >
+        
+        <requiredBuildings>
+            <Building name="Moon Base"></Building>
+        </requiredBuildings>
     </building>
     <building
         name="Ice Mine"
@@ -36,6 +40,11 @@
         requiredTurns="2"
         x="200"
         y="20" >
+        
+        <requiredBuildings>
+            <Building name="Moon Base"></Building>
+        </requiredBuildings>
+        
         <outputResources>
             <resource
                 name="Water"
@@ -54,6 +63,11 @@
         requiredTurns="4"
         x="280"
         y="220" >
+        
+        <requiredBuildings>
+            <Building name="Moon Base"></Building>
+        </requiredBuildings>
+        
         <outputResources>
             <resource
                 name="Regolith"
@@ -76,6 +90,11 @@
         requiredTurns="10"
         x="170"
         y="370">
+        
+        <requiredBuildings>
+            <Building name="Regolith Processor"></Building>
+        </requiredBuildings>
+        
         <requiredResources>
             <resource
                 name="Helium-3"
@@ -94,6 +113,11 @@
         requiredTurns="4"
         x="385"
         y="70">
+        
+        <requiredBuildings>
+            <Building name="Ice Mine"></Building>
+        </requiredBuildings>
+        
         <requiredResources>
             <resource
                 name="Water"
@@ -123,6 +147,11 @@
         requiredTurns="5"
         x="535"
         y="260" >
+        
+        <requiredBuildings>
+            <Building name="Regolith Processor"></Building>
+        </requiredBuildings>
+        
         <requiredResources>
             <resource
                 name="Regolith"
@@ -156,6 +185,11 @@
         requiredTurns="5"
         x="570"
         y="40" >
+        
+        <requiredBuildings>
+            <Building name="Water Processor"></Building>
+        </requiredBuildings>
+        
         <requiredResources>
             <resource
                 name="Hydrogen"
@@ -185,6 +219,11 @@
         requiredTurns="3"
         x="670"
         y="160" >
+        
+        <requiredBuildings>
+            <Building name="Smelting Factory"></Building>
+        </requiredBuildings>
+        
         <requiredResources>
             <resource
                 name="Metal"
@@ -210,6 +249,11 @@
         requiredTurns="6"
         x="570"
         y="380" >
+        
+        <requiredBuildings>
+            <Building name="Electronics Factory"></Building>
+        </requiredBuildings>
+        
         <requiredResources>
             <resource
                 name="Metal"
