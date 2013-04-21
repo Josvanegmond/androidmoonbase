@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import spaceappschallenge.moonville.GameActivity;
+import spaceappschallenge.moonville.MoonVille;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Building;
 import spaceappschallenge.moonville.businessmodels.BuildingTree;
@@ -13,6 +14,7 @@ import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +32,9 @@ public class BaseOverviewActivity extends GameActivity {
 
 	private AbsoluteLayout moonSurfaceLayout;
 	private ArrayList<ImageView> buildingImageList;
+	
+	private static String PREFERENCE_SCROLL_X = "base_overview_scroll_x";
+	private static String PREFERENCE_SCROLL_Y = "base_overview_scroll_y";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,50 @@ public class BaseOverviewActivity extends GameActivity {
 		showBuildings();
 		fixHVScrollViews();
 		updateUI();
+	}
+	
+	/**
+	 * Saves scroll position.
+	 */
+	@Override
+	protected void onPause() {
+		super.onPause();
+		SharedPreferences.Editor editor = 
+				getSharedPreferences(MoonVille.PREFERENCE_FILE, 0).edit();
+		final HorizontalScrollView hScroll = (HorizontalScrollView) 
+				findViewById(R.id.moonsurface_hscrollview);
+		final ScrollView vScroll = (ScrollView) 
+				findViewById(R.id.moonsurface_vscrollview);
+		editor.putInt(PREFERENCE_SCROLL_X, hScroll.getScrollX());
+		editor.putInt(PREFERENCE_SCROLL_Y, vScroll.getScrollY());
+		editor.commit();
+	}
+
+	/**
+	 * Restores scroll position.
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		final SharedPreferences settings = 
+				getSharedPreferences(MoonVille.PREFERENCE_FILE, 0);
+		final HorizontalScrollView hScroll = (HorizontalScrollView) 
+				findViewById(R.id.moonsurface_hscrollview);
+		final ScrollView vScroll = (ScrollView) 
+				findViewById(R.id.moonsurface_vscrollview);
+		// Don't know why, but using post is the only way to make this work.
+		hScroll.post(new Runnable() {			
+			@Override
+			public void run() {
+				hScroll.scrollTo(settings.getInt(PREFERENCE_SCROLL_X, 0), 0);
+			}
+		});
+		vScroll.post(new Runnable() {			
+			@Override
+			public void run() {
+				vScroll.scrollTo(0, settings.getInt(PREFERENCE_SCROLL_Y, 0));
+			}
+		});
 	}
 
 	public void updateUI() {

@@ -35,6 +35,16 @@ public class Resource implements Serializable {
 		this.unitValue = unitValue;
 		this.weight = weight;
 	}
+	
+	public Resource(Resource r) {
+		super();
+		name = r.name;
+		amount = r.amount;
+		quality = r.quality;
+		unitCost = r.unitCost;
+		unitValue = r.unitValue;
+		weight = r.weight;
+	}
 
 	/**
 	 * Merges two lists of resources, by merging identical resources and adding
