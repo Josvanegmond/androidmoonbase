@@ -1,52 +1,78 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/importResourcesLL"
+    android:id="@+id/importResourcesRL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
     android:orientation="horizontal"
     tools:context=".ImportResourcesActivity" >
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/importTitle"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="left"
+        android:text="Import resources"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android:id="@+id/horizontalLL"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_below="@+id/importTitle">
 
-        <TextView
-            android:id="@+id/importTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/leftRL"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/importTitle"
             android:gravity="left"
-            android:text="Import resources"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:layout_weight=".35" >
 
-        <TextView
-            android:id="@+id/budgetTextView"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/budgetTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/budgetTitle"
+                android:layout_marginTop="20dp"
+                android:gravity="left"
+                android:text="1000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/budgetTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:text="Budget"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/listRL"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/leftRL"
             android:gravity="right"
-            android:text="1000"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_weight="0.65" >
 
-        <TextView
-            android:id="@+id/budgetTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="right"
-            android:text="Budget"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
+            <ListView
+                android:id="@+id/importResourceslist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true" >
+            </ListView>
+        </RelativeLayout>
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/importResourceslist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp" >
-
-    </ListView>
-
-</LinearLayout>
+</RelativeLayout>

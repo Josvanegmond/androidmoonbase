@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/importResourcesLL"
     android:layout_width="match_parent"
@@ -7,47 +7,77 @@
     android:orientation="horizontal"
     tools:context=".ExportResourcesActivity" >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/exportTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Export resources"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/exportBudgetTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="left"
-            android:text="1000"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/exportBudgetTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="left"
-            android:text="Budget"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/exportResourceslist"
+    <TextView
+        android:id="@+id/exportTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1" >
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="left"
+        android:text="Export resources"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    </ListView>
+    <LinearLayout
+        android:id="@+id/exportHorLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exportTitle" >
 
-</LinearLayout>
+        <RelativeLayout
+            android:id="@+id/exportLeftRL"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/exportTitle"
+            android:layout_weight=".35"
+            android:gravity="left" >
+
+            <TextView
+                android:id="@+id/exportBudgetTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:text="Budget"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            
+              <TextView
+                android:id="@+id/exportBudgetTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/exportBudgetTitle"
+                android:layout_marginTop="20dp"
+                android:gravity="left"
+                android:text="1000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+              
+              
+              
+          
+            
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/exportRightRL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/exportLeftRL"
+            android:layout_weight="0.65"
+            android:gravity="right" >
+
+            <ListView
+                android:id="@+id/exportResourceslist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </ListView>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -154,7 +154,6 @@ public class BaseOverviewActivity extends GameActivity {
 		updateUI();
 		MoonBaseManager.saveMoonBase(view.getContext());
 
-		updateUI();
 	}
 
 	public void showImportResourcesScreen(View view) {
