@@ -33,37 +33,65 @@ public class BuildingTree implements Serializable {
 	}
 	
 	/**
-	 * Insert a building into the tree. Only call this method on the root 
-	 * node of a tree.
+	 * Tests if all required buildings exist and the building has not 
+	 * been built yet.
 	 * 
+	 * @return True if the building can be inserted (required buildings exist).
+	 */
+	public boolean canBuild(Building b) {
+		return findInsertionNode(b) != null;
+	}
+	
+	/**
+	 * Searches the tree for the correct node to insert a building to, 
+	 * or null if none is found (the building can't be built).
+	 * 
+	 * @warning If the building attribute of the returned node is not null,
+	 * 			you have to insert a new child into the returned node.
+	 */
+	private BuildingTree findInsertionNode(Building b) {
+		if (b == null) 
+			return null;
+		// Moon Base has no requirements, so take first empty node.
+		if (building == null && b.getName().equals("Moon Base"))
+			return this;
+		// Required building for anything beneath this node not available.
+		if (building == null)
+			return null;
+		// Building already exists.
+		if (building.getName().equals(b.getName()))
+			return null;
+		// Check if we can insert into childs.
+		for (BuildingTree bt : childs) {
+			if (bt.findInsertionNode(b) != null) {
+				return this;
+			}
+		}
+		// If b requires building in this node, insert into new child 
+		// (creating the child is handled by add()).
+		ArrayList<Building> required = b.getRequiredBuildings();
+		for (Building r : required) {
+			if (r.getName().equals(building.getName())) {
+				return this;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Insert a building into the tree. 
+	 *
 	 * @param b The building to insert.
 	 * @return True if the building was inserted successfully.
 	 */
 	public boolean add(Building b) {
-		if (b == null)
+		BuildingTree bt = findInsertionNode(b);
+		if (bt != null) {
+			if (bt.building != null) {
+				 bt.childs.add(new BuildingTree(b));
+			}
 			return true;
-		if (b.getName().equals(building.getName())) {
-			// Inserted the same building multiple times.
-			assert(false);
-			return false;
 		}
-		// First see if the building belongs in an existing child node.
-		for (BuildingTree bt : childs) {
-			if (bt.add(b)) {
-				return true;
-			}
-		}
-		// The building is in a new direct child node if building in 
-		// this node is a requirement.
-		ArrayList<Building> required = b.getRequiredBuildings();
-		for (Building r : required) {
-			if (r.getName().equals(building.getName())) {
-				childs.add(new BuildingTree(b));
-				return true;
-			}
-		}
-		// Insertion went completely wrong.
-		assert(false);
 		return false;
 	}
 	
