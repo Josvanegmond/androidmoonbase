@@ -188,7 +188,7 @@ public class BaseOverviewActivity extends GameActivity {
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 		BuildingTree tree = moonBase.getBuiltBuildings();
 		tree.checkPower();
-		// tree.checkRequiredBuildings();
+		tree.checkRequiredBuildings();
 
 		Resources resources = Resources.getInstance();
 		ArrayList<Resource> available = (ArrayList<Resource>) tree
