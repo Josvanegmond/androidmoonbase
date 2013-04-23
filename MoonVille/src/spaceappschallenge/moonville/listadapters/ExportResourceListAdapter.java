@@ -1,17 +1,13 @@
 package spaceappschallenge.moonville.listadapters;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-import javax.xml.datatype.Duration;
 
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.MoonBase;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
-import android.text.InputFilter.LengthFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
