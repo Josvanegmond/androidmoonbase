@@ -35,14 +35,25 @@ public class BuildingTree implements Serializable {
 		this.building = building;
 	}
 	
+	public Building getBuilding(String name) {
+		if (building.getName() == name)
+			return building;
+		for (BuildingTree bt : childs) {
+			Building b = bt.getBuilding(name);
+			if (b != null)
+				return b;
+		}
+		return null;
+	}
+	
 	/**
 	 * Tests if all required buildings exist and the building has not 
 	 * been built yet.
 	 * 
 	 * @return True if the building can be inserted (required buildings exist).
 	 */
-	public boolean canBuild(Building b) {
-		return findInsertionNode(b) != null;
+	public boolean canBuild(String name) {
+		return findInsertionNode(name) != null;
 	}
 	
 	/**
@@ -52,28 +63,27 @@ public class BuildingTree implements Serializable {
 	 * @warning If the building attribute of the returned node is not null,
 	 * 			you have to insert a new child into the returned node.
 	 */
-	private BuildingTree findInsertionNode(Building b) {
-		if (b == null) 
-			return null;
+	private BuildingTree findInsertionNode(String name) {
 		// Moon Base has no requirements, so take first empty node.
-		if (building == null && b.getName().equals("Moon Base"))
+		if (building == null && name.equals("Moon Base"))
 			return this;
 		// Required building for anything beneath this node not available.
 		if (building == null)
 			return null;
 		// Building already exists.
-		if (building.getName().equals(b.getName()))
+		if (building.getName().equals(name))
 			return null;
 		// Check if we can insert into childs.
 		for (BuildingTree bt : childs) {
-			if (bt.findInsertionNode(b) != null) {
-				return this;
+			BuildingTree found = bt.findInsertionNode(name);
+			if (found != null) {
+				return found;
 			}
 		}
 		// If b requires building in this node, insert into new child 
 		// (creating the child is handled by add()).
 		ArrayList<BuildingDefinition> required = Buildings.getInstance().
-				getBuilding(b.getName()).getRequiredBuildings();
+				getBuilding(name).getRequiredBuildings();
 		for (BuildingDefinition r : required) {
 			if (r.getName().equals(building.getName())) {
 				return this;
@@ -89,7 +99,7 @@ public class BuildingTree implements Serializable {
 	 * @return True if the building was inserted successfully.
 	 */
 	public boolean add(Building b) {
-		BuildingTree bt = findInsertionNode(b);
+		BuildingTree bt = findInsertionNode(b.getName());
 		if (bt != null) {
 			if (bt.building != null) {
 				 bt.childs.add(new BuildingTree(b));

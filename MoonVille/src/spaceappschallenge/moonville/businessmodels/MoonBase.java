@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import spaceappschallenge.moonville.factories.Buildings;
-
 /**
  * Handles information about the game world, including resources, research 
  * points, prospecting and buildings.
@@ -20,9 +18,7 @@ public class MoonBase implements Serializable {
 	protected int money;
 	private int inMonth = 0;
 
-	// TODO: Merge building tree and list.
 	protected BuildingTree builtBuildings;
-	protected List<Building> builtBuildingsList; //couldnt work with tree, not enough functionality, not enough time to understand -Jos
 	protected List<MegaProject> builtMegaProjects;
 
 	protected GameDetails gameDetails;
@@ -33,7 +29,6 @@ public class MoonBase implements Serializable {
 		this.prospectingLevel = prospectingLevel;
 		this.storedResources = new ArrayList<Resource>(); // or hashmap? not
 															// sure yet...
-		this.builtBuildingsList = new ArrayList<Building>();
 		this.money = money;
 
 		// only add starting base
@@ -106,10 +101,12 @@ public class MoonBase implements Serializable {
 		return builtBuildings;
 	}
 	
+	/*
 	public List<Building> getBuildBuildingsList() {
 		return this.builtBuildingsList;
 	}
-
+*/
+	
 	public void setBuiltBuildings(BuildingTree builtBuildings) {
 		this.builtBuildings = builtBuildings;
 	}
@@ -120,33 +117,31 @@ public class MoonBase implements Serializable {
 	 * @param name Name of the building to add.
 	 */
 	public void addBuilding(String name) {
-		for (Building b : builtBuildingsList) {
-			if (b.getName() == name) {
-				b.setAmount(b.getAmount() + 1);
-				return;
-			}
-		}
-		// Need to insert building
-		Building b = new Building(name, 1);
-		builtBuildingsList.add(b);
-		builtBuildings.add(b);
+		Building existing = builtBuildings.getBuilding(name);
+		if (existing != null)
+			existing.setAmount(existing.getAmount() + 1);
+		else
+			builtBuildings.add(new Building(name, 1));
 	}
 	
 	/**
 	 * Returns total number of buildings of this type.
 	 */
 	public int getBuildingAmount(String name) {
-		for (Building b : builtBuildingsList) {
-			if (b.getName() == name)
-				return b.getAmount();
-		}
-		return 0;
+		Building b = builtBuildings.getBuilding(name);
+		if (b != null)
+			return b.getAmount();
+		else
+			return 0;
 	}
 
 	public List<MegaProject> getBuiltMegaProjects() {
 		return builtMegaProjects;
 	}
 
+	public boolean canBuild(String name) {
+		return builtBuildings.canBuild(name);
+	}
 	public void setBuiltMegaProjects(List<MegaProject> builtMegaProjects) {
 		this.builtMegaProjects = builtMegaProjects;
 	}

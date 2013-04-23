@@ -157,16 +157,7 @@ public class BaseOverviewActivity extends GameActivity {
 					buildingDrawable.getIntrinsicHeight(),
 					bd.getXPos() * 2, bd.getYPos() * 2);
 			
-			boolean canBeBuild = true;
-			
-			for( BuildingDefinition requiredBuilding : bd.getRequiredBuildings() )
-			{
-				if( MoonBaseManager.getCurrentMoonBase().getBuildBuildingsList().contains( requiredBuilding ) == false )
-				{
-					canBeBuild = false;
-					break;
-				}
-			}
+			boolean canBeBuild = MoonBaseManager.getCurrentMoonBase().canBuild(building.getName());
 			
 			//buildingImage.setClickable( canBeBuild );
 			if( canBeBuild == false )
