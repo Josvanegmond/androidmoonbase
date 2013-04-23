@@ -59,9 +59,7 @@ public class MainMenuActivity extends GameActivity {
 				cb.isChecked());
 		editor.commit();
 		MoonVille mv = (MoonVille) getApplication();
-		// Not actually changing visibility, but this will toggle sound 
-		// according to preferences.
-		mv.visibilityChanged();
+		mv.updateSoundState();
 	}
 
 }

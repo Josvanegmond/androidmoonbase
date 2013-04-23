@@ -6,7 +6,8 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 
 /**
- * Plays background music while any activity is opened.
+ * Plays background music while any activity is opened. All activities 
+ * should imlpement GameActivity to properly play sounds.
  * 
  * @author Felix
  *
@@ -21,29 +22,29 @@ public class MoonVille extends Application {
 	
 	private int currentActivityCount = 0;
 	
-	@Override
-	public void onCreate() {
-		super.onCreate();
-	}
-	
 	public void resumeActivity() {
 		currentActivityCount++;
-		visibilityChanged();
+		updateSoundState();
 	}
 	
 	public void pauseActivity() {
 		currentActivityCount--;
-		visibilityChanged();
+		updateSoundState();
 	}
 	
-	public void visibilityChanged() {	
+	/**
+	 * Calls backgroundSoundRunnable after a short delay (in case a new 
+	 * activity is loading).
+	 */
+	public void updateSoundState() {	
 		Handler myHandler = new Handler();
-		// Wait a moment in case we are switching activities within this app.
-		// (Otherwise, sound might be stopped and started at each activity 
-		// change).
 		myHandler.postDelayed(backgroundSoundRunnable, 100);
 	}
 	
+	/**
+	 * Enables or disables background sound based on activities visibility 
+	 * and preferences.
+	 */
 	private Runnable backgroundSoundRunnable = new Runnable()
 	{
 	    @Override
@@ -62,11 +63,9 @@ public class MoonVille extends Application {
 			        player.start(); 		
 				}    		
 			}
-			else {
-				if (player != null) {
+			else if (player != null) {
 					player.release();
-					player = null;
-				}    		
+					player = null; 		
 			}
 	    }
 	 };
