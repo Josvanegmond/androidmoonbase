@@ -2,15 +2,15 @@ package spaceappschallenge.moonville.businessmodels;
 
 import java.io.Serializable;
 
-import spaceappschallenge.moonville.managers.Reference;
-
+/**
+ * Stores game specific settings (player name and difficulty).
+ */
 public class GameDetails implements Serializable{
 	String username = "";
-	int difficultyLevel = Reference.DIF_EASY;
+	int difficultyLevel = Difficulty.DIF_EASY;
 	private static GameDetails instance = null;
 
 	protected GameDetails() {
-
 	}
 
 	public static GameDetails getInstance() {

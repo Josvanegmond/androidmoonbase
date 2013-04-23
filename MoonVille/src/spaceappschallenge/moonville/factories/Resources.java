@@ -17,6 +17,10 @@ import spaceappschallenge.moonville.xml_parsers.ResourceXMLParser;
 import android.content.Context;
 import android.util.Log;
 
+/**
+ * Handles all resources (directly from xml), as well as available resources 
+ * (what exists in the world).
+ */
 public class Resources {
 	private static Resources instance = null;
 	protected static Context context;

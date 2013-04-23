@@ -3,7 +3,8 @@ package spaceappschallenge.moonville.businessmodels;
 import java.io.Serializable;
 import java.util.List;
 /*
- * A resource can be imported/exported and produced by buildings. Most importantly, they are used to construct buildings.
+ * A resource can be imported/exported and produced by buildings. Most 
+ * importantly, they are used to construct buildings.
  */
 public class Resource implements Serializable {
 	protected String name;

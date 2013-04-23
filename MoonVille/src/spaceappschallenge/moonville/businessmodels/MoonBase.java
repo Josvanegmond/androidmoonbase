@@ -6,6 +6,10 @@ import java.util.List;
 
 import spaceappschallenge.moonville.factories.Buildings;
 
+/**
+ * Handles information about the game world, including resources, research 
+ * points, prospecting and buildings.
+ */
 public class MoonBase implements Serializable {
 	protected int researchLabSize;
 	protected int researchPoints;
@@ -46,7 +50,6 @@ public class MoonBase implements Serializable {
 			return false;
 	}
 
-	//
 	public boolean spend(int expenditure) {
 		if (canSpend(expenditure)) {
 			this.money -= expenditure;
@@ -112,8 +115,7 @@ public class MoonBase implements Serializable {
 		this.builtBuildings = builtBuildings;
 	}
 	
-	public void setBuiltBuilding( Building building )
-	{
+	public void setBuiltBuilding(Building building) {
 //		if( builtBuildings.getBuildings().contains( building ) == false )
 //		{
 //			this.builtBuildings.add( building );

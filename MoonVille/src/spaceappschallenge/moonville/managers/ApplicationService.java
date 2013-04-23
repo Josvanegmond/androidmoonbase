@@ -5,6 +5,10 @@ package spaceappschallenge.moonville.managers;
 
 import android.content.Context;
 import android.util.Log;
+
+/**
+ * Provides singleton access to application context.
+ */
 public class ApplicationService{
 	protected static ApplicationService instance;
 	private static Context applicationContext;

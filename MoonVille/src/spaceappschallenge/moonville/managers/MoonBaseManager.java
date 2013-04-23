@@ -16,7 +16,13 @@ import spaceappschallenge.moonville.businessmodels.MoonBase;
 import android.content.Context;
 import android.widget.Toast;
 
+/**
+ * Creates MoonBase, saves and loads game state.
+ */
 public class MoonBaseManager {
+	
+	public static final String SAVE_FILE = "lastsavedmoonbase.sav";
+	
 	// added static since there is only 1 moonbase
 	// it's a bit dirty maybe, but also makes it easier to access it everywhere
 	// when needed -Jos
@@ -37,7 +43,7 @@ public class MoonBaseManager {
 
 		try {
 			FileInputStream fis = new FileInputStream(context.getFilesDir()
-					+ File.separator + Reference.SAVE_FILE);
+					+ File.separator + SAVE_FILE);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 
 			loadedMoonBase = (MoonBase) ois.readObject();
@@ -61,7 +67,7 @@ public class MoonBaseManager {
 	public static void saveMoonBase(Context context) {
 		try {
 			FileOutputStream fos = new FileOutputStream(context.getFilesDir()
-					+ File.separator + Reference.SAVE_FILE);
+					+ File.separator + SAVE_FILE);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(MoonBaseManager.currentMoonBase);

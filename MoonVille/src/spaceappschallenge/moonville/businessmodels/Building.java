@@ -4,6 +4,12 @@ package spaceappschallenge.moonville.businessmodels;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Handles building xml attributes as well as attributes of buildings in the 
+ * world.
+ * 
+ * TODO: Split into xml part and world part.
+ */
 public class Building implements Serializable {
 	protected String name = "";
 	protected String info = "";
