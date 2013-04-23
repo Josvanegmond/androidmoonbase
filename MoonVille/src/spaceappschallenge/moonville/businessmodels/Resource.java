@@ -9,9 +9,8 @@ public class Resource implements Serializable {
 	protected String name;
 	protected int amount;
 	protected double quality;
-	protected int unitImportPrice;// import value
-	protected int unitExportPrice;// export value //Better change the name here and in
-							// xml huh!! Robik :-)
+	protected int unitImportPrice;
+	protected int unitExportPrice;
 	protected int weight;
 
 	public Resource(String name, int amount) {
