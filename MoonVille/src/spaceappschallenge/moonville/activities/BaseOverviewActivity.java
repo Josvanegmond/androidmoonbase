@@ -96,6 +96,9 @@ public class BaseOverviewActivity extends GameActivity {
 		});
 	}
 
+	/*
+	 * Updates remaining funds and months passed on Screen
+	 */
 	public void updateUI() {
 		TextView baseOverviewFundsTextView = (TextView) (this
 				.findViewById(R.id.baseOverviewFundsTextView));

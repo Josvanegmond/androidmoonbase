@@ -25,8 +25,6 @@ public class NewGameActivity extends GameActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_game);
-
-		// initModel();//Model is dependent on the difficulty level right?
 	}
 
 	public void startNewGame(View view) {

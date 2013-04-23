@@ -21,9 +21,7 @@ public class MainMenuActivity extends GameActivity {
 		// The following line allows us to share the application context
 		// throughout the application
 		// Other classes can access the context through ApplicationService
-		Log.i("Main", "trying to get instance");
 		ApplicationService app = ApplicationService.getInstance();
-		Log.i("Main", "trying to get context");
 		app.setApplicationContext(this.getApplicationContext());
 		CheckBox cb = (CheckBox) findViewById(R.id.cb_background_music);
 		SharedPreferences settings = 
