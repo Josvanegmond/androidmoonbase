@@ -92,7 +92,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 							Log.i("null", resourceName + "not found");
 							return;
 						}
-						int unitCost = currentResource.getUnitCost();
+						int unitCost = currentResource.getImportPrice();
 						int maxQuantity = MoonBaseManager.getCurrentMoonBase()
 								.getMoney() / unitCost;// 100=maxAmount
 						Log.i("maxQuantity", "maxQuantity " + maxQuantity);
@@ -131,7 +131,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				Resource currentResource = Resources.getInstance().getResource(
 						resourceName);
 
-				int unitCost = currentResource.getUnitCost();
+				int unitCost = currentResource.getImportPrice();
 				int quantity = Integer.parseInt(((TextView) convertView
 						.findViewById(R.id.resourceQuantityTextView)).getText()
 						.toString());

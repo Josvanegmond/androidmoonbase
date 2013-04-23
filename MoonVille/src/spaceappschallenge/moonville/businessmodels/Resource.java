@@ -2,13 +2,15 @@ package spaceappschallenge.moonville.businessmodels;
 
 import java.io.Serializable;
 import java.util.List;
-
+/*
+ * A resource can be imported/exported and produced by buildings. Most importantly, they are used to construct buildings.
+ */
 public class Resource implements Serializable {
 	protected String name;
 	protected int amount;
 	protected double quality;
-	protected int unitCost;// import value
-	protected int unitValue;// export value //Better change the name here and in
+	protected int unitImportPrice;// import value
+	protected int unitExportPrice;// export value //Better change the name here and in
 							// xml huh!! Robik :-)
 	protected int weight;
 
@@ -18,21 +20,25 @@ public class Resource implements Serializable {
 		this.amount = amount;
 	}
 
-	public Resource(String name, int amount, double quality) {
+	
+	public Resource(String name, double quality, int unitImportPrice,
+			int unitExportPrice, int weight) {
 		super();
 		this.name = name;
-		this.amount = amount;
 		this.quality = quality;
+		this.unitImportPrice = unitImportPrice;
+		this.unitExportPrice = unitExportPrice;
+		this.weight = weight;
 	}
 
-	public Resource(String name, int amount, double quality, int unitCost,
-			int unitValue, int weight) {
+	public Resource(String name, int amount, double quality, int unitImportPrice,
+			int unitExportPrice, int weight) {
 		super();
 		this.name = name;
 		this.amount = amount;
 		this.quality = quality;
-		this.unitCost = unitCost;
-		this.unitValue = unitValue;
+		this.unitImportPrice = unitImportPrice;
+		this.unitExportPrice = unitExportPrice;
 		this.weight = weight;
 	}
 	
@@ -41,8 +47,8 @@ public class Resource implements Serializable {
 		name = r.name;
 		amount = r.amount;
 		quality = r.quality;
-		unitCost = r.unitCost;
-		unitValue = r.unitValue;
+		unitImportPrice = r.unitImportPrice;
+		unitExportPrice = r.unitExportPrice;
 		weight = r.weight;
 	}
 
@@ -88,20 +94,20 @@ public class Resource implements Serializable {
 		this.quality = quality;
 	}
 
-	public int getUnitCost() {
-		return unitCost;
+	public int getImportPrice() {
+		return unitImportPrice;
 	}
 
-	public void setUnitCost(int unitCost) {
-		this.unitCost = unitCost;
+	public void setUnitImportPrice(int unitImportPrice) {
+		this.unitImportPrice = unitImportPrice;
 	}
 
-	public int getUnitValue() {
-		return unitValue;
+	public int getUnitExportPrice() {
+		return unitExportPrice;
 	}
 
-	public void setUnitValue(int unitValue) {
-		this.unitValue = unitValue;
+	public void setUnitExportPrice(int unitValue) {
+		this.unitExportPrice = unitValue;
 	}
 
 	public int getWeight() {

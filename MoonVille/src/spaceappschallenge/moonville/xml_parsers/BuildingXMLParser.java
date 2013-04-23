@@ -94,15 +94,8 @@ public class BuildingXMLParser {
 		} catch (Exception e) {
 			Log.e("XMLError", "outResAmount");
 		}
-		double outResQuality = 0.0;
-		try {
-			outResQuality = Double.parseDouble(xpp.getAttributeValue(null,
-					"quality"));
-		} catch (Exception e) {
-			Log.e("XMLError", "outResQuality");
-		}
-		outputResources.add(new Resource(outResName, outResAmount,
-				outResQuality));
+	
+		outputResources.add(new Resource(outResName, outResAmount));
 		Log.i("XML", "out resource " + outResName);
 	}
 

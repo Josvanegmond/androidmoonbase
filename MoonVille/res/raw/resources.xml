@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <resource name="Water" amount="1" quality="0.1" unitCost="200" unitValue="100" weight="5"></resource>
-    <resource name="Regolith" amount="1" quality="0.1" unitCost="100000" unitValue="5000" weight="3"></resource>
-    <resource name="Helium-3" amount="1" quality="0.1" unitCost="100000" unitValue="10000" weight="1"></resource>
-    <resource name="Oxygen" amount="1" quality="0.1" unitCost="50" unitValue="10" weight="1"></resource>
-    <resource name="Hydrogen" amount="1" quality="0.1" unitCost="150" unitValue="100" weight="3"></resource>
-    <resource name="Metal" amount="1" quality="0.1" unitCost="20" unitValue="10" weight="7"></resource>
-    <resource name="Minerals" amount="1" quality="0.1" unitCost="100" unitValue="10" weight="4"></resource>
-    <resource name="Fuel" amount="1" quality="0.1" unitCost="10" unitValue="1000" weight="5"></resource>
-    <resource name="Electronics" amount="1" quality="0.1" unitCost="200" unitValue="10000" weight="3"></resource>
-    <resource name="Robot" amount="1" quality="0.1" unitCost="10000" unitValue="10000" weight="9"></resource>
-	
-    
+    <resource name="Water"  quality="0.1" importPrice="200" exportPrice="100" weight="5"></resource>
+    <resource name="Regolith"  quality="0.1" importPrice="100000" exportPrice="5000" weight="3"></resource>
+    <resource name="Helium-3"  quality="0.1" importPrice="100000" exportPrice="10000" weight="1"></resource>
+    <resource name="Oxygen"  quality="0.1" importPrice="50" exportPrice="10" weight="1"></resource>
+    <resource name="Hydrogen"  quality="0.1" importPrice="150" exportPrice="100" weight="3"></resource>
+    <resource name="Metal"  quality="0.1" importPrice="20" exportPrice="10" weight="7"></resource>
+    <resource name="Minerals"  quality="0.1" importPrice="100" exportPrice="10" weight="4"></resource>
+    <resource name="Fuel"  quality="0.1" importPrice="10" exportPrice="1000" weight="5"></resource>
+    <resource name="Electronics"  quality="0.1" importPrice="200" exportPrice="10000" weight="3"></resource>
+    <resource name="Robot"  quality="0.1" importPrice="10000" exportPrice="10000" weight="9"></resource>
+	    
 </resources>

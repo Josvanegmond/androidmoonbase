@@ -98,7 +98,7 @@ public class ExportResourceListAdapter extends BaseAdapter {
 									+ "not found");
 							return;
 						}
-						int unitProfit = currentResource.getUnitValue();
+						int unitProfit = currentResource.getUnitExportPrice();
 						int maxExportQuantity = 0;
 						List<Resource> list = MoonBaseManager
 								.getCurrentMoonBase().getStoredResources();
@@ -146,7 +146,7 @@ public class ExportResourceListAdapter extends BaseAdapter {
 				Resource currentResource = Resources.getInstance().getResource(
 						resourceName);
 
-				int unitProfit = currentResource.getUnitValue();
+				int unitProfit = currentResource.getUnitExportPrice();
 				int quantity = Integer.parseInt(((TextView) convertView
 						.findViewById(R.id.exportResourceQuantityTextView))
 						.getText().toString());

@@ -1,6 +1,3 @@
-/*
- * Parses XML containing information about Resources
- */
 package spaceappschallenge.moonville.xml_parsers;
 
 import java.io.BufferedReader;
@@ -8,16 +5,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
-
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.managers.ApplicationService;
 import android.content.Context;
-import android.util.Log;
 
+/*
+ * Parses XML containing information about resources and stores each resource in an ArrayList. 
+ * 
+ *  @author Robik
+ */
 public class ResourceXMLParser {
 	protected Context context = null;
 	protected InputStream inputStream = null;
@@ -32,7 +31,6 @@ public class ResourceXMLParser {
 		xmlFactory.setNamespaceAware(true);
 		xpp = xmlFactory.newPullParser();
 		this.resources = new ArrayList<Resource>();
-		Log.i("ResourceXMLParser", "Done initializing parser");
 	}
 
 	// Create "Resource" objects by parsing input stream
@@ -45,10 +43,9 @@ public class ResourceXMLParser {
 		int eventType = xpp.getEventType();
 		Resource resource = null;
 		String name = "";
-		int amount = 0;
 		double quality = 0.0;
-		int unitCost = 0;
-		int unitValue = 0;
+		int importPrice = 0;
+		int exportPrice = 0;
 		int weight = 0;
 
 		// Parse the xml file to create "resource" objects
@@ -56,25 +53,19 @@ public class ResourceXMLParser {
 			if (eventType == XmlPullParser.START_TAG) {
 				startTagName = xpp.getName();
 				if (startTagName.equals("resource")) {
-					Log.i("ResourceXML", "start tag is resource");
 					name = xpp.getAttributeValue(null, "name");
-					amount = Integer.parseInt(xpp.getAttributeValue(null,
-							"amount"));
 					quality = Double.parseDouble(xpp.getAttributeValue(null,
 							"quality"));
-					unitCost = Integer.parseInt(xpp.getAttributeValue(null,
-							"unitCost"));
-					unitValue = Integer.parseInt(xpp.getAttributeValue(null,
-							"unitValue"));
+					importPrice = Integer.parseInt(xpp.getAttributeValue(null,
+							"importPrice"));
+					exportPrice = Integer.parseInt(xpp.getAttributeValue(null,
+							"exportPrice"));
 					weight = Integer.parseInt(xpp.getAttributeValue(null,
 							"weight"));
-
-					Log.i("unitCost of resource ", "" + unitCost);
-					resource = new Resource(name, amount, quality, unitCost, unitValue, weight);
+					resource = new Resource(name, quality, importPrice,
+							exportPrice, weight);
 					resources.add(resource);
-					Log.i("ResourceXML", "name: " + name);
 				}
-				System.out.println("Start tag " + xpp.getName());
 			}
 			eventType = xpp.next();
 		}
