@@ -2,9 +2,8 @@ package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.factories.Buildings;
+import spaceappschallenge.moonville.businessmodels.Building;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
-import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,7 +15,7 @@ import android.widget.TextView;
 
 public class BuildingInfoActivity extends GameActivity {
 
-	private BuildingDefinition building;
+	private String buildingName;
 	private TextView buildingScale;
 	
 	@Override
@@ -25,7 +24,7 @@ public class BuildingInfoActivity extends GameActivity {
 		setContentView(R.layout.activity_building_info);
 		
 		//the building passed through via baseoverviewactivity
-		this.building = Buildings.getInstance().getBuilding(getIntent().getExtras().getString("Building"));
+		this.buildingName = getIntent().getExtras().getString("Building");
 		
 		
 		ImageView buildingImage = (ImageView) findViewById( R.id.buildingimage );
@@ -34,7 +33,7 @@ public class BuildingInfoActivity extends GameActivity {
 
 		int resID = res
 				.getIdentifier("ref_"
-						+ building.getName().replace(" ", "_")
+						+ buildingName.replace(" ", "_")
 								.toLowerCase(), "drawable",
 						getPackageName());
 		Drawable buildingDrawable = res.getDrawable(resID);
@@ -42,17 +41,16 @@ public class BuildingInfoActivity extends GameActivity {
 		
 		
 		buildingScale = (TextView) findViewById( R.id.buildingscaletext );
-		buildingScale.setText( "Building scale: " + building.getAmount() );
-		
-		//TextView buildingName = (TextView) findViewById( R.id.buildingname );
-		//buildingName.setText( building.getName() );
+		buildingScale.setText("Building scale: " + 
+					MoonBaseManager.getCurrentMoonBase().getBuildingAmount(buildingName));
 	}
 	
-	public void build( View view )
-	{
-		MoonBaseManager.getCurrentMoonBase().addBuilding(building.getName());
-		buildingScale.setText( "Building scale: " + 
-					MoonBaseManager.getCurrentMoonBase().getBuildingAmount(building.getName()));
+	public void build( View view ) {
+		if (MoonBaseManager.getCurrentMoonBase().canBuild(buildingName)) {
+			MoonBaseManager.getCurrentMoonBase().addBuilding(buildingName);
+			buildingScale.setText("Building scale: " + 
+						MoonBaseManager.getCurrentMoonBase().getBuildingAmount(buildingName));
+		}
 	}
 	
 	@Override

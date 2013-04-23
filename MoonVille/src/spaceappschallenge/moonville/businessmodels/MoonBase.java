@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
+
 /**
  * Handles information about the game world, including resources, research 
  * points, prospecting and buildings.
@@ -118,10 +120,14 @@ public class MoonBase implements Serializable {
 	 */
 	public void addBuilding(String name) {
 		Building existing = builtBuildings.getBuilding(name);
-		if (existing != null)
+		if (existing != null) {
 			existing.setAmount(existing.getAmount() + 1);
-		else
+			Log.d("test", "++");
+		}
+		else {
 			builtBuildings.add(new Building(name, 1));
+			Log.d("test", "new");
+		}
 	}
 	
 	/**
@@ -133,6 +139,10 @@ public class MoonBase implements Serializable {
 			return b.getAmount();
 		else
 			return 0;
+	}
+	
+	public Building getBuilding(String name) {
+		return builtBuildings.getBuilding(name);
 	}
 
 	public List<MegaProject> getBuiltMegaProjects() {

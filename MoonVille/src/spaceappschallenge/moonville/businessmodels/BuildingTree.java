@@ -36,7 +36,7 @@ public class BuildingTree implements Serializable {
 	}
 	
 	public Building getBuilding(String name) {
-		if (building.getName() == name)
+		if (building != null && building.getName().equals(name))
 			return building;
 		for (BuildingTree bt : childs) {
 			Building b = bt.getBuilding(name);
@@ -101,9 +101,10 @@ public class BuildingTree implements Serializable {
 	public boolean add(Building b) {
 		BuildingTree bt = findInsertionNode(b.getName());
 		if (bt != null) {
-			if (bt.building != null) {
+			if (bt.building == null)
+				bt.building = b;
+			else
 				 bt.childs.add(new BuildingTree(b));
-			}
 			return true;
 		}
 		return false;
