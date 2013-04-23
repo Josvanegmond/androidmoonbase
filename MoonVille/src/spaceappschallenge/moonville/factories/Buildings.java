@@ -18,128 +18,115 @@ import android.util.Log;
 /**
  * Singleton class, handles buildings.
  * 
- * As opposed to BuildingTree, this handles all buildings that exist in 
- * the game (defined by xml), independent from what is built in the world.
- *
+ * As opposed to BuildingTree, this handles all buildings that exist in the game
+ * (defined by xml), independent from what is built in the world.
+ * 
  */
-public class Buildings
-{
+public class Buildings {
 	private static Buildings instance;
 	protected static Context context;
 
-	//a list of all possible buildings
+	// a list of all possible buildings
 	private ArrayList<Building> allBuildings;
-	
-	//a list of buildings that the player can build
+
+	// a list of buildings that the player can build
 	private ArrayList<Building> availableBuildings;
-	
+
 	protected InputStream inputStream = null;
 
-	
-	private Buildings()
-	{	
+	private Buildings() {
 		this.allBuildings = new ArrayList<Building>();
-		
+
 		this.availableBuildings = new ArrayList<Building>();
 
-		Buildings.context = ApplicationService.getInstance().getApplicationContext();
-		
-		Log.i("Buildings","initializing all buildings");
+		Buildings.context = ApplicationService.getInstance()
+				.getApplicationContext();
+
 		initAllBuildings();
-		
+
 	}
-	
-	
-	public List<Building> getBuildingsByRequiredBuilding( Building requiredBuilding )
-	{
+
+	public List<Building> getBuildingsByRequiredBuilding(
+			Building requiredBuilding) {
 		List<Building> buildingList = new ArrayList<Building>();
-		for( Building building : allBuildings )
-		{
-			if( building.getRequiredBuildings().contains( requiredBuilding ) )
-			{
-				buildingList.add( building );
+		for (Building building : allBuildings) {
+			if (building.getRequiredBuildings().contains(requiredBuilding)) {
+				buildingList.add(building);
 			}
 		}
-		
+
 		return buildingList;
 	}
-	
-	
-	protected void initAllBuildings()
-	{
+
+	/*
+	 * Calls the parser to initialize the ArrayList of buildings
+	 */
+	protected void initAllBuildings() {
 		inputStream = context.getResources().openRawResource(R.raw.buildings);
 
 		try {
 			BuildingXMLParser xmlParser = new BuildingXMLParser(inputStream);
 			try {
-				Log.i("Buildings","parsing.....");
 				this.allBuildings = xmlParser.parse();
-				Log.i("Buildings","printing.....");
-				printAllBuildings();
+				//printAllBuildings();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				Log.e("Buildings","There was problem while parsing the xml file");
-				//e.printStackTrace();
+				Log.e("Buildings",
+						"There was problem while parsing the xml file");
+				// e.printStackTrace();
 			}
 		} catch (XmlPullParserException e) {
 			// TODO Auto-generated catch block
-			Log.e("Buildings","XMLParser could not be instantiated");
-			//e.printStackTrace();
+			Log.e("Buildings", "XMLParser could not be instantiated");
+			// e.printStackTrace();
 		}
 	}
-	
-	public void printAllBuildings(){
-		for(int i=0;i<this.allBuildings.size();i++){
+
+	public void printAllBuildings() {
+		for (int i = 0; i < this.allBuildings.size(); i++) {
 			Building building = this.allBuildings.get(i);
-			
-			Log.i("Buildings",building.getName());
-		
-			
-			ArrayList<Resource> resources= building.getRequiredResources();
-			Log.i("LENGTH","reqd resource size:"+resources.size());
-			for(Resource rResource:resources){
-				Log.i("Buildings rr",rResource.getName());
+
+			Log.i("Buildings", building.getName());
+
+			ArrayList<Resource> resources = building.getRequiredResources();
+			Log.i("LENGTH", "reqd resource size:" + resources.size());
+			for (Resource rResource : resources) {
+				Log.i("Buildings rr", rResource.getName());
 			}
-			
-			Log.i("Buildings","object: "+building);
+
+			ArrayList<Building> rbuilding = building.getRequiredBuildings();
+			for (Building rb : rbuilding) {
+				Log.i("required buildings", rb.getName());
+			}
 		}
 	}
-	
-	
-	public static Buildings getInstance()
-	{
-		//TODO: when loading existing game, this factory should be replaced by the saved one, not create a new one
-		
-		if( Buildings.instance == null )
-		{
+
+	public static Buildings getInstance() {
+		// TODO: when loading existing game, this factory should be replaced by
+		// the saved one, not create a new one
+		if (Buildings.instance == null) {
 			Buildings.instance = new Buildings();
 		}
-		
+
 		return Buildings.instance;
 	}
 
-
-	//returns a building object according to its name
-	public Building getBuilding( String name )
-	{
+	// returns a building object according to its name
+	public Building getBuilding(String name) {
 		Building foundBuilding = null;
-		
-		for( Building building : this.allBuildings )
-		{
-			if( building.getName().equals( name ) )
-			{
+
+		for (Building building : this.allBuildings) {
+			if (building.getName().equals(name)) {
 				foundBuilding = building;
 				break;
 			}
 		}
-		
+
 		return foundBuilding;
 	}
 
-
-	//returns all available buildings
-	public ArrayList<Building> getAllBuildings()
-	{
+	// returns all available buildings
+	public ArrayList<Building> getAllBuildings() {
 		return this.allBuildings;
 	}
 }

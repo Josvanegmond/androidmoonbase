@@ -4,8 +4,7 @@ package spaceappschallenge.moonville.businessmodels;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Building implements Serializable
-{
+public class Building implements Serializable {
 	protected String name = "";
 	protected String info = "";
 	protected int amount = 0;
@@ -24,6 +23,10 @@ public class Building implements Serializable
 	protected boolean hasRequiredBuildings;
 
 	private int xPos, yPos;
+
+	public Building(String name) {
+		this.name = name;
+	}
 
 	public Building(String name, int amount) {
 		this.name = name;

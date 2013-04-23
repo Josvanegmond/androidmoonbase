@@ -16,7 +16,7 @@
     <building
         name="Solar Panel Array"
         amount="0"
-        info="Provides electric energy by utilizing sunling"
+        info="Provides electric energy by utilizing sunlight"
         inputPower="0"
         monetaryCost="20"
         outputPower="10"

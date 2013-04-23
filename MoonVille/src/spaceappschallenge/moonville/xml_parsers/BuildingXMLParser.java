@@ -1,7 +1,6 @@
 /*
- * Parses XML containing information about Buildings.
+ * Parses XML containing information about Buildings and stores them inside ArrayList of Building
  */
-//Note: Reusing ResourceXMLParser would be a better idea.
 package spaceappschallenge.moonville.xml_parsers;
 
 import java.io.BufferedReader;
@@ -94,7 +93,7 @@ public class BuildingXMLParser {
 		} catch (Exception e) {
 			Log.e("XMLError", "outResAmount");
 		}
-	
+
 		outputResources.add(new Resource(outResName, outResAmount));
 		Log.i("XML", "out resource " + outResName);
 	}
@@ -102,15 +101,9 @@ public class BuildingXMLParser {
 	public void addRequiredBuilding(XmlPullParser xpp,
 			ArrayList<Building> requiredBuildings) {
 		String reqdBuildName = xpp.getAttributeValue(null, "name");
-		int reqdBuildAmount = 0;
-		try {
-			reqdBuildAmount = Integer.parseInt(xpp.getAttributeValue(null,
-					"amount"));
-		} catch (Exception e) {
-			Log.e("XMLError", "reqdBuildAmount");
-		}
-		requiredBuildings.add(new Building(reqdBuildName, reqdBuildAmount));
-		Log.i("XML","required building "+reqdBuildName);
+	
+		requiredBuildings.add(new Building(reqdBuildName));
+		Log.i("XML", "required building " + reqdBuildName);
 	}
 
 	// Create "Building" objects by parsing input stream
@@ -139,13 +132,10 @@ public class BuildingXMLParser {
 					// Break the loop when the end tag: </building> is reached
 					if (eventType == XmlPullParser.END_TAG
 							&& xpp.getName().equalsIgnoreCase("building")) {
-						atBuilding = false;
 						break;
 					}
 
-					boolean atRequiredResources = false;// The tag:
-					// <requiredResources>
-					// may be absent
+					boolean atRequiredResources = false;
 					if (eventType == XmlPullParser.START_TAG
 							&& xpp.getName().equalsIgnoreCase(
 									"requiredResources")) {
@@ -157,7 +147,6 @@ public class BuildingXMLParser {
 						if (eventType == XmlPullParser.END_TAG
 								&& xpp.getName().equalsIgnoreCase(
 										"requiredResources")) {
-							atRequiredResources = false;
 							break;
 						}
 
@@ -173,7 +162,6 @@ public class BuildingXMLParser {
 							if (eventType == XmlPullParser.END_TAG
 									&& xpp.getName().equalsIgnoreCase(
 											"resource")) {
-								atRequiredResource = false;
 								break;
 							}
 
@@ -186,27 +174,20 @@ public class BuildingXMLParser {
 						eventType = xpp.next();
 					}// atRequiredResources
 
-					boolean atOutputResources = false;// The tag:
-					// <outputResources>
-					// might be absent
+					boolean atOutputResources = false;
 					if (eventType == XmlPullParser.START_TAG
 							&& xpp.getName()
 									.equalsIgnoreCase("outputResources")) {
 						atOutputResources = true;
 					}
 					while (atOutputResources) {
-						// Break the loop when the end tag: </building> is
-						// reached
 						if (eventType == XmlPullParser.END_TAG
 								&& xpp.getName().equalsIgnoreCase(
 										"outputResources")) {
-							atOutputResources = false;
 							break;
 						}
 
-						boolean atOutputResource = false;// The tag:
-						// <requiredBuilding>
-						// might be absent
+						boolean atOutputResource = false;
 						if (eventType == XmlPullParser.START_TAG
 								&& xpp.getName().equalsIgnoreCase("resource")) {
 							atOutputResource = true;
@@ -216,32 +197,25 @@ public class BuildingXMLParser {
 							if (eventType == XmlPullParser.END_TAG
 									&& xpp.getName().equalsIgnoreCase(
 											"resource")) {
-								atOutputResource = false;
 								break;
 							}
 							if (xpp.getAttributeCount() > 0) {
 								addOutputResource(xpp, outputResources);
-
 							}
-
 							eventType = xpp.next();
 						}// atOutputResource
-
 						eventType = xpp.next();
 					}// atOutputResources
 
-					boolean atRequiredBuildings = false;// The tag:
-					// <requiredBuildings>
-					// might be absent
+					boolean atRequiredBuildings = false;
 					if (eventType == XmlPullParser.START_TAG
 							&& xpp.getName().equalsIgnoreCase(
 									"requiredBuildings")) {
 						atRequiredBuildings = true;
-						//Log.i("XML","required buildings tag found");
+						// Log.i("XML","required buildings tag found");
 					}
 					while (atRequiredBuildings) {
-						// Break the loop when the end tag: </building> is
-						// reached
+
 						if (eventType == XmlPullParser.END_TAG
 								&& xpp.getName().equalsIgnoreCase(
 										"requiredBuildings")) {
@@ -249,9 +223,7 @@ public class BuildingXMLParser {
 							break;
 						}
 
-						boolean atRequiredBuilding = false;// The tag:
-						// <requiredBuilding>
-						// might be absent
+						boolean atRequiredBuilding = false;
 						if (eventType == XmlPullParser.START_TAG
 								&& xpp.getName().equalsIgnoreCase("building")) {
 							atRequiredBuilding = true;
