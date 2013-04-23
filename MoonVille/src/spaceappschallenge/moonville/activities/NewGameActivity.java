@@ -58,7 +58,7 @@ public class NewGameActivity extends GameActivity {
 
 		Difficulty diff = new Difficulty(gameDetails.getDifficultyLevel());
 
-		MoonBaseManager.createNewMoonBase(diff);
+		MoonBaseManager.createNewMoonBase(diff, this);
 		// MoonBase should become a singleton I think, best way to make it
 		// easily accessible -Jos
 	}

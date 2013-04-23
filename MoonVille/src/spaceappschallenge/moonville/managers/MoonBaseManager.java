@@ -32,10 +32,11 @@ public class MoonBaseManager {
 		return currentMoonBase;
 	}
 
-	public static void createNewMoonBase(Difficulty diff) {
+	public static void createNewMoonBase(Difficulty diff, Context context) {
 		MoonBaseManager.currentMoonBase = new MoonBase(
 				diff.getResearchPoints(), diff.getProspectingLevel(),
 				diff.getMoney());
+		saveMoonBase(context);
 	}
 
 	public static void loadSavedMoonbase(Context context) {
