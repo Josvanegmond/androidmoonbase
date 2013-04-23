@@ -2,8 +2,9 @@ package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.businessmodels.Building;
+import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
+import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 
 public class BuildingInfoActivity extends GameActivity {
 
-	private Building building;
+	private BuildingDefinition building;
 	private TextView buildingScale;
 	
 	@Override
@@ -24,7 +25,7 @@ public class BuildingInfoActivity extends GameActivity {
 		setContentView(R.layout.activity_building_info);
 		
 		//the building passed through via baseoverviewactivity
-		this.building = (Building) this.getIntent().getSerializableExtra( "Building" );
+		this.building = Buildings.getInstance().getBuilding(getIntent().getExtras().getString("Building"));
 		
 		
 		ImageView buildingImage = (ImageView) findViewById( R.id.buildingimage );
@@ -49,13 +50,9 @@ public class BuildingInfoActivity extends GameActivity {
 	
 	public void build( View view )
 	{
-		building.setAmount( building.getAmount() + 1 );
-		buildingScale.setText( "Building scale: " + building.getAmount() );
-		//building created for first time
-		if( building.getAmount() == 1 )
-		{
-			MoonBaseManager.getCurrentMoonBase().setBuiltBuilding( building );
-		}
+		MoonBaseManager.getCurrentMoonBase().addBuilding(building.getName());
+		buildingScale.setText( "Building scale: " + 
+					MoonBaseManager.getCurrentMoonBase().getBuildingAmount(building.getName()));
 	}
 	
 	@Override

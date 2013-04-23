@@ -20,6 +20,7 @@ public class MoonBase implements Serializable {
 	protected int money;
 	private int inMonth = 0;
 
+	// TODO: Merge building tree and list.
 	protected BuildingTree builtBuildings;
 	protected List<Building> builtBuildingsList; //couldnt work with tree, not enough functionality, not enough time to understand -Jos
 	protected List<MegaProject> builtMegaProjects;
@@ -37,8 +38,7 @@ public class MoonBase implements Serializable {
 
 		// only add starting base
 		this.builtBuildings = new BuildingTree();
-		this.builtBuildings.add(Buildings.getInstance().getBuilding(
-				"Lunar Base"));
+		this.builtBuildings.add(new Building("Lunar Base", 1));
 
 		this.gameDetails = GameDetails.getInstance();
 	}
@@ -106,8 +106,7 @@ public class MoonBase implements Serializable {
 		return builtBuildings;
 	}
 	
-	public List<Building> getBuildBuildingsList()
-	{
+	public List<Building> getBuildBuildingsList() {
 		return this.builtBuildingsList;
 	}
 
@@ -115,13 +114,33 @@ public class MoonBase implements Serializable {
 		this.builtBuildings = builtBuildings;
 	}
 	
-	public void setBuiltBuilding(Building building) {
-//		if( builtBuildings.getBuildings().contains( building ) == false )
-//		{
-//			this.builtBuildings.add( building );
-//		}
-		
-		this.builtBuildingsList.add( building );
+	/**
+	 * Creates a new building or increases the amount if one already exists.
+	 * 
+	 * @param name Name of the building to add.
+	 */
+	public void addBuilding(String name) {
+		for (Building b : builtBuildingsList) {
+			if (b.getName() == name) {
+				b.setAmount(b.getAmount() + 1);
+				return;
+			}
+		}
+		// Need to insert building
+		Building b = new Building(name, 1);
+		builtBuildingsList.add(b);
+		builtBuildings.add(b);
+	}
+	
+	/**
+	 * Returns total number of buildings of this type.
+	 */
+	public int getBuildingAmount(String name) {
+		for (Building b : builtBuildingsList) {
+			if (b.getName() == name)
+				return b.getAmount();
+		}
+		return 0;
 	}
 
 	public List<MegaProject> getBuiltMegaProjects() {

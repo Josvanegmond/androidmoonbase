@@ -6,13 +6,13 @@ import java.util.List;
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.MoonVille;
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.businessmodels.Building;
 import spaceappschallenge.moonville.businessmodels.BuildingTree;
 import spaceappschallenge.moonville.businessmodels.MoonBase;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
+import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -122,9 +122,9 @@ public class BaseOverviewActivity extends GameActivity {
 
 		buildingImageList.clear();
 
-		List<Building> buildings = Buildings.getInstance().getAllBuildings();
+		List<BuildingDefinition> buildings = Buildings.getInstance().getAllBuildings();
 		
-		for (final Building building : buildings)
+		for (final BuildingDefinition building : buildings)
 		{
 			ImageView buildingImage = new ImageView(this);
 			
@@ -133,7 +133,7 @@ public class BaseOverviewActivity extends GameActivity {
 				public void onClick(View view)
 				{
 					Intent intent = new Intent(BaseOverviewActivity.this, BuildingInfoActivity.class);
-					intent.putExtra( "Building", building );
+					intent.putExtra("Building", building.getName());
 					view.getContext().startActivity( intent );
 					BaseOverviewActivity.this.finish();
 				}
@@ -151,14 +151,15 @@ public class BaseOverviewActivity extends GameActivity {
 			Drawable buildingDrawable = res.getDrawable(resID);
 			buildingImage.setImageDrawable(buildingDrawable);
 
+			BuildingDefinition bd = Buildings.getInstance().getBuilding(building.getName());
 			AbsoluteLayout.LayoutParams buildingParams = new AbsoluteLayout.LayoutParams(
 					buildingDrawable.getIntrinsicWidth(),
 					buildingDrawable.getIntrinsicHeight(),
-					building.getXPos() * 2, building.getYPos() * 2);
+					bd.getXPos() * 2, bd.getYPos() * 2);
 			
 			boolean canBeBuild = true;
 			
-			for( Building requiredBuilding : building.getRequiredBuildings() )
+			for( BuildingDefinition requiredBuilding : bd.getRequiredBuildings() )
 			{
 				if( MoonBaseManager.getCurrentMoonBase().getBuildBuildingsList().contains( requiredBuilding ) == false )
 				{

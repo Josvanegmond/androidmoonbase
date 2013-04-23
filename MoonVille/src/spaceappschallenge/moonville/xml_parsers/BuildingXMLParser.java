@@ -23,7 +23,7 @@ public class BuildingXMLParser {
 	protected Context context = null;
 	protected InputStream inputStream = null;
 	protected XmlPullParser xpp;
-	protected ArrayList<Building> buildings;
+	protected ArrayList<BuildingDefinition> buildings;
 	protected boolean isBuildingFinished = false;
 
 	/*
@@ -36,7 +36,7 @@ public class BuildingXMLParser {
 		XmlPullParserFactory xmlFactory = XmlPullParserFactory.newInstance();
 		xmlFactory.setNamespaceAware(true);
 		xpp = xmlFactory.newPullParser();
-		this.buildings = new ArrayList<Building>();
+		this.buildings = new ArrayList<BuildingDefinition>();
 	}
 
 	String buildingName = "";
@@ -49,7 +49,7 @@ public class BuildingXMLParser {
 	int buildingYPos = 0;
 	ArrayList<Resource> requiredResources;
 	ArrayList<Resource> outputResources;
-	ArrayList<Building> requiredBuildings;
+	ArrayList<BuildingDefinition> requiredBuildings;
 
 	public void readBuildingAttributes() {
 		// Read the attributes for each building
@@ -99,15 +99,15 @@ public class BuildingXMLParser {
 	}
 
 	public void addRequiredBuilding(XmlPullParser xpp,
-			ArrayList<Building> requiredBuildings) {
+			ArrayList<BuildingDefinition> requiredBuildings) {
 		String reqdBuildName = xpp.getAttributeValue(null, "name");
 	
-		requiredBuildings.add(new Building(reqdBuildName));
+		requiredBuildings.add(new BuildingDefinition(reqdBuildName));
 		Log.i("XML", "required building " + reqdBuildName);
 	}
 
 	// Create "Building" objects by parsing input stream
-	public ArrayList<Building> parse() throws XmlPullParserException,
+	public ArrayList<BuildingDefinition> parse() throws XmlPullParserException,
 			IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				this.inputStream));
@@ -124,7 +124,7 @@ public class BuildingXMLParser {
 				readBuildingAttributes();
 				outputResources = new ArrayList<Resource>();
 				requiredResources = new ArrayList<Resource>();
-				requiredBuildings = new ArrayList<Building>();
+				requiredBuildings = new ArrayList<BuildingDefinition>();
 
 				// For Nested elements
 				while (atBuilding) {// <building>
@@ -249,7 +249,7 @@ public class BuildingXMLParser {
 
 					eventType = xpp.next();
 				}// while atBuilding
-				this.buildings.add(new Building(buildingName, buildingInfo,
+				this.buildings.add(new BuildingDefinition(buildingName, buildingInfo,
 						buildingAmount, buildingInputPower,
 						buildingOutputPower, buildingMonetaryCost,
 						buildingRegolithCost, buildingRequiredTurns,
