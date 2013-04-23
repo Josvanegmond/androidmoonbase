@@ -7,7 +7,6 @@ import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.listadapters.ExportResourceListAdapter;
-import spaceappschallenge.moonville.listadapters.ImportResourceListAdapter;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.content.Intent;
 import android.os.Bundle;

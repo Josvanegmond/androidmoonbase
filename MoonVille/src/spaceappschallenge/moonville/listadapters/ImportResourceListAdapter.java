@@ -3,7 +3,6 @@ package spaceappschallenge.moonville.listadapters;
 import java.util.ArrayList;
 
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.activities.ImportResourcesActivity;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.managers.MoonBaseManager;

@@ -11,6 +11,9 @@ import android.app.Activity;
  */
 public class GameActivity extends Activity {
 	
+	/**
+	 * Calls MoonVile.resumeActivity.
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
