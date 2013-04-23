@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BuildingInfoActivity extends GameActivity {
 
@@ -50,6 +51,10 @@ public class BuildingInfoActivity extends GameActivity {
 			MoonBaseManager.getCurrentMoonBase().addBuilding(buildingName);
 			buildingScale.setText("Building scale: " + 
 						MoonBaseManager.getCurrentMoonBase().getBuildingAmount(buildingName));
+		}
+		else {
+			// TODO: Show the reason (missing resources, required building etc.).
+			Toast.makeText(this, "Can't build at this time", Toast.LENGTH_SHORT).show();
 		}
 	}
 	

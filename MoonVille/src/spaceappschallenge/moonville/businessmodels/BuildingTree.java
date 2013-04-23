@@ -72,7 +72,7 @@ public class BuildingTree implements Serializable {
 			return null;
 		// Building already exists.
 		if (building.getName().equals(name))
-			return null;
+			return this;
 		// Check if we can insert into childs.
 		for (BuildingTree bt : childs) {
 			BuildingTree found = bt.findInsertionNode(name);
