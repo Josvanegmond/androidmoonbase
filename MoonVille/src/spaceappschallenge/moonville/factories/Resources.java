@@ -55,13 +55,11 @@ public class Resources {
 			try {
 				allResources = xmlParser.parse();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				Log.e("Resources",
 						"There was problem while parsing the xml file");
 				e.printStackTrace();
 			}
 		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
 			Log.e("Resources", "XMLParser could not be instantiated");
 			e.printStackTrace();
 		}

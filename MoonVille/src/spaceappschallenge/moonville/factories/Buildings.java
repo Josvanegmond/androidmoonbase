@@ -70,15 +70,11 @@ public class Buildings {
 				this.allBuildings = xmlParser.parse();
 				//printAllBuildings();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				Log.e("Buildings",
 						"There was problem while parsing the xml file");
-				// e.printStackTrace();
 			}
 		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
 			Log.e("Buildings", "XMLParser could not be instantiated");
-			// e.printStackTrace();
 		}
 	}
 
