@@ -20,7 +20,6 @@ import android.content.Context;
 import android.util.Log;
 
 public class BuildingXMLParser {
-	protected Context context = null;
 	protected InputStream inputStream = null;
 	protected XmlPullParser xpp;
 	protected ArrayList<BuildingDefinition> buildings;
@@ -32,7 +31,6 @@ public class BuildingXMLParser {
 	public BuildingXMLParser(InputStream inputStream)
 			throws XmlPullParserException {
 		this.inputStream = inputStream;
-		this.context = ApplicationService.getInstance().getApplicationContext();
 		XmlPullParserFactory xmlFactory = XmlPullParserFactory.newInstance();
 		xmlFactory.setNamespaceAware(true);
 		xpp = xmlFactory.newPullParser();

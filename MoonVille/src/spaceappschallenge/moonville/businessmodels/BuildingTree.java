@@ -162,8 +162,9 @@ public class BuildingTree implements Serializable {
 	}
 	
 	/**
-	 * Checks if each building has its required buildings. This is true if 
-	 * no higher node in the tree is empty.
+	 * Checks if each building has its required buildings. This is true if
+	 * no higher node in the tree is empty. It will set that building's
+	 * hasRequiredBuildings attribute accordingly.
 	 * 
 	 * @param isParentEmpty True if the parent node is empty. Means required 
 	 * 						buildings are not available.

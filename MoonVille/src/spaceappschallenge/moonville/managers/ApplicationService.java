@@ -9,7 +9,8 @@ import android.util.Log;
 /**
  * Provides singleton access to application context.
  */
-public class ApplicationService{
+public class ApplicationService
+{
 	protected static ApplicationService instance;
 	private static Context applicationContext;
 	
@@ -29,7 +30,13 @@ public class ApplicationService{
 		ApplicationService.applicationContext=applicationContext;
 	}
 	
-	public Context getApplicationContext(){
+	public Context getApplicationContext()
+	{
+		if( ApplicationService.applicationContext == null )
+		{
+			Log.d( "Error", "Application context has not been provided to ApplicationService before getApplicationContext() is called." );
+		}
+		
 		return ApplicationService.applicationContext;
 	}
 }

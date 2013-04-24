@@ -234,7 +234,7 @@ public class BaseOverviewActivity extends GameActivity {
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 		BuildingTree tree = moonBase.getBuiltBuildings();
 		tree.checkPower();
-		//tree.checkRequiredBuildings(); ?? what's this doing here? -Jos
+		tree.checkRequiredBuildings();
 
 		Resources resources = Resources.getInstance();
 		ArrayList<Resource> available = (ArrayList<Resource>) tree
