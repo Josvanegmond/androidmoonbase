@@ -21,7 +21,9 @@ public class MoonBase implements Serializable {
 	private int inMonth = 0;
 
 	protected BuildingTree builtBuildings;
-	protected List<MegaProject> builtMegaProjects;
+	
+	//not implemented yet
+	//protected List<MegaProject> builtMegaProjects;
 
 	protected GameDetails gameDetails;
 
@@ -145,16 +147,19 @@ public class MoonBase implements Serializable {
 		return builtBuildings.getBuilding(name);
 	}
 
-	public List<MegaProject> getBuiltMegaProjects() {
-		return builtMegaProjects;
-	}
-
 	public boolean canBuild(String name) {
 		return builtBuildings.canBuild(name);
 	}
-	public void setBuiltMegaProjects(List<MegaProject> builtMegaProjects) {
-		this.builtMegaProjects = builtMegaProjects;
-	}
+	
+//	Not implemented yet
+//
+//	public List<MegaProject> getBuiltMegaProjects() {
+//		return builtMegaProjects;
+//	}
+//
+//	public void setBuiltMegaProjects(List<MegaProject> builtMegaProjects) {
+//		this.builtMegaProjects = builtMegaProjects;
+//	}
 
 	public int getMonth() {
 		return inMonth;
