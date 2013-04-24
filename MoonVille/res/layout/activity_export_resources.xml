@@ -1,83 +1,98 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/importResourcesLL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".ExportResourcesActivity" >
 
     <TextView
         android:id="@+id/exportTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:gravity="left"
         android:text="Export resources"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout
-        android:id="@+id/exportHorLL"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/exportTitle" >
+        android:layout_margin="10dp" >
 
-        <RelativeLayout
-            android:id="@+id/exportLeftRL"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/exportTitle"
-            android:layout_weight=".35"
-            android:gravity="left" >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/exportBudgetTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="10dp"
-                android:gravity="left"
-                android:text="Budget"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-            
-              <TextView
-                android:id="@+id/exportBudgetTextView"
+            <ImageView
+                android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/exportBudgetTitle"
-                android:layout_marginTop="20dp"
-                android:gravity="left"
-                android:text="1000"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-              
-              
-              
-          
-            
+                android:src="@drawable/dummydome_medium" />
+        </LinearLayout>
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/exportRightRL"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/exportLeftRL"
-            android:layout_weight="0.65"
-            android:gravity="right" >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
             <ListView
-                android:id="@+id/exportResourceslist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:id="@+id/demandList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
             </ListView>
-        </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:maxLines="3"
+        android:text="Orbital Transits Company"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A small company providing transport services to ground and orbital stations around earth. They import extraterrestrial resources from mining companies and distribute them further to ground based and orbital facilities."
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <LinearLayout
+        android:id="@+id/buttonlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:text="Previous" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:text="Export" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text="Next" />
+    </LinearLayout>
+
+</LinearLayout>
