@@ -59,7 +59,7 @@
         <activity
             android:name=".activities.ResourcesActivity"
             android:label="@string/title_activity_resources"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" android:theme="@android:style/Theme.Dialog">
         </activity>
         <activity
             android:name="spaceappschallenge.moonville.activities.MegaProjectActivity"
@@ -89,12 +89,12 @@
         <activity
             android:name="spaceappschallenge.moonville.activities.ImportResourcesActivity"
             android:label="@string/title_activity_import_resources"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape" android:theme="@android:style/Theme.Dialog">
         </activity>
         <activity
             android:name="spaceappschallenge.moonville.activities.ExportResourcesActivity"
             android:label="@string/title_activity_export_resources"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape" android:theme="@android:style/Theme.Dialog">
         </activity>
     </application>
 

@@ -11,6 +11,7 @@ import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Building;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.managers.ApplicationService;
+import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import spaceappschallenge.moonville.xml_parsers.BuildingXMLParser;
 import android.content.Context;
 import android.util.Log;
@@ -27,17 +28,17 @@ public class Buildings {
 	protected static Context context;
 
 	// a list of all possible buildings
-	private ArrayList<Building> allBuildings;
+	private ArrayList<BuildingDefinition> allBuildings;
 
 	// a list of buildings that the player can build
-	private ArrayList<Building> availableBuildings;
+	private ArrayList<BuildingDefinition> availableBuildings;
 
 	protected InputStream inputStream = null;
 
 	private Buildings() {
-		this.allBuildings = new ArrayList<Building>();
+		this.allBuildings = new ArrayList<BuildingDefinition>();
 
-		this.availableBuildings = new ArrayList<Building>();
+		this.availableBuildings = new ArrayList<BuildingDefinition>();
 
 		Buildings.context = ApplicationService.getInstance()
 				.getApplicationContext();
@@ -46,10 +47,10 @@ public class Buildings {
 
 	}
 
-	public List<Building> getBuildingsByRequiredBuilding(
+	public List<BuildingDefinition> getBuildingsByRequiredBuilding(
 			Building requiredBuilding) {
-		List<Building> buildingList = new ArrayList<Building>();
-		for (Building building : allBuildings) {
+		List<BuildingDefinition> buildingList = new ArrayList<BuildingDefinition>();
+		for (BuildingDefinition building : allBuildings) {
 			if (building.getRequiredBuildings().contains(requiredBuilding)) {
 				buildingList.add(building);
 			}
@@ -70,21 +71,17 @@ public class Buildings {
 				this.allBuildings = xmlParser.parse();
 				//printAllBuildings();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				Log.e("Buildings",
 						"There was problem while parsing the xml file");
-				// e.printStackTrace();
 			}
 		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
 			Log.e("Buildings", "XMLParser could not be instantiated");
-			// e.printStackTrace();
 		}
 	}
 
 	public void printAllBuildings() {
 		for (int i = 0; i < this.allBuildings.size(); i++) {
-			Building building = this.allBuildings.get(i);
+			BuildingDefinition building = this.allBuildings.get(i);
 
 			Log.i("Buildings", building.getName());
 
@@ -94,8 +91,8 @@ public class Buildings {
 				Log.i("Buildings rr", rResource.getName());
 			}
 
-			ArrayList<Building> rbuilding = building.getRequiredBuildings();
-			for (Building rb : rbuilding) {
+			ArrayList<BuildingDefinition> rbuilding = building.getRequiredBuildings();
+			for (BuildingDefinition rb : rbuilding) {
 				Log.i("required buildings", rb.getName());
 			}
 		}
@@ -112,10 +109,10 @@ public class Buildings {
 	}
 
 	// returns a building object according to its name
-	public Building getBuilding(String name) {
-		Building foundBuilding = null;
+	public BuildingDefinition getBuilding(String name) {
+		BuildingDefinition foundBuilding = null;
 
-		for (Building building : this.allBuildings) {
+		for (BuildingDefinition building : this.allBuildings) {
 			if (building.getName().equals(name)) {
 				foundBuilding = building;
 				break;
@@ -126,7 +123,7 @@ public class Buildings {
 	}
 
 	// returns all available buildings
-	public ArrayList<Building> getAllBuildings() {
+	public ArrayList<BuildingDefinition> getAllBuildings() {
 		return this.allBuildings;
 	}
 }

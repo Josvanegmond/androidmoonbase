@@ -67,14 +67,10 @@ public class ImportResourceListAdapter extends BaseAdapter {
 
 					@Override
 					public void onStopTrackingTouch(SeekBar seekBar) {
-						// TODO Auto-generated method stub
-
 					}
 
 					@Override
 					public void onStartTrackingTouch(SeekBar seekBar) {
-						// TODO Auto-generated method stub
-
 					}
 
 					@Override

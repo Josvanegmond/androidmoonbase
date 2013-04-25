@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Building;
 import spaceappschallenge.moonville.factories.Buildings;
+import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 
 public class BuildingListAdapter extends BaseAdapter
 {
-	private ArrayList<Building> allBuildings;
+	private ArrayList<BuildingDefinition> allBuildings;
 	
 	public BuildingListAdapter()
 	{
@@ -43,7 +44,7 @@ public class BuildingListAdapter extends BaseAdapter
 	@Override
 	public View getView( int index, View convertView, ViewGroup parent )
 	{
-		Building building = this.allBuildings.get( index );
+		BuildingDefinition building = this.allBuildings.get(index);
 		
 		if( convertView == null )
 		{

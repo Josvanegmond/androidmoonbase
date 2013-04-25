@@ -1,8 +1,13 @@
 package spaceappschallenge.moonville.businessmodels;
 
-import spaceappschallenge.moonville.managers.Reference;
-
+/**
+ * Provides values based on difficulty level.
+ */
 public class Difficulty {
+	
+	public static final int DIF_EASY = 0;
+	public static final int DIF_MED = 1;
+	public static final int DIF_HARD = 2;
 
 	private int researchPoints;
 	private int prospectingLevel;
@@ -11,17 +16,17 @@ public class Difficulty {
 	// some basic difficulties... not final! ~ jodli
 	public Difficulty(int difficultyLevel) {
 		switch (difficultyLevel) {
-		case Reference.DIF_EASY:
+		case DIF_EASY:
 			this.researchPoints = 100;
 			this.prospectingLevel = 10;
 			this.money = 100000000;
 			break;
-		case Reference.DIF_MED:
+		case DIF_MED:
 			this.researchPoints = 50;
 			this.prospectingLevel = 5;
 			this.money = 10000000;
 			break;
-		case Reference.DIF_HARD:
+		case DIF_HARD:
 			this.researchPoints = 25;
 			this.prospectingLevel = 3;
 			this.money = 1000000;

@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import spaceappschallenge.moonville.factories.Buildings;
+import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
+
 /**
  * Contains all buildings per level as of 
  * https://www.facebook.com/photo.php?fbid=10151316698507504
@@ -14,7 +17,7 @@ import java.util.List;
  *
  */
 public class BuildingTree implements Serializable {
-	
+
 	Building building;
 	
 	List<BuildingTree> childs = new ArrayList<BuildingTree>();
@@ -32,14 +35,25 @@ public class BuildingTree implements Serializable {
 		this.building = building;
 	}
 	
+	public Building getBuilding(String name) {
+		if (building != null && building.getName().equals(name))
+			return building;
+		for (BuildingTree bt : childs) {
+			Building b = bt.getBuilding(name);
+			if (b != null)
+				return b;
+		}
+		return null;
+	}
+	
 	/**
 	 * Tests if all required buildings exist and the building has not 
 	 * been built yet.
 	 * 
 	 * @return True if the building can be inserted (required buildings exist).
 	 */
-	public boolean canBuild(Building b) {
-		return findInsertionNode(b) != null;
+	public boolean canBuild(String name) {
+		return findInsertionNode(name) != null;
 	}
 	
 	/**
@@ -49,28 +63,28 @@ public class BuildingTree implements Serializable {
 	 * @warning If the building attribute of the returned node is not null,
 	 * 			you have to insert a new child into the returned node.
 	 */
-	private BuildingTree findInsertionNode(Building b) {
-		if (b == null) 
-			return null;
+	private BuildingTree findInsertionNode(String name) {
 		// Moon Base has no requirements, so take first empty node.
-		if (building == null && b.getName().equals("Moon Base"))
+		if (building == null && name.equals("Moon Base"))
 			return this;
 		// Required building for anything beneath this node not available.
 		if (building == null)
 			return null;
 		// Building already exists.
-		if (building.getName().equals(b.getName()))
-			return null;
+		if (building.getName().equals(name))
+			return this;
 		// Check if we can insert into childs.
 		for (BuildingTree bt : childs) {
-			if (bt.findInsertionNode(b) != null) {
-				return this;
+			BuildingTree found = bt.findInsertionNode(name);
+			if (found != null) {
+				return found;
 			}
 		}
 		// If b requires building in this node, insert into new child 
 		// (creating the child is handled by add()).
-		ArrayList<Building> required = b.getRequiredBuildings();
-		for (Building r : required) {
+		ArrayList<BuildingDefinition> required = Buildings.getInstance().
+				getBuilding(name).getRequiredBuildings();
+		for (BuildingDefinition r : required) {
 			if (r.getName().equals(building.getName())) {
 				return this;
 			}
@@ -85,11 +99,12 @@ public class BuildingTree implements Serializable {
 	 * @return True if the building was inserted successfully.
 	 */
 	public boolean add(Building b) {
-		BuildingTree bt = findInsertionNode(b);
+		BuildingTree bt = findInsertionNode(b.getName());
 		if (bt != null) {
-			if (bt.building != null) {
+			if (bt.building == null)
+				bt.building = b;
+			else
 				 bt.childs.add(new BuildingTree(b));
-			}
 			return true;
 		}
 		return false;
@@ -112,8 +127,10 @@ public class BuildingTree implements Serializable {
 			q.remove(v);
 			if (v.building == null)
 				continue;
-			if (v.building.getInputPower() <= power) {
-				power -= v.building.getInputPower();
+			int inputPower = Buildings.getInstance().getBuilding(
+					v.building.getName()).getInputPower();
+			if (inputPower <= power) {
+				power -= inputPower;
 				v.building.setHasPower(true);
 			}
 			else
@@ -129,7 +146,8 @@ public class BuildingTree implements Serializable {
 	private int computeTotalPowerOutput() {
 		int power = 0;
 		if (building != null)
-			power += building.getOutputPower();
+			power += Buildings.getInstance().getBuilding(
+							building.getName()).getOutputPower();
 		for (BuildingTree c : childs)
 			power += c.computeTotalPowerOutput();
 		return power;		
@@ -144,8 +162,9 @@ public class BuildingTree implements Serializable {
 	}
 	
 	/**
-	 * Checks if each building has its required buildings. This is true if 
-	 * no higher node in the tree is empty.
+	 * Checks if each building has its required buildings. This is true if
+	 * no higher node in the tree is empty. It will set that building's
+	 * hasRequiredBuildings attribute accordingly.
 	 * 
 	 * @param isParentEmpty True if the parent node is empty. Means required 
 	 * 						buildings are not available.
@@ -180,12 +199,14 @@ public class BuildingTree implements Serializable {
 			List<Resource> oldAmount = new ArrayList<Resource>();
 			for (Resource r : resourceAvailable)
 				oldAmount.add(new Resource(r));
-			
-			for (Resource resourceNeed : building.getRequiredResources()) {
+
+			BuildingDefinition bd = Buildings.getInstance().getBuilding(
+					building.getName());
+			for (Resource resourceNeed : bd.getRequiredResources()) {
 				if (subtractBuildingResources(resourceAvailable, resourceNeed)) {
 					building.setHasRequiredResources(true);
 					resourceAvailable = Resource.merge(resourceAvailable, 
-							building.getOutputResources());				
+							bd.getOutputResources());				
 				}
 				else {
 					// Reset resources so we don't remove part of the resources 

@@ -17,28 +17,25 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ExportResourcesActivity extends GameActivity {
+public class ExportResourcesActivity extends GameActivity
+{
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_export_resources);
-		Log.i("ExportResourcesActivity", "gathering resources..");
-		ArrayList<Resource> resources = Resources.getInstance()
-				.getAllResources();
+
 		ExportResourceListAdapter resourceListAdapter = new ExportResourceListAdapter();
 		Log.i("ResourcesActivity", "showing export resources screen..");
 		ListView resourceListView = (ListView) this
-				.findViewById(R.id.exportResourceslist);
+				.findViewById(R.id.demandList);
 		resourceListView.setAdapter(resourceListAdapter);
 		updateUI();
 	}
 
-	public void updateUI() {
-		TextView exportBudgetTextView = (TextView) (this
-				.findViewById(R.id.exportBudgetTextView));
-		exportBudgetTextView.setText(""
-				+ MoonBaseManager.getCurrentMoonBase().getMoney());
+	public void updateUI()
+	{
 	}
 
 	@Override
@@ -50,8 +47,6 @@ public class ExportResourcesActivity extends GameActivity {
 
 	// methods called by onClick property of button in xml
 	public void showBaseOverviewScreen(View view) {
-		view.getContext().startActivity(
-				new Intent(this, BaseOverviewActivity.class));
 		this.finish();
 	}
 
@@ -72,21 +67,5 @@ public class ExportResourcesActivity extends GameActivity {
 				new Intent(this, ExportResourcesActivity.class));
 		this.finish();
 	}
-	
-	
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event)
-	{
-	    if ((keyCode == KeyEvent.KEYCODE_BACK))
-	    {
-			startActivity(
-					new Intent(ExportResourcesActivity.this, BaseOverviewActivity.class));
-	        finish();
-	    }
-	    return super.onKeyDown(keyCode, event);
-	}
-	
-
 
 }

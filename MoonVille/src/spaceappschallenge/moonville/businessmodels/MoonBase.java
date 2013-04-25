@@ -4,8 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import spaceappschallenge.moonville.factories.Buildings;
+import android.util.Log;
 
+/**
+ * Handles information about the game world, including resources, research 
+ * points, prospecting and buildings.
+ */
 public class MoonBase implements Serializable {
 	protected int researchLabSize;
 	protected int researchPoints;
@@ -17,8 +21,9 @@ public class MoonBase implements Serializable {
 	private int inMonth = 0;
 
 	protected BuildingTree builtBuildings;
-	protected List<Building> builtBuildingsList; //couldnt work with tree, not enough functionality, not enough time to understand -Jos
-	protected List<MegaProject> builtMegaProjects;
+	
+	//not implemented yet
+	//protected List<MegaProject> builtMegaProjects;
 
 	protected GameDetails gameDetails;
 
@@ -28,13 +33,11 @@ public class MoonBase implements Serializable {
 		this.prospectingLevel = prospectingLevel;
 		this.storedResources = new ArrayList<Resource>(); // or hashmap? not
 															// sure yet...
-		this.builtBuildingsList = new ArrayList<Building>();
 		this.money = money;
 
 		// only add starting base
 		this.builtBuildings = new BuildingTree();
-		this.builtBuildings.add(Buildings.getInstance().getBuilding(
-				"Lunar Base"));
+		this.builtBuildings.add(new Building("Lunar Base", 1));
 
 		this.gameDetails = GameDetails.getInstance();
 	}
@@ -46,7 +49,6 @@ public class MoonBase implements Serializable {
 			return false;
 	}
 
-	//
 	public boolean spend(int expenditure) {
 		if (canSpend(expenditure)) {
 			this.money -= expenditure;
@@ -103,32 +105,61 @@ public class MoonBase implements Serializable {
 		return builtBuildings;
 	}
 	
-	public List<Building> getBuildBuildingsList()
-	{
+	/*
+	public List<Building> getBuildBuildingsList() {
 		return this.builtBuildingsList;
 	}
-
+*/
+	
 	public void setBuiltBuildings(BuildingTree builtBuildings) {
 		this.builtBuildings = builtBuildings;
 	}
 	
-	public void setBuiltBuilding( Building building )
-	{
-//		if( builtBuildings.getBuildings().contains( building ) == false )
-//		{
-//			this.builtBuildings.add( building );
-//		}
-		
-		this.builtBuildingsList.add( building );
+	/**
+	 * Creates a new building or increases the amount if one already exists.
+	 * 
+	 * @param name Name of the building to add.
+	 */
+	public void addBuilding(String name) {
+		Building existing = builtBuildings.getBuilding(name);
+		if (existing != null) {
+			existing.setAmount(existing.getAmount() + 1);
+			Log.d("test", "++");
+		}
+		else {
+			builtBuildings.add(new Building(name, 1));
+			Log.d("test", "new");
+		}
+	}
+	
+	/**
+	 * Returns total number of buildings of this type.
+	 */
+	public int getBuildingAmount(String name) {
+		Building b = builtBuildings.getBuilding(name);
+		if (b != null)
+			return b.getAmount();
+		else
+			return 0;
+	}
+	
+	public Building getBuilding(String name) {
+		return builtBuildings.getBuilding(name);
 	}
 
-	public List<MegaProject> getBuiltMegaProjects() {
-		return builtMegaProjects;
+	public boolean canBuild(String name) {
+		return builtBuildings.canBuild(name);
 	}
-
-	public void setBuiltMegaProjects(List<MegaProject> builtMegaProjects) {
-		this.builtMegaProjects = builtMegaProjects;
-	}
+	
+//	Not implemented yet
+//
+//	public List<MegaProject> getBuiltMegaProjects() {
+//		return builtMegaProjects;
+//	}
+//
+//	public void setBuiltMegaProjects(List<MegaProject> builtMegaProjects) {
+//		this.builtMegaProjects = builtMegaProjects;
+//	}
 
 	public int getMonth() {
 		return inMonth;

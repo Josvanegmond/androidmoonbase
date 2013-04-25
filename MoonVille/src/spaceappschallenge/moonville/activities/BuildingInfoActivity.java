@@ -12,10 +12,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BuildingInfoActivity extends GameActivity {
 
-	private Building building;
+	private String buildingName;
 	private TextView buildingScale;
 	
 	@Override
@@ -24,7 +25,7 @@ public class BuildingInfoActivity extends GameActivity {
 		setContentView(R.layout.activity_building_info);
 		
 		//the building passed through via baseoverviewactivity
-		this.building = (Building) this.getIntent().getSerializableExtra( "Building" );
+		this.buildingName = getIntent().getExtras().getString("Building");
 		
 		
 		ImageView buildingImage = (ImageView) findViewById( R.id.buildingimage );
@@ -33,7 +34,7 @@ public class BuildingInfoActivity extends GameActivity {
 
 		int resID = res
 				.getIdentifier("ref_"
-						+ building.getName().replace(" ", "_")
+						+ buildingName.replace(" ", "_")
 								.toLowerCase(), "drawable",
 						getPackageName());
 		Drawable buildingDrawable = res.getDrawable(resID);
@@ -41,20 +42,19 @@ public class BuildingInfoActivity extends GameActivity {
 		
 		
 		buildingScale = (TextView) findViewById( R.id.buildingscaletext );
-		buildingScale.setText( "Building scale: " + building.getAmount() );
-		
-		//TextView buildingName = (TextView) findViewById( R.id.buildingname );
-		//buildingName.setText( building.getName() );
+		buildingScale.setText("Building scale: " + 
+					MoonBaseManager.getCurrentMoonBase().getBuildingAmount(buildingName));
 	}
 	
-	public void build( View view )
-	{
-		building.setAmount( building.getAmount() + 1 );
-		buildingScale.setText( "Building scale: " + building.getAmount() );
-		//building created for first time
-		if( building.getAmount() == 1 )
-		{
-			MoonBaseManager.getCurrentMoonBase().setBuiltBuilding( building );
+	public void build( View view ) {
+		if (MoonBaseManager.getCurrentMoonBase().canBuild(buildingName)) {
+			MoonBaseManager.getCurrentMoonBase().addBuilding(buildingName);
+			buildingScale.setText("Building scale: " + 
+						MoonBaseManager.getCurrentMoonBase().getBuildingAmount(buildingName));
+		}
+		else {
+			// TODO: Show the reason (missing resources, required building etc.).
+			Toast.makeText(this, "Can't build at this time", Toast.LENGTH_SHORT).show();
 		}
 	}
 	

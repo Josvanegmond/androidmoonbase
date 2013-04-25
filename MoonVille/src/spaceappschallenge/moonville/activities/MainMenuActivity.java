@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 public class MainMenuActivity extends GameActivity {
 
@@ -37,6 +38,8 @@ public class MainMenuActivity extends GameActivity {
 			view.getContext().startActivity(
 					new Intent(this, BaseOverviewActivity.class));
 		}
+		else 
+			Toast.makeText(this, "No saved game found", Toast.LENGTH_SHORT).show();
 	}
 
 	public void showNewGameScreen(View view) {
