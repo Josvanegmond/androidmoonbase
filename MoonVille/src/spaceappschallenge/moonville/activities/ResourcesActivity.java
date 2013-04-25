@@ -37,16 +37,9 @@ public class ResourcesActivity extends GameActivity {
 		return true;
 	}
 	
-	@Override
-	public void onBackPressed() {
-		//this does the same thing as the "back to Overview" Button
-		this.showBaseOverviewScreen(this.findViewById(R.id.ar_showBaseOverviewButton));
-	}
 
 	// methods called by onClick property of button in xml
 	public void showBaseOverviewScreen(View view) {
-		view.getContext().startActivity(
-				new Intent(this, BaseOverviewActivity.class));
 		this.finish();
 	}
 
@@ -61,35 +54,13 @@ public class ResourcesActivity extends GameActivity {
 		view.getContext().startActivity(
 				new Intent(this, ExportResourcesActivity.class));
 	}
-
-	public void showResourcesScreen(View view) {
-		// we are already here
-		// view.getContext().startActivity( new Intent( this,
-		// ResourcesActivity.class ) );
-	}
 	
 	public void showBuildingScreen(View view) {
-		view.getContext().startActivity(
-				new Intent(this, BaseOverviewActivity.class));
+		this.finish();
 	}
 
 	public void showExportScreen(View view) {
 		view.getContext().startActivity(
 				new Intent(this, ExportResourcesActivity.class));
 	}
-
-
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event)
-	{
-	    if ((keyCode == KeyEvent.KEYCODE_BACK))
-	    {
-			startActivity(
-					new Intent(this, BaseOverviewActivity.class));
-	        finish();
-	    }
-	    return super.onKeyDown(keyCode, event);
-	}
-	
 }
