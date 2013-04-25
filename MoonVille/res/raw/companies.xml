@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<companies>
+
+	<company
+	   name="Orbital Transits"
+	   info="A small company providing transport services to ground and orbital stations around earth. They import extraterrestrial resources from mining companies and distribute them further to ground based and orbital facilities."
+	   paymentfactor="1"
+	   requiredreputation = "0" >
+	   
+        <importResources>
+            <resource
+                name="Water"
+                amount="100" >
+            </resource>
+            <resource
+                name="Hydrogen"
+                amount="25" >
+            </resource>
+            <resource
+                name="Helium-3"
+                amount="5" >
+            </resource>
+        </importResources>
+        
+    </company>
+
+	<company
+	   name="Asteroids inc"
+	   info="Asteroids incorporated harvests resources from near earth asteroids, but are dependend on import of propellants. They have a strong market position by selling an abundance of resources that have a rare occurence on Earth. As one of the first pioneers on extraterrestrian excavation, this company is an icon for a new age of space industry."
+	   paymentfactor="1.4"
+	   requiredreputation = "0" >
+	   
+        <importResources>
+            <resource
+                name="Water"
+                amount="300" >
+            </resource>
+            <resource
+                name="Hydrogen"
+                amount="150" >
+            </resource>
+        </importResources>
+        
+    </company>
+
+</companies>
