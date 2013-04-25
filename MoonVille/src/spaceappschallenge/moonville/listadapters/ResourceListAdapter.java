@@ -1,10 +1,10 @@
 package spaceappschallenge.moonville.listadapters;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Resource;
-import spaceappschallenge.moonville.factories.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,25 +13,25 @@ import android.widget.TextView;
 
 public class ResourceListAdapter extends BaseAdapter
 {
-	private ArrayList<Resource> allResources;
+	private List<Resource> resources;
 	
-	public ResourceListAdapter()
+	public ResourceListAdapter( List<Resource> resourceList )
 	{
 		//get the resources via the factory
-		this.allResources = Resources.getInstance().getAllResources();
+		this.resources = resourceList;
 	}
 	
 	
 	@Override
 	public int getCount()
 	{
-		return allResources.size();
+		return resources.size();
 	}
 
 	@Override
 	public Object getItem( int index )
 	{
-		return allResources.get( index );
+		return resources.get( index );
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class ResourceListAdapter extends BaseAdapter
 	@Override
 	public View getView( int index, View convertView, ViewGroup parent )
 	{
-		Resource resource = this.allResources.get( index );
+		Resource resource = this.resources.get( index );
 		
 		if( convertView == null )
 		{

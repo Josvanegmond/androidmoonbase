@@ -3,6 +3,9 @@ package spaceappschallenge.moonville.businessmodels;
 import java.util.ArrayList;
 import java.util.List;
 
+import spaceappschallenge.moonville.factories.Resources;
+import spaceappschallenge.moonville.xml_parsers.ResourceDefinition;
+
 public class ImportCompany
 {
 	protected String name;
@@ -22,6 +25,20 @@ public class ImportCompany
 		this.paymentFactor = paymentFactor2;
 		this.requiredReputation = requiredReputation;
 		this.importResources = importResources;
+	}
+	
+	public int getPayment()
+	{
+		Resources resources = Resources.getInstance();
+		
+		int totalMoneySum = 0;
+		for( Resource resource : this.importResources )
+		{
+			ResourceDefinition resourceDefinition = resources.getResource( resource.getName() );
+			totalMoneySum += resource.getAmount() * resourceDefinition.getExportPrice();
+		}
+		
+		return (int)( this.paymentFactor * totalMoneySum );
 	}
 
 	public int getRequiredReputation()

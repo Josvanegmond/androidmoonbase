@@ -8,7 +8,8 @@ import spaceappschallenge.moonville.businessmodels.Resource;
 /**
  * Provides access to the xml attributes of a building.
  */
-public class BuildingDefinition {
+public class BuildingDefinition
+{
 	protected String name = "";
 	protected String info = "";
 	protected int amount = 0;

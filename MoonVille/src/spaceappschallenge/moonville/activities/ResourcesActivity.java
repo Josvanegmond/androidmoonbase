@@ -1,12 +1,12 @@
 package spaceappschallenge.moonville.activities;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Resource;
-import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.listadapters.ResourceListAdapter;
+import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,9 +22,9 @@ public class ResourcesActivity extends GameActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_resources);
 
-		ArrayList<Resource> resources = Resources.getInstance()
-				.getAllResources();
-		ResourceListAdapter resourceListAdapter = new ResourceListAdapter();
+		List<Resource> resources = MoonBaseManager.getCurrentMoonBase().getStoredResources();
+		
+		ResourceListAdapter resourceListAdapter = new ResourceListAdapter( resources );
 		ListView resourceListView = (ListView) this
 				.findViewById(R.id.resourceslist);
 		resourceListView.setAdapter(resourceListAdapter);

@@ -29,7 +29,8 @@ public class BuildingXMLParser {
 	 * @param: inputStream: InputStream object with the XML as the file
 	 */
 	public BuildingXMLParser(InputStream inputStream)
-			throws XmlPullParserException {
+			throws XmlPullParserException
+	{
 		this.inputStream = inputStream;
 		XmlPullParserFactory xmlFactory = XmlPullParserFactory.newInstance();
 		xmlFactory.setNamespaceAware(true);

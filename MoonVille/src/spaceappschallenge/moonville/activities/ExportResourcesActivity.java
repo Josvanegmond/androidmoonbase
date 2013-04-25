@@ -5,8 +5,11 @@ import java.util.List;
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.ImportCompany;
+import spaceappschallenge.moonville.businessmodels.MoonBase;
+import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.ImportCompanies;
 import spaceappschallenge.moonville.listadapters.ExportResourceListAdapter;
+import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -59,9 +62,49 @@ public class ExportResourcesActivity extends GameActivity
 	
 
 	// methods called by onClick property of button in xml
+	
+	/**
+	 * export grabs the selected company, checks the resource demand, and compares it to the resources stored in moonbase.
+	 * If there are enough resources, the resources are substracted from moonbase and money is added.
+	 * 
+	 * TODO: reputation involvement
+	 */
 	public void export( View view )
 	{
+		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
+		ImportCompany company = companies.get( this.companyIndex );
 		
+		List<Resource> moonBaseResources = moonBase.getStoredResources();
+		List<Resource> importResources = company.getImportResources();
+		
+		boolean canExport = true;
+		
+		//check if enough resources have been gathered to export the resources
+		//canExport will be set accordingly
+		for( Resource importResource : importResources )
+		{
+			Resource moonBaseResource = null;
+			
+			for( Resource searchResource : moonBaseResources )
+			{
+				if( searchResource.getName().equals( importResource.getName() ) )
+				{
+					moonBaseResource = searchResource;
+					break;
+				}
+			}
+			
+			if( moonBaseResource.getAmount() < importResource.getAmount() )
+			{
+				canExport = false;
+			}
+		}
+		
+		//if we can export, substract resources and add money
+		if( canExport == true )
+		{
+			moonBase.setMoney( moonBase.getMoney() + company.getPayment() );
+		}
 	}
 	
 	

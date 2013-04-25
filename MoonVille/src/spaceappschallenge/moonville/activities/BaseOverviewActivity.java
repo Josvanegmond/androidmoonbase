@@ -236,18 +236,17 @@ public class BaseOverviewActivity extends GameActivity {
 		tree.checkPower();
 		tree.checkRequiredBuildings();
 
-		Resources resources = Resources.getInstance();
-		ArrayList<Resource> available = (ArrayList<Resource>) tree
-				.checkResources(resources.getAvailableResources());
-		resources.setAvailableResources(available);
+		List<Resource> available = (ArrayList<Resource>) tree.checkResources( moonBase.getStoredResources() );
+		moonBase.setStoredResources( available );
 
 		// TODO: factor in research and prospecting bonus
 		// TODO: calculate reputation
 
 		// last step, save to file
-		MoonBaseManager.getCurrentMoonBase().setMonth(
-				MoonBaseManager.getCurrentMoonBase().getMonth() + 1);
+		moonBase.setMonth( moonBase.getMonth() + 1);
+		
 		updateUI();
+		
 		MoonBaseManager.saveMoonBase(view.getContext());
 
 	}
