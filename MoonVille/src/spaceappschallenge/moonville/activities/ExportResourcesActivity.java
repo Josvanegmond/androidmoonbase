@@ -94,9 +94,12 @@ public class ExportResourcesActivity extends GameActivity
 				}
 			}
 			
-			if( moonBaseResource.getAmount() < importResource.getAmount() )
+			if( moonBaseResource != null )
 			{
-				canExport = false;
+				if( moonBaseResource.getAmount() < importResource.getAmount() )
+				{
+					canExport = false;
+				}
 			}
 		}
 		

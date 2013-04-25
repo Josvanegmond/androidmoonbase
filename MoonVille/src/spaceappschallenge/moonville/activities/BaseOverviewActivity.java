@@ -232,6 +232,8 @@ public class BaseOverviewActivity extends GameActivity {
 	public void nextTurn(View view)
 	{
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
+		moonBase.incrementMonth();
+		
 		BuildingTree tree = moonBase.getBuiltBuildings();
 		tree.checkPower();
 		tree.checkRequiredBuildings();
@@ -243,7 +245,6 @@ public class BaseOverviewActivity extends GameActivity {
 		// TODO: calculate reputation
 
 		// last step, save to file
-		moonBase.setMonth( moonBase.getMonth() + 1);
 		
 		updateUI();
 		
