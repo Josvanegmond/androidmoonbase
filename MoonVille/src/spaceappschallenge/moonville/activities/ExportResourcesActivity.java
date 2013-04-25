@@ -47,8 +47,6 @@ public class ExportResourcesActivity extends GameActivity
 
 	// methods called by onClick property of button in xml
 	public void showBaseOverviewScreen(View view) {
-		view.getContext().startActivity(
-				new Intent(this, BaseOverviewActivity.class));
 		this.finish();
 	}
 
@@ -69,21 +67,5 @@ public class ExportResourcesActivity extends GameActivity
 				new Intent(this, ExportResourcesActivity.class));
 		this.finish();
 	}
-	
-	
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event)
-	{
-	    if ((keyCode == KeyEvent.KEYCODE_BACK))
-	    {
-			startActivity(
-					new Intent(ExportResourcesActivity.this, BaseOverviewActivity.class));
-	        finish();
-	    }
-	    return super.onKeyDown(keyCode, event);
-	}
-	
-
 
 }

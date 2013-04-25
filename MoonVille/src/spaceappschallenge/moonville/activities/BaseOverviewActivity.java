@@ -255,33 +255,22 @@ public class BaseOverviewActivity extends GameActivity {
 	public void showImportResourcesScreen(View view) {
 		view.getContext().startActivity(
 				new Intent(this, ImportResourcesActivity.class));
-		this.finish();
 	}
 
 	public void showExportResourcesScreen(View view) {
 		view.getContext().startActivity(
 				new Intent(this, ExportResourcesActivity.class));
-		this.finish();
 
-	}
-
-	public void showBaseOverviewScreen(View view) {
-		// we are already here
-		// view.getContext().startActivity( new Intent( this,
-		// BaseOverviewActivity.class ) );
-		// this.finish();
 	}
 
 	public void showResourcesScreen(View view) {
 		view.getContext().startActivity(
 				new Intent(this, ResourcesActivity.class));
-		this.finish();
 	}
 
 	public void showExportScreen(View view) {
 		view.getContext().startActivity(
 				new Intent(this, ResourcesActivity.class));
-		this.finish();
 	}
 
 	// some scrollbar fix for scrolling

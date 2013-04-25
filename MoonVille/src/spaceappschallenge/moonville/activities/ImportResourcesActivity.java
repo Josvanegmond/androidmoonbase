@@ -56,8 +56,6 @@ public class ImportResourcesActivity extends GameActivity {
 	}
 
 	public void showBuildingScreen(View view) {
-		view.getContext().startActivity(
-				new Intent(this, BaseOverviewActivity.class));
 		this.finish();
 	}
 
@@ -71,20 +69,6 @@ public class ImportResourcesActivity extends GameActivity {
 		view.getContext().startActivity(
 				new Intent(this, ImportResourcesActivity.class));
 		this.finish();
-	}
-	
-	
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event)
-	{
-	    if ((keyCode == KeyEvent.KEYCODE_BACK))
-	    {
-			startActivity(
-					new Intent(this, BaseOverviewActivity.class));
-	        finish();
-	    }
-	    return super.onKeyDown(keyCode, event);
 	}
 
 }
