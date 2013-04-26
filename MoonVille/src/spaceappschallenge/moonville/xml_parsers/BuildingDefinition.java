@@ -7,20 +7,20 @@ import spaceappschallenge.moonville.businessmodels.Resource;
 
 /**
  * Provides access to the xml attributes of a building.
+ * This is a read-only object, and is made by the xml parser
  */
 public class BuildingDefinition
 {
-	protected String name = "";
-	protected String info = "";
-	protected int amount = 0;
-	protected ArrayList<Resource> requiredResources;
-	protected ArrayList<Resource> outputResources;
-	protected ArrayList<BuildingDefinition> requiredBuildings;
-	protected int inputPower = 0;
-	protected int outputPower = 0;
-	protected int requiredTurns = 0;
-	protected int regolithCost = 0;
-	protected int monetaryCost = 0;
+	private String name = "";
+	private String info = "";
+	private int amount = 0;
+	private ArrayList<Resource> requiredResources;
+	private ArrayList<Resource> outputResources;
+	private ArrayList<BuildingDefinition> requiredBuildings;
+	private int inputPower = 0;
+	private int outputPower = 0;
+	private int requiredTurns = 0;
+	private int monetaryCost = 0;
 	private int xPos, yPos;
 	
 	public BuildingDefinition(String name) {
@@ -30,7 +30,7 @@ public class BuildingDefinition
 	public BuildingDefinition(String name, String info,
 			int amount, int inputPower,
 			int outputPower, int monetaryCost,
-			int regolithCost, int requiredTurns,
+			int requiredTurns,
 			ArrayList<Resource> requiredResources,
 			ArrayList<Resource> outputResources,
 			ArrayList<BuildingDefinition> requiredBuildings, int xPos,
@@ -40,7 +40,6 @@ public class BuildingDefinition
 		this.amount = amount;
 		this.inputPower = inputPower;
 		this.monetaryCost = monetaryCost;
-		this.regolithCost = regolithCost;
 		this.requiredTurns = requiredTurns;
 		this.outputResources = outputResources;
 		this.requiredBuildings = requiredBuildings;
@@ -90,10 +89,6 @@ public class BuildingDefinition
 
 	public int getRequiredTurns() {
 		return requiredTurns;
-	}
-
-	public int getRegolithCost() {
-		return regolithCost;
 	}
 
 	public int getMonetaryCost() {

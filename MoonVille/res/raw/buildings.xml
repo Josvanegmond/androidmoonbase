@@ -8,7 +8,6 @@
         inputPower="0"
         monetaryCost="1000"
         outputPower="0"
-        regolithCost="0"
         requiredTurns="20"
         x="20"
         y="220" >
@@ -20,7 +19,6 @@
         inputPower="0"
         monetaryCost="20"
         outputPower="10"
-        regolithCost="0"
         requiredTurns="2"
         x="80"
         y="110" >
@@ -36,7 +34,6 @@
         inputPower="10"
         monetaryCost="20"
         outputPower="0"
-        regolithCost="0"
         requiredTurns="2"
         x="200"
         y="20" >
@@ -59,7 +56,6 @@
         inputPower="20"
         monetaryCost="20"
         outputPower="0"
-        regolithCost="0"
         requiredTurns="4"
         x="280"
         y="220" >
@@ -86,7 +82,6 @@
         inputPower="0"
         monetaryCost="100"
         outputPower="50"
-        regolithCost="0"
         requiredTurns="10"
         x="170"
         y="370" >
@@ -109,7 +104,6 @@
         inputPower="10"
         monetaryCost="15"
         outputPower="0"
-        regolithCost="0"
         requiredTurns="4"
         x="385"
         y="70" >
@@ -143,7 +137,6 @@
         inputPower="50"
         monetaryCost="25"
         outputPower="0"
-        regolithCost="0"
         requiredTurns="5"
         x="535"
         y="260" >
@@ -181,7 +174,6 @@
         inputPower="50"
         monetaryCost="30"
         outputPower="0"
-        regolithCost="0"
         requiredTurns="5"
         x="570"
         y="40" >
@@ -215,7 +207,6 @@
         inputPower="20"
         monetaryCost="10"
         outputPower="0"
-        regolithCost="0"
         requiredTurns="3"
         x="670"
         y="160" >
@@ -245,7 +236,6 @@
         inputPower="50"
         monetaryCost="15"
         outputPower="0"
-        regolithCost="0"
         requiredTurns="6"
         x="570"
         y="380" >

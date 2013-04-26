@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ExportResourcesActivity extends GameActivity
 {
@@ -99,7 +100,14 @@ public class ExportResourcesActivity extends GameActivity
 				if( moonBaseResource.getAmount() < importResource.getAmount() )
 				{
 					canExport = false;
+					Toast.makeText( this, "Can't export, resources in stock, but demand not satisfied", 500 ).show();
+					
 				}
+			}
+			else
+			{
+				canExport = false;
+				Toast.makeText( this, "Can't export, demanded resources not in stock", 500 ).show();
 			}
 		}
 		
@@ -107,6 +115,7 @@ public class ExportResourcesActivity extends GameActivity
 		if( canExport == true )
 		{
 			moonBase.setMoney( moonBase.getMoney() + company.getPayment() );
+			Toast.makeText( this, "Exported, payment is " + company.getPayment(), 500 ).show();
 		}
 	}
 	
