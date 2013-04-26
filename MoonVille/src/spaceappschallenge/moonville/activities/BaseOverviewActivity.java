@@ -20,6 +20,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -223,23 +224,12 @@ public class BaseOverviewActivity extends GameActivity {
 		BuildingTree buildingTree = MoonBaseManager.getCurrentMoonBase().getBuiltBuildings();
 		buildingTree.checkResources( resourceChangeList );
 		
-		if( buildingTree.size() == 0 )
-		{
-			Toast.makeText( this, "No buildings built", 500 ).show();
-		}
-		
-		else
+		if( buildingTree.size() > 0 )
 		{
 			for( final Building building : buildingTree )
 			{
 				List<Resource> outputResources = building.getResourceOutput();
 	
-				if( outputResources.size() == 0 )
-				{
-					Toast.makeText( this, "No resources outputted ", 500 ).show();
-				}
-	
-				Toast.makeText( this, "Output resources of " + building.getName() + ": " + outputResources.size(), 500 ).show();
 				int popupNumber = 0;
 				
 				for( final Resource resource : outputResources )
@@ -249,23 +239,28 @@ public class BaseOverviewActivity extends GameActivity {
 					 */
 					new AsyncTask<Integer,Integer,Void>()
 					{
-						private TextView resourcePopup;
+						private View resourcePopup;
 						private LayoutParams popupParams;
+						private TextView text;
 						
 						@Override
 						protected void onPreExecute()
 						{
-							resourcePopup = new TextView( BaseOverviewActivity.this );
-							resourcePopup.setText( "+ " + resource.getAmount() + " " + resource.getName() );
+							LayoutInflater inflater = LayoutInflater.from( BaseOverviewActivity.this );
+							resourcePopup = inflater.inflate(R.layout.overview_popup, moonSurfaceLayout, false);
+							text = (TextView) resourcePopup.findViewById( R.id.text );
+							text.setText( "+ " + resource.getAmount() + " " + resource.getName() );
 							
 							//place the popup in the background according to position determined in Building object
 							BuildingDefinition bd = Buildings.getInstance().getBuilding(building.getName());
 							popupParams = new AbsoluteLayout.LayoutParams(
-									400,
-									80,
+									resourcePopup.getMeasuredWidth() +150,
+									resourcePopup.getMeasuredHeight() +30,
 									bd.getXPos(), bd.getYPos());
 			
 							resourcePopup.setLayoutParams( popupParams );
+							text.setTextColor( Color.argb( 100, 255, 255, 255 ) );
+							resourcePopup.setBackgroundColor( Color.argb( 0, 20, 20, 20 ) );
 							moonSurfaceLayout.addView( resourcePopup );
 						}
 						
@@ -275,7 +270,7 @@ public class BaseOverviewActivity extends GameActivity {
 						{
 							try
 							{
-								int alpha = 100;
+								int alpha = 10, dtAlpha = 10;
 								int popupNumber = args[0];
 								
 								Thread.sleep( popupNumber * 100 );
@@ -283,10 +278,13 @@ public class BaseOverviewActivity extends GameActivity {
 								while( alpha > 0 )
 								{
 									this.publishProgress( alpha );
-									alpha-=5;
+									alpha+=dtAlpha;
+									dtAlpha--;
 									
 									Thread.sleep( 50 );
 								}
+
+								this.publishProgress( 0 );
 							}
 							catch( InterruptedException e )
 							{
@@ -299,7 +297,8 @@ public class BaseOverviewActivity extends GameActivity {
 						@Override
 						protected void onProgressUpdate( Integer... values )
 						{
-							resourcePopup.setTextColor( Color.argb( values[0], 0, 0, 0 ) );
+							text.setTextColor( Color.argb( values[0], 255, 255, 255 ) );
+							resourcePopup.setBackgroundColor( Color.argb( values[0], 20, 20, 20 ) );
 							popupParams.y -= 1;
 							resourcePopup.setLayoutParams( popupParams );
 						}

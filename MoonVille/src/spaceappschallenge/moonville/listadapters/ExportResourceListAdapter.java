@@ -58,7 +58,7 @@ public class ExportResourceListAdapter extends BaseAdapter
 			convertView = inflater.inflate(R.layout.listitem_export_resource, parent, false);
 		}
 
-		TextView resourceName = (TextView) convertView.findViewById(R.id.exportResourceNameTextView);
+		TextView resourceName = (TextView) convertView.findViewById(R.id.exportresourcename);
 		resourceName.setText(resource.getName());
 		
 		return convertView;
