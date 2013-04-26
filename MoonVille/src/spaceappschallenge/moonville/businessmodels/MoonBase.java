@@ -10,7 +10,8 @@ import android.util.Log;
  * Handles information about the game world, including resources, research 
  * points, prospecting and buildings.
  */
-public class MoonBase implements Serializable {
+public class MoonBase implements Serializable
+{
 	protected int researchLabSize;
 	protected int researchPoints;
 	protected int prospectingLevel;
@@ -27,7 +28,8 @@ public class MoonBase implements Serializable {
 
 	protected GameDetails gameDetails;
 
-	public MoonBase(int researchPoints, int prospectingLevel, int money) {
+	public MoonBase(int researchPoints, int prospectingLevel, int money)
+	{
 		this.researchLabSize = 1;
 		this.researchPoints = researchPoints;
 		this.prospectingLevel = prospectingLevel;

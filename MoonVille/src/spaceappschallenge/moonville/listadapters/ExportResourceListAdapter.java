@@ -22,42 +22,43 @@ import android.widget.Toast;
 
 public class ExportResourceListAdapter extends BaseAdapter
 {
-	private ArrayList<Resource> allResources;
+	private List<Resource> resourceList;
 
-	public ExportResourceListAdapter() {
-		// get the resources via the factory
-		this.allResources = Resources.getInstance().getAllResources();
+	public ExportResourceListAdapter( List<Resource> resourceList )
+	{
+		this.resourceList = resourceList;
 	}
 
 	@Override
-	public int getCount() {
-		return allResources.size();
+	public int getCount()
+	{
+		return resourceList.size();
 	}
 
 	@Override
-	public Object getItem(int index) {
-		return allResources.get(index);
+	public Object getItem(int index)
+	{
+		return resourceList.get(index);
 	}
 
 	@Override
-	public long getItemId(int index) {
+	public long getItemId(int index)
+	{
 		return index;
 	}
 
 	@Override
 	public View getView(int index, View convertView, ViewGroup parent)
 	{
-		Resource resource = this.allResources.get(index);
+		Resource resource = this.resourceList.get(index);
 
 		if (convertView == null)
 		{
 			LayoutInflater inflater = LayoutInflater.from( parent.getContext() );
-			convertView = inflater.inflate(R.layout.listitem_export_resource,
-					parent, false);
+			convertView = inflater.inflate(R.layout.listitem_export_resource, parent, false);
 		}
 
-		TextView resourceName = (TextView) convertView
-				.findViewById(R.id.exportResourceNameTextView);
+		TextView resourceName = (TextView) convertView.findViewById(R.id.exportresourcename);
 		resourceName.setText(resource.getName());
 		
 		return convertView;

@@ -19,31 +19,33 @@ import android.content.Context;
  * 
  *  @author Robik
  */
-public class ResourceXMLParser {
+public class ResourceXMLParser
+{
 	protected Context context = null;
 	protected InputStream inputStream = null;
 	protected XmlPullParser xpp;
-	protected ArrayList<Resource> resources;
+	protected ArrayList<ResourceDefinition> resources;
 
 	public ResourceXMLParser(InputStream inputStream)
-			throws XmlPullParserException {
+			throws XmlPullParserException
+	{
 		this.inputStream = inputStream;
 		this.context = ApplicationService.getInstance().getApplicationContext();
 		XmlPullParserFactory xmlFactory = XmlPullParserFactory.newInstance();
 		xmlFactory.setNamespaceAware(true);
 		xpp = xmlFactory.newPullParser();
-		this.resources = new ArrayList<Resource>();
+		this.resources = new ArrayList<ResourceDefinition>();
 	}
 
 	// Create "Resource" objects by parsing input stream
-	public ArrayList<Resource> parse() throws XmlPullParserException,
+	public ArrayList<ResourceDefinition> parse() throws XmlPullParserException,
 			IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				this.inputStream));
 		xpp.setInput(br);
 		String startTagName = "";
 		int eventType = xpp.getEventType();
-		Resource resource = null;
+		ResourceDefinition resource = null;
 		String name = "";
 		double quality = 0.0;
 		int importPrice = 0;
@@ -64,13 +66,14 @@ public class ResourceXMLParser {
 							"exportPrice"));
 					weight = Integer.parseInt(xpp.getAttributeValue(null,
 							"weight"));
-					resource = new Resource(name, quality, importPrice,
+					resource = new ResourceDefinition(name, quality, importPrice,
 							exportPrice, weight);
 					resources.add(resource);
 				}
 			}
 			eventType = xpp.next();
 		}
+		
 		return this.resources;
 	}
 

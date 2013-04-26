@@ -29,7 +29,8 @@ public class BuildingXMLParser {
 	 * @param: inputStream: InputStream object with the XML as the file
 	 */
 	public BuildingXMLParser(InputStream inputStream)
-			throws XmlPullParserException {
+			throws XmlPullParserException
+	{
 		this.inputStream = inputStream;
 		XmlPullParserFactory xmlFactory = XmlPullParserFactory.newInstance();
 		xmlFactory.setNamespaceAware(true);
@@ -41,7 +42,7 @@ public class BuildingXMLParser {
 	String buildingInfo = "";
 	int buildingAmount = 0;
 	int buildingInputPower = 0, buildingOutputPower = 0;
-	int buildingMonetaryCost = 0, buildingRegolithCost = 0;
+	int buildingMonetaryCost = 0;
 	int buildingRequiredTurns = 0;
 	int buildingXPos = 0;
 	int buildingYPos = 0;
@@ -61,8 +62,6 @@ public class BuildingXMLParser {
 				"outputPower"));
 		buildingMonetaryCost = Integer.parseInt(xpp.getAttributeValue(null,
 				"monetaryCost"));
-		buildingRegolithCost = Integer.parseInt(xpp.getAttributeValue(null,
-				"regolithCost"));
 		buildingRequiredTurns = Integer.parseInt(xpp.getAttributeValue(null,
 				"requiredTurns"));
 		buildingXPos = Integer.parseInt(xpp.getAttributeValue(null, "x"));
@@ -250,7 +249,7 @@ public class BuildingXMLParser {
 				this.buildings.add(new BuildingDefinition(buildingName, buildingInfo,
 						buildingAmount, buildingInputPower,
 						buildingOutputPower, buildingMonetaryCost,
-						buildingRegolithCost, buildingRequiredTurns,
+						buildingRequiredTurns,
 						requiredResources, outputResources, requiredBuildings,
 						buildingXPos, buildingYPos));
 			}// if building

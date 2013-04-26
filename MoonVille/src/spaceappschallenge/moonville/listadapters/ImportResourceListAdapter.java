@@ -1,11 +1,13 @@
 package spaceappschallenge.moonville.listadapters;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
+import spaceappschallenge.moonville.xml_parsers.ResourceDefinition;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ImportResourceListAdapter extends BaseAdapter {
-	private ArrayList<Resource> allResources;
+	private List<ResourceDefinition> allResources;
 
-	public ImportResourceListAdapter() {
+	public ImportResourceListAdapter( List<ResourceDefinition> resources ) {
 		// get the resources via the factory
-		this.allResources = Resources.getInstance().getAllResources();
+		this.allResources = resources;
 	}
 
 	@Override
@@ -43,7 +45,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int index, View convertView, ViewGroup parent) {
-		Resource resource = this.allResources.get(index);
+		ResourceDefinition resource = this.allResources.get(index);
 
 		if (convertView == null) {
 			LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -81,7 +83,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 								.findViewById(R.id.importResourceNameTextView))
 								.getText().toString();
 
-						Resource currentResource = Resources.getInstance()
+						ResourceDefinition currentResource = Resources.getInstance()
 								.getResource(resourceName);
 						if (currentResource == null) {
 							Log.i("null", resourceName + "not found");
@@ -123,7 +125,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				String resourceName = ((TextView) convertView
 						.findViewById(R.id.importResourceNameTextView))
 						.getText().toString();
-				Resource currentResource = Resources.getInstance().getResource(
+				ResourceDefinition currentResource = Resources.getInstance().getResource(
 						resourceName);
 
 				int unitCost = currentResource.getImportPrice();

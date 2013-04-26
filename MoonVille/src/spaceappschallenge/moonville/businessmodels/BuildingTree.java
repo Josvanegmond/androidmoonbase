@@ -2,7 +2,9 @@ package spaceappschallenge.moonville.businessmodels;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Stack;
 
 import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
@@ -16,11 +18,10 @@ import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
  * @author Felix
  *
  */
-public class BuildingTree implements Serializable {
-
-	Building building;
-	
-	List<BuildingTree> childs = new ArrayList<BuildingTree>();
+public class BuildingTree implements Serializable, Iterable<Building>
+{
+	private Building building;
+	private List<BuildingTree> childs = new ArrayList<BuildingTree>();
 	
 	/**
 	 * Creates an empty tree.
@@ -216,6 +217,7 @@ public class BuildingTree implements Serializable {
 				}
 			}
 		}
+		
 		for (BuildingTree c : childs) 
 			Resource.merge(resourceAvailable, c.checkResources(resourceAvailable));
 		return resourceAvailable;
@@ -238,5 +240,47 @@ public class BuildingTree implements Serializable {
 			}
 		}
 		return true;
+	}
+
+	
+	public Building getBuilding()
+	{
+		return this.building;
+	}
+	
+	public List<BuildingTree> getChilds()
+	{
+		return this.childs;
+	}
+
+	/**
+	 * Added an iterator so the tree can be easily read in a for loop
+	 * Jos
+	 */
+	@Override
+	public Iterator<Building> iterator()
+	{
+		Iterator<Building> iterator = new BuildingTreeIterator<Building>( this );
+		return iterator;
+	}
+
+	
+	/**
+	 * returns the amount of buildings in the tree.
+	 * uses iterator to iterate through all childs, and counts amount.
+	 * TODO: optimize (size as attribute?)
+	 */
+	public int size()
+	{
+		int amount = 0;
+		
+		Iterator<Building> iter = iterator();
+		while( iter.hasNext() )
+		{
+			iter.next();
+			amount++;
+		}
+		
+		return amount;
 	}
 }

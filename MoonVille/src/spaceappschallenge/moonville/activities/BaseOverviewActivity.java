@@ -6,27 +6,32 @@ import java.util.List;
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.MoonVille;
 import spaceappschallenge.moonville.R;
+import spaceappschallenge.moonville.businessmodels.Building;
 import spaceappschallenge.moonville.businessmodels.BuildingTree;
 import spaceappschallenge.moonville.businessmodels.MoonBase;
 import spaceappschallenge.moonville.businessmodels.Resource;
 import spaceappschallenge.moonville.factories.Buildings;
-import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsoluteLayout;
+import android.widget.AbsoluteLayout.LayoutParams;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BaseOverviewActivity extends GameActivity {
 
@@ -216,6 +221,105 @@ public class BaseOverviewActivity extends GameActivity {
 	}
 
 	
+	public void showResourcePopups()
+	{	
+		List<Resource> resourceChangeList = new ArrayList<Resource>();
+		BuildingTree buildingTree = MoonBaseManager.getCurrentMoonBase().getBuiltBuildings();
+		buildingTree.checkResources( resourceChangeList );
+		
+		if( buildingTree.size() > 0 )
+		{
+			for( final Building building : buildingTree )
+			{
+				List<Resource> outputResources = building.getResourceOutput();
+	
+				int popupNumber = 0;
+				
+				for( final Resource resource : outputResources )
+				{
+					/**
+					 * Slowly fade and move popup away
+					 */
+					new AsyncTask<Integer,Integer,Void>()
+					{
+						private View resourcePopup;
+						private LayoutParams popupParams;
+						private TextView text;
+						
+						@Override
+						protected void onPreExecute()
+						{
+							LayoutInflater inflater = LayoutInflater.from( BaseOverviewActivity.this );
+							resourcePopup = inflater.inflate(R.layout.overview_popup, moonSurfaceLayout, false);
+							text = (TextView) resourcePopup.findViewById( R.id.text );
+							text.setText( "+ " + resource.getAmount() + " " + resource.getName() );
+							
+							//place the popup in the background according to position determined in Building object
+							BuildingDefinition bd = Buildings.getInstance().getBuilding(building.getName());
+							popupParams = new AbsoluteLayout.LayoutParams(
+									resourcePopup.getMeasuredWidth() +150,
+									resourcePopup.getMeasuredHeight() +30,
+									bd.getXPos(), bd.getYPos());
+			
+							resourcePopup.setLayoutParams( popupParams );
+							text.setTextColor( Color.argb( 100, 255, 255, 255 ) );
+							resourcePopup.setBackgroundColor( Color.argb( 0, 20, 20, 20 ) );
+							moonSurfaceLayout.addView( resourcePopup );
+						}
+						
+						
+						@Override
+						protected Void doInBackground( Integer... args )
+						{
+							try
+							{
+								int alpha = 10, dtAlpha = 10;
+								int popupNumber = args[0];
+								
+								Thread.sleep( popupNumber * 100 );
+								
+								while( alpha > 0 )
+								{
+									this.publishProgress( alpha );
+									alpha+=dtAlpha;
+									dtAlpha--;
+									
+									Thread.sleep( 50 );
+								}
+
+								this.publishProgress( 0 );
+							}
+							catch( InterruptedException e )
+							{
+								
+							}
+							
+							return null;
+						}
+						
+						@Override
+						protected void onProgressUpdate( Integer... values )
+						{
+							text.setTextColor( Color.argb( values[0], 255, 255, 255 ) );
+							resourcePopup.setBackgroundColor( Color.argb( values[0], 20, 20, 20 ) );
+							popupParams.y -= 1;
+							resourcePopup.setLayoutParams( popupParams );
+						}
+						
+						@Override
+						protected void onPostExecute( Void result )
+						{
+							moonSurfaceLayout.removeView( resourcePopup );
+						}
+						
+					}.execute(popupNumber);
+					
+					popupNumber++;
+				}
+			}
+		}
+	}
+	
 
 	// methods called by onClick property of button in xml
 	
@@ -235,25 +339,28 @@ public class BaseOverviewActivity extends GameActivity {
 	public void nextTurn(View view)
 	{
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
+		moonBase.incrementMonth();
+		
 		BuildingTree tree = moonBase.getBuiltBuildings();
 		tree.checkPower();
 		tree.checkRequiredBuildings();
 
-		Resources resources = Resources.getInstance();
-		ArrayList<Resource> available = (ArrayList<Resource>) tree
-				.checkResources(resources.getAvailableResources());
-		resources.setAvailableResources(available);
+		List<Resource> available = (ArrayList<Resource>) tree.checkResources( moonBase.getStoredResources() );
+		moonBase.setStoredResources( available );
 
 		// TODO: factor in research and prospecting bonus
 		// TODO: calculate reputation
 
 		// last step, save to file
-		MoonBaseManager.getCurrentMoonBase().setMonth(
-				MoonBaseManager.getCurrentMoonBase().getMonth() + 1);
+		
 		updateUI();
+		showResourcePopups();
+		
 		MoonBaseManager.saveMoonBase(view.getContext());
 
 	}
+	
+	
 
 	public void showImportResourcesScreen(View view) {
 		view.getContext().startActivity(
