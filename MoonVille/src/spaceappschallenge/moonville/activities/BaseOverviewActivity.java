@@ -25,17 +25,16 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AbsoluteLayout;
-import android.widget.AbsoluteLayout.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class BaseOverviewActivity extends GameActivity {
 
-	private AbsoluteLayout moonSurfaceLayout;
+	private RelativeLayout moonSurfaceLayout;
 	private ArrayList<ImageView> buildingImageList;
 	
 	private static String PREFERENCE_SCROLL_X = "base_overview_scroll_x";
@@ -46,7 +45,7 @@ public class BaseOverviewActivity extends GameActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_base_overview);
 		Log.i("Base", "showing moon");
-		moonSurfaceLayout = (AbsoluteLayout) this
+		moonSurfaceLayout = (RelativeLayout) this
 				.findViewById(R.id.moonsurface_relativelayout);
 		Log.i("Base", "showing buildings");
 
@@ -137,7 +136,7 @@ public class BaseOverviewActivity extends GameActivity {
 	{
 		//erase all building images from list
 		for (ImageView buildingImage : buildingImageList) {
-			((AbsoluteLayout) buildingImage.getParent())
+			((RelativeLayout) buildingImage.getParent())
 					.removeView(buildingImage);
 		}
 
@@ -194,13 +193,20 @@ public class BaseOverviewActivity extends GameActivity {
 	
 				//place it in the background according to position determined in Building object
 				BuildingDefinition bd = Buildings.getInstance().getBuilding(building.getName());
-				AbsoluteLayout.LayoutParams buildingParams = new AbsoluteLayout.LayoutParams(
-						buildingDrawable.getIntrinsicWidth() /2,
-						buildingDrawable.getIntrinsicHeight() /2,
-						bd.getXPos(), bd.getYPos());
 				
-				buildingImage.setLayoutParams(buildingParams);
-	
+//				Matrix matrix = new Matrix();
+//				matrix.reset();
+//				matrix.postTranslate( bd.getXPos(), bd.getYPos() );
+//				
+//				buildingImage.setScaleType(ScaleType.MATRIX);
+//				buildingImage.setImageMatrix(matrix);
+				
+				buildingImage.setLayoutParams( 
+					new RelativeLayout.LayoutParams( new MarginLayoutParams(width, height) ) );
+//						bd.getXPos(), bd.getYPos(), buildingDrawable.getIntrinsicWidth() /2, buildingDrawable.getIntrinsicHeight() /2
+	//				)
+		//		);
+
 				moonSurfaceLayout.addView(buildingImage);
 				
 
@@ -240,7 +246,7 @@ public class BaseOverviewActivity extends GameActivity {
 					new AsyncTask<Integer,Integer,Void>()
 					{
 						private View resourcePopup;
-						private LayoutParams popupParams;
+						private RelativeLayout.LayoutParams popupParams;
 						private TextView text;
 						
 						@Override
@@ -253,10 +259,8 @@ public class BaseOverviewActivity extends GameActivity {
 							
 							//place the popup in the background according to position determined in Building object
 							BuildingDefinition bd = Buildings.getInstance().getBuilding(building.getName());
-							popupParams = new AbsoluteLayout.LayoutParams(
-									resourcePopup.getMeasuredWidth() +150,
-									resourcePopup.getMeasuredHeight() +30,
-									bd.getXPos(), bd.getYPos());
+							popupParams =
+							new RelativeLayout.LayoutParams( bd.getXPos(), bd.getYPos() );	
 			
 							resourcePopup.setLayoutParams( popupParams );
 							text.setTextColor( Color.argb( 100, 255, 255, 255 ) );
@@ -281,7 +285,7 @@ public class BaseOverviewActivity extends GameActivity {
 									alpha+=dtAlpha;
 									dtAlpha--;
 									
-									Thread.sleep( 50 );
+									Thread.sleep( 10 );
 								}
 
 								this.publishProgress( 0 );
@@ -299,7 +303,7 @@ public class BaseOverviewActivity extends GameActivity {
 						{
 							text.setTextColor( Color.argb( values[0], 255, 255, 255 ) );
 							resourcePopup.setBackgroundColor( Color.argb( values[0], 20, 20, 20 ) );
-							popupParams.y -= 1;
+							popupParams.bottomMargin += 1;
 							resourcePopup.setLayoutParams( popupParams );
 						}
 						
