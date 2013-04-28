@@ -232,6 +232,8 @@ public class BaseOverviewActivity extends GameActivity {
 		{
 			for( final Building building : buildingTree )
 			{
+				if (building == null)
+					continue;
 				List<Resource> outputResources = building.getResourceOutput();
 	
 				int popupNumber = 0;
