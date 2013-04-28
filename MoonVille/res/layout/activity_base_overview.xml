@@ -29,16 +29,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/equator_backdrop" >
 
-                    <ImageView
-                        android:id="@+id/imageView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginLeft="178dp"
-                        android:layout_marginTop="108dp"
-                        android:src="@drawable/ref_smelting_facility" />
-
                 </RelativeLayout>
             </ScrollView>
         </HorizontalScrollView>
