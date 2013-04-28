@@ -11,54 +11,49 @@
         android:id="@+id/horizontalLL"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/importTitle">
-
-        <RelativeLayout
-            android:id="@+id/leftRL"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="left"
-            android:layout_weight=".35" >
-
-            <TextView
-                android:id="@+id/budgetTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/budgetTitle"
-                android:layout_marginTop="20dp"
-                android:gravity="left"
-                android:text="1000"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/budgetTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="10dp"
-                android:gravity="left"
-                android:text="Budget"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-        </RelativeLayout>
+        android:layout_below="@+id/importTitle" >
 
         <RelativeLayout
             android:id="@+id/listRL"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/leftRL"
-            android:gravity="right"
-            android:layout_weight="0.65" >
+            android:gravity="right" >
+
+            <LinearLayout
+                android:id="@+id/importResourcesBudgetHL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/budgetTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="left"
+                    android:text="Budget"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/budgetTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@+id/budgetTitle"
+                    android:layout_marginLeft="20dp"
+                    android:text="1000"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
 
             <ListView
                 android:id="@+id/importResourceslist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true" >
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/importResourcesBudgetHL" >
             </ListView>
         </RelativeLayout>
     </LinearLayout>
