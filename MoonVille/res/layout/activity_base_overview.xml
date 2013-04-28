@@ -23,12 +23,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" >
 
-                <AbsoluteLayout
+                <RelativeLayout
                     android:id="@+id/moonsurface_relativelayout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/equator_backdrop" >
-                </AbsoluteLayout>
+
+                </RelativeLayout>
             </ScrollView>
         </HorizontalScrollView>
 
