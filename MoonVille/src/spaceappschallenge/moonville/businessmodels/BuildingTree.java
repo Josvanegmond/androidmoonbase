@@ -22,6 +22,7 @@ public class BuildingTree implements Serializable, Iterable<Building>
 {
 	private Building building;
 	private List<BuildingTree> childs = new ArrayList<BuildingTree>();
+	private int childCount = 0;
 	
 	/**
 	 * Creates an empty tree.
@@ -106,6 +107,7 @@ public class BuildingTree implements Serializable, Iterable<Building>
 				bt.building = b;
 			else
 				 bt.childs.add(new BuildingTree(b));
+			childCount++;
 			return true;
 		}
 		return false;
@@ -258,29 +260,16 @@ public class BuildingTree implements Serializable, Iterable<Building>
 	 * Jos
 	 */
 	@Override
-	public Iterator<Building> iterator()
-	{
-		Iterator<Building> iterator = new BuildingTreeIterator<Building>( this );
+	public Iterator<Building> iterator() {
+		Iterator<Building> iterator = new BuildingTreeIterator<Building>(this);
 		return iterator;
 	}
 
 	
 	/**
-	 * returns the amount of buildings in the tree.
-	 * uses iterator to iterate through all childs, and counts amount.
-	 * TODO: optimize (size as attribute?)
+	 * Returns the amount of buildings in the tree.
 	 */
-	public int size()
-	{
-		int amount = 0;
-		
-		Iterator<Building> iter = iterator();
-		while( iter.hasNext() )
-		{
-			iter.next();
-			amount++;
-		}
-		
-		return amount;
+	public int size() {
+		return (building == null) ? 0 : childCount + 1;
 	}
 }
