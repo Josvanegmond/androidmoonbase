@@ -83,4 +83,15 @@ public class Building implements Serializable {
 		return outputResources;
 	}
 
+	public List<Resource> getResourceInput()
+	{
+		List<Resource> inputResources = this.associatedDefinition.getRequiredResources();
+		for( Resource resource : inputResources )
+		{
+			resource.setAmount( resource.getAmount() * this.getAmount() );
+		}
+		
+		return inputResources;
+	}
+
 }

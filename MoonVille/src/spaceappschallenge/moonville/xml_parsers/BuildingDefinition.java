@@ -1,15 +1,15 @@
 package spaceappschallenge.moonville.xml_parsers;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import spaceappschallenge.moonville.businessmodels.Building;
 import spaceappschallenge.moonville.businessmodels.Resource;
 
 /**
  * Provides access to the xml attributes of a building.
  * This is a read-only object, and is made by the xml parser
  */
-public class BuildingDefinition
+public class BuildingDefinition implements Serializable
 {
 	private String name = "";
 	private String info = "";
