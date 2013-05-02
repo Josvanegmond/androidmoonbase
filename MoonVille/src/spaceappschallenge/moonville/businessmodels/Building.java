@@ -23,16 +23,21 @@ public class Building implements Serializable {
 	private BuildingDefinition associatedDefinition;
 	
 
-	public Building(String name, int amount) {
-		this.name = name;
+	public Building(BuildingDefinition buildingDefinition, int amount) {
+		this.name = buildingDefinition.getName();
 		this.amount = amount;
 		
-		this.associatedDefinition = Buildings.getInstance().getBuilding( this.name );
+		this.associatedDefinition = buildingDefinition;
 	}
 
 	// Setters and Getters
 	public String getName() {
 		return name;
+	}
+	
+	public int getRequiredTurns()
+	{
+		return this.associatedDefinition.getRequiredTurns();
 	}
 	
 	public int getAmount() {
@@ -92,6 +97,23 @@ public class Building implements Serializable {
 		}
 		
 		return inputResources;
+	}
+
+
+	public List<String> getRequiredBuildings()
+	{
+		List<String> requiredBuildings = this.associatedDefinition.getRequiredBuildings();
+		return requiredBuildings;
+	}
+	
+	public int getInputPower()
+	{
+		return this.associatedDefinition.getInputPower();
+	}
+	
+	public int getOutputPower()
+	{
+		return this.associatedDefinition.getOutputPower();
 	}
 
 }
