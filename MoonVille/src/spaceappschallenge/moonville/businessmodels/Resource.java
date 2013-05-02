@@ -2,6 +2,8 @@ package spaceappschallenge.moonville.businessmodels;
 
 import java.io.Serializable;
 import java.util.List;
+
+import android.util.Log;
 /*
  * A resource can be imported/exported and produced by buildings. Most 
  * importantly, they are used to construct buildings.
@@ -59,12 +61,15 @@ public class Resource implements Serializable {
 	public static List<Resource> merge(List<Resource> a, List<Resource> b) {
 		for (Resource ra : a) {
 			for (Resource rb : b) {
-				if (ra.getName() == rb.getName()) {
+				if (ra.getName().equals( rb.getName() )) {
 					ra.setAmount(ra.getAmount() + rb.getAmount());
 					b.remove(rb);
+					Log.d( "debug", "Resource " + ra.getName() + " amount: " + ra.getAmount() );
 				}
 			}
 		}
+		
+		//if resource didn't exist already, add it now
 		a.addAll(b);
 		return a;
 	}
