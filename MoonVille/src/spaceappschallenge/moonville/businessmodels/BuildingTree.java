@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import spaceappschallenge.moonville.factories.Buildings;
-import spaceappschallenge.moonville.managers.MoonBaseManager;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.util.Log;
 
@@ -196,38 +195,31 @@ public class BuildingTree implements Serializable, Iterable<Building>
 	 * @return List of resources that are available from buildings.
 	 */
 	public List<Resource> checkResources(List<Resource> resourceAvailable) {
-		if (building != null)
-		{
-			if( building.getHasPower() ) {//&& 
-				//building.getHasRequiredResources()) {
-				// Save values in case we need to reset available resources (if a 
-				// building has some but not all of its resources available).
-				List<Resource> oldAmount = new ArrayList<Resource>();
-				for (Resource r : resourceAvailable)
-					oldAmount.add(new Resource(r));
-	
-				BuildingDefinition bd = Buildings.getInstance().getBuilding(
-						building.getName());
+		List<Resource> newAmount = new ArrayList<Resource>();
+		if (building != null && building.getHasPower()) {
+			// Save values in case we need to reset available resources (if a 
+			// building has some but not all of its resources available).
+			List<Resource> oldAmount = new ArrayList<Resource>();
+			for (Resource r : resourceAvailable)
+				oldAmount.add(new Resource(r));
 
-				for (Resource resourceNeed : bd.getRequiredResources()) {
-					if (subtractBuildingResources(resourceAvailable, resourceNeed)) {
-						building.setHasRequiredResources(true);
-						resourceAvailable = Resource.merge(resourceAvailable, 
-								bd.getOutputResources());				
-					}
-					else {
-						// Reset resources so we don't remove part of the resources 
-						// for a building that can't work.
-						resourceAvailable = oldAmount;
-						building.setHasRequiredResources(false);
-					}
-				}
+			BuildingDefinition bd = Buildings.getInstance().getBuilding(
+					building.getName());
+
+			boolean hasResources = true;
+			for (Resource resourceNeed : bd.getRequiredResources()) {
+				if (!subtractBuildingResources(resourceAvailable, resourceNeed))
+					hasResources = false;
 			}
+			building.setHasRequiredResources(hasResources);	
+			if (hasResources)
+				newAmount = bd.getOutputResources();
+				
 		}
-		
+		newAmount = Resource.merge(newAmount, resourceAvailable);
 		for (BuildingTree c : childs) 
-			Resource.merge(resourceAvailable, c.checkResources(resourceAvailable));
-		return resourceAvailable;
+			newAmount = c.checkResources(newAmount);
+		return newAmount;
 	}
 
 	/**

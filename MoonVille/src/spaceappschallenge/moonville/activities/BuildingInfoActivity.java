@@ -2,7 +2,8 @@ package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.businessmodels.Building;
+import spaceappschallenge.moonville.adapters.BuildingInfoListAdapter;
+import spaceappschallenge.moonville.businessmodels.MoonBase;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -10,7 +11,9 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,18 +42,27 @@ public class BuildingInfoActivity extends GameActivity {
 						getPackageName());
 		Drawable buildingDrawable = res.getDrawable(resID);
 		buildingImage.setImageDrawable(buildingDrawable);
-		
+
+		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 		
 		buildingScale = (TextView) findViewById( R.id.buildingscaletext );
 		buildingScale.setText("Building scale: " + 
-					MoonBaseManager.getCurrentMoonBase().getBuildingAmount(buildingName));
+					moonBase.getBuildingAmount(buildingName));
+		
+		BaseAdapter buildingInfoListAdapter = new BuildingInfoListAdapter( moonBase.getBuilding( buildingName ) );
+		
+		ListView buildingInfoList = (ListView) findViewById( R.id.buildinginfolist );
+		buildingInfoList.setAdapter( buildingInfoListAdapter );
 	}
 	
 	public void build( View view ) {
-		if (MoonBaseManager.getCurrentMoonBase().canBuild(buildingName)) {
-			MoonBaseManager.getCurrentMoonBase().addBuilding(buildingName);
+
+		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
+		
+		if (moonBase.canBuild(buildingName)) {
+			moonBase.addBuilding(buildingName);
 			buildingScale.setText("Building scale: " + 
-						MoonBaseManager.getCurrentMoonBase().getBuildingAmount(buildingName));
+					moonBase.getBuildingAmount(buildingName));
 		}
 		else {
 			// TODO: Show the reason (missing resources, required building etc.).

@@ -32,7 +32,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/buildinginfo"
+                android:id="@+id/buildinginfolist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Information about the building. What is it&apos;s purpose, what materials are used in construction, etc."

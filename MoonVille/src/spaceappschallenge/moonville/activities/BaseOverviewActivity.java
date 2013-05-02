@@ -285,7 +285,7 @@ public class BaseOverviewActivity extends GameActivity {
 		tree.checkPower();
 		tree.checkRequiredBuildings();
 
-		List<Resource> available = (ArrayList<Resource>) tree.checkResources( moonBase.getStoredResources() );
+		List<Resource> available = tree.checkResources( moonBase.getStoredResources() );
 		moonBase.setStoredResources( available );
 		
 		for( Resource res : available )
