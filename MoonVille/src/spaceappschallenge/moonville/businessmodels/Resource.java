@@ -1,7 +1,10 @@
 package spaceappschallenge.moonville.businessmodels;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 /*
  * A resource can be imported/exported and produced by buildings. Most 
  * importantly, they are used to construct buildings.
@@ -57,16 +60,18 @@ public class Resource implements Serializable {
 	 * up their amount. Assumes no identical resources within a list.
 	 */
 	public static List<Resource> merge(List<Resource> a, List<Resource> b) {
-		for (Resource ra : a) {
-			for (Resource rb : b) {
-				if (ra.getName() == rb.getName()) {
-					ra.setAmount(ra.getAmount() + rb.getAmount());
-					b.remove(rb);
-				}
+		final Map<String, Resource> map =  new TreeMap<String, Resource>();
+		for (Resource r : a) 
+			map.put(r.getName(), new Resource(r));
+		for (Resource r : b) {
+			if (map.containsKey(r.getName())) {
+				Resource existing = map.get(r.getName());
+				existing.setAmount(existing.getAmount() + r.getAmount());
 			}
+			else
+				map.put(r.getName(), new Resource(r));					
 		}
-		a.addAll(b);
-		return a;
+		return new ArrayList<Resource>(map.values());
 	}
 
 	// Getters and Setters
