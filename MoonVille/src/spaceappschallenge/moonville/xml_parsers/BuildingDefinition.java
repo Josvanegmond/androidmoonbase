@@ -16,16 +16,16 @@ public class BuildingDefinition
 	private int amount = 0;
 	private ArrayList<Resource> requiredResources;
 	private ArrayList<Resource> outputResources;
-	private ArrayList<BuildingDefinition> requiredBuildings;
+	private ArrayList<String> requiredBuildings;
 	private int inputPower = 0;
 	private int outputPower = 0;
 	private int requiredTurns = 0;
 	private int monetaryCost = 0;
 	private int xPos, yPos;
 	
-	public BuildingDefinition(String name) {
+	/*public BuildingDefinition(String name) {
 		this.name = name;
-	}
+	}*/
 
 	public BuildingDefinition(String name, String info,
 			int amount, int inputPower,
@@ -33,14 +33,16 @@ public class BuildingDefinition
 			int requiredTurns,
 			ArrayList<Resource> requiredResources,
 			ArrayList<Resource> outputResources,
-			ArrayList<BuildingDefinition> requiredBuildings, int xPos,
+			ArrayList<String> requiredBuildings, int xPos,
 			int yPos) {
 		this.name = name;
 		this.info = info;
 		this.amount = amount;
 		this.inputPower = inputPower;
+		this.outputPower = outputPower;
 		this.monetaryCost = monetaryCost;
 		this.requiredTurns = requiredTurns;
+		this.requiredResources = requiredResources;
 		this.outputResources = outputResources;
 		this.requiredBuildings = requiredBuildings;
 		this.xPos = xPos;
@@ -67,7 +69,7 @@ public class BuildingDefinition
 		return outputResources;
 	}
 
-	public ArrayList<BuildingDefinition> getRequiredBuildings() {
+	public ArrayList<String> getRequiredBuildings() {
 		return this.requiredBuildings;
 	}
 

@@ -48,7 +48,7 @@ public class BuildingXMLParser {
 	int buildingYPos = 0;
 	ArrayList<Resource> requiredResources;
 	ArrayList<Resource> outputResources;
-	ArrayList<BuildingDefinition> requiredBuildings;
+	ArrayList<String> requiredBuildings;
 
 	public void readBuildingAttributes() {
 		// Read the attributes for each building
@@ -96,10 +96,10 @@ public class BuildingXMLParser {
 	}
 
 	public void addRequiredBuilding(XmlPullParser xpp,
-			ArrayList<BuildingDefinition> requiredBuildings) {
+			ArrayList<String> requiredBuildings) {
 		String reqdBuildName = xpp.getAttributeValue(null, "name");
 	
-		requiredBuildings.add(new BuildingDefinition(reqdBuildName));
+		requiredBuildings.add(reqdBuildName);
 		Log.i("XML", "required building " + reqdBuildName);
 	}
 
@@ -121,7 +121,7 @@ public class BuildingXMLParser {
 				readBuildingAttributes();
 				outputResources = new ArrayList<Resource>();
 				requiredResources = new ArrayList<Resource>();
-				requiredBuildings = new ArrayList<BuildingDefinition>();
+				requiredBuildings = new ArrayList<String>();
 
 				// For Nested elements
 				while (atBuilding) {// <building>

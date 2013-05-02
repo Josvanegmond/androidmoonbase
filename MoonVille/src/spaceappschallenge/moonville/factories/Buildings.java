@@ -91,9 +91,9 @@ public class Buildings {
 				Log.i("Buildings rr", rResource.getName());
 			}
 
-			ArrayList<BuildingDefinition> rbuilding = building.getRequiredBuildings();
-			for (BuildingDefinition rb : rbuilding) {
-				Log.i("required buildings", rb.getName());
+			ArrayList<String> rbuilding = building.getRequiredBuildings();
+			for (String rb : rbuilding) {
+				Log.i("required buildings", rb);
 			}
 		}
 	}

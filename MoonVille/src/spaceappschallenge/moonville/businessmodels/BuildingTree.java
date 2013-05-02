@@ -4,10 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Stack;
 
 import spaceappschallenge.moonville.factories.Buildings;
+import spaceappschallenge.moonville.managers.MoonBaseManager;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
+import android.util.Log;
 
 /**
  * Contains all buildings per level as of 
@@ -84,10 +85,10 @@ public class BuildingTree implements Serializable, Iterable<Building>
 		}
 		// If b requires building in this node, insert into new child 
 		// (creating the child is handled by add()).
-		ArrayList<BuildingDefinition> required = Buildings.getInstance().
+		ArrayList<String> required = Buildings.getInstance().
 				getBuilding(name).getRequiredBuildings();
-		for (BuildingDefinition r : required) {
-			if (r.getName().equals(building.getName())) {
+		for (String r : required) {
+			if (r.equals(building.getName())) {
 				return this;
 			}
 		}
@@ -132,6 +133,7 @@ public class BuildingTree implements Serializable, Iterable<Building>
 				continue;
 			int inputPower = Buildings.getInstance().getBuilding(
 					v.building.getName()).getInputPower();
+			Log.d("debug", "power of " + v.building.getName() + " is " + inputPower + ", total power is " + power );
 			if (inputPower <= power) {
 				power -= inputPower;
 				v.building.setHasPower(true);
@@ -148,9 +150,8 @@ public class BuildingTree implements Serializable, Iterable<Building>
 	 */
 	private int computeTotalPowerOutput() {
 		int power = 0;
-		if (building != null)
-			power += Buildings.getInstance().getBuilding(
-							building.getName()).getOutputPower();
+		if (building != null)	
+			power += Buildings.getInstance().getBuilding(building.getName()).getOutputPower() * building.getAmount();
 		for (BuildingTree c : childs)
 			power += c.computeTotalPowerOutput();
 		return power;		
@@ -195,27 +196,31 @@ public class BuildingTree implements Serializable, Iterable<Building>
 	 * @return List of resources that are available from buildings.
 	 */
 	public List<Resource> checkResources(List<Resource> resourceAvailable) {
-		if (building != null && building.getHasPower() && 
-				building.getHasRequiredResources()) {
-			// Save values in case we need to reset available resources (if a 
-			// building has some but not all of its resources available).
-			List<Resource> oldAmount = new ArrayList<Resource>();
-			for (Resource r : resourceAvailable)
-				oldAmount.add(new Resource(r));
+		if (building != null)
+		{
+			if( building.getHasPower() ) {//&& 
+				//building.getHasRequiredResources()) {
+				// Save values in case we need to reset available resources (if a 
+				// building has some but not all of its resources available).
+				List<Resource> oldAmount = new ArrayList<Resource>();
+				for (Resource r : resourceAvailable)
+					oldAmount.add(new Resource(r));
+	
+				BuildingDefinition bd = Buildings.getInstance().getBuilding(
+						building.getName());
 
-			BuildingDefinition bd = Buildings.getInstance().getBuilding(
-					building.getName());
-			for (Resource resourceNeed : bd.getRequiredResources()) {
-				if (subtractBuildingResources(resourceAvailable, resourceNeed)) {
-					building.setHasRequiredResources(true);
-					resourceAvailable = Resource.merge(resourceAvailable, 
-							bd.getOutputResources());				
-				}
-				else {
-					// Reset resources so we don't remove part of the resources 
-					// for a building that can't work.
-					resourceAvailable = oldAmount;
-					building.setHasRequiredResources(false);
+				for (Resource resourceNeed : bd.getRequiredResources()) {
+					if (subtractBuildingResources(resourceAvailable, resourceNeed)) {
+						building.setHasRequiredResources(true);
+						resourceAvailable = Resource.merge(resourceAvailable, 
+								bd.getOutputResources());				
+					}
+					else {
+						// Reset resources so we don't remove part of the resources 
+						// for a building that can't work.
+						resourceAvailable = oldAmount;
+						building.setHasRequiredResources(false);
+					}
 				}
 			}
 		}

@@ -51,10 +51,10 @@ public class ResourceListAdapter extends BaseAdapter
 			convertView = inflater.inflate( R.layout.listitem_resource, parent, false );
 		}
 		
-		TextView resourceName = (TextView) convertView.findViewById( R.id.resourceNameTextView );
+		TextView resourceName = (TextView) convertView.findViewById( R.id.resourcename );
 		resourceName.setText( resource.getName() );
-		TextView resourceAmount = (TextView) convertView.findViewById( R.id.resourceAmountTextView );
-		resourceAmount.setText( "Available\nAmount: "+resource.getAmount() );
+		TextView resourceAmount = (TextView) convertView.findViewById( R.id.resourceamount );
+		resourceAmount.setText( "Available amount: "+resource.getAmount() );
 		return convertView;
 	}
 

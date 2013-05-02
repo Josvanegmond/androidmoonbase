@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BaseOverviewActivity extends GameActivity {
 
@@ -232,25 +233,28 @@ public class BaseOverviewActivity extends GameActivity {
 		{
 			for( final Building building : buildingTree )
 			{
-				List<Resource> outputResources = building.getResourceOutput();
-	
-				int popupNumber = 0;
-				
-				for( Resource resource : outputResources )
+				if( building.getHasPower() && building.getHasRequiredResources() )
 				{
-					/**
-					 * Slowly fade and move popup away
-					 */	
-					BuildingDefinition bd = Buildings.getInstance().getBuilding(building.getName());
+					List<Resource> outputResources = building.getResourceOutput();
+		
+					int popupNumber = 0;
 					
-					new Popup(
-						BaseOverviewActivity.this,
-						moonSurfaceLayout,
-						"+ " + resource.getAmount() + " " + resource.getName(),
-						bd.getXPos(), bd.getYPos(),
-						popupNumber * 10 );
-					
-					popupNumber++;
+					for( Resource resource : outputResources )
+					{
+						/**
+						 * Slowly fade and move popup away
+						 */	
+						BuildingDefinition bd = Buildings.getInstance().getBuilding(building.getName());
+						
+						new Popup(
+							BaseOverviewActivity.this,
+							moonSurfaceLayout,
+							"+ " + resource.getAmount() + " " + resource.getName(),
+							bd.getXPos(), bd.getYPos(),
+							popupNumber * 10 );
+						
+						popupNumber++;
+					}
 				}
 			}
 		}
@@ -283,6 +287,11 @@ public class BaseOverviewActivity extends GameActivity {
 
 		List<Resource> available = (ArrayList<Resource>) tree.checkResources( moonBase.getStoredResources() );
 		moonBase.setStoredResources( available );
+		
+		for( Resource res : available )
+		{
+			Log.d( "debug", res.getName() + " stored: " + res.getAmount() );
+		}
 
 		// TODO: factor in research and prospecting bonus
 		// TODO: calculate reputation
@@ -319,6 +328,7 @@ public class BaseOverviewActivity extends GameActivity {
 				new Intent(this, ResourcesActivity.class));
 	}
 
+	
 	// some scrollbar fix for scrolling
 	//TODO: make a custom widget for this
 	private void fixHVScrollViews() {

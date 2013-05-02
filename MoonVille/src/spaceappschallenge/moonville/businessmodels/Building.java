@@ -16,9 +16,9 @@ public class Building implements Serializable {
 	protected int amount = 0;
 
 	// These are computed each time they are needed, so no init necessary.
-	protected boolean hasPower;
-	protected boolean hasRequiredResources;
-	protected boolean hasRequiredBuildings;
+	protected boolean hasPower = false;
+	protected boolean hasRequiredResources = false;
+	protected boolean hasRequiredBuildings = false;
 
 	private BuildingDefinition associatedDefinition;
 	
