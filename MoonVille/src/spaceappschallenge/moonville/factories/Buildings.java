@@ -85,13 +85,13 @@ public class Buildings {
 
 			Log.i("Buildings", building.getName());
 
-			ArrayList<Resource> resources = building.getRequiredResources();
+			List<Resource> resources = building.getRequiredResources();
 			Log.i("LENGTH", "reqd resource size:" + resources.size());
 			for (Resource rResource : resources) {
 				Log.i("Buildings rr", rResource.getName());
 			}
 
-			ArrayList<String> rbuilding = building.getRequiredBuildings();
+			List<String> rbuilding = building.getRequiredBuildings();
 			for (String rb : rbuilding) {
 				Log.i("required buildings", rb);
 			}

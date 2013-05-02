@@ -1,8 +1,9 @@
 package spaceappschallenge.moonville.xml_parsers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import spaceappschallenge.moonville.businessmodels.Building;
 import spaceappschallenge.moonville.businessmodels.Resource;
 
 /**
@@ -11,21 +12,17 @@ import spaceappschallenge.moonville.businessmodels.Resource;
  */
 public class BuildingDefinition
 {
-	private String name = "";
-	private String info = "";
-	private int amount = 0;
-	private ArrayList<Resource> requiredResources;
-	private ArrayList<Resource> outputResources;
-	private ArrayList<String> requiredBuildings;
-	private int inputPower = 0;
-	private int outputPower = 0;
-	private int requiredTurns = 0;
-	private int monetaryCost = 0;
-	private int xPos, yPos;
-	
-	/*public BuildingDefinition(String name) {
-		this.name = name;
-	}*/
+	private final String name;
+	private final String info;
+	private final int amount;
+	private final List<Resource> requiredResources;
+	private final List<Resource> outputResources;
+	private final List<String> requiredBuildings;
+	private final int inputPower;
+	private final int outputPower;
+	private final int requiredTurns;
+	private final int monetaryCost;
+	private final int xPos, yPos;
 
 	public BuildingDefinition(String name, String info,
 			int amount, int inputPower,
@@ -42,9 +39,9 @@ public class BuildingDefinition
 		this.outputPower = outputPower;
 		this.monetaryCost = monetaryCost;
 		this.requiredTurns = requiredTurns;
-		this.requiredResources = requiredResources;
-		this.outputResources = outputResources;
-		this.requiredBuildings = requiredBuildings;
+		this.requiredResources = Collections.unmodifiableList(requiredResources);
+		this.outputResources = Collections.unmodifiableList(outputResources);
+		this.requiredBuildings = Collections.unmodifiableList(requiredBuildings);
 		this.xPos = xPos;
 		this.yPos = yPos;
 	}
@@ -61,15 +58,15 @@ public class BuildingDefinition
 		return amount;
 	}
 
-	public ArrayList<Resource> getRequiredResources() {
+	public List<Resource> getRequiredResources() {
 		return requiredResources;
 	}
 
-	public ArrayList<Resource> getOutputResources() {
+	public List<Resource> getOutputResources() {
 		return outputResources;
 	}
 
-	public ArrayList<String> getRequiredBuildings() {
+	public List<String> getRequiredBuildings() {
 		return this.requiredBuildings;
 	}
 
