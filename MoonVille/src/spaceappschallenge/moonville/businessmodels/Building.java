@@ -2,10 +2,10 @@
 package spaceappschallenge.moonville.businessmodels;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
-import android.util.Log;
 
 /**
  * Handles a attributes of a single building in the world.
@@ -78,24 +78,31 @@ public class Building implements Serializable {
 	 */
 	public List<Resource> getResourceOutput()
 	{
+		List<Resource> addedResources = new ArrayList<Resource>();
 		List<Resource> outputResources = this.associatedDefinition.getOutputResources();
 		for( Resource resource : outputResources )
 		{
-			resource.setAmount( resource.getAmount() * this.getAmount() );
+			Resource addedResource = new Resource( resource );
+			addedResource.setAmount( resource.getAmount() * this.getAmount() );
+			addedResources.add( addedResource );
 		}
 		
-		return outputResources;
+		return addedResources;
 	}
 
 	public List<Resource> getResourceInput()
 	{
+		List<Resource> addedResources = new ArrayList<Resource>();
 		List<Resource> inputResources = this.associatedDefinition.getRequiredResources();
 		for( Resource resource : inputResources )
 		{
-			resource.setAmount( resource.getAmount() * this.getAmount() );
+			Resource addedResource = new Resource( resource );
+			addedResource.setAmount( resource.getAmount() * this.getAmount() );
+			addedResources.add( addedResource );
+			
 		}
 		
-		return inputResources;
+		return addedResources;
 	}
 
 

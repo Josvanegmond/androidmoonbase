@@ -46,11 +46,11 @@ public class BuildingInfoListAdapter extends BaseAdapter
 		this.infoList.add( "" );
 		
 		if( buildingDefinition.getInputPower() > 0 )
-			this.infoList.add( "Input power: " + buildingDefinition.getInputPower() + " kWh" );
+			this.infoList.add( "Input power: " + (buildingDefinition.getInputPower() * buildingDefinition.getAmount()) + " kWh" );
 		
 		if( buildingDefinition.getOutputPower() > 0 )
-			this.infoList.add( "Output power: " + buildingDefinition.getOutputPower() + "kWh" );
-		
+			this.infoList.add( "Output power: " + (buildingDefinition.getOutputPower() * buildingDefinition.getAmount()) + "kWh" );
+
 		this.infoList.add( "" );
 		
 		if( buildingDefinition.getRequiredBuildings().size() > 0 )
@@ -61,13 +61,15 @@ public class BuildingInfoListAdapter extends BaseAdapter
 				this.infoList.add( buildingName );
 			}
 		}
-			
+
+		this.infoList.add( "" );
+		
 		if( buildingDefinition.getRequiredResources().size() > 0 )
 		{
-			this.infoList.add( "Processes resources (per month per building):" );
+			this.infoList.add( "Processes resources:" );
 			for( Resource resource : buildingDefinition.getRequiredResources() )
 			{
-				this.infoList.add( resource.getName() + ": " + (resource.getAmount() * buildingDefinition.getAmount()) );
+				this.infoList.add( resource.getName() + ": " + resource.getAmount() );
 			}
 		}
 
@@ -75,7 +77,7 @@ public class BuildingInfoListAdapter extends BaseAdapter
 
 		if( buildingDefinition.getOutputResources().size() > 0 )
 		{
-			this.infoList.add( "Output resources (per month per building):" );
+			this.infoList.add( "Output resources:" );
 			for( Resource resource : buildingDefinition.getOutputResources() )
 			{
 				this.infoList.add( resource.getName() + ": " + resource.getAmount() );
@@ -86,24 +88,32 @@ public class BuildingInfoListAdapter extends BaseAdapter
 	private void fillBuildingInfo( Building building )
 	{
 		this.infoList.add( building.getRequiredTurns() + " months building time" );
-		this.infoList.add( "" );
 		this.infoList.add( "Power levels " + ((building.getHasPower() == true) ? "nominal" : "depleted") );
 		
 		if( building.getInputPower() > 0 )
-			this.infoList.add( "Input power: " + building.getInputPower() + " kWh" );
+			this.infoList.add( "Input power: " + (building.getInputPower() * building.getAmount()) + " kW" );
 		
 		if( building.getOutputPower() > 0 )
-			this.infoList.add( "Output power: " + building.getOutputPower() + "kWh" );
+			this.infoList.add( "Output power: " + (building.getOutputPower() * building.getAmount()) + "kW" );
 		
 		this.infoList.add( "" );
-		
+
 		if( building.getRequiredBuildings().size() > 0 )
-			this.infoList.add( "Preceding buildings " + ((building.getHasRequiredBuildings() == true) ? "operative" : "shut down") );
-		
+		{
+			if( building.getRequiredBuildings().size() > 0 )
+				this.infoList.add( "Preceding buildings " + ((building.getHasRequiredBuildings() == true) ? "operative" : "shut down") );
+
+			this.infoList.add( "Required buildings:" );
+			for( String buildingName : building.getRequiredBuildings() )
+			{
+				this.infoList.add( buildingName );
+			}
+		}
+
 		if( building.getResourceInput().size() > 0 )
 		{
 			this.infoList.add( "Resource supply " + ((building.getHasRequiredResources() == true) ? "upholding" : "depleted") );
-			this.infoList.add( "Processed resources (per month):" );
+			this.infoList.add( "Processed resources:" );
 			for( Resource resource : building.getResourceInput() )
 			{
 				this.infoList.add( resource.getName() + ": " + (resource.getAmount() * building.getAmount()) );
@@ -114,7 +124,7 @@ public class BuildingInfoListAdapter extends BaseAdapter
 
 		if( building.getResourceOutput().size() > 0 )
 		{
-			this.infoList.add( "Output resources (per month):" );
+			this.infoList.add( "Output resources:" );
 			for( Resource resource : building.getResourceOutput() )
 			{
 				this.infoList.add( resource.getName() + ": " + (resource.getAmount() * building.getAmount()) );
