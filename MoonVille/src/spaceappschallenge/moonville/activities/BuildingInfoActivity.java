@@ -2,8 +2,8 @@ package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.adapters.BuildingInfoListAdapter;
 import spaceappschallenge.moonville.businessmodels.MoonBase;
+import spaceappschallenge.moonville.listadapters.BuildingInfoListAdapter;
 import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;

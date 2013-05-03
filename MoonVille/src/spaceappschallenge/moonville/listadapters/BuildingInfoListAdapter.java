@@ -1,4 +1,4 @@
-package spaceappschallenge.moonville.adapters;
+package spaceappschallenge.moonville.listadapters;
 
 import java.util.ArrayList;
 import java.util.List;
