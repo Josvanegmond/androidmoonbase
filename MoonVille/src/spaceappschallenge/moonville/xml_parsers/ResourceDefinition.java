@@ -2,11 +2,11 @@ package spaceappschallenge.moonville.xml_parsers;
 
 public class ResourceDefinition
 {
-	private String name;
-	private double quality;
-	private int importPrice;
-	private int exportPrice;
-	private int weight;
+	private final String name;
+	private final double quality;
+	private final int importPrice;
+	private final int exportPrice;
+	private final int weight;
 	
 	public ResourceDefinition( String name, double quality, int importPrice, int exportPrice, int weight )
 	{

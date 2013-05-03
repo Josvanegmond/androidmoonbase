@@ -84,7 +84,7 @@ public class BuildingTree implements Serializable, Iterable<Building>
 		}
 		// If b requires building in this node, insert into new child 
 		// (creating the child is handled by add()).
-		ArrayList<String> required = Buildings.getInstance().
+		List<String> required = Buildings.getInstance().
 				getBuilding(name).getRequiredBuildings();
 		for (String r : required) {
 			if (r.equals(building.getName())) {
