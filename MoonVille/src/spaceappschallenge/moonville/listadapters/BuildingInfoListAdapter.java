@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.businessmodels.Building;
-import spaceappschallenge.moonville.businessmodels.MoonBase;
-import spaceappschallenge.moonville.businessmodels.Resource;
+import spaceappschallenge.moonville.domain.Building;
+import spaceappschallenge.moonville.domain.MoonBase;
+import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.Buildings;
-import spaceappschallenge.moonville.managers.MoonBaseManager;
+import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,13 +24,19 @@ public class BuildingInfoListAdapter extends BaseAdapter
 	{
 		this.infoList = new ArrayList<String>();
 		
+		fillBuildingInfo( buildingName );
+	}
+	
+	
+	public void fillBuildingInfo( String buildingName )
+	{
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 		Building building = moonBase.getBuilding( buildingName );
+		BuildingDefinition buildingDefinition = Buildings.getInstance().getBuilding( buildingName );
 		
 		//if there is no building, the building has not been made yet and we only acquire data from the matching buildingdefinition
 		if( building == null )
 		{
-			BuildingDefinition buildingDefinition = Buildings.getInstance().getBuilding( buildingName );
 			fillBuildingInfo( buildingDefinition );
 		}
 
@@ -39,6 +45,7 @@ public class BuildingInfoListAdapter extends BaseAdapter
 			fillBuildingInfo( building );
 		}
 	}
+	
 	
 	private void fillBuildingInfo( BuildingDefinition buildingDefinition )
 	{

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import spaceappschallenge.moonville.businessmodels.Resource;
+import spaceappschallenge.moonville.domain.Resource;
 
 /**
  * Provides access to the xml attributes of a building.

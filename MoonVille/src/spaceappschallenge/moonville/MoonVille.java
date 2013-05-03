@@ -18,10 +18,12 @@ public class MoonVille extends Application {
 	public static String PREFERENCE_BACKGROUND_MUSIC = 
 			"moonvile_background_music";
 
-	MediaPlayer player = null;
 	
+	
+	private MediaPlayer player = null;
 	private int currentActivityCount = 0;
 	
+
 	public void resumeActivity() {
 		currentActivityCount++;
 		updateSoundState();

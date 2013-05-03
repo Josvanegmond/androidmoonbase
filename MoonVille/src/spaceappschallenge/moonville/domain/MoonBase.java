@@ -1,4 +1,4 @@
-package spaceappschallenge.moonville.businessmodels;
+package spaceappschallenge.moonville.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -123,11 +123,9 @@ public class MoonBase implements Serializable
 		Building existing = this.getBuilding(name);
 		if (existing != null) {
 			existing.setAmount(existing.getAmount() + 1);
-			Log.d("test", "++");
 		}
 		else {
 			builtBuildings.add( new Building( Buildings.getInstance().getBuilding( name ), 1) );
-			Log.d("test", "new");
 		}
 	}
 	
@@ -152,7 +150,6 @@ public class MoonBase implements Serializable
 		
 		else
 		{
-			Log.d("debug", "building " + name + " not found in tree");
 			return null;
 		}
 	}

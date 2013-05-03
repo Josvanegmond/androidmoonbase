@@ -26,7 +26,7 @@
             android:layout_marginTop="20dp"
             android:orientation="vertical" >
 
-            <TextView
+            <spaceappschallenge.moonville.ui.FontTextView
                 android:id="@+id/buildingscaletext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
 
     </LinearLayout>
 
-    <TextView
+    <spaceappschallenge.moonville.ui.FontTextView
         android:id="@+id/buildinginfolist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

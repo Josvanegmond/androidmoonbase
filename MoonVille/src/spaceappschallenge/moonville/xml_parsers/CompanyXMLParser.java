@@ -13,8 +13,8 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import spaceappschallenge.moonville.businessmodels.ImportCompany;
-import spaceappschallenge.moonville.businessmodels.Resource;
+import spaceappschallenge.moonville.domain.ImportCompany;
+import spaceappschallenge.moonville.domain.Resource;
 import android.util.Log;
 
 public class CompanyXMLParser {

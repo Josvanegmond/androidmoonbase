@@ -1,4 +1,4 @@
-package spaceappschallenge.moonville.businessmodels;
+package spaceappschallenge.moonville.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,7 +7,6 @@ import java.util.List;
 
 import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
-import android.util.Log;
 
 /**
  * Contains all buildings per level as of 
@@ -131,8 +130,7 @@ public class BuildingTree implements Serializable, Iterable<Building>
 			if (v.building == null)
 				continue;
 			int inputPower = Buildings.getInstance().getBuilding(
-					v.building.getName()).getInputPower();
-			Log.d("debug", "power of " + v.building.getName() + " is " + inputPower + ", total power is " + power );
+					v.building.getName()).getInputPower() * v.building.getAmount();
 			if (inputPower <= power) {
 				power -= inputPower;
 				v.building.setHasPower(true);

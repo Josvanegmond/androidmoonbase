@@ -1,7 +1,7 @@
 /*
  * The sole purpose of this class is to provide application "Context".
  */
-package spaceappschallenge.moonville.managers;
+package spaceappschallenge.moonville.factories;
 
 import android.content.Context;
 import android.util.Log;

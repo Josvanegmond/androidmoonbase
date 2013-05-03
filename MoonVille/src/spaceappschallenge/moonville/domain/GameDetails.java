@@ -1,4 +1,4 @@
-package spaceappschallenge.moonville.businessmodels;
+package spaceappschallenge.moonville.domain;
 
 import java.io.Serializable;
 

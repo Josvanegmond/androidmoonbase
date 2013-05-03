@@ -2,16 +2,16 @@ package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.businessmodels.MoonBase;
+import spaceappschallenge.moonville.domain.MoonBase;
+import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.listadapters.BuildingInfoListAdapter;
-import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,7 +21,7 @@ public class BuildingInfoActivity extends GameActivity {
 
 	private String buildingName;
 	private TextView buildingScale;
-	private BaseAdapter buildingInfoListAdapter;
+	private BuildingInfoListAdapter buildingInfoListAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +63,20 @@ public class BuildingInfoActivity extends GameActivity {
 			moonBase.addBuilding(buildingName);
 			buildingScale.setText("Building scale: " + 
 					moonBase.getBuildingAmount(buildingName));
+			
+			//TODO: supposed to real-time update data in the info list, doesn't work
+			buildingInfoListAdapter.fillBuildingInfo( buildingName );
 			buildingInfoListAdapter.notifyDataSetChanged();
 		}
 		else {
 			// TODO: Show the reason (missing resources, required building etc.).
 			Toast.makeText(this, "Can't build at this time", Toast.LENGTH_SHORT).show();
 		}
+		
+
+		startActivity(
+				new Intent(this, BaseOverviewActivity.class));
+        finish();
 	}
 	
 	@Override

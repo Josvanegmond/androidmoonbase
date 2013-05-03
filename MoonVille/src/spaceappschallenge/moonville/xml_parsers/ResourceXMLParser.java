@@ -10,8 +10,8 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import spaceappschallenge.moonville.businessmodels.Resource;
-import spaceappschallenge.moonville.managers.ApplicationService;
+import spaceappschallenge.moonville.domain.Resource;
+import spaceappschallenge.moonville.factories.ApplicationService;
 import android.content.Context;
 
 /*

@@ -1,5 +1,5 @@
 //Note-Many constructors are unnecessary. Should remove them.
-package spaceappschallenge.moonville.businessmodels;
+package spaceappschallenge.moonville.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;

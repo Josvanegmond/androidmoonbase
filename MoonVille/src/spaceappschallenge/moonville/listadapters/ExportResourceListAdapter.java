@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.businessmodels.MoonBase;
-import spaceappschallenge.moonville.businessmodels.Resource;
+import spaceappschallenge.moonville.domain.MoonBase;
+import spaceappschallenge.moonville.domain.Resource;
+import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.factories.Resources;
-import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;

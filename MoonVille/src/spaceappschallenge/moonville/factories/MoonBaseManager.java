@@ -1,7 +1,7 @@
 /*
  * A singleton class which manages moon bases. It also identifies the current moon base.
  */
-package spaceappschallenge.moonville.managers;
+package spaceappschallenge.moonville.factories;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import spaceappschallenge.moonville.businessmodels.Difficulty;
-import spaceappschallenge.moonville.businessmodels.MoonBase;
+import spaceappschallenge.moonville.domain.Difficulty;
+import spaceappschallenge.moonville.domain.MoonBase;
 import android.content.Context;
 import android.widget.Toast;
 

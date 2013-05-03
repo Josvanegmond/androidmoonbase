@@ -4,9 +4,9 @@ import java.util.List;
 
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.businessmodels.Resource;
+import spaceappschallenge.moonville.domain.Resource;
+import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.listadapters.ResourceListAdapter;
-import spaceappschallenge.moonville.managers.MoonBaseManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;

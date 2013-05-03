@@ -41,7 +41,7 @@
             android:orientation="horizontal"
             android:padding="10dp" >
 
-            <TextView
+            <spaceappschallenge.moonville.ui.FontTextView
                 android:id="@+id/baseOverviewFundsTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,14 +49,14 @@
                 android:text="Funds: "
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
+            <spaceappschallenge.moonville.ui.FontTextView
                 android:id="@+id/month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Month:"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
+            <spaceappschallenge.moonville.ui.FontTextView
                 android:id="@+id/txtMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

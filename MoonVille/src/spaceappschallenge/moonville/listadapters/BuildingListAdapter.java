@@ -3,7 +3,7 @@ package spaceappschallenge.moonville.listadapters;
 import java.util.ArrayList;
 
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.businessmodels.Building;
+import spaceappschallenge.moonville.domain.Building;
 import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.view.LayoutInflater;

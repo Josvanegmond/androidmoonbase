@@ -5,9 +5,9 @@ package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.businessmodels.Difficulty;
-import spaceappschallenge.moonville.businessmodels.GameDetails;
-import spaceappschallenge.moonville.managers.MoonBaseManager;
+import spaceappschallenge.moonville.domain.Difficulty;
+import spaceappschallenge.moonville.domain.GameDetails;
+import spaceappschallenge.moonville.factories.MoonBaseManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;

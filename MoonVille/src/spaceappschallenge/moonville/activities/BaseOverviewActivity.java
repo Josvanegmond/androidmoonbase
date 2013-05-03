@@ -6,32 +6,26 @@ import java.util.List;
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.MoonVille;
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.businessmodels.Building;
-import spaceappschallenge.moonville.businessmodels.BuildingTree;
-import spaceappschallenge.moonville.businessmodels.MoonBase;
-import spaceappschallenge.moonville.businessmodels.Resource;
+import spaceappschallenge.moonville.domain.Building;
+import spaceappschallenge.moonville.domain.BuildingTree;
+import spaceappschallenge.moonville.domain.MoonBase;
+import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.Buildings;
-import spaceappschallenge.moonville.managers.MoonBaseManager;
+import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class BaseOverviewActivity extends GameActivity {
 
@@ -45,10 +39,8 @@ public class BaseOverviewActivity extends GameActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_base_overview);
-		Log.i("Base", "showing moon");
 		moonSurfaceLayout = (RelativeLayout) this
 				.findViewById(R.id.moonsurface_relativelayout);
-		Log.i("Base", "showing buildings");
 
 		this.buildingImageList = new ArrayList<ImageView>();
 
@@ -287,11 +279,6 @@ public class BaseOverviewActivity extends GameActivity {
 
 		List<Resource> available = tree.checkResources( moonBase.getStoredResources() );
 		moonBase.setStoredResources( available );
-		
-		for( Resource res : available )
-		{
-			Log.d( "debug", res.getName() + " stored: " + res.getAmount() );
-		}
 
 		// TODO: factor in research and prospecting bonus
 		// TODO: calculate reputation
