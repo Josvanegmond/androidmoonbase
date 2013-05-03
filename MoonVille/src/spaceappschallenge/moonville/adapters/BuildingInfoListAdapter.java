@@ -5,24 +5,86 @@ import java.util.List;
 
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.businessmodels.Building;
+import spaceappschallenge.moonville.businessmodels.MoonBase;
 import spaceappschallenge.moonville.businessmodels.Resource;
+import spaceappschallenge.moonville.factories.Buildings;
+import spaceappschallenge.moonville.managers.MoonBaseManager;
+import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
 public class BuildingInfoListAdapter extends BaseAdapter
 {
-	private Building building;
 	private List<String> infoList;
 	
-	public BuildingInfoListAdapter( Building building )
+	public BuildingInfoListAdapter( String buildingName )
 	{
-		this.building = building;
 		this.infoList = new ArrayList<String>();
+		
+		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
+		Building building = moonBase.getBuilding( buildingName );
+		
+		//if there is no building, the building has not been made yet and we only acquire data from the matching buildingdefinition
+		if( building == null )
+		{
+			BuildingDefinition buildingDefinition = Buildings.getInstance().getBuilding( buildingName );
+			fillBuildingInfo( buildingDefinition );
+		}
 
+		else
+		{
+			fillBuildingInfo( building );
+		}
+	}
+	
+	private void fillBuildingInfo( BuildingDefinition buildingDefinition )
+	{
+		this.infoList.add( buildingDefinition.getRequiredTurns() + " months building time" );
+		this.infoList.add( "" );
+		
+		if( buildingDefinition.getInputPower() > 0 )
+			this.infoList.add( "Input power: " + buildingDefinition.getInputPower() + " kWh" );
+		
+		if( buildingDefinition.getOutputPower() > 0 )
+			this.infoList.add( "Output power: " + buildingDefinition.getOutputPower() + "kWh" );
+		
+		this.infoList.add( "" );
+		
+		if( buildingDefinition.getRequiredBuildings().size() > 0 )
+		{
+			this.infoList.add( "Required buildings:" );
+			for( String buildingName : buildingDefinition.getRequiredBuildings() )
+			{
+				this.infoList.add( buildingName );
+			}
+		}
+			
+		if( buildingDefinition.getRequiredResources().size() > 0 )
+		{
+			this.infoList.add( "Processes resources (per month per building):" );
+			for( Resource resource : buildingDefinition.getRequiredResources() )
+			{
+				this.infoList.add( resource.getName() + ": " + (resource.getAmount() * buildingDefinition.getAmount()) );
+			}
+		}
+
+		this.infoList.add( "" );
+
+		if( buildingDefinition.getOutputResources().size() > 0 )
+		{
+			this.infoList.add( "Output resources (per month per building):" );
+			for( Resource resource : buildingDefinition.getOutputResources() )
+			{
+				this.infoList.add( resource.getName() + ": " + resource.getAmount() );
+			}
+		}
+	}
+	
+	private void fillBuildingInfo( Building building )
+	{
 		this.infoList.add( building.getRequiredTurns() + " months building time" );
 		this.infoList.add( "" );
 		this.infoList.add( "Power levels " + ((building.getHasPower() == true) ? "nominal" : "depleted") );
@@ -59,6 +121,7 @@ public class BuildingInfoListAdapter extends BaseAdapter
 			}
 		}
 	}
+	
 	
 	
 	@Override

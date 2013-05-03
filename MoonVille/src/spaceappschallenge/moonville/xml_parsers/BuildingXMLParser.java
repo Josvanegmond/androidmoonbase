@@ -19,11 +19,24 @@ import spaceappschallenge.moonville.managers.ApplicationService;
 import android.content.Context;
 import android.util.Log;
 
-public class BuildingXMLParser {
+public class BuildingXMLParser
+{
 	protected InputStream inputStream = null;
 	protected XmlPullParser xpp;
 	protected ArrayList<BuildingDefinition> buildings;
 	protected boolean isBuildingFinished = false;
+
+	private String buildingName = "";
+	private String buildingInfo = "";
+	private int buildingAmount = 0;
+	private int buildingInputPower = 0, buildingOutputPower = 0;
+	private int buildingMonetaryCost = 0;
+	private int buildingRequiredTurns = 0;
+	private int buildingXPos = 0;
+	private int buildingYPos = 0;
+	private ArrayList<Resource> requiredResources;
+	private ArrayList<Resource> outputResources;
+	private ArrayList<String> requiredBuildings;
 
 	/*
 	 * @param: inputStream: InputStream object with the XML as the file
@@ -38,18 +51,7 @@ public class BuildingXMLParser {
 		this.buildings = new ArrayList<BuildingDefinition>();
 	}
 
-	String buildingName = "";
-	String buildingInfo = "";
-	int buildingAmount = 0;
-	int buildingInputPower = 0, buildingOutputPower = 0;
-	int buildingMonetaryCost = 0;
-	int buildingRequiredTurns = 0;
-	int buildingXPos = 0;
-	int buildingYPos = 0;
-	ArrayList<Resource> requiredResources;
-	ArrayList<Resource> outputResources;
-	ArrayList<String> requiredBuildings;
-
+	
 	public void readBuildingAttributes() {
 		// Read the attributes for each building
 		buildingName = xpp.getAttributeValue(null, "name");

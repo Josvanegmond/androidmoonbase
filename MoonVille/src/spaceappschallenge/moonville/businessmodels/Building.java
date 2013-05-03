@@ -2,11 +2,10 @@
 package spaceappschallenge.moonville.businessmodels;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
+import android.util.Log;
 
 /**
  * Handles a attributes of a single building in the world.

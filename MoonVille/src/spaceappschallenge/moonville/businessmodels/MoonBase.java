@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import spaceappschallenge.moonville.factories.Buildings;
+
 import android.util.Log;
 
 /**
@@ -39,7 +41,7 @@ public class MoonBase implements Serializable
 
 		// only add starting base
 		this.builtBuildings = new BuildingTree();
-		this.builtBuildings.add(new Building("Lunar Base", 1));
+		this.builtBuildings.add( new Building( Buildings.getInstance().getBuilding( "Moon Base" ), 1 ) );
 
 		this.gameDetails = GameDetails.getInstance();
 	}
@@ -107,11 +109,6 @@ public class MoonBase implements Serializable
 		return builtBuildings;
 	}
 	
-	/*
-	public List<Building> getBuildBuildingsList() {
-		return this.builtBuildingsList;
-	}
-*/
 	
 	public void setBuiltBuildings(BuildingTree builtBuildings) {
 		this.builtBuildings = builtBuildings;
@@ -123,13 +120,13 @@ public class MoonBase implements Serializable
 	 * @param name Name of the building to add.
 	 */
 	public void addBuilding(String name) {
-		Building existing = builtBuildings.getBuilding(name);
+		Building existing = this.getBuilding(name);
 		if (existing != null) {
 			existing.setAmount(existing.getAmount() + 1);
 			Log.d("test", "++");
 		}
 		else {
-			builtBuildings.add(new Building(name, 1));
+			builtBuildings.add( new Building( Buildings.getInstance().getBuilding( name ), 1) );
 			Log.d("test", "new");
 		}
 	}
@@ -138,15 +135,26 @@ public class MoonBase implements Serializable
 	 * Returns total number of buildings of this type.
 	 */
 	public int getBuildingAmount(String name) {
-		Building b = builtBuildings.getBuilding(name);
+		Building b = this.getBuilding(name);
 		if (b != null)
 			return b.getAmount();
 		else
+		{
 			return 0;
+		}
 	}
 	
-	public Building getBuilding(String name) {
-		return builtBuildings.getBuilding(name);
+	public Building getBuilding(String name)
+	{
+		Building b = builtBuildings.getBuilding( name );
+		if( b != null )
+			return b;
+		
+		else
+		{
+			Log.d("debug", "building " + name + " not found in tree");
+			return null;
+		}
 	}
 
 	public boolean canBuild(String name) {

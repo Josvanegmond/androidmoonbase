@@ -21,6 +21,7 @@ public class BuildingInfoActivity extends GameActivity {
 
 	private String buildingName;
 	private TextView buildingScale;
+	private BaseAdapter buildingInfoListAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +47,9 @@ public class BuildingInfoActivity extends GameActivity {
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 		
 		buildingScale = (TextView) findViewById( R.id.buildingscaletext );
-		buildingScale.setText("Building scale: " + 
-					moonBase.getBuildingAmount(buildingName));
+		buildingScale.setText( "Building scale: " + moonBase.getBuildingAmount(buildingName) );
 		
-		BaseAdapter buildingInfoListAdapter = new BuildingInfoListAdapter( moonBase.getBuilding( buildingName ) );
+		buildingInfoListAdapter = new BuildingInfoListAdapter( buildingName );
 		
 		ListView buildingInfoList = (ListView) findViewById( R.id.buildinginfolist );
 		buildingInfoList.setAdapter( buildingInfoListAdapter );
@@ -63,6 +63,7 @@ public class BuildingInfoActivity extends GameActivity {
 			moonBase.addBuilding(buildingName);
 			buildingScale.setText("Building scale: " + 
 					moonBase.getBuildingAmount(buildingName));
+			buildingInfoListAdapter.notifyDataSetChanged();
 		}
 		else {
 			// TODO: Show the reason (missing resources, required building etc.).
