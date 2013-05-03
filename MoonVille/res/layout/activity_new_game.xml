@@ -23,7 +23,7 @@
                 android:orientation="vertical" >
             </LinearLayout>
 
-            <TextView
+            <spaceappschallenge.moonville.ui.FontTextView
                 android:id="@+id/buildingname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
 
-        <TextView
+        <spaceappschallenge.moonville.ui.FontTextView
             android:id="@+id/buildingscaletext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             <requestFocus />
         </EditText>
 
-        <TextView
+        <spaceappschallenge.moonville.ui.FontTextView
             android:id="@+id/TextView01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

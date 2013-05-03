@@ -1,61 +1,72 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/importResourcesRL"
+    android:id="@+id/horizontalLL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_below="@+id/importTitle"
     android:layout_margin="20dp"
-    android:layout_marginTop="10dp"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".ImportResourcesActivity" >
 
-    <LinearLayout
-        android:id="@+id/horizontalLL"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/importTitle" >
+    <spaceappschallenge.moonville.ui.FontTextView
+        android:id="@+id/exportTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="Import resources"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <RelativeLayout
-            android:id="@+id/listRL"
+    <LinearLayout
+        android:id="@+id/importResourcesBudgetHL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" >
+
+        <spaceappschallenge.moonville.ui.FontTextView
+            android:id="@+id/budgettitletext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Budget"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <spaceappschallenge.moonville.ui.FontTextView
+            android:id="@+id/budgettext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:gravity="right" >
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:text="1000"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <LinearLayout
-                android:id="@+id/importResourcesBudgetHL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" >
-
-                <TextView
-                    android:id="@+id/budgetTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:gravity="left"
-                    android:text="Budget"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/budgetTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_toRightOf="@+id/budgetTitle"
-                    android:layout_marginLeft="20dp"
-                    android:text="1000"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </LinearLayout>
-
-            <ListView
-                android:id="@+id/importResourceslist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/importResourcesBudgetHL" >
-            </ListView>
-        </RelativeLayout>
+        <spaceappschallenge.moonville.ui.FontTextView
+            android:id="@+id/importmonths"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="left"
+            android:text="Next import in 0 months"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ListView
+            android:id="@+id/importresourceslist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/pendingimportlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </ListView>
+
+    </LinearLayout>
+
+</LinearLayout>

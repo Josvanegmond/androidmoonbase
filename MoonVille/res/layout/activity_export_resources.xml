@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".ExportResourcesActivity" >
 
-    <TextView
+    <spaceappschallenge.moonville.ui.FontTextView
         android:id="@+id/exportTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,53 +15,61 @@
         android:text="Export resources"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp" >
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical" >
-
-            <ImageView
-                android:id="@+id/companyimage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/dummydome_medium" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <ListView
-                android:id="@+id/importresourcelist"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" >
-            </ListView>
+                android:layout_margin="10dp" >
+
+                <ImageView
+                    android:id="@+id/companyimage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/asteroidsinc" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <ListView
+                        android:id="@+id/importresourcelist"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+                    </ListView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <spaceappschallenge.moonville.ui.FontTextView
+                android:id="@+id/companyname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:maxLines="3"
+                android:text="Orbital Transits Company"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <spaceappschallenge.moonville.ui.FontTextView
+                android:id="@+id/companyinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A small company providing transport services to ground and orbital stations around earth. They import extraterrestrial resources from mining companies and distribute them further to ground based and orbital facilities."
+                android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/companyname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:maxLines="3"
-        android:text="Orbital Transits Company"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/companyinfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="A small company providing transport services to ground and orbital stations around earth. They import extraterrestrial resources from mining companies and distribute them further to ground based and orbital facilities."
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/buttonlayout"

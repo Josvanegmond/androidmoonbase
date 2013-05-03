@@ -29,14 +29,14 @@ public class ImportResourcesActivity extends GameActivity {
 		ImportResourceListAdapter resourceListAdapter = new ImportResourceListAdapter( resources );
 
 		ListView resourceListView = (ListView) this
-				.findViewById(R.id.importResourceslist);
+				.findViewById(R.id.importresourceslist);
 		resourceListView.setAdapter(resourceListAdapter);
 		updateUI();
 	}
 
 	public void updateUI() {
 		TextView budgetTextView = (TextView) (this
-				.findViewById(R.id.budgetTextView));
+				.findViewById(R.id.budgettext));
 		budgetTextView.setText(""
 				+ MoonBaseManager.getCurrentMoonBase().getMoney());
 	}

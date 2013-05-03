@@ -155,7 +155,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				Log.i("cost", " total cost is:" + totalCost);
 				try {
 					((TextView) ((View) (parent.getParent().getParent()))
-							.findViewById(R.id.budgetTextView)).setText(""
+							.findViewById(R.id.budgettext)).setText(""
 							+ MoonBaseManager.getCurrentMoonBase().getMoney());
 				} catch (Exception e) {
 					Log.e("ImportResourceListAdapter",

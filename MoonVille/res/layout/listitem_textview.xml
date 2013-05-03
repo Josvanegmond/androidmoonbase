@@ -5,7 +5,7 @@
     android:layout_marginBottom="5dp"
     android:orientation="vertical" >
 
-    <TextView
+    <spaceappschallenge.moonville.ui.FontTextView
         android:id="@+id/buildinginfotext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

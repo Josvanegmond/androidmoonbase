@@ -163,7 +163,7 @@ public class BuildingInfoListAdapter extends BaseAdapter
 	{
 		if( convertView == null )
 		{
-			View listItem = LayoutInflater.from( parent.getContext() ).inflate( R.layout.listitem_buildinginfo, parent, false );
+			View listItem = LayoutInflater.from( parent.getContext() ).inflate( R.layout.listitem_textview, parent, false );
 			convertView = listItem;
 		}
 
