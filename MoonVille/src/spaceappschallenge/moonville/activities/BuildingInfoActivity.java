@@ -3,12 +3,12 @@ package spaceappschallenge.moonville.activities;
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.MoonBase;
+import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.listadapters.BuildingInfoListAdapter;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -30,8 +30,7 @@ public class BuildingInfoActivity extends GameActivity {
 		
 		//the building passed through via baseoverviewactivity
 		this.buildingName = getIntent().getExtras().getString("Building");
-		
-		
+				
 		ImageView buildingImage = (ImageView) findViewById( R.id.buildingimage );
 
 		android.content.res.Resources res = this.getResources();
@@ -46,11 +45,15 @@ public class BuildingInfoActivity extends GameActivity {
 
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 		
-		buildingScale = (TextView) findViewById( R.id.buildingscaletext );
-		buildingScale.setText( "Building scale: " + moonBase.getBuildingAmount(buildingName) );
+		buildingScale = (TextView) findViewById( R.id.noOfBuildingsText);
+		buildingScale.setText( "Buildings: " + moonBase.getBuildingAmount(buildingName) );
 		
+		//Show Description of the building
+		TextView buildingInfo = (TextView)findViewById(R.id.buildinginfo);
+		buildingInfo.setText(Buildings.getInstance().getBuilding(this.buildingName).getInfo());
+		
+		//Show stats of the building in a list view
 		buildingInfoListAdapter = new BuildingInfoListAdapter( buildingName );
-		
 		ListView buildingInfoList = (ListView) findViewById( R.id.buildinginfolist );
 		buildingInfoList.setAdapter( buildingInfoListAdapter );
 	}

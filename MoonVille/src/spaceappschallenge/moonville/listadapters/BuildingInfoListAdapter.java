@@ -49,7 +49,7 @@ public class BuildingInfoListAdapter extends BaseAdapter
 	
 	private void fillBuildingInfo( BuildingDefinition buildingDefinition )
 	{
-		this.infoList.add( buildingDefinition.getRequiredTurns() + " months building time" );
+		this.infoList.add("Construction time: " + buildingDefinition.getRequiredTurns() + " months" );
 		this.infoList.add( "" );
 		
 		if( buildingDefinition.getInputPower() > 0 )
