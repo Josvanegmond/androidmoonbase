@@ -31,7 +31,7 @@ public class BaseOverviewActivity extends GameActivity {
 
 	private RelativeLayout moonSurfaceLayout;
 	private ArrayList<ImageView> buildingImageList;
-	
+
 	private static String PREFERENCE_SCROLL_X = "base_overview_scroll_x";
 	private static String PREFERENCE_SCROLL_Y = "base_overview_scroll_y";
 
@@ -48,19 +48,17 @@ public class BaseOverviewActivity extends GameActivity {
 		fixHVScrollViews();
 		updateUI();
 	}
-	
+
 	/**
 	 * Saves scroll position.
 	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
-		SharedPreferences.Editor editor = 
-				getSharedPreferences(MoonVille.PREFERENCE_FILE, 0).edit();
-		final HorizontalScrollView hScroll = (HorizontalScrollView) 
-				findViewById(R.id.moonsurface_hscrollview);
-		final ScrollView vScroll = (ScrollView) 
-				findViewById(R.id.moonsurface_vscrollview);
+		SharedPreferences.Editor editor = getSharedPreferences(
+				MoonVille.PREFERENCE_FILE, 0).edit();
+		final HorizontalScrollView hScroll = (HorizontalScrollView) findViewById(R.id.moonsurface_hscrollview);
+		final ScrollView vScroll = (ScrollView) findViewById(R.id.moonsurface_vscrollview);
 		editor.putInt(PREFERENCE_SCROLL_X, hScroll.getScrollX());
 		editor.putInt(PREFERENCE_SCROLL_Y, vScroll.getScrollY());
 		editor.commit();
@@ -72,20 +70,18 @@ public class BaseOverviewActivity extends GameActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		final SharedPreferences settings = 
-				getSharedPreferences(MoonVille.PREFERENCE_FILE, 0);
-		final HorizontalScrollView hScroll = (HorizontalScrollView) 
-				findViewById(R.id.moonsurface_hscrollview);
-		final ScrollView vScroll = (ScrollView) 
-				findViewById(R.id.moonsurface_vscrollview);
+		final SharedPreferences settings = getSharedPreferences(
+				MoonVille.PREFERENCE_FILE, 0);
+		final HorizontalScrollView hScroll = (HorizontalScrollView) findViewById(R.id.moonsurface_hscrollview);
+		final ScrollView vScroll = (ScrollView) findViewById(R.id.moonsurface_vscrollview);
 		// Don't know why, but using post is the only way to make this work.
-		hScroll.post(new Runnable() {			
+		hScroll.post(new Runnable() {
 			@Override
 			public void run() {
 				hScroll.scrollTo(settings.getInt(PREFERENCE_SCROLL_X, 0), 0);
 			}
 		});
-		vScroll.post(new Runnable() {			
+		vScroll.post(new Runnable() {
 			@Override
 			public void run() {
 				vScroll.scrollTo(0, settings.getInt(PREFERENCE_SCROLL_Y, 0));
@@ -113,186 +109,172 @@ public class BaseOverviewActivity extends GameActivity {
 		return true;
 	}
 
-	
 	/**
-	 * showBuildings shows the buildings on the moon landscape.
-	 * It's using an absolute layout (deprecated) to be able to position buildings on absolute position.
-	 * RelativeLayout didn't work, the buildings did not scroll along and out of the viewport.
+	 * showBuildings shows the buildings on the moon landscape. It's using an
+	 * absolute layout (deprecated) to be able to position buildings on absolute
+	 * position. RelativeLayout didn't work, the buildings did not scroll along
+	 * and out of the viewport.
 	 * 
-	 * The method maintains a list of images (buildingImagesList) for each building placed in the absolutelayout.
-	 * When called, this list is cleared, the images removed from layout, and then re-added.
-	 * The image positions are obtained from the Buildings factory, which gets the data from buildings.xml.
+	 * The method maintains a list of images (buildingImagesList) for each
+	 * building placed in the absolutelayout. When called, this list is cleared,
+	 * the images removed from layout, and then re-added. The image positions
+	 * are obtained from the Buildings factory, which gets the data from
+	 * buildings.xml.
 	 * 
-	 * Image transparency is determined by the fact wether or not a building can already be build:
-	 * 	If the building is build, the image is opaque (alpha 100)
-	 * 	Else if all required buildings of a building have been build, the image is transparent (alpha 50)
-	 *  Else building is invisible (alpha 0)
+	 * Image transparency is determined by the fact wether or not a building can
+	 * already be build: If the building is build, the image is opaque (alpha
+	 * 100) Else if all required buildings of a building have been build, the
+	 * image is transparent (alpha 50) Else building is invisible (alpha 0)
 	 */
-	private void showBuildings()
-	{
-		//erase all building images from list
+	private void showBuildings() {
+		// erase all building images from list
 		for (ImageView buildingImage : buildingImageList) {
 			((RelativeLayout) buildingImage.getParent())
 					.removeView(buildingImage);
 		}
 
-		//clear list
+		// clear list
 		buildingImageList.clear();
-		
-		
-		//obtain the current moonbase
+
+		// obtain the current moonbase
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
-		
-		
-		//get all buildings, to check for each building if it is visible and what its position should be
-		List<BuildingDefinition> buildings = Buildings.getInstance().getAllBuildings();
-		
-		for (final BuildingDefinition building : buildings)
-		{
-			//see if the building can be build or not, and whether or not it is already visible
+
+		// get all buildings, to check for each building if it is visible and
+		// what its position should be
+		List<BuildingDefinition> buildings = Buildings.getInstance()
+				.getAllBuildings();
+
+		for (final BuildingDefinition building : buildings) {
+			// see if the building can be build or not, and whether or not it is
+			// already visible
 			boolean canBeBuild = moonBase.canBuild(building.getName());
 
-			if( canBeBuild == false )
-			{
-				//nothing happens, no building visible
+			if (canBeBuild == false) {
+				// nothing happens, no building visible
 			}
-			
-			else
-			{		
+
+			else {
 				ImageView buildingImage = new ImageView(this);
-				
-				//by clicking on the building, the BuildingInfoActivity pops up
+
+				// by clicking on the building, the BuildingInfoActivity pops up
 				buildingImage.setOnClickListener(new OnClickListener() {
 					@Override
-					public void onClick(View view)
-					{
-						Intent intent = new Intent(BaseOverviewActivity.this, BuildingInfoActivity.class);
+					public void onClick(View view) {
+						Intent intent = new Intent(BaseOverviewActivity.this,
+								BuildingInfoActivity.class);
 						intent.putExtra("Building", building.getName());
-						view.getContext().startActivity( intent );
+						view.getContext().startActivity(intent);
 						BaseOverviewActivity.this.finish();
 					}
 				});
-	
+
 				buildingImageList.add(buildingImage);
-	
+
 				android.content.res.Resources res = this.getResources();
-	
-				//obtain the bitmap from the name of the building
-				//TODO: replace/remove ref_ prefix to match name of the final image in the file system
-				int resID = res
-						.getIdentifier("ref_"
-								+ building.getName().replace(" ", "_")
-										.toLowerCase(), "drawable",
-								getPackageName());
+
+				// obtain the bitmap from the name of the building
+				// TODO: replace/remove ref_ prefix to match name of the final
+				// image in the file system
+				int resID = res.getIdentifier("ref_"
+						+ building.getName().replace(" ", "_").toLowerCase(),
+						"drawable", getPackageName());
 				Drawable buildingDrawable = res.getDrawable(resID);
 				buildingImage.setImageDrawable(buildingDrawable);
-	
-				//place it in the background according to position determined in Building object
-				BuildingDefinition bd = Buildings.getInstance().getBuilding(building.getName());
-				
-				RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams( buildingDrawable.getIntrinsicWidth()/2, buildingDrawable.getIntrinsicHeight()/2 );
-				//params.addRule( RelativeLayout.ALIGN_PARENT_LEFT );
-				//params.addRule( RelativeLayout.ALIGN_PARENT_TOP );
+
+				// place it in the background according to position determined
+				// in Building object
+				BuildingDefinition bd = Buildings.getInstance().getBuilding(
+						building.getName());
+
+				RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+						buildingDrawable.getIntrinsicWidth() / 2,
+						buildingDrawable.getIntrinsicHeight() / 2);
+				// params.addRule( RelativeLayout.ALIGN_PARENT_LEFT );
+				// params.addRule( RelativeLayout.ALIGN_PARENT_TOP );
 				params.leftMargin = bd.getXPos();
 				params.topMargin = bd.getYPos();
-				
-				buildingImage.setLayoutParams( params );
+
+				buildingImage.setLayoutParams(params);
 
 				moonSurfaceLayout.addView(buildingImage);
-				
 
-				//depending on wether or not it is already build, show it 
-				if( moonBase.getBuilding( building.getName() ) != null )
-				{
-					buildingImage.setAlpha( 255 );
-				}
-				else
-				{
-					buildingImage.setAlpha( 50 );
+				// depending on wether or not it is already build, show it
+				if (moonBase.getBuilding(building.getName()) != null) {
+					buildingImage.setAlpha(255);
+				} else {
+					buildingImage.setAlpha(50);
 				}
 			}
 		}
 	}
 
-	
-	public void showResourcePopups()
-	{	
+	public void showResourcePopups() {
 		List<Resource> resourceChangeList = new ArrayList<Resource>();
-		BuildingTree buildingTree = MoonBaseManager.getCurrentMoonBase().getBuiltBuildings();
-		buildingTree.checkResources( resourceChangeList );
-		
-		if( buildingTree.size() > 0 )
-		{
-			for( final Building building : buildingTree )
-			{
-				if( building.getHasPower() && building.getHasRequiredResources() )
-				{
-					List<Resource> outputResources = building.getResourceOutput();
-		
+		BuildingTree buildingTree = MoonBaseManager.getCurrentMoonBase()
+				.getBuiltBuildings();
+		buildingTree.checkResources(resourceChangeList);
+
+		if (buildingTree.size() > 0) {
+			for (final Building building : buildingTree) {
+				if (building.getHasPower()
+						&& building.getHasRequiredResources()) {
+					List<Resource> outputResources = building
+							.getResourceOutput();
+
 					int popupNumber = 0;
-					
-					for( Resource resource : outputResources )
-					{
+
+					for (Resource resource : outputResources) {
 						/**
 						 * Slowly fade and move popup away
-						 */	
-						BuildingDefinition bd = Buildings.getInstance().getBuilding(building.getName());
-						
-						new Popup(
-							BaseOverviewActivity.this,
-							moonSurfaceLayout,
-							"+ " + resource.getAmount() + " " + resource.getName(),
-							bd.getXPos(), bd.getYPos(),
-							popupNumber * 10 );
-						
+						 */
+						BuildingDefinition bd = Buildings.getInstance()
+								.getBuilding(building.getName());
+
+						new Popup(BaseOverviewActivity.this, moonSurfaceLayout,
+								"+ " + resource.getAmount() + " "
+										+ resource.getName(), bd.getXPos(),
+								bd.getYPos(), popupNumber * 10);
+
 						popupNumber++;
 					}
 				}
 			}
 		}
 	}
-	
 
 	// methods called by onClick property of button in xml
-	
+
 	/**
-	 * nextTurn pushes the game forward to the next month.
-	 * It forwards time, changes resources, builds the
-	 * buildings and divides the power.
+	 * nextTurn pushes the game forward to the next month. It forwards time,
+	 * changes resources, builds the buildings and divides the power.
 	 * 
-	 * Performed tasks:
-	 * 	divide power among buildings
-	 * 	process all resources
-	 * 	calculate reputation
-	 * 	change month
-	 * 	save game state
+	 * Performed tasks: divide power among buildings process all resources
+	 * calculate reputation change month save game state
 	 * 
 	 */
-	public void nextTurn(View view)
-	{
+	public void nextTurn(View view) {
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 		moonBase.incrementMonth();
-		
+
 		BuildingTree tree = moonBase.getBuiltBuildings();
 		tree.checkPower();
 		tree.checkRequiredBuildings();
 
-		List<Resource> available = tree.checkResources( moonBase.getStoredResources() );
-		moonBase.setStoredResources( available );
+		List<Resource> available = tree.checkResources(moonBase
+				.getStoredResources());
+		moonBase.setStoredResources(available);
 
 		// TODO: factor in research and prospecting bonus
 		// TODO: calculate reputation
 
 		// last step, save to file
-		
+
 		updateUI();
 		showResourcePopups();
-		
+
 		MoonBaseManager.saveMoonBase(view.getContext());
 
 	}
-	
-	
 
 	public void showImportResourcesScreen(View view) {
 		view.getContext().startActivity(
@@ -310,14 +292,8 @@ public class BaseOverviewActivity extends GameActivity {
 				new Intent(this, ResourcesActivity.class));
 	}
 
-	public void showExportScreen(View view) {
-		view.getContext().startActivity(
-				new Intent(this, ResourcesActivity.class));
-	}
-
-	
 	// some scrollbar fix for scrolling
-	//TODO: make a custom widget for this
+	// TODO: make a custom widget for this
 	private void fixHVScrollViews() {
 		final HorizontalScrollView hScroll = (HorizontalScrollView) findViewById(R.id.moonsurface_hscrollview);
 		final ScrollView vScroll = (ScrollView) findViewById(R.id.moonsurface_vscrollview);
