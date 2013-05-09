@@ -86,7 +86,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/importButton"
+                android:id="@+id/importResourceButton"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
