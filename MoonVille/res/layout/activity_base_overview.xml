@@ -77,7 +77,7 @@
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/Button01"
+                android:id="@+id/baseOverviewResourcesButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="showResourcesScreen"
@@ -93,7 +93,7 @@
                 android:textSize="@dimen/tinyButtonText" />
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/baseOverviewResourceExportButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="showExportResourcesScreen"
@@ -102,7 +102,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/Button03"
+            android:id="@+id/baseOverviewNextMonthButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="nextTurn"
