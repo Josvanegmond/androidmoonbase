@@ -27,36 +27,37 @@
             android:orientation="vertical" >
 
             <spaceappschallenge.moonville.ui.FontTextView
-                android:id="@+id/buildingscaletext"
+                android:id="@+id/noOfBuildingsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:layout_marginRight="20dp"
                 android:text="Buildings: 0"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <spaceappschallenge.moonville.ui.FontTextView
+                android:id="@+id/buildinginfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Here comes a description for each building. It can describe the location, it&apos; s in and output, dependencies, etc."
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
                 android:id="@+id/button1"
                 android:layout_width="match_parent"
-                android:layout_height="33dp"
+                android:layout_height="wrap_content"
                 android:onClick="build"
                 android:text="Construct building" />
-
-            <ListView
-                android:id="@+id/buildinginfolist"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-            </ListView>
-
         </LinearLayout>
-
     </LinearLayout>
 
-    <spaceappschallenge.moonville.ui.FontTextView
+    <ListView
         android:id="@+id/buildinginfolist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="Here comes a description for each building. It can describe the location, it&apos; s in and output, dependencies, etc."
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" >
+    </ListView>
 
 </LinearLayout>
