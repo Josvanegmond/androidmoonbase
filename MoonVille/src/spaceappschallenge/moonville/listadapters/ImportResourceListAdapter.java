@@ -23,7 +23,7 @@ import android.widget.Toast;
 public class ImportResourceListAdapter extends BaseAdapter {
 	private List<ResourceDefinition> allResources;
 
-	public ImportResourceListAdapter( List<ResourceDefinition> resources ) {
+	public ImportResourceListAdapter(List<ResourceDefinition> resources) {
 		// get the resources via the factory
 		this.allResources = resources;
 	}
@@ -83,8 +83,8 @@ public class ImportResourceListAdapter extends BaseAdapter {
 								.findViewById(R.id.importResourceNameTextView))
 								.getText().toString();
 
-						ResourceDefinition currentResource = Resources.getInstance()
-								.getResource(resourceName);
+						ResourceDefinition currentResource = Resources
+								.getInstance().getResource(resourceName);
 						if (currentResource == null) {
 							Log.i("null", resourceName + "not found");
 							return;
@@ -116,7 +116,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 	protected void addListenerToBuyButton(final View convertView,
 			final ViewGroup parent) {
 		Button importButton = (Button) convertView
-				.findViewById(R.id.importButton);
+				.findViewById(R.id.importResourceButton);
 		importButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -125,8 +125,8 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				String resourceName = ((TextView) convertView
 						.findViewById(R.id.importResourceNameTextView))
 						.getText().toString();
-				ResourceDefinition currentResource = Resources.getInstance().getResource(
-						resourceName);
+				ResourceDefinition currentResource = Resources.getInstance()
+						.getResource(resourceName);
 
 				int unitCost = currentResource.getImportPrice();
 				int quantity = Integer.parseInt(((TextView) convertView
@@ -153,18 +153,28 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				toast.show();
 
 				Log.i("cost", " total cost is:" + totalCost);
+				String budget = ""
+						+ MoonBaseManager.getCurrentMoonBase().getMoney();
 				try {
-					((TextView) ((View) (parent.getParent().getParent()))
-							.findViewById(R.id.budgettext)).setText(""
-							+ MoonBaseManager.getCurrentMoonBase().getMoney());
+
+					((TextView) ((View)parent.getParent()).findViewById(R.id.budgettext))
+							.setText(budget);//problem: drilling through parent hierarchy is a pain, we should have a parent controller for all activities
+
 				} catch (Exception e) {
 					Log.e("ImportResourceListAdapter",
 							"Could not update budget in text view");
 
 				}
+				try {
+					((TextView) ((View)parent.getParent())
+							.findViewById(R.id.baseOverviewFundsTextView))
+							.setText(budget);
+				} catch (Exception e) {
+					Log.e("ImportResourceListAdapter",
+							"Could not update budget in text view of base overview screen");
+				}
 				MoonBaseManager.saveMoonBase(v.getContext());
 			}
 		});
 	}
-
 }

@@ -5,16 +5,9 @@
     android:layout_height="match_parent"
     android:layout_below="@+id/importTitle"
     android:layout_margin="20dp"
+    android:layout_marginTop="10dp"
     android:orientation="vertical"
     tools:context=".ImportResourcesActivity" >
-
-    <spaceappschallenge.moonville.ui.FontTextView
-        android:id="@+id/exportTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="Import resources"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout
         android:id="@+id/importResourcesBudgetHL"
@@ -38,33 +31,32 @@
             android:layout_weight="1"
             android:text="1000"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <spaceappschallenge.moonville.ui.FontTextView
-            android:id="@+id/importmonths"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:gravity="left"
-            android:text="Next import in 0 months"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/importresourceslistTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:text="Purchase Resources:"
+            android:textAppearance="?android:attr/textAppearanceMedium">
+        </TextView>
+
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <ListView
             android:id="@+id/importresourceslist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
-        </ListView>
-
-        <ListView
-            android:id="@+id/pendingimportlist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left">
         </ListView>
 
     </LinearLayout>

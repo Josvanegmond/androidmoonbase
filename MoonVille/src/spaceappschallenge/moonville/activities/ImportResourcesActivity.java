@@ -67,7 +67,7 @@ public class ImportResourcesActivity extends GameActivity {
 
 	public void showExportScreen(View view) {
 		view.getContext().startActivity(
-				new Intent(this, ImportResourcesActivity.class));
+				new Intent(this, ExportResourcesActivity.class));
 		this.finish();
 	}
 

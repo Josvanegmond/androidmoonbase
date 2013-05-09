@@ -7,14 +7,6 @@
     android:orientation="vertical"
     tools:context=".ExportResourcesActivity" >
 
-    <spaceappschallenge.moonville.ui.FontTextView
-        android:id="@+id/exportTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="Export resources"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
@@ -36,7 +28,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
-                    android:src="@drawable/asteroidsinc" />
+                    android:src="@drawable/baseoverview" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -68,7 +60,6 @@
                 android:text="A small company providing transport services to ground and orbital stations around earth. They import extraterrestrial resources from mining companies and distribute them further to ground based and orbital facilities."
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
-
     </ScrollView>
 
     <LinearLayout
@@ -104,7 +95,6 @@
             android:layout_weight="1"
             android:onClick="nextImportCompany"
             android:text="Next" />
-
     </LinearLayout>
 
 </LinearLayout>
