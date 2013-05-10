@@ -5,6 +5,7 @@ import java.util.List;
 
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.Resource;
+import spaceappschallenge.moonville.factories.ApplicationService;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.factories.Resources;
 import spaceappschallenge.moonville.xml_parsers.ResourceDefinition;
@@ -157,8 +158,9 @@ public class ImportResourceListAdapter extends BaseAdapter {
 						+ MoonBaseManager.getCurrentMoonBase().getMoney();
 				try {
 
-					((TextView) ((View)parent.getParent()).findViewById(R.id.budgettext))
-							.setText(budget);//problem: drilling through parent hierarchy is a pain, we should have a parent controller for all activities
+					((TextView) (ApplicationService
+							.getImportResourcesActivity())
+							.findViewById(R.id.budgettext)).setText(budget);
 
 				} catch (Exception e) {
 					Log.e("ImportResourceListAdapter",
@@ -166,7 +168,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 
 				}
 				try {
-					((TextView) ((View)parent.getParent())
+					((TextView) (ApplicationService.getBaseOverviewActivity())
 							.findViewById(R.id.baseOverviewFundsTextView))
 							.setText(budget);
 				} catch (Exception e) {

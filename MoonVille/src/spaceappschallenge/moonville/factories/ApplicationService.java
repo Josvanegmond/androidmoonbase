@@ -1,8 +1,11 @@
 /*
- * The sole purpose of this class is to provide application "Context".
+ * This class provides application context.
+ * Also, it stores instances of Activities.
  */
 package spaceappschallenge.moonville.factories;
 
+import spaceappschallenge.moonville.activities.BaseOverviewActivity;
+import spaceappschallenge.moonville.activities.ImportResourcesActivity;
 import android.content.Context;
 import android.util.Log;
 
@@ -13,6 +16,8 @@ public class ApplicationService
 {
 	protected static ApplicationService instance;
 	private static Context applicationContext;
+	private static BaseOverviewActivity baseOverviewActivity;
+	private static ImportResourcesActivity importResourcesActivity;
 	
 	protected ApplicationService(){
 		//just to make sure it can't be instantiated
@@ -39,6 +44,26 @@ public class ApplicationService
 		
 		return ApplicationService.applicationContext;
 	}
+
+	public static BaseOverviewActivity getBaseOverviewActivity() {
+		return baseOverviewActivity;
+	}
+
+	public static void setBaseOverviewActivity(
+			BaseOverviewActivity baseOverviewActivity) {
+		ApplicationService.baseOverviewActivity = baseOverviewActivity;
+	}
+
+	public static ImportResourcesActivity getImportResourcesActivity() {
+		return importResourcesActivity;
+	}
+
+	public static void setImportResourcesActivity(
+			ImportResourcesActivity importResourcesActivity) {
+		ApplicationService.importResourcesActivity = importResourcesActivity;
+	}
+	
+	
 }
 //public class ApplicationService extends Application {
 //	protected static ApplicationService instance;

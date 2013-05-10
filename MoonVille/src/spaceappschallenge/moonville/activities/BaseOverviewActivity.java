@@ -10,6 +10,7 @@ import spaceappschallenge.moonville.domain.Building;
 import spaceappschallenge.moonville.domain.BuildingTree;
 import spaceappschallenge.moonville.domain.MoonBase;
 import spaceappschallenge.moonville.domain.Resource;
+import spaceappschallenge.moonville.factories.ApplicationService;
 import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
@@ -43,7 +44,7 @@ public class BaseOverviewActivity extends GameActivity {
 				.findViewById(R.id.moonsurface_relativelayout);
 
 		this.buildingImageList = new ArrayList<ImageView>();
-
+		ApplicationService.setBaseOverviewActivity(this);
 		showBuildings();
 		fixHVScrollViews();
 		updateUI();
