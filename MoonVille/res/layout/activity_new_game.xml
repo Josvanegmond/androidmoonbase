@@ -1,108 +1,170 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ScrollView"
+    android:id="@+id/newgamelayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp" >
 
     <LinearLayout
-        android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".NewCompanyActivity" >
+        android:layout_weight="1"
+        android:orientation="vertical" >
 
-        <LinearLayout
+        <spaceappschallenge.moonville.ui.FontTextView
+            android:id="@+id/companytitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Game"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ScrollView
+            android:id="@+id/scrollView1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1" >
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:orientation="vertical" >
+
+                <spaceappschallenge.moonville.ui.FontTextView
+                    android:id="@+id/FontTextView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:scrollbars="vertical"
+                    android:text="@string/welcome_text"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
-
-            <spaceappschallenge.moonville.ui.FontTextView
-                android:id="@+id/buildingname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:text="Welcome to the MoonVille project. You have been selected as the world&apos;s first lunar industry president.\n\nYou are responsible of the successes and failures of the colony. If you fail, it is not likely humanity will be able to exploit the moon again in the near future. But we have all confidence you will show the world it can be done.\n\nGood luck Mr. President!"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-        </LinearLayout>
-
-        <spaceappschallenge.moonville.ui.FontTextView
-            android:id="@+id/buildingscaletext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Please state your name"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <EditText
-            android:id="@+id/userNameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:imeOptions="actionDone"
-            android:lines="1"
-            android:singleLine="true" >
-
-            <requestFocus />
-        </EditText>
-
-        <spaceappschallenge.moonville.ui.FontTextView
-            android:id="@+id/TextView01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Enter difficulty level"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" >
-
-            <RadioGroup
-                android:id="@+id/difficultyRadioGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:orientation="horizontal" >
-
-                <RadioButton
-                    android:id="@+id/easyRadio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/difficulty_easy" />
-
-                <RadioButton
-                    android:id="@+id/mediumRadio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/difficulty_medium" />
-
-                <RadioButton
-                    android:id="@+id/hardRadio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/difficulty_hard" />
-            </RadioGroup>
-        </LinearLayout>
+        </ScrollView>
 
         <Button
             android:id="@+id/newCompanyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_marginTop="20dp"
             android:onClick="startNewGame"
             android:text="Start New Company" />
     </LinearLayout>
 
-</ScrollView>
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <spaceappschallenge.moonville.ui.FontTextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Company details"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical" >
+
+                <spaceappschallenge.moonville.ui.FontTextView
+                    android:id="@+id/buildingscaletext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Please state your name"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <EditText
+                    android:id="@+id/usercompanyname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#444444"
+                    android:ems="10"
+                    android:imeOptions="actionDone"
+                    android:lines="1"
+                    android:padding="5dp"
+                    android:singleLine="true"
+                    android:text="Moonman"
+                    android:textColor="#ffffff" />
+
+                <spaceappschallenge.moonville.ui.FontTextView
+                    android:id="@+id/FontTextView03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Choose difficulty"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <RadioGroup
+                    android:id="@+id/choosedifficulty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/easyRadio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="@string/difficulty_easy"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <RadioButton
+                        android:id="@+id/realisticRadio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/difficulty_realistic"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                </RadioGroup>
+
+                <spaceappschallenge.moonville.ui.FontTextView
+                    android:id="@+id/FontTextView02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Accept a launch contract"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <Spinner
+                    android:id="@+id/choosespacetransport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:gravity="fill_horizontal" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" >
+
+                    <spaceappschallenge.moonville.ui.FontTextView
+                        android:id="@+id/startingbudget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Starting budget: $10.000.000.000" />
+
+                    <spaceappschallenge.moonville.ui.FontTextView
+                        android:id="@+id/startingreputation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Starting reputation: 0%" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
