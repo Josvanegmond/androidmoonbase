@@ -1,125 +1,122 @@
-//Note-Many constructors are unnecessary. Should remove them.
 package spaceappschallenge.moonville.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
+import android.util.Pair;
+
+import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 
 /**
- * Handles a attributes of a single building in the world.
+ * Handles attributes of single building in the world.
  */
 public class Building implements Serializable {
-	protected String name = "";
-	protected int amount = 0;
+	protected BuildingDefinition buildingDefinition = null;
+	protected int age;
+	protected boolean constructed = false;
+	// If it is active, then it can provide output. It is deactivated when
+	// requirements are not fulfilled.
+	protected boolean active = false;
 
-	// These are computed each time they are needed, so no init necessary.
-	protected boolean hasPower = false;
-	protected boolean hasRequiredResources = false;
-	protected boolean hasRequiredBuildings = false;
-
-	private BuildingDefinition associatedDefinition;
-	
-
-	public Building(BuildingDefinition buildingDefinition, int amount) {
-		this.name = buildingDefinition.getName();
-		this.amount = amount;
-		
-		this.associatedDefinition = buildingDefinition;
-	}
-
-	// Setters and Getters
-	public String getName() {
-		return name;
+	public Building(BuildingDefinition buildingDefinition, int age) {
+		this.buildingDefinition = buildingDefinition;
+		this.age = age;
 	}
 	
-	public int getRequiredTurns()
-	{
-		return this.associatedDefinition.getRequiredTurns();
-	}
 	
-	public int getAmount() {
-		return amount;
-	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-
-	public boolean getHasPower() {
-		return hasPower;
-	}
-
-	public void setHasPower(boolean hasPower) {
-		this.hasPower = hasPower;
-	}
-
-	public boolean getHasRequiredResources() {
-		return hasRequiredResources;
-	}
-
-	public void setHasRequiredResources(boolean hasRequiredResources) {
-		this.hasRequiredResources = hasRequiredResources;
-	}
-
-	public void setHasRequiredBuildings(boolean a) {
-		this.hasRequiredBuildings = a;
-	}
-
-	public boolean getHasRequiredBuildings() {
-		return this.hasRequiredBuildings;
+	/**
+	 * Perform all the necessary updates
+	 */
+	public void updateNextTurn() {
+		updateAge();
+		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
+		if (moonBase.canProvideResources(buildingDefinition
+				.getRequiredResources())) {
+			if (moonBase
+					.hasBuildings(buildingDefinition.getRequiredBuildings())) {
+				if (moonBase.hasPower(buildingDefinition.getInputPower())) {
+					moonBase.decreaseResources(buildingDefinition
+							.getRequiredResources());// Consume resources
+					moonBase.decreasePower(buildingDefinition.getInputPower());// Consumer
+																				// power
+					this.active = true;// Activate
+					Log.i("active: ",this.buildingDefinition.getName()+" is active");
+					generateOutput();// Provide output
+					return;
+				}
+				else Log.i("updateNextTurn() "," no power for "+this.buildingDefinition.getName());
+			}
+			else Log.i("updateNextTurn() "," no building for "+this.buildingDefinition.getName());
+			
+		}
+		else Log.i("updateNextTurn() "," no resources for "+this.buildingDefinition.getName());
+		this.active = false;
 	}
 
 	/**
-	 * Returns the total output of resources.
-	 * This is a list of new resource objects, containing the total output number:
-	 * default produced by this building multiplied by the amount of buildings
+	 * Add its outputs (power and resources) to Moonbase
 	 */
-	public List<Resource> getResourceOutput()
-	{
-		List<Resource> addedResources = new ArrayList<Resource>();
-		List<Resource> outputResources = this.associatedDefinition.getOutputResources();
-		for( Resource resource : outputResources )
-		{
-			Resource addedResource = new Resource( resource );
-			addedResource.setAmount( resource.getAmount() * this.getAmount() );
-			addedResources.add( addedResource );
-		}
-		
-		return addedResources;
+	protected void generateOutput() {
+		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
+		moonBase.addPower(buildingDefinition.getOutputPower());// generate power
+		moonBase.increaseResources(buildingDefinition.getOutputResources());// generate resources
 	}
 
-	public List<Resource> getResourceInput()
-	{
-		List<Resource> addedResources = new ArrayList<Resource>();
-		List<Resource> inputResources = this.associatedDefinition.getRequiredResources();
-		for( Resource resource : inputResources )
-		{
-			Resource addedResource = new Resource( resource );
-			addedResource.setAmount( resource.getAmount() * this.getAmount() );
-			addedResources.add( addedResource );
-			
+	/**
+	 * Increment age and update "constructed" boolean
+	 */
+	protected void updateAge() {
+		++this.age;
+		if (this.age >= this.buildingDefinition.getRequiredTurns()) {
+			this.constructed = true;
 		}
-		
-		return addedResources;
 	}
 
+	/**
+	 * Check if a building can be constructed
+	 * 
+	 * @return
+	 */
+	public boolean canBeConstructed() {
+		return true;
+	}
 
-	public List<String> getRequiredBuildings()
-	{
-		List<String> requiredBuildings = this.associatedDefinition.getRequiredBuildings();
-		return requiredBuildings;
+	public boolean isConstructed() {
+		return this.constructed;
+	}
+
+	// Setters and getters
+	public BuildingDefinition getBuildingDefinition() {
+		return buildingDefinition;
+	}
+
+	public void setBuildingDefinition(BuildingDefinition buildingDefinition) {
+		this.buildingDefinition = buildingDefinition;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
-	public int getInputPower()
-	{
-		return this.associatedDefinition.getInputPower();
+	public void setConstructed(boolean constructed){
+		this.constructed=constructed;
 	}
 	
-	public int getOutputPower()
-	{
-		return this.associatedDefinition.getOutputPower();
-	}
+	
 
 }

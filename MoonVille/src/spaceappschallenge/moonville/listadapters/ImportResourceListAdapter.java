@@ -8,8 +8,8 @@ import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.ApplicationService;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.factories.Resources;
-import spaceappschallenge.moonville.xml_parsers.ResourceDefinition;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,9 +22,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ImportResourceListAdapter extends BaseAdapter {
-	private List<ResourceDefinition> allResources;
+	private List<Resource> allResources;
 
-	public ImportResourceListAdapter(List<ResourceDefinition> resources) {
+	public ImportResourceListAdapter(List<Resource> resources) {
 		// get the resources via the factory
 		this.allResources = resources;
 	}
@@ -46,7 +46,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int index, View convertView, ViewGroup parent) {
-		ResourceDefinition resource = this.allResources.get(index);
+		Resource resource = this.allResources.get(index);
 
 		if (convertView == null) {
 			LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -84,7 +84,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 								.findViewById(R.id.importResourceNameTextView))
 								.getText().toString();
 
-						ResourceDefinition currentResource = Resources
+						Resource currentResource = Resources
 								.getInstance().getResource(resourceName);
 						if (currentResource == null) {
 							Log.i("null", resourceName + "not found");
@@ -126,7 +126,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				String resourceName = ((TextView) convertView
 						.findViewById(R.id.importResourceNameTextView))
 						.getText().toString();
-				ResourceDefinition currentResource = Resources.getInstance()
+				Resource currentResource = Resources.getInstance()
 						.getResource(resourceName);
 
 				int unitCost = currentResource.getImportPrice();
@@ -136,14 +136,10 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				int totalCost = unitCost * quantity;
 				Toast toast;
 				if (MoonBaseManager.getCurrentMoonBase().spend(totalCost)) {
-					ArrayList<Resource> newList = new ArrayList<Resource>();
-					newList.add(new Resource(resourceName, quantity));
-					ArrayList<Resource> resourceAvailable = (ArrayList<Resource>) Resource
-							.merge(MoonBaseManager.getCurrentMoonBase()
-									.getStoredResources(), newList);
-
-					MoonBaseManager.getCurrentMoonBase().setStoredResources(
-							resourceAvailable);
+					ArrayList<Pair<Resource,Integer>> newList = new ArrayList<Pair<Resource,Integer>>();
+					newList.add(new Pair<Resource,Integer>(Resources.getInstance().getResource(resourceName), quantity));
+					
+					MoonBaseManager.getCurrentMoonBase().increaseResources(newList);
 					toast = Toast.makeText(v.getContext(), "Spent: "
 							+ totalCost, 2000);
 
@@ -170,7 +166,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				try {
 					((TextView) (ApplicationService.getBaseOverviewActivity())
 							.findViewById(R.id.baseOverviewFundsTextView))
-							.setText(budget);
+							.setText("Funds: "+budget);
 				} catch (Exception e) {
 					Log.e("ImportResourceListAdapter",
 							"Could not update budget in text view of base overview screen");

@@ -16,11 +16,12 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import spaceappschallenge.moonville.domain.Building;
 import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.ApplicationService;
+import spaceappschallenge.moonville.factories.Resources;
 import android.content.Context;
 import android.util.Log;
+import android.util.Pair;
 
-public class BuildingXMLParser
-{
+public class BuildingXMLParser {
 	protected InputStream inputStream = null;
 	protected XmlPullParser xpp;
 	protected ArrayList<BuildingDefinition> buildings;
@@ -34,16 +35,15 @@ public class BuildingXMLParser
 	private int buildingRequiredTurns = 0;
 	private int buildingXPos = 0;
 	private int buildingYPos = 0;
-	private ArrayList<Resource> requiredResources;
-	private ArrayList<Resource> outputResources;
+	private ArrayList<Pair<Resource, Integer>> requiredResources;
+	private ArrayList<Pair<Resource, Integer>> outputResources;
 	private ArrayList<String> requiredBuildings;
 
 	/*
 	 * @param: inputStream: InputStream object with the XML as the file
 	 */
 	public BuildingXMLParser(InputStream inputStream)
-			throws XmlPullParserException
-	{
+			throws XmlPullParserException {
 		this.inputStream = inputStream;
 		XmlPullParserFactory xmlFactory = XmlPullParserFactory.newInstance();
 		xmlFactory.setNamespaceAware(true);
@@ -51,7 +51,6 @@ public class BuildingXMLParser
 		this.buildings = new ArrayList<BuildingDefinition>();
 	}
 
-	
 	public void readBuildingAttributes() {
 		// Read the attributes for each building
 		buildingName = xpp.getAttributeValue(null, "name");
@@ -71,18 +70,32 @@ public class BuildingXMLParser
 		Log.i("XML", "buildingName: " + buildingName);
 	}
 
+	/**
+	 * Adds requiredResources to the list
+	 * 
+	 * @param xpp
+	 * @param requiredResources
+	 */
 	public void addRequiredResource(XmlPullParser xpp,
-			ArrayList<Resource> requiredResources) {
+			ArrayList<Pair<Resource, Integer>> requiredResources) {
 
 		String reqdResName = xpp.getAttributeValue(null, "name");
 		int reqdResAmount = Integer.parseInt(xpp.getAttributeValue(null,
 				"amount"));
-		requiredResources.add(new Resource(reqdResName, reqdResAmount));
+		Resource reqdRes = Resources.getInstance().getResource(reqdResName);
+		requiredResources.add(new Pair<Resource, Integer>(reqdRes,
+				reqdResAmount));
 		Log.i("XML", "required resource " + reqdResName);
 	}
 
+	/**
+	 * Adds outputResources to the list
+	 * 
+	 * @param xpp
+	 * @param outputResources
+	 */
 	public void addOutputResource(XmlPullParser xpp,
-			ArrayList<Resource> outputResources) {
+			ArrayList<Pair<Resource, Integer>> outputResources) {
 		String outResName = xpp.getAttributeValue(null, "name");
 
 		int outResAmount = 0;
@@ -93,19 +106,33 @@ public class BuildingXMLParser
 			Log.e("XMLError", "outResAmount");
 		}
 
-		outputResources.add(new Resource(outResName, outResAmount));
+		Resource outputRes = Resources.getInstance().getResource(outResName);
+		outputResources
+				.add(new Pair<Resource, Integer>(outputRes, outResAmount));
 		Log.i("XML", "out resource " + outResName);
 	}
 
+	/**
+	 * Adds requiredBuildings to the list
+	 * 
+	 * @param xpp
+	 * @param requiredBuildings
+	 */
 	public void addRequiredBuilding(XmlPullParser xpp,
 			ArrayList<String> requiredBuildings) {
 		String reqdBuildName = xpp.getAttributeValue(null, "name");
-	
+
 		requiredBuildings.add(reqdBuildName);
 		Log.i("XML", "required building " + reqdBuildName);
 	}
 
-	// Create "Building" objects by parsing input stream
+	/**
+	 * Creates building objects by parsing xml file
+	 * 
+	 * @return
+	 * @throws XmlPullParserException
+	 * @throws IOException
+	 */
 	public ArrayList<BuildingDefinition> parse() throws XmlPullParserException,
 			IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(
@@ -121,8 +148,8 @@ public class BuildingXMLParser
 					&& xpp.getName().equalsIgnoreCase("building")) {
 				atBuilding = true;
 				readBuildingAttributes();
-				outputResources = new ArrayList<Resource>();
-				requiredResources = new ArrayList<Resource>();
+				outputResources = new ArrayList<Pair<Resource, Integer>>();
+				requiredResources = new ArrayList<Pair<Resource, Integer>>();
 				requiredBuildings = new ArrayList<String>();
 
 				// For Nested elements
@@ -248,12 +275,12 @@ public class BuildingXMLParser
 
 					eventType = xpp.next();
 				}// while atBuilding
-				this.buildings.add(new BuildingDefinition(buildingName, buildingInfo,
-						buildingAmount, buildingInputPower,
+				this.buildings.add(new BuildingDefinition(buildingName,
+						buildingInfo, buildingAmount, buildingInputPower,
 						buildingOutputPower, buildingMonetaryCost,
-						buildingRequiredTurns,
-						requiredResources, outputResources, requiredBuildings,
-						buildingXPos, buildingYPos));
+						buildingRequiredTurns, requiredResources,
+						outputResources, requiredBuildings, buildingXPos,
+						buildingYPos));
 			}// if building
 
 			eventType = xpp.next();

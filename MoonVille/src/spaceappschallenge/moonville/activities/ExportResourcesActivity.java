@@ -12,6 +12,7 @@ import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.listadapters.ExportResourceListAdapter;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -75,20 +76,20 @@ public class ExportResourcesActivity extends GameActivity
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 		ImportCompany company = companies.get( this.companyIndex );
 		
-		List<Resource> moonBaseResources = moonBase.getStoredResources();
-		List<Resource> importResources = company.getImportResources();
+		List<Pair<Resource,Integer>> moonBaseResources = moonBase.getStoredResources();
+		List<Pair<Resource,Integer>> importResources = company.getImportResources();
 		
 		boolean canExport = true;
 		
 		//check if enough resources have been gathered to export the resources
 		//canExport will be set accordingly
-		for( Resource importResource : importResources )
+		for( Pair<Resource, Integer> importResource : importResources )
 		{
-			Resource moonBaseResource = null;
+			Pair<Resource, Integer> moonBaseResource = null;
 			
-			for( Resource searchResource : moonBaseResources )
+			for( Pair<Resource, Integer> searchResource : moonBaseResources )
 			{
-				if( searchResource.getName().equals( importResource.getName() ) )
+				if( searchResource.first.getName().equals( importResource.first.getName() ) )
 				{
 					moonBaseResource = searchResource;
 					break;
@@ -97,7 +98,7 @@ public class ExportResourcesActivity extends GameActivity
 			
 			if( moonBaseResource != null )
 			{
-				if( moonBaseResource.getAmount() < importResource.getAmount() )
+				if( moonBaseResource.second < importResource.second )
 				{
 					canExport = false;
 					Toast.makeText( this, "Can't export, resources in stock, but demand not satisfied", 500 ).show();
@@ -111,7 +112,7 @@ public class ExportResourcesActivity extends GameActivity
 			}
 		}
 		
-		//if we can export, substract resources and add money
+		//if we can export, subtract resources and add money
 		if( canExport == true )
 		{
 			moonBase.setMoney( moonBase.getMoney() + company.getPayment() );

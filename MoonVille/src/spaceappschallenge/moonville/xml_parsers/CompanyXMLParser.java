@@ -15,7 +15,9 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import spaceappschallenge.moonville.domain.ImportCompany;
 import spaceappschallenge.moonville.domain.Resource;
+import spaceappschallenge.moonville.factories.Resources;
 import android.util.Log;
+import android.util.Pair;
 
 public class CompanyXMLParser {
 	protected InputStream inputStream = null;
@@ -34,50 +36,49 @@ public class CompanyXMLParser {
 		xpp = xmlFactory.newPullParser();
 		this.companies = new ArrayList<ImportCompany>();
 	}
-	
 
 	String companyName = "";
 	String companyInfo = "";
 	double paymentFactor = 0;
 	int requiredReputation = 0;
-	ArrayList<Resource> importResources;
+	ArrayList<Pair<Resource, Integer>> importResources;
 
 	public void readCompanyAttributes() {
 		// Read the attributes for each building
 		companyName = xpp.getAttributeValue(null, "name");
 		companyInfo = xpp.getAttributeValue(null, "info");
-		paymentFactor = Double.parseDouble(xpp.getAttributeValue(null, "paymentfactor"));
-		requiredReputation = Integer.parseInt(xpp.getAttributeValue(null,"requiredreputation"));
+		paymentFactor = Double.parseDouble(xpp.getAttributeValue(null,
+				"paymentfactor"));
+		requiredReputation = Integer.parseInt(xpp.getAttributeValue(null,
+				"requiredreputation"));
 	}
-	
 
 	public void addImportResource(XmlPullParser xpp,
-			ArrayList<Resource> importResources) {
+			ArrayList<Pair<Resource, Integer>> importResources) {
 
 		String reqdResName = xpp.getAttributeValue(null, "name");
 		int reqdResAmount = Integer.parseInt(xpp.getAttributeValue(null,
 				"amount"));
-		importResources.add(new Resource(reqdResName, reqdResAmount));
+		importResources.add(new Pair(Resources.getInstance().getResource(
+				reqdResName), reqdResAmount));
 	}
 
-
-
 	// Create "Building" objects by parsing input stream
-	public ArrayList<ImportCompany> parse() throws XmlPullParserException,	IOException
-	{
-		BufferedReader br = new BufferedReader(new InputStreamReader( this.inputStream ) );
+	public ArrayList<ImportCompany> parse() throws XmlPullParserException,
+			IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+				this.inputStream));
 		xpp.setInput(br);
 		int eventType = xpp.getEventType();
 
 		// Parse the xml file to create "building" objects
-		while (eventType != XmlPullParser.END_DOCUMENT)
-		{
+		while (eventType != XmlPullParser.END_DOCUMENT) {
 			boolean atBuilding = false;
 			if (eventType == XmlPullParser.START_TAG
 					&& xpp.getName().equalsIgnoreCase("company")) {
 				atBuilding = true;
 				readCompanyAttributes();
-				importResources = new ArrayList<Resource>();
+				importResources = new ArrayList<Pair<Resource, Integer>>();
 
 				// For Nested elements
 				while (atBuilding) {// <building>
@@ -90,8 +91,8 @@ public class CompanyXMLParser {
 
 					boolean atImportResources = false;
 					if (eventType == XmlPullParser.START_TAG
-							&& xpp.getName().equalsIgnoreCase(
-									"importresources")) {
+							&& xpp.getName()
+									.equalsIgnoreCase("importresources")) {
 						atImportResources = true;
 					}
 					while (atImportResources) {
@@ -129,15 +130,10 @@ public class CompanyXMLParser {
 
 					eventType = xpp.next();
 				}// while atBuilding
-				
-				this.companies.add(
-					new ImportCompany(
-						companyName, companyInfo,
-						paymentFactor, requiredReputation,
-						importResources
-					)
-				);
-				
+
+				this.companies.add(new ImportCompany(companyName, companyInfo,
+						paymentFactor, requiredReputation, importResources));
+
 			}// if building
 
 			eventType = xpp.next();

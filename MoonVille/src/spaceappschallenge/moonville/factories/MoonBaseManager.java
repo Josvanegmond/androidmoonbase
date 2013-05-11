@@ -20,9 +20,9 @@ import android.widget.Toast;
  * Creates MoonBase, saves and loads game state.
  */
 public class MoonBaseManager {
-	
+
 	public static final String SAVE_FILE = "lastsavedmoonbase.sav";
-	
+
 	// added static since there is only 1 moonbase
 	// it's a bit dirty maybe, but also makes it easier to access it everywhere
 	// when needed -Jos
@@ -33,12 +33,15 @@ public class MoonBaseManager {
 	}
 
 	public static void createNewMoonBase(Difficulty diff, Context context) {
-		MoonBaseManager.currentMoonBase = new MoonBase(
-				diff.getResearchPoints(), diff.getProspectingLevel(),
-				diff.getMoney());
+		MoonBaseManager.currentMoonBase = new MoonBase(diff.getMoney());
+		MoonBaseManager.currentMoonBase.addPower(1000);//Initial power
 		saveMoonBase(context);
 	}
 
+	/**
+	 * Opens saved game
+	 * @param context
+	 */
 	public static void loadSavedMoonbase(Context context) {
 		MoonBase loadedMoonBase = null;
 
@@ -65,6 +68,10 @@ public class MoonBaseManager {
 		MoonBaseManager.currentMoonBase = loadedMoonBase;
 	}
 
+	/**
+	 * Saves the game state
+	 * @param context
+	 */
 	public static void saveMoonBase(Context context) {
 		try {
 			FileOutputStream fos = new FileOutputStream(context.getFilesDir()

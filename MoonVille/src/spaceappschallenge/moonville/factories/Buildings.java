@@ -14,6 +14,7 @@ import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import spaceappschallenge.moonville.xml_parsers.BuildingXMLParser;
 import android.content.Context;
 import android.util.Log;
+import android.util.Pair;
 
 /**
  * Singleton class, handles buildings.
@@ -84,10 +85,10 @@ public class Buildings {
 
 			Log.i("Buildings", building.getName());
 
-			List<Resource> resources = building.getRequiredResources();
+			List<Pair<Resource,Integer>> resources = building.getRequiredResources();
 			Log.i("LENGTH", "reqd resource size:" + resources.size());
-			for (Resource rResource : resources) {
-				Log.i("Buildings rr", rResource.getName());
+			for (Pair<Resource, Integer> rResource : resources) {
+				Log.i("Buildings rr", rResource.first.getName());
 			}
 
 			List<String> rbuilding = building.getRequiredBuildings();

@@ -10,6 +10,7 @@ import spaceappschallenge.moonville.listadapters.ResourceListAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -22,7 +23,7 @@ public class ResourcesActivity extends GameActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_resources);
 
-		List<Resource> resources = MoonBaseManager.getCurrentMoonBase().getStoredResources();
+		List<Pair<Resource,Integer>> resources = MoonBaseManager.getCurrentMoonBase().getStoredResources();
 		
 		ResourceListAdapter resourceListAdapter = new ResourceListAdapter( resources );
 		ListView resourceListView = (ListView) this

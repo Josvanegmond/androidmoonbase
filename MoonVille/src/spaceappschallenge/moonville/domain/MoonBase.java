@@ -5,44 +5,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 import spaceappschallenge.moonville.factories.Buildings;
+import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 
 import android.util.Log;
+import android.util.Pair;
 
 /**
- * Handles information about the game world, including resources, research 
- * points, prospecting and buildings.
+ * Handles information about the game world, including power, money, resources
+ * and buildings
  */
-public class MoonBase implements Serializable
-{
-	protected int researchLabSize;
-	protected int researchPoints;
-	protected int prospectingLevel;
-	protected List<Resource> storedResources;
+public class MoonBase implements Serializable {
+	// List of Pairs of resources and their amounts
+	protected List<Pair<Resource, Integer>> storedResources = new ArrayList();
+	protected List<Building> constructedBuildings = new ArrayList();
+	protected List<Building> buildingsUnderConstruction = new ArrayList();
 
-	// chosenMoonSite
 	protected int money;
-	private int inMonth = 0;
-
-	protected BuildingTree builtBuildings;
-	
-	//not implemented yet
-	//protected List<MegaProject> builtMegaProjects;
+	protected int power;
+	private int currentMonth = 0;
 
 	protected GameDetails gameDetails;
 
-	public MoonBase(int researchPoints, int prospectingLevel, int money)
-	{
-		this.researchLabSize = 1;
-		this.researchPoints = researchPoints;
-		this.prospectingLevel = prospectingLevel;
-		this.storedResources = new ArrayList<Resource>(); // or hashmap? not
-															// sure yet...
+	public MoonBase(int money) {
+		this.storedResources = new ArrayList<Pair<Resource, Integer>>();
 		this.money = money;
-
-		// only add starting base
-		this.builtBuildings = new BuildingTree();
-		this.builtBuildings.add( new Building( Buildings.getInstance().getBuilding( "Moon Base" ), 1 ) );
-
+		// It is assumed that at the start of the game, a moon base is present
+		BuildingDefinition moonBaseDefinition = Buildings.getInstance()
+				.getBuilding("Moon Base");
+		Building moonBase = new Building(moonBaseDefinition,
+				moonBaseDefinition.getRequiredTurns());
+		moonBase.setActive(true);
+		moonBase.setConstructed(true);
+		this.constructedBuildings.add(moonBase);
 		this.gameDetails = GameDetails.getInstance();
 	}
 
@@ -65,35 +59,329 @@ public class MoonBase implements Serializable
 		this.money += income;
 	}
 
-	public int getResearchLabSize() {
-		return researchLabSize;
+	/**
+	 * Checks if building of certain type can be built
+	 * 
+	 * @param buildingDefinition
+	 * @return
+	 */
+	public boolean canConstruct(BuildingDefinition buildingDefinition) {
+		return true;// for now any type of building can be constructed
 	}
 
-	public void setResearchLabSize(int researchLabSize) {
-		this.researchLabSize = researchLabSize;
+	public void construct(BuildingDefinition buildingDefinition) {
+		Building building = new Building(buildingDefinition, 0);
+		this.buildingsUnderConstruction.add(building);
 	}
 
-	public int getResearchPoints() {
-		return researchPoints;
+	public void nextTurn() {
+		incrementMonth();
+		updateBuildingsUnderConstruction();
+		updateConstructedBuildings();// Output is with this function
 	}
 
-	public void setResearchPoints(int researchPoints) {
-		this.researchPoints = researchPoints;
+	/**
+	 * Update buildings which are under construction
+	 */
+	public void updateBuildingsUnderConstruction() {
+		for (Building b : this.buildingsUnderConstruction) {
+			b.updateAge();
+		}
+		for (int i = this.buildingsUnderConstruction.size() - 1; i >= 0; i--) {
+			Building b = this.buildingsUnderConstruction.get(i);
+			if (b.isConstructed()) {
+				this.constructedBuildings.add(b);
+				this.buildingsUnderConstruction.remove(i);
+			}
+		}
+
 	}
 
-	public int getProspectingLevel() {
-		return prospectingLevel;
+	/**
+	 * If at least one building of given name is constructed, then it returns
+	 * true
+	 * 
+	 * @param buildingName
+	 * @return
+	 */
+	public boolean isBuildingConstructed(String buildingName) {
+		for (Building b : constructedBuildings) {
+			if (buildingName.equalsIgnoreCase(b.getBuildingDefinition()
+					.getName())) {
+				Log.i("constructed building: ", buildingName);
+				return true;
+			}
+		}
+		return false;
 	}
 
-	public void setProspectingLevel(int prospectingLevel) {
-		this.prospectingLevel = prospectingLevel;
+	/**
+	 * Update the buildings which are already constructed
+	 */
+	public void updateConstructedBuildings() {
+		for (Building b : this.constructedBuildings) {
+			b.updateNextTurn();
+		}
 	}
 
-	public List<Resource> getStoredResources() {
+	/**
+	 * Checks if resource can be provided
+	 * 
+	 * @param resources
+	 * @return
+	 */
+	public boolean canProvideResources(List<Pair<Resource, Integer>> resources) {
+		if (resources == null)
+			return true;
+		if (resources.size() == 0)
+			return true;
+		boolean resourceFound = false;
+		for (Pair<Resource, Integer> requiredResource : resources) {
+			resourceFound = false;
+			for (Pair<Resource, Integer> storedResource : storedResources) {
+				if (requiredResource.first.getName().equals(
+						storedResource.first.getName())) {
+					resourceFound = true;
+					if (requiredResource.second > storedResource.second) {
+						Log.i("canProvideResources",
+								" can't fulfil resources due to lack of amount");
+						return false;
+					}
+				}
+			}
+			if (!resourceFound) {
+				Log.i("canProvideResources ", " resource not found");
+				return false;
+			}
+
+		}
+		return true;
+	}
+
+	/**
+	 * Returns the amoount of resources of given name
+	 * 
+	 * @param resourceName
+	 * @return
+	 */
+	public int getAmountOfResources(String resourceName) {
+		for (Pair<Resource, Integer> resource : storedResources) {
+			if (resource.first.getName().equals(resourceName)) {
+				return resource.second;
+			}
+		}
+		return 0;
+	}
+
+	/**
+	 * Adds inputResources to stored resources
+	 * 
+	 * @param inputResources
+	 */
+	public void increaseResources(List<Pair<Resource, Integer>> inputResources) {
+		boolean resourceFound = false;
+		for (Pair<Resource, Integer> inputResource : inputResources) {
+			for (int i = 0; i < storedResources.size(); i++) {
+				if (inputResource.first.getName().equalsIgnoreCase(
+						storedResources.get(i).first.getName())) {
+					resourceFound = true;
+					Log.i("increase resources", "resource found");
+					Pair<Resource, Integer> updatedResource = new Pair<Resource, Integer>(
+							inputResource.first, inputResource.second
+									+ storedResources.get(i).second);
+					storedResources.set(i, updatedResource);
+
+				}
+			}
+			// If resource does not pre-exist then, add new entry to the list
+			if (!resourceFound) {
+				storedResources.add(inputResource);
+				Log.i("increase resource", inputResource.first.getName()
+						+ " was entered");
+			}
+		}
+	}
+
+	/**
+	 * Decreases the stored resources with the specified resources Caution!!!!:
+	 * Check with canProvideResources() before calling this function
+	 * 
+	 * @param resources
+	 */
+	public void decreaseResources(List<Pair<Resource, Integer>> resources) {
+		for (Pair<Resource, Integer> requiredResource : resources) {
+			for (int i = 0; i < storedResources.size(); i++) {
+
+				if (requiredResource.first.getName().equals(
+						storedResources.get(i).first.getName())) {
+					Pair<Resource, Integer> updatedResource = new Pair<Resource, Integer>(
+							requiredResource.first,
+							storedResources.get(i).second
+									- requiredResource.second);
+					storedResources.set(i, updatedResource);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Checks if the requiredBuildings are present
+	 * 
+	 * @param requiredBuildings
+	 * @return
+	 */
+	public boolean hasBuildings(List<String> requiredBuildings) {
+		if (requiredBuildings == null || requiredBuildings.size() == 0) {
+			return true;
+		}
+		boolean buildingFound = false;
+		for (String requiredBuildingName : requiredBuildings) {
+			for (Building constructedBuilding : constructedBuildings) {
+				if (constructedBuilding.getBuildingDefinition().getName()
+						.equals(requiredBuildingName)) {
+					buildingFound = true;
+					break;
+				}
+			}
+			if (!buildingFound) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Checks if the MoonBase can provide the required power
+	 * 
+	 * @param requiredPower
+	 * @return
+	 */
+	public boolean hasPower(int requiredPower) {
+		if (requiredPower <= 0)
+			return true;
+		if (requiredPower < this.power)
+			return true;
+		else
+			return false;
+	}
+
+	/**
+	 * Allows adding power to MoonBase
+	 * 
+	 * @param power
+	 */
+	public void addPower(int power) {
+		this.power += power;
+	}
+
+	/**
+	 * Decreases the available power Caution!!: Use hasPower() for confirmation
+	 * before calling this function
+	 * 
+	 * @param power
+	 */
+	public void decreasePower(int power) {
+		this.power -= power;
+	}
+
+	/**
+	 * Returns number of constructed buildings having specified name
+	 * 
+	 * @param buildingName
+	 * @return
+	 */
+	public int getNumberOfConstructedBuildings(String buildingName) {
+		int cnt = 0;
+		for (Building b : this.constructedBuildings) {
+			if (b.getBuildingDefinition().getName().equals(buildingName)) {
+				++cnt;
+			}
+		}
+		return cnt;
+	}
+
+	/**
+	 * Returns number of buildings with specified name which are under
+	 * construction
+	 * 
+	 * @param buildingName
+	 * @return
+	 */
+	public int getNumberOfBuildingsUnderConstruction(String buildingName) {
+		int cnt = 0;
+		for (Building b : this.buildingsUnderConstruction) {
+			if (b.getBuildingDefinition().getName().equals(buildingName)) {
+				++cnt;
+			}
+		}
+		return cnt;
+	}
+
+	/**
+	 * Checks if a building with given name is present or not
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public boolean isBuildingPresent(String name) {
+		for (Building b : constructedBuildings) {
+			if (b.getBuildingDefinition().getName().equals(name)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Returns the number of constructed buildings having specified name
+	 * 
+	 * @param buildingName
+	 * @return
+	 */
+	public int getNoOfActiveBuildings(String buildingName) {
+		int num = 0;
+		for (Building b : constructedBuildings) {
+			if (b.getBuildingDefinition().getName().equals(buildingName)
+					&& b.isActive()) {
+
+				++num;
+			}
+		}
+		Log.i("active: ", num + " " + buildingName + " are active");
+		return num;
+	}
+
+	/**
+	 * Returns outputResources from its active buildings
+	 * 
+	 * @param buildingName
+	 * @return
+	 */
+	public List<Pair<Resource, Integer>> getOutputResources(String buildingName) {
+		int noOfConstructedBuildings = getNoOfActiveBuildings(buildingName);
+		List<Pair<Resource, Integer>> outputResourcesPerBuilding = Buildings
+				.getInstance().getBuilding(buildingName).getOutputResources();
+		List<Pair<Resource, Integer>> outputResources = new ArrayList();
+
+		for (Pair<Resource, Integer> outputResourcePerBuilding : outputResourcesPerBuilding) {
+			Pair<Resource, Integer> outputResource = new Pair(
+					outputResourcePerBuilding.first,
+					outputResourcePerBuilding.second * noOfConstructedBuildings);
+			Log.i("getOutputResources()", buildingName + ": "
+					+ outputResource.first.getName() + " amount: "
+					+ outputResource.second);
+			outputResources.add(outputResource);
+		}
+
+		return outputResources;
+	}
+
+	// Getters and Setters
+	public List<Pair<Resource, Integer>> getStoredResources() {
 		return storedResources;
 	}
 
-	public void setStoredResources(List<Resource> storedResources) {
+	public void setStoredResources(List<Pair<Resource, Integer>> storedResources) {
 		this.storedResources = storedResources;
 	}
 
@@ -105,79 +393,48 @@ public class MoonBase implements Serializable
 		this.money = money;
 	}
 
-	public BuildingTree getBuiltBuildings() {
-		return builtBuildings;
-	}
-	
-	
-	public void setBuiltBuildings(BuildingTree builtBuildings) {
-		this.builtBuildings = builtBuildings;
-	}
-	
-	/**
-	 * Creates a new building or increases the amount if one already exists.
-	 * 
-	 * @param name Name of the building to add.
-	 */
-	public void addBuilding(String name) {
-		Building existing = this.getBuilding(name);
-		if (existing != null) {
-			existing.setAmount(existing.getAmount() + 1);
-		}
-		else {
-			builtBuildings.add( new Building( Buildings.getInstance().getBuilding( name ), 1) );
-		}
-	}
-	
-	/**
-	 * Returns total number of buildings of this type.
-	 */
-	public int getBuildingAmount(String name) {
-		Building b = this.getBuilding(name);
-		if (b != null)
-			return b.getAmount();
-		else
-		{
-			return 0;
-		}
-	}
-	
-	public Building getBuilding(String name)
-	{
-		Building b = builtBuildings.getBuilding( name );
-		if( b != null )
-			return b;
-		
-		else
-		{
-			return null;
-		}
+	public List<Building> getConstructedBuildings() {
+		return constructedBuildings;
 	}
 
-	public boolean canBuild(String name) {
-		return builtBuildings.canBuild(name);
+	public void setConstructedBuildings(List<Building> constructedBuildings) {
+		this.constructedBuildings = constructedBuildings;
 	}
-	
-//	Not implemented yet
-//
-//	public List<MegaProject> getBuiltMegaProjects() {
-//		return builtMegaProjects;
-//	}
-//
-//	public void setBuiltMegaProjects(List<MegaProject> builtMegaProjects) {
-//		this.builtMegaProjects = builtMegaProjects;
-//	}
 
 	public int getMonth() {
-		return inMonth;
+		return currentMonth;
 	}
 
 	public void setMonth(int inMonth) {
-		this.inMonth = inMonth;
-	}
-	
-	public void incrementMonth(){
-		++this.inMonth;
+		this.currentMonth = inMonth;
 	}
 
+	public void incrementMonth() {
+		++this.currentMonth;
+	}
+
+	public List<Building> getBuildingsUnderConstruction() {
+		return buildingsUnderConstruction;
+	}
+
+	public void setBuildingsUnderConstruction(
+			List<Building> buildingsUnderConstruction) {
+		this.buildingsUnderConstruction = buildingsUnderConstruction;
+	}
+
+	public int getPower() {
+		return power;
+	}
+
+	public void setPower(int power) {
+		this.power = power;
+	}
+
+	public int getCurrentMonth() {
+		return currentMonth;
+	}
+
+	public void setCurrentMonth(int currentMonth) {
+		this.currentMonth = currentMonth;
+	}
 }

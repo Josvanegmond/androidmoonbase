@@ -7,7 +7,6 @@ import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.MoonVille;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.Building;
-import spaceappschallenge.moonville.domain.BuildingTree;
 import spaceappschallenge.moonville.domain.MoonBase;
 import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.ApplicationService;
@@ -18,6 +17,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -148,100 +149,96 @@ public class BaseOverviewActivity extends GameActivity {
 		for (final BuildingDefinition building : buildings) {
 			// see if the building can be build or not, and whether or not it is
 			// already visible
-			boolean canBeBuild = moonBase.canBuild(building.getName());
+			boolean isBuildingConstructed = moonBase
+					.isBuildingConstructed(building.getName());
 
-			if (canBeBuild == false) {
-				// nothing happens, no building visible
-			}
+			ImageView buildingImage = new ImageView(this);
 
-			else {
-				ImageView buildingImage = new ImageView(this);
-
-				// by clicking on the building, the BuildingInfoActivity pops up
-				buildingImage.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						Intent intent = new Intent(BaseOverviewActivity.this,
-								BuildingInfoActivity.class);
-						intent.putExtra("Building", building.getName());
-						view.getContext().startActivity(intent);
-						BaseOverviewActivity.this.finish();
-					}
-				});
-
-				buildingImageList.add(buildingImage);
-
-				android.content.res.Resources res = this.getResources();
-
-				// obtain the bitmap from the name of the building
-				// TODO: replace/remove ref_ prefix to match name of the final
-				// image in the file system
-				int resID = res.getIdentifier("ref_"
-						+ building.getName().replace(" ", "_").toLowerCase(),
-						"drawable", getPackageName());
-				Drawable buildingDrawable = res.getDrawable(resID);
-				buildingImage.setImageDrawable(buildingDrawable);
-
-				// place it in the background according to position determined
-				// in Building object
-				BuildingDefinition bd = Buildings.getInstance().getBuilding(
-						building.getName());
-
-				RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-						buildingDrawable.getIntrinsicWidth() / 2,
-						buildingDrawable.getIntrinsicHeight() / 2);
-				// params.addRule( RelativeLayout.ALIGN_PARENT_LEFT );
-				// params.addRule( RelativeLayout.ALIGN_PARENT_TOP );
-				params.leftMargin = bd.getXPos();
-				params.topMargin = bd.getYPos();
-
-				buildingImage.setLayoutParams(params);
-
-				moonSurfaceLayout.addView(buildingImage);
-
-				// depending on wether or not it is already build, show it
-				if (moonBase.getBuilding(building.getName()) != null) {
-					buildingImage.setAlpha(255);
-				} else {
-					buildingImage.setAlpha(50);
+			// by clicking on the building, the BuildingInfoActivity pops up
+			buildingImage.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Intent intent = new Intent(BaseOverviewActivity.this,
+							BuildingInfoActivity.class);
+					intent.putExtra("Building", building.getName());
+					view.getContext().startActivity(intent);
+					BaseOverviewActivity.this.finish();
 				}
+			});
+
+			buildingImageList.add(buildingImage);
+
+			android.content.res.Resources res = this.getResources();
+
+			// obtain the bitmap from the name of the building
+			// TODO: replace/remove ref_ prefix to match name of the final
+			// image in the file system
+			int resID = res
+					.getIdentifier("ref_"
+							+ building.getName().replace(" ", "_")
+									.toLowerCase(), "drawable",
+							getPackageName());
+			Drawable buildingDrawable = res.getDrawable(resID);
+			buildingImage.setImageDrawable(buildingDrawable);
+
+			// place it in the background according to position determined
+			// in Building object
+			BuildingDefinition bd = Buildings.getInstance().getBuilding(
+					building.getName());
+
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+					buildingDrawable.getIntrinsicWidth() / 2,
+					buildingDrawable.getIntrinsicHeight() / 2);
+			// params.addRule( RelativeLayout.ALIGN_PARENT_LEFT );
+			// params.addRule( RelativeLayout.ALIGN_PARENT_TOP );
+			params.leftMargin = bd.getXPos();
+			params.topMargin = bd.getYPos();
+
+			buildingImage.setLayoutParams(params);
+
+			moonSurfaceLayout.addView(buildingImage);
+
+			// depending on whether or not it is already build, show it
+			if (moonBase.isBuildingConstructed(building.getName())) {
+				buildingImage.setAlpha(255);
+			} else {
+				buildingImage.setAlpha(50);
 			}
+
 		}
 	}
 
 	public void showResourcePopups() {
-		List<Resource> resourceChangeList = new ArrayList<Resource>();
-		BuildingTree buildingTree = MoonBaseManager.getCurrentMoonBase()
-				.getBuiltBuildings();
-		buildingTree.checkResources(resourceChangeList);
+		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 
-		if (buildingTree.size() > 0) {
-			for (final Building building : buildingTree) {
-				if (building.getHasPower()
-						&& building.getHasRequiredResources()) {
-					List<Resource> outputResources = building
-							.getResourceOutput();
+		for (BuildingDefinition b : Buildings.getInstance().getAllBuildings()) {
+			if (moonBase.isBuildingConstructed(b.getName())) {
+				List<Pair<Resource, Integer>> outputResources = moonBase
+						.getOutputResources(b.getName());
+				int popupNumber = 0;
+				for (Pair<Resource, Integer> outputResource : outputResources) {
+					Log.i("showResourcePopups", "resource: "
+							+ outputResource.first.getName());
+					/**
+					 * Slowly fade and move popup away
+					 */
+					new Popup(
+							BaseOverviewActivity.this,
+							moonSurfaceLayout,
+							"+ "
+									+ moonBase
+											.getAmountOfResources(outputResource.first
+													.getName()) + " "
+									+ outputResource.first.getName(),
+							b.getXPos(), b.getYPos(), popupNumber * 10);
 
-					int popupNumber = 0;
+					popupNumber++;
+				}// for
 
-					for (Resource resource : outputResources) {
-						/**
-						 * Slowly fade and move popup away
-						 */
-						BuildingDefinition bd = Buildings.getInstance()
-								.getBuilding(building.getName());
+			}// if is constructed
+		}// for each building definition
 
-						new Popup(BaseOverviewActivity.this, moonSurfaceLayout,
-								"+ " + resource.getAmount() + " "
-										+ resource.getName(), bd.getXPos(),
-								bd.getYPos(), popupNumber * 10);
-
-						popupNumber++;
-					}
-				}
-			}
-		}
-	}
+	}// function
 
 	// methods called by onClick property of button in xml
 
@@ -255,26 +252,11 @@ public class BaseOverviewActivity extends GameActivity {
 	 */
 	public void nextTurn(View view) {
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
-		moonBase.incrementMonth();
-
-		BuildingTree tree = moonBase.getBuiltBuildings();
-		tree.checkPower();
-		tree.checkRequiredBuildings();
-
-		List<Resource> available = tree.checkResources(moonBase
-				.getStoredResources());
-		moonBase.setStoredResources(available);
-
-		// TODO: factor in research and prospecting bonus
-		// TODO: calculate reputation
-
-		// last step, save to file
-
+		moonBase.nextTurn();
+		showBuildings();
 		updateUI();
 		showResourcePopups();
-
 		MoonBaseManager.saveMoonBase(view.getContext());
-
 	}
 
 	public void showImportResourcesScreen(View view) {

@@ -9,6 +9,7 @@ import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.factories.Resources;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,9 +23,9 @@ import android.widget.Toast;
 
 public class ExportResourceListAdapter extends BaseAdapter
 {
-	private List<Resource> resourceList;
+	private List<Pair<Resource,Integer>> resourceList;
 
-	public ExportResourceListAdapter( List<Resource> resourceList )
+	public ExportResourceListAdapter( List<Pair<Resource,Integer>> resourceList )
 	{
 		this.resourceList = resourceList;
 	}
@@ -50,7 +51,7 @@ public class ExportResourceListAdapter extends BaseAdapter
 	@Override
 	public View getView(int index, View convertView, ViewGroup parent)
 	{
-		Resource resource = this.resourceList.get(index);
+		Resource resource = this.resourceList.get(index).first;
 
 		if (convertView == null)
 		{

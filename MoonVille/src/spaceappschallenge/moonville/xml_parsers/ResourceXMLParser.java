@@ -24,7 +24,7 @@ public class ResourceXMLParser
 	protected Context context = null;
 	protected InputStream inputStream = null;
 	protected XmlPullParser xpp;
-	protected ArrayList<ResourceDefinition> resources;
+	protected ArrayList<Resource> resources;
 
 	public ResourceXMLParser(InputStream inputStream)
 			throws XmlPullParserException
@@ -34,18 +34,18 @@ public class ResourceXMLParser
 		XmlPullParserFactory xmlFactory = XmlPullParserFactory.newInstance();
 		xmlFactory.setNamespaceAware(true);
 		xpp = xmlFactory.newPullParser();
-		this.resources = new ArrayList<ResourceDefinition>();
+		this.resources = new ArrayList<Resource>();
 	}
 
 	// Create "Resource" objects by parsing input stream
-	public ArrayList<ResourceDefinition> parse() throws XmlPullParserException,
+	public ArrayList<Resource> parse() throws XmlPullParserException,
 			IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				this.inputStream));
 		xpp.setInput(br);
 		String startTagName = "";
 		int eventType = xpp.getEventType();
-		ResourceDefinition resource = null;
+		Resource resource = null;
 		String name = "";
 		double quality = 0.0;
 		int importPrice = 0;
@@ -66,7 +66,7 @@ public class ResourceXMLParser
 							"exportPrice"));
 					weight = Integer.parseInt(xpp.getAttributeValue(null,
 							"weight"));
-					resource = new ResourceDefinition(name, quality, importPrice,
+					resource = new Resource(name, quality, importPrice,
 							exportPrice, weight);
 					resources.add(resource);
 				}
