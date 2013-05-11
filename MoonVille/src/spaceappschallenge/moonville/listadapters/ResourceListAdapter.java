@@ -5,7 +5,7 @@ import java.util.List;
 
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.Resource;
-import android.util.Pair;
+import spaceappschallenge.moonville.SerializablePair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class ResourceListAdapter extends BaseAdapter {
-	private List<Pair<Resource, Integer>> resources;
+	private List<SerializablePair<Resource, Integer>> resources;
 
-	public ResourceListAdapter(List<Pair<Resource, Integer>> resourceList) {
+	public ResourceListAdapter(List<SerializablePair<Resource, Integer>> resourceList) {
 		// get the resources via the factory
 		this.resources = resourceList;
 	}
@@ -37,7 +37,7 @@ public class ResourceListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int index, View convertView, ViewGroup parent) {
-		Pair<Resource, Integer> resource = this.resources.get(index);
+		SerializablePair<Resource, Integer> resource = this.resources.get(index);
 
 		if (convertView == null) {
 			LayoutInflater inflater = LayoutInflater.from(parent.getContext());

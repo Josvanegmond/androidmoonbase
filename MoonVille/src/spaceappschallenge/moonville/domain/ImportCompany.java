@@ -1,22 +1,27 @@
 package spaceappschallenge.moonville.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.util.Pair;
+import spaceappschallenge.moonville.SerializablePair;
 
 import spaceappschallenge.moonville.factories.Resources;
 
-public class ImportCompany {
+public class ImportCompany implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8688952695777202963L;
 	protected String name;
 	protected String info;
-	protected List<Pair<Resource, Integer>> importResources;
+	protected List<SerializablePair<Resource, Integer>> importResources;
 	protected double paymentFactor;
 	protected int requiredReputation;
 
 	public ImportCompany(String companyName, String companyInfo,
 			double paymentFactor2, int requiredReputation,
-			ArrayList<Pair<Resource, Integer>> importResources) {
+			ArrayList<SerializablePair<Resource, Integer>> importResources) {
 		this.name = companyName;
 		this.info = companyInfo;
 		this.paymentFactor = paymentFactor2;
@@ -28,7 +33,7 @@ public class ImportCompany {
 		Resources resources = Resources.getInstance();
 
 		int totalMoneySum = 0;
-		for (Pair<Resource, Integer> resource : this.importResources) {
+		for (SerializablePair<Resource, Integer> resource : this.importResources) {
 			Resource resourceDefinition = resources.getResource(resource.first
 					.getName());
 			totalMoneySum += resource.second
@@ -50,7 +55,7 @@ public class ImportCompany {
 		return this.info;
 	}
 
-	public List<Pair<Resource, Integer>> getImportResources() {
+	public List<SerializablePair<Resource, Integer>> getImportResources() {
 		return this.importResources;
 	}
 }

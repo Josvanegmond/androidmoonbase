@@ -3,22 +3,26 @@ package spaceappschallenge.moonville.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import spaceappschallenge.moonville.SerializablePair;
 import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 
 import android.util.Log;
-import android.util.Pair;
+
 
 /**
  * Handles information about the game world, including power, money, resources
  * and buildings
  */
 public class MoonBase implements Serializable {
-	// List of Pairs of resources and their amounts
-	protected List<Pair<Resource, Integer>> storedResources = new ArrayList();
-	protected List<Building> constructedBuildings = new ArrayList();
-	protected List<Building> buildingsUnderConstruction = new ArrayList();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6698209397974201732L;
+	// List of SerializablePairs of resources and their amounts
+	protected List<SerializablePair<Resource, Integer>> storedResources = new ArrayList<SerializablePair<Resource, Integer>>();
+	protected List<Building> constructedBuildings = new ArrayList<Building>();
+	protected List<Building> buildingsUnderConstruction = new ArrayList<Building>();
 
 	protected int money;
 	protected int power;
@@ -27,7 +31,7 @@ public class MoonBase implements Serializable {
 	protected GameDetails gameDetails;
 
 	public MoonBase(int money) {
-		this.storedResources = new ArrayList<Pair<Resource, Integer>>();
+		this.storedResources = new ArrayList<SerializablePair<Resource, Integer>>();
 		this.money = money;
 		// It is assumed that at the start of the game, a moon base is present
 		BuildingDefinition moonBaseDefinition = Buildings.getInstance()
@@ -130,15 +134,15 @@ public class MoonBase implements Serializable {
 	 * @param resources
 	 * @return
 	 */
-	public boolean canProvideResources(List<Pair<Resource, Integer>> resources) {
+	public boolean canProvideResources(List<SerializablePair<Resource, Integer>> resources) {
 		if (resources == null)
 			return true;
 		if (resources.size() == 0)
 			return true;
 		boolean resourceFound = false;
-		for (Pair<Resource, Integer> requiredResource : resources) {
+		for (SerializablePair<Resource, Integer> requiredResource : resources) {
 			resourceFound = false;
-			for (Pair<Resource, Integer> storedResource : storedResources) {
+			for (SerializablePair<Resource, Integer> storedResource : storedResources) {
 				if (requiredResource.first.getName().equals(
 						storedResource.first.getName())) {
 					resourceFound = true;
@@ -165,7 +169,7 @@ public class MoonBase implements Serializable {
 	 * @return
 	 */
 	public int getAmountOfResources(String resourceName) {
-		for (Pair<Resource, Integer> resource : storedResources) {
+		for (SerializablePair<Resource, Integer> resource : storedResources) {
 			if (resource.first.getName().equals(resourceName)) {
 				return resource.second;
 			}
@@ -178,15 +182,15 @@ public class MoonBase implements Serializable {
 	 * 
 	 * @param inputResources
 	 */
-	public void increaseResources(List<Pair<Resource, Integer>> inputResources) {
+	public void increaseResources(List<SerializablePair<Resource, Integer>> inputResources) {
 		boolean resourceFound = false;
-		for (Pair<Resource, Integer> inputResource : inputResources) {
+		for (SerializablePair<Resource, Integer> inputResource : inputResources) {
 			for (int i = 0; i < storedResources.size(); i++) {
 				if (inputResource.first.getName().equalsIgnoreCase(
 						storedResources.get(i).first.getName())) {
 					resourceFound = true;
 					Log.i("increase resources", "resource found");
-					Pair<Resource, Integer> updatedResource = new Pair<Resource, Integer>(
+					SerializablePair<Resource, Integer> updatedResource = new SerializablePair<Resource, Integer>(
 							inputResource.first, inputResource.second
 									+ storedResources.get(i).second);
 					storedResources.set(i, updatedResource);
@@ -208,13 +212,13 @@ public class MoonBase implements Serializable {
 	 * 
 	 * @param resources
 	 */
-	public void decreaseResources(List<Pair<Resource, Integer>> resources) {
-		for (Pair<Resource, Integer> requiredResource : resources) {
+	public void decreaseResources(List<SerializablePair<Resource, Integer>> resources) {
+		for (SerializablePair<Resource, Integer> requiredResource : resources) {
 			for (int i = 0; i < storedResources.size(); i++) {
 
 				if (requiredResource.first.getName().equals(
 						storedResources.get(i).first.getName())) {
-					Pair<Resource, Integer> updatedResource = new Pair<Resource, Integer>(
+					SerializablePair<Resource, Integer> updatedResource = new SerializablePair<Resource, Integer>(
 							requiredResource.first,
 							storedResources.get(i).second
 									- requiredResource.second);
@@ -357,14 +361,14 @@ public class MoonBase implements Serializable {
 	 * @param buildingName
 	 * @return
 	 */
-	public List<Pair<Resource, Integer>> getOutputResources(String buildingName) {
+	public List<SerializablePair<Resource, Integer>> getOutputResources(String buildingName) {
 		int noOfConstructedBuildings = getNoOfActiveBuildings(buildingName);
-		List<Pair<Resource, Integer>> outputResourcesPerBuilding = Buildings
+		List<SerializablePair<Resource, Integer>> outputResourcesPerBuilding = Buildings
 				.getInstance().getBuilding(buildingName).getOutputResources();
-		List<Pair<Resource, Integer>> outputResources = new ArrayList();
+		List<SerializablePair<Resource, Integer>> outputResources = new ArrayList();
 
-		for (Pair<Resource, Integer> outputResourcePerBuilding : outputResourcesPerBuilding) {
-			Pair<Resource, Integer> outputResource = new Pair(
+		for (SerializablePair<Resource, Integer> outputResourcePerBuilding : outputResourcesPerBuilding) {
+			SerializablePair<Resource, Integer> outputResource = new SerializablePair(
 					outputResourcePerBuilding.first,
 					outputResourcePerBuilding.second * noOfConstructedBuildings);
 			Log.i("getOutputResources()", buildingName + ": "
@@ -377,11 +381,11 @@ public class MoonBase implements Serializable {
 	}
 
 	// Getters and Setters
-	public List<Pair<Resource, Integer>> getStoredResources() {
+	public List<SerializablePair<Resource, Integer>> getStoredResources() {
 		return storedResources;
 	}
 
-	public void setStoredResources(List<Pair<Resource, Integer>> storedResources) {
+	public void setStoredResources(List<SerializablePair<Resource, Integer>> storedResources) {
 		this.storedResources = storedResources;
 	}
 

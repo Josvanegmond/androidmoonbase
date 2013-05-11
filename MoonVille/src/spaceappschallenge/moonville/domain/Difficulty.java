@@ -1,10 +1,16 @@
 package spaceappschallenge.moonville.domain;
 
+import java.io.Serializable;
+
 /**
  * Provides values based on difficulty level.
  */
-public class Difficulty {
+public class Difficulty implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5813235211061576115L;
 	public static final int DIF_EASY = 0;
 	public static final int DIF_MED = 1;
 	public static final int DIF_HARD = 2;

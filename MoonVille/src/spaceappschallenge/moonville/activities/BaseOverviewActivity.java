@@ -2,6 +2,7 @@ package spaceappschallenge.moonville.activities;
 
 import java.util.ArrayList;
 import java.util.List;
+import spaceappschallenge.moonville.SerializablePair;
 
 import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.MoonVille;
@@ -18,7 +19,6 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -213,10 +213,10 @@ public class BaseOverviewActivity extends GameActivity {
 
 		for (BuildingDefinition b : Buildings.getInstance().getAllBuildings()) {
 			if (moonBase.isBuildingConstructed(b.getName())) {
-				List<Pair<Resource, Integer>> outputResources = moonBase
+				List<SerializablePair<Resource, Integer>> outputResources = moonBase
 						.getOutputResources(b.getName());
 				int popupNumber = 0;
-				for (Pair<Resource, Integer> outputResource : outputResources) {
+				for (SerializablePair<Resource, Integer> outputResource : outputResources) {
 					Log.i("showResourcePopups", "resource: "
 							+ outputResource.first.getName());
 					/**

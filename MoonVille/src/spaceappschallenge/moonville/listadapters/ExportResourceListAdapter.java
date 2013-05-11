@@ -9,7 +9,7 @@ import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.factories.Resources;
 import android.util.Log;
-import android.util.Pair;
+import spaceappschallenge.moonville.SerializablePair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,9 +23,9 @@ import android.widget.Toast;
 
 public class ExportResourceListAdapter extends BaseAdapter
 {
-	private List<Pair<Resource,Integer>> resourceList;
+	private List<SerializablePair<Resource,Integer>> resourceList;
 
-	public ExportResourceListAdapter( List<Pair<Resource,Integer>> resourceList )
+	public ExportResourceListAdapter( List<SerializablePair<Resource,Integer>> resourceList )
 	{
 		this.resourceList = resourceList;
 	}

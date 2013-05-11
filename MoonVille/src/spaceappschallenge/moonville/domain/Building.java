@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.util.Log;
-import android.util.Pair;
+import spaceappschallenge.moonville.SerializablePair;
 
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
@@ -14,6 +14,8 @@ import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
  * Handles attributes of single building in the world.
  */
 public class Building implements Serializable {
+	
+	private static final long serialVersionUID = -219378277763518936L;
 	protected BuildingDefinition buildingDefinition = null;
 	protected int age;
 	protected boolean constructed = false;

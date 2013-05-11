@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import android.util.Pair;
+import spaceappschallenge.moonville.SerializablePair;
 
 import spaceappschallenge.moonville.domain.Resource;
 
@@ -18,8 +18,8 @@ public class BuildingDefinition implements Serializable
 	private final String name;
 	private final String info;
 	private final int amount;
-	private final List<Pair<Resource,Integer>> requiredResources;
-	private final List<Pair<Resource,Integer>> outputResources;
+	private final List<SerializablePair<Resource,Integer>> requiredResources;
+	private final List<SerializablePair<Resource,Integer>> outputResources;
 	private final List<String> requiredBuildings;
 	private final int inputPower;
 	private final int outputPower;
@@ -31,8 +31,8 @@ public class BuildingDefinition implements Serializable
 			int amount, int inputPower,
 			int outputPower, int monetaryCost,
 			int requiredTurns,
-			ArrayList<Pair<Resource, Integer>> requiredResources,
-			ArrayList<Pair<Resource, Integer>> outputResources,
+			ArrayList<SerializablePair<Resource, Integer>> requiredResources,
+			ArrayList<SerializablePair<Resource, Integer>> outputResources,
 			ArrayList<String> requiredBuildings, int xPos,
 			int yPos) {
 		this.name = name;
@@ -62,11 +62,11 @@ public class BuildingDefinition implements Serializable
 		return amount;
 	}
 
-	public List<Pair<Resource,Integer>> getRequiredResources() {
+	public List<SerializablePair<Resource,Integer>> getRequiredResources() {
 		return requiredResources;
 	}
 
-	public List<Pair<Resource,Integer>> getOutputResources() {
+	public List<SerializablePair<Resource,Integer>> getOutputResources() {
 		return outputResources;
 	}
 

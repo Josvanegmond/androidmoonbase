@@ -10,7 +10,7 @@ import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
-import android.util.Pair;
+import spaceappschallenge.moonville.SerializablePair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +65,7 @@ public class BuildingInfoListAdapter extends BaseAdapter {
 
 		if (buildingDefinition.getRequiredResources().size() > 0) {
 			this.infoList.add("Processes resources:");
-			for (Pair<Resource, Integer> resource : buildingDefinition
+			for (SerializablePair<Resource, Integer> resource : buildingDefinition
 					.getRequiredResources()) {
 				this.infoList.add(resource.first.getName() + ": "
 						+ resource.second);
@@ -76,7 +76,7 @@ public class BuildingInfoListAdapter extends BaseAdapter {
 
 		if (buildingDefinition.getOutputResources().size() > 0) {
 			this.infoList.add("Output resources:");
-			for (Pair<Resource, Integer> resource : buildingDefinition
+			for (SerializablePair<Resource, Integer> resource : buildingDefinition
 					.getOutputResources()) {
 				this.infoList.add(resource.first.getName() + ": "
 						+ resource.second);
@@ -115,7 +115,7 @@ public class BuildingInfoListAdapter extends BaseAdapter {
 
 		if (buildingDefinition.getOutputResources().size() > 0) {
 			this.infoList.add("Output resources:");
-			for (Pair<Resource, Integer> resource : buildingDefinition
+			for (SerializablePair<Resource, Integer> resource : buildingDefinition
 					.getOutputResources()) {
 				this.infoList.add(resource.first.getName()
 						+ ": "

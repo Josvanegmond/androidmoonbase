@@ -12,7 +12,7 @@ import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.listadapters.ExportResourceListAdapter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Pair;
+import spaceappschallenge.moonville.SerializablePair;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -76,18 +76,18 @@ public class ExportResourcesActivity extends GameActivity
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 		ImportCompany company = companies.get( this.companyIndex );
 		
-		List<Pair<Resource,Integer>> moonBaseResources = moonBase.getStoredResources();
-		List<Pair<Resource,Integer>> importResources = company.getImportResources();
+		List<SerializablePair<Resource,Integer>> moonBaseResources = moonBase.getStoredResources();
+		List<SerializablePair<Resource,Integer>> importResources = company.getImportResources();
 		
 		boolean canExport = true;
 		
 		//check if enough resources have been gathered to export the resources
 		//canExport will be set accordingly
-		for( Pair<Resource, Integer> importResource : importResources )
+		for( SerializablePair<Resource, Integer> importResource : importResources )
 		{
-			Pair<Resource, Integer> moonBaseResource = null;
+			SerializablePair<Resource, Integer> moonBaseResource = null;
 			
-			for( Pair<Resource, Integer> searchResource : moonBaseResources )
+			for( SerializablePair<Resource, Integer> searchResource : moonBaseResources )
 			{
 				if( searchResource.first.getName().equals( importResource.first.getName() ) )
 				{

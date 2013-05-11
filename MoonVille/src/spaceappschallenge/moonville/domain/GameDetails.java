@@ -6,6 +6,10 @@ import java.io.Serializable;
  * Stores game specific settings (player name and difficulty).
  */
 public class GameDetails implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7546492796233811239L;
 	String username = "";
 	int difficultyLevel = Difficulty.DIF_EASY;
 	private static GameDetails instance = null;

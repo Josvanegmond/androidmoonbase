@@ -9,7 +9,7 @@ import spaceappschallenge.moonville.factories.ApplicationService;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.factories.Resources;
 import android.util.Log;
-import android.util.Pair;
+import spaceappschallenge.moonville.SerializablePair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -136,8 +136,8 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				int totalCost = unitCost * quantity;
 				Toast toast;
 				if (MoonBaseManager.getCurrentMoonBase().spend(totalCost)) {
-					ArrayList<Pair<Resource,Integer>> newList = new ArrayList<Pair<Resource,Integer>>();
-					newList.add(new Pair<Resource,Integer>(Resources.getInstance().getResource(resourceName), quantity));
+					ArrayList<SerializablePair<Resource,Integer>> newList = new ArrayList<SerializablePair<Resource,Integer>>();
+					newList.add(new SerializablePair<Resource,Integer>(Resources.getInstance().getResource(resourceName), quantity));
 					
 					MoonBaseManager.getCurrentMoonBase().increaseResources(newList);
 					toast = Toast.makeText(v.getContext(), "Spent: "

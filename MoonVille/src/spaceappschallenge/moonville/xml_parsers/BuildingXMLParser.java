@@ -19,7 +19,7 @@ import spaceappschallenge.moonville.factories.ApplicationService;
 import spaceappschallenge.moonville.factories.Resources;
 import android.content.Context;
 import android.util.Log;
-import android.util.Pair;
+import spaceappschallenge.moonville.SerializablePair;
 
 public class BuildingXMLParser {
 	protected InputStream inputStream = null;
@@ -35,8 +35,8 @@ public class BuildingXMLParser {
 	private int buildingRequiredTurns = 0;
 	private int buildingXPos = 0;
 	private int buildingYPos = 0;
-	private ArrayList<Pair<Resource, Integer>> requiredResources;
-	private ArrayList<Pair<Resource, Integer>> outputResources;
+	private ArrayList<SerializablePair<Resource, Integer>> requiredResources;
+	private ArrayList<SerializablePair<Resource, Integer>> outputResources;
 	private ArrayList<String> requiredBuildings;
 
 	/*
@@ -77,13 +77,13 @@ public class BuildingXMLParser {
 	 * @param requiredResources
 	 */
 	public void addRequiredResource(XmlPullParser xpp,
-			ArrayList<Pair<Resource, Integer>> requiredResources) {
+			ArrayList<SerializablePair<Resource, Integer>> requiredResources) {
 
 		String reqdResName = xpp.getAttributeValue(null, "name");
 		int reqdResAmount = Integer.parseInt(xpp.getAttributeValue(null,
 				"amount"));
 		Resource reqdRes = Resources.getInstance().getResource(reqdResName);
-		requiredResources.add(new Pair<Resource, Integer>(reqdRes,
+		requiredResources.add(new SerializablePair<Resource, Integer>(reqdRes,
 				reqdResAmount));
 		Log.i("XML", "required resource " + reqdResName);
 	}
@@ -95,7 +95,7 @@ public class BuildingXMLParser {
 	 * @param outputResources
 	 */
 	public void addOutputResource(XmlPullParser xpp,
-			ArrayList<Pair<Resource, Integer>> outputResources) {
+			ArrayList<SerializablePair<Resource, Integer>> outputResources) {
 		String outResName = xpp.getAttributeValue(null, "name");
 
 		int outResAmount = 0;
@@ -108,7 +108,7 @@ public class BuildingXMLParser {
 
 		Resource outputRes = Resources.getInstance().getResource(outResName);
 		outputResources
-				.add(new Pair<Resource, Integer>(outputRes, outResAmount));
+				.add(new SerializablePair<Resource, Integer>(outputRes, outResAmount));
 		Log.i("XML", "out resource " + outResName);
 	}
 
@@ -148,8 +148,8 @@ public class BuildingXMLParser {
 					&& xpp.getName().equalsIgnoreCase("building")) {
 				atBuilding = true;
 				readBuildingAttributes();
-				outputResources = new ArrayList<Pair<Resource, Integer>>();
-				requiredResources = new ArrayList<Pair<Resource, Integer>>();
+				outputResources = new ArrayList<SerializablePair<Resource, Integer>>();
+				requiredResources = new ArrayList<SerializablePair<Resource, Integer>>();
 				requiredBuildings = new ArrayList<String>();
 
 				// For Nested elements

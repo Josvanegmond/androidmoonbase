@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import spaceappschallenge.moonville.domain.Difficulty;
 import spaceappschallenge.moonville.domain.MoonBase;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -34,12 +35,13 @@ public class MoonBaseManager {
 
 	public static void createNewMoonBase(Difficulty diff, Context context) {
 		MoonBaseManager.currentMoonBase = new MoonBase(diff.getMoney());
-		MoonBaseManager.currentMoonBase.addPower(1000);//Initial power
+		MoonBaseManager.currentMoonBase.addPower(1000);// Initial power
 		saveMoonBase(context);
 	}
 
 	/**
 	 * Opens saved game
+	 * 
 	 * @param context
 	 */
 	public static void loadSavedMoonbase(Context context) {
@@ -70,6 +72,7 @@ public class MoonBaseManager {
 
 	/**
 	 * Saves the game state
+	 * 
 	 * @param context
 	 */
 	public static void saveMoonBase(Context context) {
@@ -81,6 +84,7 @@ public class MoonBaseManager {
 			oos.writeObject(MoonBaseManager.currentMoonBase);
 
 			Toast t = Toast.makeText(context, "Saved.", Toast.LENGTH_LONG);
+			Log.i("saved", "saved successfully");
 			t.show();
 
 			oos.close();
@@ -88,6 +92,7 @@ public class MoonBaseManager {
 		}
 
 		catch (IOException e) {
+			Log.e("Can't Save", "File can't be saved");
 			e.printStackTrace();
 		}
 	}

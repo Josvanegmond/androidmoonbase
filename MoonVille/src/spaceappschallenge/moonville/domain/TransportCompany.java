@@ -1,7 +1,13 @@
 package spaceappschallenge.moonville.domain;
 
-public class TransportCompany
+import java.io.Serializable;
+
+public class TransportCompany implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3928258998268313288L;
 	private int res_logo;
 	private String name;
 	private String slogan;

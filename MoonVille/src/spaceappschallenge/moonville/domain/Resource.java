@@ -4,11 +4,15 @@ import java.io.Serializable;
 
 public class Resource implements Serializable
 {
-	private final String name;
-	private final double quality;
-	private final int importPrice;
-	private final int exportPrice;
-	private final int weight;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9104023380104564668L;
+	private String name;
+	private double quality;
+	private int importPrice;
+	private int exportPrice;
+	private int weight;
 	
 	public Resource( String name, double quality, int importPrice, int exportPrice, int weight )
 	{
@@ -41,6 +45,25 @@ public class Resource implements Serializable
 	public int getWeight() {
 		return weight;
 	}
-	
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setQuality(double quality) {
+		this.quality = quality;
+	}
+
+	public void setImportPrice(int importPrice) {
+		this.importPrice = importPrice;
+	}
+
+	public void setExportPrice(int exportPrice) {
+		this.exportPrice = exportPrice;
+	}
+
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
 	
 }

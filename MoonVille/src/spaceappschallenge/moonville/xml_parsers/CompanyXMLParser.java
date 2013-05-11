@@ -17,7 +17,7 @@ import spaceappschallenge.moonville.domain.ImportCompany;
 import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.Resources;
 import android.util.Log;
-import android.util.Pair;
+import spaceappschallenge.moonville.SerializablePair;
 
 public class CompanyXMLParser {
 	protected InputStream inputStream = null;
@@ -41,7 +41,7 @@ public class CompanyXMLParser {
 	String companyInfo = "";
 	double paymentFactor = 0;
 	int requiredReputation = 0;
-	ArrayList<Pair<Resource, Integer>> importResources;
+	ArrayList<SerializablePair<Resource, Integer>> importResources;
 
 	public void readCompanyAttributes() {
 		// Read the attributes for each building
@@ -54,12 +54,12 @@ public class CompanyXMLParser {
 	}
 
 	public void addImportResource(XmlPullParser xpp,
-			ArrayList<Pair<Resource, Integer>> importResources) {
+			ArrayList<SerializablePair<Resource, Integer>> importResources) {
 
 		String reqdResName = xpp.getAttributeValue(null, "name");
 		int reqdResAmount = Integer.parseInt(xpp.getAttributeValue(null,
 				"amount"));
-		importResources.add(new Pair(Resources.getInstance().getResource(
+		importResources.add(new SerializablePair(Resources.getInstance().getResource(
 				reqdResName), reqdResAmount));
 	}
 
@@ -78,7 +78,7 @@ public class CompanyXMLParser {
 					&& xpp.getName().equalsIgnoreCase("company")) {
 				atBuilding = true;
 				readCompanyAttributes();
-				importResources = new ArrayList<Pair<Resource, Integer>>();
+				importResources = new ArrayList<SerializablePair<Resource, Integer>>();
 
 				// For Nested elements
 				while (atBuilding) {// <building>
