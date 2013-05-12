@@ -2,7 +2,6 @@ package spaceappschallenge.moonville.activities;
 
 import java.util.List;
 
-import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.ApplicationService;

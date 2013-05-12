@@ -10,11 +10,11 @@ import org.xmlpull.v1.XmlPullParserException;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.Building;
 import spaceappschallenge.moonville.domain.Resource;
+import spaceappschallenge.moonville.miscellaneous.SerializablePair;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import spaceappschallenge.moonville.xml_parsers.BuildingXMLParser;
 import android.content.Context;
 import android.util.Log;
-import spaceappschallenge.moonville.SerializablePair;
 
 /**
  * Singleton class, handles buildings.

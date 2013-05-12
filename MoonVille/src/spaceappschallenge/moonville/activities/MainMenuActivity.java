@@ -1,10 +1,9 @@
 package spaceappschallenge.moonville.activities;
 
-import spaceappschallenge.moonville.GameActivity;
-import spaceappschallenge.moonville.MoonVille;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.factories.ApplicationService;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
+import spaceappschallenge.moonville.miscellaneous.MoonVille;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,8 +24,8 @@ public class MainMenuActivity extends GameActivity {
 		ApplicationService app = ApplicationService.getInstance();
 		app.setApplicationContext(this.getApplicationContext());
 		CheckBox cb = (CheckBox) findViewById(R.id.cb_background_music);
-		SharedPreferences settings = 
-				getSharedPreferences(MoonVille.PREFERENCE_FILE, 0);
+		SharedPreferences settings = getSharedPreferences(
+				MoonVille.PREFERENCE_FILE, 0);
 		cb.setChecked(settings.getBoolean(
 				MoonVille.PREFERENCE_BACKGROUND_MUSIC, true));
 	}
@@ -37,9 +36,9 @@ public class MainMenuActivity extends GameActivity {
 		if (MoonBaseManager.getCurrentMoonBase() != null) {
 			view.getContext().startActivity(
 					new Intent(this, BaseOverviewActivity.class));
-		}
-		else 
-			Toast.makeText(this, "No saved game found", Toast.LENGTH_SHORT).show();
+		} else
+			Toast.makeText(this, "No saved game found", Toast.LENGTH_SHORT)
+					.show();
 	}
 
 	public void showNewGameScreen(View view) {
@@ -51,13 +50,12 @@ public class MainMenuActivity extends GameActivity {
 		view.getContext()
 				.startActivity(new Intent(this, CreditsActivity.class));
 	}
-	
+
 	public void toggleBackgroundMusic(View view) {
-		SharedPreferences.Editor editor = 
-				getSharedPreferences(MoonVille.PREFERENCE_FILE, 0).edit();
+		SharedPreferences.Editor editor = getSharedPreferences(
+				MoonVille.PREFERENCE_FILE, 0).edit();
 		CheckBox cb = (CheckBox) view;
-		editor.putBoolean(MoonVille.PREFERENCE_BACKGROUND_MUSIC, 
-				cb.isChecked());
+		editor.putBoolean(MoonVille.PREFERENCE_BACKGROUND_MUSIC, cb.isChecked());
 		editor.commit();
 		MoonVille mv = (MoonVille) getApplication();
 		mv.updateSoundState();

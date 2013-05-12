@@ -1,6 +1,5 @@
 package spaceappschallenge.moonville.activities;
 
-import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.MoonBase;
 import spaceappschallenge.moonville.factories.Buildings;

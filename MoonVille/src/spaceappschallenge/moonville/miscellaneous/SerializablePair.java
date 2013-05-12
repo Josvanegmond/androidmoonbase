@@ -1,4 +1,4 @@
-package spaceappschallenge.moonville;
+package spaceappschallenge.moonville.miscellaneous;
 
 import java.io.Serializable;
 

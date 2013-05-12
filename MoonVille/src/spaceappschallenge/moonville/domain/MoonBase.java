@@ -3,8 +3,8 @@ package spaceappschallenge.moonville.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import spaceappschallenge.moonville.SerializablePair;
 import spaceappschallenge.moonville.factories.Buildings;
+import spaceappschallenge.moonville.miscellaneous.SerializablePair;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 
 import android.util.Log;

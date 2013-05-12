@@ -16,8 +16,8 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import spaceappschallenge.moonville.domain.ImportCompany;
 import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.Resources;
+import spaceappschallenge.moonville.miscellaneous.SerializablePair;
 import android.util.Log;
-import spaceappschallenge.moonville.SerializablePair;
 
 public class CompanyXMLParser {
 	protected InputStream inputStream = null;

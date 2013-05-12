@@ -1,6 +1,6 @@
 package spaceappschallenge.moonville.ui;
 
-import spaceappschallenge.moonville.GameActivity;
+import spaceappschallenge.moonville.activities.GameActivity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;

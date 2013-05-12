@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import spaceappschallenge.moonville.SerializablePair;
 
 import spaceappschallenge.moonville.factories.Resources;
+import spaceappschallenge.moonville.miscellaneous.SerializablePair;
 
 public class ImportCompany implements Serializable{
 	/**

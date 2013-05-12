@@ -5,7 +5,7 @@ import java.util.List;
 
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.Resource;
-import spaceappschallenge.moonville.SerializablePair;
+import spaceappschallenge.moonville.miscellaneous.SerializablePair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

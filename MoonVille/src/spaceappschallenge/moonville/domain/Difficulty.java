@@ -2,11 +2,20 @@ package spaceappschallenge.moonville.domain;
 
 import java.io.Serializable;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.util.Log;
+
+import spaceappschallenge.moonville.factories.ApplicationService;
+import spaceappschallenge.moonville.factories.MoonBaseManager;
+import spaceappschallenge.moonville.miscellaneous.MoonVille;
+import spaceappschallenge.moonville.R;
+
 /**
  * Provides values based on difficulty level.
  */
-public class Difficulty implements Serializable{
-	
+public class Difficulty implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -18,33 +27,36 @@ public class Difficulty implements Serializable{
 	private int researchPoints;
 	private int prospectingLevel;
 	private int money;
+	private Resources resources;
 
 	// some basic difficulties... not final! ~ jodli
 	public Difficulty(int difficultyLevel) {
+		resources = MoonVille.getContext().getResources();
 		switch (difficultyLevel) {
-		case DIF_EASY:
-			this.researchPoints = 100;
-			this.prospectingLevel = 10;
-			this.money = 100000000;
-			break;
+
 		case DIF_MED:
-			this.researchPoints = 50;
-			this.prospectingLevel = 5;
-			this.money = 10000000;
+			this.researchPoints = resources
+					.getInteger(R.integer.difficult_research);
+			this.prospectingLevel = resources
+					.getInteger(R.integer.difficult_prospecting_level);
+			this.money = resources.getInteger(R.integer.difficult_money);
 			break;
 		case DIF_HARD:
-			this.researchPoints = 25;
-			this.prospectingLevel = 3;
-			this.money = 1000000;
+			this.researchPoints = resources
+					.getInteger(R.integer.medium_research);
+			this.prospectingLevel = resources
+					.getInteger(R.integer.medium_prospecting_level);
+			this.money = resources.getInteger(R.integer.medium_money);
 			break;
 
 		default:
-			// no difficulty level selected - assuming easy - this shouldnt
-			// happen... ~ jodli
-			this.researchPoints = 100;
-			this.prospectingLevel = 10;
-			this.money = 10000000;
+
+			this.researchPoints = resources.getInteger(R.integer.easy_research);
+			this.prospectingLevel = resources
+					.getInteger(R.integer.easy_prospecting_level);
+			this.money = resources.getInteger(R.integer.easy_money);
 			break;
+
 		}
 	}
 

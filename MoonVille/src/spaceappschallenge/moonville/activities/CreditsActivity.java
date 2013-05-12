@@ -1,6 +1,5 @@
 package spaceappschallenge.moonville.activities;
 
-import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import android.os.Bundle;
 import android.view.Menu;

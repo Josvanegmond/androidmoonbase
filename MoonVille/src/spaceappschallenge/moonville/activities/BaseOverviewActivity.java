@@ -2,10 +2,7 @@ package spaceappschallenge.moonville.activities;
 
 import java.util.ArrayList;
 import java.util.List;
-import spaceappschallenge.moonville.SerializablePair;
 
-import spaceappschallenge.moonville.GameActivity;
-import spaceappschallenge.moonville.MoonVille;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.Building;
 import spaceappschallenge.moonville.domain.MoonBase;
@@ -13,6 +10,8 @@ import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.ApplicationService;
 import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
+import spaceappschallenge.moonville.miscellaneous.MoonVille;
+import spaceappschallenge.moonville.miscellaneous.SerializablePair;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -208,7 +207,10 @@ public class BaseOverviewActivity extends GameActivity {
 		}
 	}
 
-	public void showResourcePopups() {
+	/**
+	 * Shows popup over buildings, showing output resources
+	 */
+	public void showOutputPopups() {
 		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
 
 		for (BuildingDefinition b : Buildings.getInstance().getAllBuildings()) {
@@ -216,24 +218,34 @@ public class BaseOverviewActivity extends GameActivity {
 				List<SerializablePair<Resource, Integer>> outputResources = moonBase
 						.getOutputResources(b.getName());
 				int popupNumber = 0;
-				for (SerializablePair<Resource, Integer> outputResource : outputResources) {
-					Log.i("showResourcePopups", "resource: "
-							+ outputResource.first.getName());
-					/**
-					 * Slowly fade and move popup away
-					 */
-					new Popup(
-							BaseOverviewActivity.this,
-							moonSurfaceLayout,
-							"+ "
-									+ moonBase
-											.getAmountOfResources(outputResource.first
-													.getName()) + " "
-									+ outputResource.first.getName(),
-							b.getXPos(), b.getYPos(), popupNumber * 10);
+				int noOfActiveBuildings = moonBase.getNoOfActiveBuildings(b
+						.getName());
 
-					popupNumber++;
-				}// for
+				/**
+				 * Slowly fade and move popup away
+				 */
+
+				if (noOfActiveBuildings > 0) {
+					for (SerializablePair<Resource, Integer> outputResource : outputResources) {
+						int resourceAmount = noOfActiveBuildings
+								* outputResource.second;// second=amount of
+														// output resource
+						new Popup(BaseOverviewActivity.this, moonSurfaceLayout,
+								"+ " + resourceAmount + " "
+										+ outputResource.first.getName(),
+								b.getXPos(), b.getYPos(), popupNumber * 10);
+
+						popupNumber++;
+					}//for
+					
+					//Show popup for output power
+					if(b.getOutputPower()>0){
+						int outputPower = noOfActiveBuildings*b.getOutputPower();
+						new Popup(BaseOverviewActivity.this,moonSurfaceLayout,"+ "+outputPower+" KW",b.getXPos(),b.getYPos(),popupNumber*10);
+						
+					}
+
+				}
 
 			}// if is constructed
 		}// for each building definition
@@ -255,7 +267,7 @@ public class BaseOverviewActivity extends GameActivity {
 		moonBase.nextTurn();
 		showBuildings();
 		updateUI();
-		showResourcePopups();
+		showOutputPopups();
 		MoonBaseManager.saveMoonBase(view.getContext());
 	}
 

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import spaceappschallenge.moonville.SerializablePair;
 
 import spaceappschallenge.moonville.domain.Resource;
+import spaceappschallenge.moonville.miscellaneous.SerializablePair;
 
 /**
  * Provides access to the xml attributes of a building.
@@ -17,7 +17,6 @@ public class BuildingDefinition implements Serializable
 {
 	private final String name;
 	private final String info;
-	private final int amount;
 	private final List<SerializablePair<Resource,Integer>> requiredResources;
 	private final List<SerializablePair<Resource,Integer>> outputResources;
 	private final List<String> requiredBuildings;
@@ -27,8 +26,7 @@ public class BuildingDefinition implements Serializable
 	private final int monetaryCost;
 	private final int xPos, yPos;
 
-	public BuildingDefinition(String name, String info,
-			int amount, int inputPower,
+	public BuildingDefinition(String name, String info, int inputPower,
 			int outputPower, int monetaryCost,
 			int requiredTurns,
 			ArrayList<SerializablePair<Resource, Integer>> requiredResources,
@@ -37,7 +35,6 @@ public class BuildingDefinition implements Serializable
 			int yPos) {
 		this.name = name;
 		this.info = info;
-		this.amount = amount;
 		this.inputPower = inputPower;
 		this.outputPower = outputPower;
 		this.monetaryCost = monetaryCost;
@@ -58,9 +55,6 @@ public class BuildingDefinition implements Serializable
 		return info;
 	}
 
-	public int getAmount() {
-		return amount;
-	}
 
 	public List<SerializablePair<Resource,Integer>> getRequiredResources() {
 		return requiredResources;

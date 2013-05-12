@@ -17,9 +17,9 @@ import spaceappschallenge.moonville.domain.Building;
 import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.ApplicationService;
 import spaceappschallenge.moonville.factories.Resources;
+import spaceappschallenge.moonville.miscellaneous.SerializablePair;
 import android.content.Context;
 import android.util.Log;
-import spaceappschallenge.moonville.SerializablePair;
 
 public class BuildingXMLParser {
 	protected InputStream inputStream = null;
@@ -29,7 +29,6 @@ public class BuildingXMLParser {
 
 	private String buildingName = "";
 	private String buildingInfo = "";
-	private int buildingAmount = 0;
 	private int buildingInputPower = 0, buildingOutputPower = 0;
 	private int buildingMonetaryCost = 0;
 	private int buildingRequiredTurns = 0;
@@ -55,8 +54,6 @@ public class BuildingXMLParser {
 		// Read the attributes for each building
 		buildingName = xpp.getAttributeValue(null, "name");
 		buildingInfo = xpp.getAttributeValue(null, "info");
-		buildingAmount = Integer
-				.parseInt(xpp.getAttributeValue(null, "amount"));
 		buildingInputPower = Integer.parseInt(xpp.getAttributeValue(null,
 				"inputPower"));
 		buildingOutputPower = Integer.parseInt(xpp.getAttributeValue(null,
@@ -276,7 +273,7 @@ public class BuildingXMLParser {
 					eventType = xpp.next();
 				}// while atBuilding
 				this.buildings.add(new BuildingDefinition(buildingName,
-						buildingInfo, buildingAmount, buildingInputPower,
+						buildingInfo, buildingInputPower,
 						buildingOutputPower, buildingMonetaryCost,
 						buildingRequiredTurns, requiredResources,
 						outputResources, requiredBuildings, buildingXPos,

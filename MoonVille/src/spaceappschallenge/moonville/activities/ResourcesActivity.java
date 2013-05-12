@@ -2,15 +2,14 @@ package spaceappschallenge.moonville.activities;
 
 import java.util.List;
 
-import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.listadapters.ResourceListAdapter;
+import spaceappschallenge.moonville.miscellaneous.SerializablePair;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import spaceappschallenge.moonville.SerializablePair;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;

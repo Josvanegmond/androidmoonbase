@@ -1,5 +1,6 @@
-package spaceappschallenge.moonville;
+package spaceappschallenge.moonville.activities;
 
+import spaceappschallenge.moonville.miscellaneous.MoonVille;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;

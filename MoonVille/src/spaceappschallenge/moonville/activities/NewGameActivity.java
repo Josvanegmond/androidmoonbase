@@ -3,7 +3,6 @@
  */
 package spaceappschallenge.moonville.activities;
 
-import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.Difficulty;
 import spaceappschallenge.moonville.domain.GameDetails;
@@ -31,6 +30,7 @@ public class NewGameActivity extends GameActivity {
 		
 		Spinner spinner = (Spinner) this.findViewById(R.id.choosespacetransport);
 		spinner.setAdapter( new TransportCompanySpinnerAdapter( TransportCompanies.getInstance().getCompanies() ) );
+		
 	}
 
 	public void startNewGame(View view) {

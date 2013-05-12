@@ -2,7 +2,6 @@ package spaceappschallenge.moonville.activities;
 
 import java.util.List;
 
-import spaceappschallenge.moonville.GameActivity;
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.ImportCompany;
 import spaceappschallenge.moonville.domain.MoonBase;
@@ -10,9 +9,9 @@ import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.ImportCompanies;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.listadapters.ExportResourceListAdapter;
+import spaceappschallenge.moonville.miscellaneous.SerializablePair;
 import android.content.Intent;
 import android.os.Bundle;
-import spaceappschallenge.moonville.SerializablePair;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;

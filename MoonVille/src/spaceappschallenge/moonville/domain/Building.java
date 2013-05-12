@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.util.Log;
-import spaceappschallenge.moonville.SerializablePair;
 
 import spaceappschallenge.moonville.factories.MoonBaseManager;
+import spaceappschallenge.moonville.miscellaneous.SerializablePair;
 import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 
 /**
