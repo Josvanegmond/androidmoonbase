@@ -10,7 +10,7 @@
         android:targetSdkVersion="17" />
 
     <application
-        android:name="spaceappschallenge.moonville.MoonVille"
+        android:name="spaceappschallenge.moonville.miscellaneous.MoonVille"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
