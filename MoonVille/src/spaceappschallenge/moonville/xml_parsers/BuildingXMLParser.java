@@ -24,7 +24,8 @@ import android.util.Log;
 public class BuildingXMLParser {
 	protected InputStream inputStream = null;
 	protected XmlPullParser xpp;
-	protected ArrayList<BuildingDefinition> buildings;
+	protected ArrayList<BuildingDefinition> buildings = new ArrayList<BuildingDefinition>();
+	protected ArrayList<BuildingDefinition> megaprojects = new ArrayList<BuildingDefinition>();
 	protected boolean isBuildingFinished = false;
 
 	private String buildingName = "";
@@ -34,6 +35,7 @@ public class BuildingXMLParser {
 	private int buildingRequiredTurns = 0;
 	private int buildingXPos = 0;
 	private int buildingYPos = 0;
+	protected String buildingType = "Normal";
 	private ArrayList<SerializablePair<Resource, Integer>> requiredResources;
 	private ArrayList<SerializablePair<Resource, Integer>> outputResources;
 	private ArrayList<String> requiredBuildings;
@@ -64,7 +66,16 @@ public class BuildingXMLParser {
 				"requiredTurns"));
 		buildingXPos = Integer.parseInt(xpp.getAttributeValue(null, "x"));
 		buildingYPos = Integer.parseInt(xpp.getAttributeValue(null, "y"));
+		try {
+			this.buildingType = xpp.getAttributeValue(null, "type");
+			if (this.buildingType == null) {
+				buildingType = "Normal";
+			}
+		} catch (Exception e) {
+			this.buildingType = "Normal";
+		}
 		Log.i("XML", "buildingName: " + buildingName);
+		Log.i("XML", "buildingType: " + buildingType);
 	}
 
 	/**
@@ -104,8 +115,8 @@ public class BuildingXMLParser {
 		}
 
 		Resource outputRes = Resources.getInstance().getResource(outResName);
-		outputResources
-				.add(new SerializablePair<Resource, Integer>(outputRes, outResAmount));
+		outputResources.add(new SerializablePair<Resource, Integer>(outputRes,
+				outResAmount));
 		Log.i("XML", "out resource " + outResName);
 	}
 
@@ -272,12 +283,18 @@ public class BuildingXMLParser {
 
 					eventType = xpp.next();
 				}// while atBuilding
-				this.buildings.add(new BuildingDefinition(buildingName,
-						buildingInfo, buildingInputPower,
-						buildingOutputPower, buildingMonetaryCost,
-						buildingRequiredTurns, requiredResources,
-						outputResources, requiredBuildings, buildingXPos,
-						buildingYPos));
+				BuildingDefinition bd = new BuildingDefinition(buildingName,
+						buildingInfo, buildingInputPower, buildingOutputPower,
+						buildingMonetaryCost, buildingRequiredTurns,
+						requiredResources, outputResources, requiredBuildings,
+						buildingXPos, buildingYPos);
+
+				if (this.buildingType.equalsIgnoreCase("Normal"))
+					this.buildings.add(bd);
+				else if (this.buildingType.equalsIgnoreCase("Megaproject"))
+					this.megaprojects.add(bd);
+				else
+					Log.e("Undefined building type: ", "" + buildingType);
 			}// if building
 
 			eventType = xpp.next();
@@ -286,4 +303,12 @@ public class BuildingXMLParser {
 		return this.buildings;
 
 	}// end of function
+
+	public ArrayList<BuildingDefinition> getBuildings() {
+		return this.buildings;
+	}
+
+	public ArrayList<BuildingDefinition> getMegaprojects() {
+		return this.megaprojects;
+	}
 }// class

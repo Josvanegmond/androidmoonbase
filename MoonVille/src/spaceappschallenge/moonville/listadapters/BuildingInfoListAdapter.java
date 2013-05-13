@@ -101,7 +101,9 @@ public class BuildingInfoListAdapter extends BaseAdapter {
 				+" "+ buildingDefinition.getRequiredTurns() + " months");
 		int noOfBuildings = MoonBaseManager.getCurrentMoonBase()
 				.getNoOfActiveBuildings(buildingDefinition.getName());
-
+		this.infoList.add("Active: "+noOfBuildings);
+		this.infoList.add("");
+		
 		if (buildingDefinition.getInputPower() > 0)
 			this.infoList.add(appResources.getString(R.string.input_power)
 					+" "+ (buildingDefinition.getInputPower() * noOfBuildings)
