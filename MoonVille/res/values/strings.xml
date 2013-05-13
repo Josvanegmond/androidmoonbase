@@ -23,5 +23,11 @@
     <string name="welcome_text">Welcome to the Moonopoly project. You have been selected as the world\'s first lunar industry president!\n\nYou are responsible for the successes and failures of the colony. You have a monopoly position as mankind\'s first commercial moon industry, but keep an eye on competition of other space industry endeavours.\n\nExplore your opportunities and risks, become a self sustaining exoplanetary industry and boost humanity into a new age!</string>
     <string name="IMPORT_LISTITEM_HOLDER">0</string>
     <string name="TRANSPORTCOMPANY_LISTITEM_HOLDER">1</string>
+    <string name="construction_time">Construction Time:</string>
+    <string name="input_power">Input Power:</string>
+    <string name="output_power">Output Power:</string>
+    <string name="required_resources">Required Resources:</string>
+    <string name="required_buildings">Required Buildings:</string>
+    <string name="output_resources">Output Resources:</string>
 
 </resources>
