@@ -5,6 +5,7 @@ import java.util.List;
 
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.Building;
+import spaceappschallenge.moonville.domain.BuildingDefinition;
 import spaceappschallenge.moonville.domain.MoonBase;
 import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.ApplicationService;
@@ -12,7 +13,6 @@ import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.miscellaneous.MoonVille;
 import spaceappschallenge.moonville.miscellaneous.SerializablePair;
-import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -146,6 +146,9 @@ public class BaseOverviewActivity extends GameActivity {
 				.getAllBuildings();
 
 		for (final BuildingDefinition building : buildings) {
+			//Do not draw images for megaprojects because they are not present at this this
+			if(building.getType().equals("Megaproject"))
+				continue;
 			// see if the building can be build or not, and whether or not it is
 			// already visible
 			boolean isBuildingConstructed = moonBase
@@ -285,6 +288,10 @@ public class BaseOverviewActivity extends GameActivity {
 	public void showResourcesScreen(View view) {
 		view.getContext().startActivity(
 				new Intent(this, ResourcesActivity.class));
+	}
+	
+	public void showMegaprojectsScreen(View view){
+		view.getContext().startActivity(new Intent(this,MegaprojectListActivity.class));
 	}
 
 	// some scrollbar fix for scrolling

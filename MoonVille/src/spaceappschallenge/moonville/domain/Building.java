@@ -8,7 +8,6 @@ import android.util.Log;
 
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.miscellaneous.SerializablePair;
-import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 
 /**
  * Handles attributes of single building in the world.

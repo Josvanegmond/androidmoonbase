@@ -14,6 +14,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import spaceappschallenge.moonville.domain.Building;
+import spaceappschallenge.moonville.domain.BuildingDefinition;
 import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.ApplicationService;
 import spaceappschallenge.moonville.factories.Resources;
@@ -284,17 +285,21 @@ public class BuildingXMLParser {
 					eventType = xpp.next();
 				}// while atBuilding
 				BuildingDefinition bd = new BuildingDefinition(buildingName,
-						buildingInfo, buildingInputPower, buildingOutputPower,
+						buildingInfo, buildingType, buildingInputPower, buildingOutputPower,
 						buildingMonetaryCost, buildingRequiredTurns,
 						requiredResources, outputResources, requiredBuildings,
 						buildingXPos, buildingYPos);
-
-				if (this.buildingType.equalsIgnoreCase("Normal"))
-					this.buildings.add(bd);
-				else if (this.buildingType.equalsIgnoreCase("Megaproject"))
+				this.buildings.add(bd);//add megaprojects + buildings to a list
+				//Add megaprojects to separate list
+				if(this.buildingType.equalsIgnoreCase("Megaproject")){
 					this.megaprojects.add(bd);
-				else
-					Log.e("Undefined building type: ", "" + buildingType);
+				}
+//				if (this.buildingType.equalsIgnoreCase("Normal"))
+//					this.buildings.add(bd);
+//				else if (this.buildingType.equalsIgnoreCase("Megaproject"))
+//					this.megaprojects.add(bd);
+//				else
+//					Log.e("Undefined building type: ", "" + buildingType);
 			}// if building
 
 			eventType = xpp.next();

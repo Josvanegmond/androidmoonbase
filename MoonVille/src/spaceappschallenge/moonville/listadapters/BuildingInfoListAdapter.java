@@ -5,6 +5,7 @@ import java.util.List;
 
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.Building;
+import spaceappschallenge.moonville.domain.BuildingDefinition;
 import spaceappschallenge.moonville.domain.MoonBase;
 import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.ApplicationService;
@@ -12,7 +13,6 @@ import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.miscellaneous.MoonVille;
 import spaceappschallenge.moonville.miscellaneous.SerializablePair;
-import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
@@ -25,39 +25,51 @@ import android.widget.TextView;
 public class BuildingInfoListAdapter extends BaseAdapter {
 	private List<String> infoList;
 	private Resources appResources;
+	private BuildingDefinition buildingDefinition;
+	private String buildingName;
+	private MoonBase moonBase;
 
 	public BuildingInfoListAdapter(String buildingName) {
 		this.infoList = new ArrayList<String>();
+		this.buildingName = buildingName;
 		appResources = MoonVille.getContext().getResources();
+		moonBase = MoonBaseManager.getCurrentMoonBase();
+		buildingDefinition = Buildings.getInstance().getBuilding(buildingName);
 		if (appResources == null) {
 			Log.e("null", "app resources is null");
 		}
-		fillBuildingInfo(buildingName);
+		fillBuildingInfo();
 
 	}
 
-	public void fillBuildingInfo(String buildingName) {
-		MoonBase moonBase = MoonBaseManager.getCurrentMoonBase();
-		BuildingDefinition buildingDefinition = Buildings.getInstance()
-				.getBuilding(buildingName);
+	public void fillBuildingInfo() {
+
+		this.infoList.add("Description: \n" + buildingDefinition.getInfo()
+				+ "\n");
+
 		if (moonBase.isBuildingConstructed(buildingName)) {
-			fillConstructedBuildingInfo(buildingDefinition);
+			fillConstructedBuildingInfo();
 		} else
-			fillUnconstructedBuildingInfo(buildingDefinition);
+			fillUnconstructedBuildingInfo();
 	}
 
-	private void fillUnconstructedBuildingInfo(
-			BuildingDefinition buildingDefinition) {
+	/**
+	 * Fill in information about buildings which have not been constructed yet
+	 */
+	private void fillUnconstructedBuildingInfo() {
 		this.infoList.add(appResources.getString(R.string.construction_time)
-				+" "+ buildingDefinition.getRequiredTurns() + " months");
-		this.infoList.add("");
+				+ "\n" + buildingDefinition.getRequiredTurns() + " months"
+				+ "\n");
+
 		if (buildingDefinition.getInputPower() > 0)
 			this.infoList.add(appResources.getString(R.string.input_power)
-					+" "+ (buildingDefinition.getInputPower()) + " KW");
+					+ "\n" + (buildingDefinition.getInputPower()) + " KW"
+					+ "\n");
 
 		if (buildingDefinition.getOutputPower() > 0)
 			this.infoList.add(appResources.getString(R.string.output_power)
-					+" "+ (buildingDefinition.getOutputPower()) + " KW");
+					+ "\n" + (buildingDefinition.getOutputPower()) + " KW"
+					+ "\n");
 
 		this.infoList.add("");
 
@@ -95,26 +107,25 @@ public class BuildingInfoListAdapter extends BaseAdapter {
 		}
 	}
 
-	private void fillConstructedBuildingInfo(
-			BuildingDefinition buildingDefinition) {
+	private void fillConstructedBuildingInfo() {
 		this.infoList.add(appResources.getString(R.string.construction_time)
-				+" "+ buildingDefinition.getRequiredTurns() + " months");
+				+ "\n" + buildingDefinition.getRequiredTurns() + " months"
+				+ "\n");
 		int noOfBuildings = MoonBaseManager.getCurrentMoonBase()
 				.getNoOfActiveBuildings(buildingDefinition.getName());
-		this.infoList.add("Active: "+noOfBuildings);
+		this.infoList.add("Active:\n" + noOfBuildings + "\n");
 		this.infoList.add("");
-		
+
 		if (buildingDefinition.getInputPower() > 0)
 			this.infoList.add(appResources.getString(R.string.input_power)
-					+" "+ (buildingDefinition.getInputPower() * noOfBuildings)
-					+ " KW");
+					+ "\n"
+					+ (buildingDefinition.getInputPower() * noOfBuildings)
+					+ " KW" + "\n");
 
 		if (buildingDefinition.getOutputPower() > 0)
 			this.infoList.add(appResources.getString(R.string.output_power)
-					+" "	+ buildingDefinition.getOutputPower() * noOfBuildings
-					+ " KW");
-
-		this.infoList.add("");
+					+ "\n" + buildingDefinition.getOutputPower()
+					* noOfBuildings + " KW" + "\n");
 
 		if (buildingDefinition.getRequiredBuildings().size() > 0) {
 
@@ -126,6 +137,17 @@ public class BuildingInfoListAdapter extends BaseAdapter {
 			}
 		}
 
+		this.infoList.add("");
+
+		if (buildingDefinition.getRequiredResources().size() > 0) {
+			this.infoList.add(""
+					+ appResources.getString(R.string.required_resources));
+			for (SerializablePair<Resource, Integer> resource : buildingDefinition
+					.getRequiredResources()) {
+				this.infoList.add(resource.first.getName() + ": "
+						+ (resource.second * noOfBuildings));
+			}
+		}
 		this.infoList.add("");
 
 		if (buildingDefinition.getOutputResources().size() > 0) {
@@ -167,6 +189,10 @@ public class BuildingInfoListAdapter extends BaseAdapter {
 		text.setText(this.infoList.get(position));
 
 		return convertView;
+	}
+
+	public List<String> getInfoList() {
+		return this.infoList;
 	}
 
 }

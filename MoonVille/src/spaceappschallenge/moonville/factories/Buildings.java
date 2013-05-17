@@ -9,9 +9,9 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import spaceappschallenge.moonville.R;
 import spaceappschallenge.moonville.domain.Building;
+import spaceappschallenge.moonville.domain.BuildingDefinition;
 import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.miscellaneous.SerializablePair;
-import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import spaceappschallenge.moonville.xml_parsers.BuildingXMLParser;
 import android.content.Context;
 import android.util.Log;
@@ -32,6 +32,7 @@ public class Buildings {
 
 	// a list of buildings that the player can build
 	private ArrayList<BuildingDefinition> availableBuildings;
+	private ArrayList<BuildingDefinition> allMegaprojects;
 
 	protected InputStream inputStream = null;
 
@@ -69,6 +70,7 @@ public class Buildings {
 			BuildingXMLParser xmlParser = new BuildingXMLParser(inputStream);
 			try {
 				this.allBuildings = xmlParser.parse();
+				this.allMegaprojects = xmlParser.getMegaprojects();
 				//printAllBuildings();
 			} catch (IOException e) {
 				Log.e("Buildings",
@@ -125,5 +127,9 @@ public class Buildings {
 	// returns all available buildings
 	public ArrayList<BuildingDefinition> getAllBuildings() {
 		return this.allBuildings;
+	}
+	
+	public ArrayList<BuildingDefinition> getAllMegaprojects(){
+		return this.allMegaprojects;
 	}
 }

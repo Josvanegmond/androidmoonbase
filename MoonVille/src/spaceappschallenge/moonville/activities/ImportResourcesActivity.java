@@ -24,8 +24,7 @@ public class ImportResourcesActivity extends GameActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_import_resources);
 
-		List<Resource> resources = Resources.getInstance()
-				.getAllResources();
+		List<Resource> resources = Resources.getInstance().getAllResources();
 		ImportResourceListAdapter resourceListAdapter = new ImportResourceListAdapter(
 				resources);
 
@@ -48,29 +47,6 @@ public class ImportResourcesActivity extends GameActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_import_resources, menu);
 		return true;
-	}
-
-	// methods called by onClick property of button in xml
-	public void showBaseOverviewScreen(View view) {
-		view.getContext().startActivity(
-				new Intent(this, BaseOverviewActivity.class));
-		this.finish();
-	}
-
-	public void showBuildingScreen(View view) {
-		this.finish();
-	}
-
-	public void showResourcesScreen(View view) {
-		view.getContext().startActivity(
-				new Intent(this, ResourcesActivity.class));
-		this.finish();
-	}
-
-	public void showExportScreen(View view) {
-		view.getContext().startActivity(
-				new Intent(this, ExportResourcesActivity.class));
-		this.finish();
 	}
 
 }

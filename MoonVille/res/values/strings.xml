@@ -11,7 +11,7 @@
     <string name="title_activity_new_company">NewCompanyActivity</string>
     <string name="title_activity_base_overview">Base Overview</string>
     <string name="title_activity_resources">Resources</string>
-    <string name="title_activity_mega_project">Mega Project</string>
+    <string name="title_activity_mega_project_list">Mega Project List</string>
     <string name="title_activity_buildings">Buildings</string>
     <string name="title_activity_company_info">Company Info</string>
     <string name="title_activity_building_info">Building Info</string>
