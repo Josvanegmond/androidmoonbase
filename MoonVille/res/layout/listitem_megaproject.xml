@@ -10,15 +10,6 @@
         android:layout_marginBottom="10dp" >
 
         <spaceappschallenge.moonville.ui.FontTextView
-            android:id="@+id/megaprojectTitleTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="0.5"
-            android:text="Megaproject:"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <spaceappschallenge.moonville.ui.FontTextView
             android:id="@+id/megaprojectTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
