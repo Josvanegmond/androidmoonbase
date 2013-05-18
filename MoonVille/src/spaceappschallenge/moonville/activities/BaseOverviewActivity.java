@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import spaceappschallenge.moonville.R;
-import spaceappschallenge.moonville.domain.Building;
 import spaceappschallenge.moonville.domain.MoonBase;
 import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.factories.ApplicationService;
@@ -17,7 +16,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
