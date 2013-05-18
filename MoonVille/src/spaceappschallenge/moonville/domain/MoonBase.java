@@ -24,13 +24,15 @@ public class MoonBase implements Serializable {
 
 	protected int money;
 	protected int power;
+	protected int launchMass;
 	private int currentMonth = 0;
 
 	protected GameDetails gameDetails;
 
-	public MoonBase(int money) {
+	public MoonBase(int money, int launchMass) {
 		this.storedResources = new ArrayList<SerializablePair<Resource, Integer>>();
 		this.money = money;
+		this.launchMass = launchMass;
 		// It is assumed that at the start of the game, a moon base is present
 		BuildingDefinition moonBaseDefinition = Buildings.getInstance()
 				.getBuilding("Moon Base");
@@ -44,6 +46,7 @@ public class MoonBase implements Serializable {
 
 	/**
 	 * Checks if moonbase can spend specified amount of money
+	 * 
 	 * @param expenditure
 	 * @return
 	 */
@@ -56,6 +59,7 @@ public class MoonBase implements Serializable {
 
 	/**
 	 * Spend the specified money
+	 * 
 	 * @param expenditure
 	 * @return
 	 */
@@ -69,6 +73,30 @@ public class MoonBase implements Serializable {
 
 	public void sell(int income) {
 		this.money += income;
+	}
+
+	/**
+	 * Checks if the given launch mass can be launched
+	 * 
+	 * @param launchMass
+	 * @return
+	 */
+	public boolean canLaunch(int launchMass) {
+		if (this.launchMass >= launchMass) {
+			return true;
+		} else
+			return false;
+	}
+
+	/**
+	 * Decreases the specified launch mass from total launch mass
+	 * 
+	 * @param launchMass
+	 */
+	public void launch(int launchMass) {
+		if (canLaunch(launchMass)) {
+			this.launchMass -= launchMass;
+		}
 	}
 
 	/**
@@ -126,9 +154,10 @@ public class MoonBase implements Serializable {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Checks if any building is under construction
+	 * 
 	 * @param buildingName
 	 * @return
 	 */
@@ -486,5 +515,9 @@ public class MoonBase implements Serializable {
 
 	public void setCurrentMonth(int currentMonth) {
 		this.currentMonth = currentMonth;
+	}
+
+	public int getLaunchMass() {
+		return this.launchMass;
 	}
 }

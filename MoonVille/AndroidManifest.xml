@@ -38,7 +38,7 @@
         <activity
             android:name="spaceappschallenge.moonville.AllResourcesActivity"
             android:label="@string/title_activity_all_resources" >
-        </activity>
+        </activity>
         -->
 
         <activity
@@ -57,9 +57,10 @@
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name=".activities.ResourcesActivity"
+            android:name="spaceappschallenge.moonville.activities.ResourcesActivity"
             android:label="@string/title_activity_resources"
-            android:screenOrientation="landscape" android:theme="@android:style/Theme.Dialog">
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
             android:name="spaceappschallenge.moonville.activities.BuildingsActivity"
@@ -84,17 +85,28 @@
         <activity
             android:name="spaceappschallenge.moonville.activities.ImportResourcesActivity"
             android:label="@string/title_activity_import_resources"
-            android:screenOrientation="landscape" android:theme="@android:style/Theme.Dialog">
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
             android:name="spaceappschallenge.moonville.activities.ExportResourcesActivity"
             android:label="@string/title_activity_export_resources"
-            android:screenOrientation="landscape" android:theme="@android:style/Theme.Dialog">
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Dialog" >
         </activity>
-         <activity
+        <activity
             android:name="spaceappschallenge.moonville.activities.MegaprojectListActivity"
-            android:label="@string/title_activity_mega_project_list" 
-            android:screenOrientation="landscape" android:theme="@android:style/Theme.Dialog">
+            android:label="@string/title_activity_mega_project_list"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.activities.InitialLaunchActivity"
+            android:label="@string/title_activity_initial_launch"
+            android:parentActivityName="spaceappschallenge.moonville.activities.GameActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="spaceappschallenge.moonville.activities.GameActivity" />
         </activity>
     </application>
 

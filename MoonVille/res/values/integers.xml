@@ -2,13 +2,16 @@
 <resources>
     <integer name="difficult_research">25</integer>
     <integer name="difficult_money">100000</integer>
+     <integer name="difficult_launchMass">1000</integer>
     <integer name="difficult_prospecting_level">25</integer>
     
     <integer name="medium_research">50</integer>
     <integer name="medium_money">500000</integer>
+     <integer name="medium_launchMass">5000</integer>
     <integer name="medium_prospecting_level">50</integer>
     
     <integer name="easy_research">100</integer>
     <integer name="easy_money">1000000</integer>
+     <integer name="easy_launchMass">10000</integer>
     <integer name="easy_prospecting_level">100</integer>
 </resources>

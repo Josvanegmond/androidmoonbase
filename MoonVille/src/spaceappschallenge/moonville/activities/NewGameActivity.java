@@ -37,7 +37,8 @@ public class NewGameActivity extends GameActivity {
 		gameDetails = GameDetails.getInstance();
 		retrieveUserInputs();
 		initModel();
-		showBaseOverviewScreen(view);
+		showInitialLaunchScreen(view);
+		//showBaseOverviewScreen(view);
 	}
 
 	// Retrieve user name and difficulty level
@@ -66,6 +67,10 @@ public class NewGameActivity extends GameActivity {
 		// easily accessible -Jos
 	}
 
+	public void showInitialLaunchScreen(View view){
+		view.getContext().startActivity(new Intent(this,InitialLaunchActivity.class));
+		this.finish();
+	}
 	// I changed the init method to this one, which is triggered by the onClick
 	// property in the xml of the button
 	// since we are using separate activities, this is a very easy way to
