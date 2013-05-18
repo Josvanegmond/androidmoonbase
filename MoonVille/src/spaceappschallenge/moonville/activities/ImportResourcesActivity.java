@@ -38,7 +38,7 @@ public class ImportResourcesActivity extends GameActivity {
 	public void updateUI() {
 		TextView budgetTextView = (TextView) (this
 				.findViewById(R.id.budgettext));
-		budgetTextView.setText(""
+		budgetTextView.setText("$"
 				+ MoonBaseManager.getCurrentMoonBase().getMoney());
 	}
 

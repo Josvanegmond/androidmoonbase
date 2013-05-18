@@ -96,13 +96,13 @@ public class ExportResourcesActivity extends GameActivity {
 					Toast.makeText(
 							this,
 							"Can't export, resources in stock, but demand not satisfied",
-							500).show();
+							5000).show();
 					break;
 				}
 			} else {
 				canExport = false;
 				Toast.makeText(this,
-						"Can't export, demanded resources not in stock", 500)
+						"Can't export, demanded resources not in stock", 5000)
 						.show();
 				break;
 			}
@@ -113,7 +113,7 @@ public class ExportResourcesActivity extends GameActivity {
 			moonBase.setMoney(moonBase.getMoney() + company.getPayment());
 			moonBase.decreaseResources(importResources);
 			Toast.makeText(this,
-					"Exported, payment is " + company.getPayment(), 500).show();
+					"Exported, payment is $" + company.getPayment(), 5000).show();
 		}
 	}
 

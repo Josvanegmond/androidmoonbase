@@ -141,16 +141,16 @@ public class ImportResourceListAdapter extends BaseAdapter {
 					
 					MoonBaseManager.getCurrentMoonBase().increaseResources(newList);
 					toast = Toast.makeText(v.getContext(), "Spent: "
-							+ totalCost, 2000);
+							+ totalCost, 5000);
 
 				} else {
 					toast = Toast.makeText(v.getContext(),
-							"Can't spend so much!", 2000);
+							"Can't spend so much!", 5000);
 				}
 				toast.show();
 
 				Log.i("cost", " total cost is:" + totalCost);
-				String budget = ""
+				String budget = "$"
 						+ MoonBaseManager.getCurrentMoonBase().getMoney();
 				try {
 
@@ -166,7 +166,7 @@ public class ImportResourceListAdapter extends BaseAdapter {
 				try {
 					((TextView) (ApplicationService.getBaseOverviewActivity())
 							.findViewById(R.id.baseOverviewFundsTextView))
-							.setText("Funds: "+budget);
+							.setText("Funds: $"+budget);
 				} catch (Exception e) {
 					Log.e("ImportResourceListAdapter",
 							"Could not update budget in text view of base overview screen");

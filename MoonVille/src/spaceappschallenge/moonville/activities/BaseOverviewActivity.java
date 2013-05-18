@@ -96,7 +96,7 @@ public class BaseOverviewActivity extends GameActivity {
 	public void updateUI() {
 		TextView baseOverviewFundsTextView = (TextView) (this
 				.findViewById(R.id.baseOverviewFundsTextView));
-		baseOverviewFundsTextView.setText("Funds: "
+		baseOverviewFundsTextView.setText("Funds: $"
 				+ MoonBaseManager.getCurrentMoonBase().getMoney());
 
 		TextView txtMonth = (TextView) (this.findViewById(R.id.txtMonth));
@@ -146,8 +146,9 @@ public class BaseOverviewActivity extends GameActivity {
 				.getAllBuildings();
 
 		for (final BuildingDefinition building : buildings) {
-			//Do not draw images for megaprojects because they are not present at this this
-			if(building.getType().equals("Megaproject"))
+			// Do not draw images for megaprojects because they are not present
+			// at this this
+			if (building.getType().equals("Megaproject"))
 				continue;
 			// see if the building can be build or not, and whether or not it is
 			// already visible
@@ -239,13 +240,16 @@ public class BaseOverviewActivity extends GameActivity {
 								b.getXPos(), b.getYPos(), popupNumber * 10);
 
 						popupNumber++;
-					}//for
-					
-					//Show popup for output power
-					if(b.getOutputPower()>0){
-						int outputPower = noOfActiveBuildings*b.getOutputPower();
-						new Popup(BaseOverviewActivity.this,moonSurfaceLayout,"+ "+outputPower+" KW",b.getXPos(),b.getYPos(),popupNumber*10);
-						
+					}// for
+
+					// Show popup for output power
+					if (b.getOutputPower() > 0) {
+						int outputPower = noOfActiveBuildings
+								* b.getOutputPower();
+						new Popup(BaseOverviewActivity.this, moonSurfaceLayout,
+								"+ " + outputPower + " KW", b.getXPos(),
+								b.getYPos(), popupNumber * 10);
+
 					}
 
 				}
@@ -289,9 +293,15 @@ public class BaseOverviewActivity extends GameActivity {
 		view.getContext().startActivity(
 				new Intent(this, ResourcesActivity.class));
 	}
-	
-	public void showMegaprojectsScreen(View view){
-		view.getContext().startActivity(new Intent(this,MegaprojectListActivity.class));
+
+	public void showResearchScreen(View view) {
+		view.getContext().startActivity(
+				new Intent(this, ResearchActivity.class));
+	}
+
+	public void showMegaprojectsScreen(View view) {
+		view.getContext().startActivity(
+				new Intent(this, MegaprojectListActivity.class));
 	}
 
 	// some scrollbar fix for scrolling
