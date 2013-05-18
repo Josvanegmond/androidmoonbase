@@ -1,11 +1,11 @@
 package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.R;
+import spaceappschallenge.moonville.domain.BuildingDefinition;
 import spaceappschallenge.moonville.domain.MoonBase;
 import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.factories.MoonBaseManager;
 import spaceappschallenge.moonville.listadapters.BuildingInfoListAdapter;
-import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -47,10 +47,7 @@ public class BuildingInfoActivity extends GameActivity {
 		buildingScale.setText("Buildings: "
 				+ moonBase.getNumberOfConstructedBuildings(buildingName));
 
-		// Show Description of the building
-		TextView buildingInfo = (TextView) findViewById(R.id.buildinginfo);
-		buildingInfo.setText(Buildings.getInstance()
-				.getBuilding(this.buildingName).getInfo());
+		
 
 		// Show stats of the building in a list view
 		buildingInfoListAdapter = new BuildingInfoListAdapter(buildingName);

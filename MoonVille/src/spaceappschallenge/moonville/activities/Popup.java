@@ -1,8 +1,8 @@
 package spaceappschallenge.moonville.activities;
 
 import spaceappschallenge.moonville.R;
+import spaceappschallenge.moonville.domain.BuildingDefinition;
 import spaceappschallenge.moonville.factories.Buildings;
-import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;

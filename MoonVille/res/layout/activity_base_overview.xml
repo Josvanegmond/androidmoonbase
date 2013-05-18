@@ -99,6 +99,15 @@
                 android:onClick="showExportResourcesScreen"
                 android:text="Export"
                 android:textSize="@dimen/tinyButtonText" />
+
+            <Button
+                android:id="@+id/baseOverviewMegaProjectsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="showMegaprojectsScreen"
+                android:text="MegaProjects" 
+                android:textSize="@dimen/tinyButtonText"/>
+
         </LinearLayout>
 
         <Button

@@ -27,6 +27,7 @@ public class Difficulty implements Serializable {
 	private int researchPoints;
 	private int prospectingLevel;
 	private int money;
+	private int launchMass;
 	private Resources resources;
 
 	// some basic difficulties... not final! ~ jodli
@@ -40,6 +41,8 @@ public class Difficulty implements Serializable {
 			this.prospectingLevel = resources
 					.getInteger(R.integer.difficult_prospecting_level);
 			this.money = resources.getInteger(R.integer.difficult_money);
+			this.launchMass = resources
+					.getInteger(R.integer.difficult_launchMass);
 			break;
 		case DIF_HARD:
 			this.researchPoints = resources
@@ -47,6 +50,7 @@ public class Difficulty implements Serializable {
 			this.prospectingLevel = resources
 					.getInteger(R.integer.medium_prospecting_level);
 			this.money = resources.getInteger(R.integer.medium_money);
+			this.launchMass = resources.getInteger(R.integer.medium_launchMass);
 			break;
 
 		default:
@@ -55,6 +59,7 @@ public class Difficulty implements Serializable {
 			this.prospectingLevel = resources
 					.getInteger(R.integer.easy_prospecting_level);
 			this.money = resources.getInteger(R.integer.easy_money);
+			this.launchMass = resources.getInteger(R.integer.easy_launchMass);
 			break;
 
 		}
@@ -70,5 +75,10 @@ public class Difficulty implements Serializable {
 
 	public int getMoney() {
 		return money;
+	}
+
+	public int getLaunchMass() {
+		// TODO Auto-generated method stub
+		return launchMass;
 	}
 }

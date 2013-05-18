@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import spaceappschallenge.moonville.factories.Buildings;
 import spaceappschallenge.moonville.miscellaneous.SerializablePair;
-import spaceappschallenge.moonville.xml_parsers.BuildingDefinition;
 
 import android.util.Log;
-
 
 /**
  * Handles information about the game world, including power, money, resources
@@ -26,13 +24,15 @@ public class MoonBase implements Serializable {
 
 	protected int money;
 	protected int power;
+	protected int launchMass;
 	private int currentMonth = 0;
 
 	protected GameDetails gameDetails;
 
-	public MoonBase(int money) {
+	public MoonBase(int money, int launchMass) {
 		this.storedResources = new ArrayList<SerializablePair<Resource, Integer>>();
 		this.money = money;
+		this.launchMass = launchMass;
 		// It is assumed that at the start of the game, a moon base is present
 		BuildingDefinition moonBaseDefinition = Buildings.getInstance()
 				.getBuilding("Moon Base");
@@ -44,6 +44,12 @@ public class MoonBase implements Serializable {
 		this.gameDetails = GameDetails.getInstance();
 	}
 
+	/**
+	 * Checks if moonbase can spend specified amount of money
+	 * 
+	 * @param expenditure
+	 * @return
+	 */
 	public boolean canSpend(int expenditure) {
 		if (expenditure <= money) {
 			return true;
@@ -51,6 +57,12 @@ public class MoonBase implements Serializable {
 			return false;
 	}
 
+	/**
+	 * Spend the specified money
+	 * 
+	 * @param expenditure
+	 * @return
+	 */
 	public boolean spend(int expenditure) {
 		if (canSpend(expenditure)) {
 			this.money -= expenditure;
@@ -61,6 +73,30 @@ public class MoonBase implements Serializable {
 
 	public void sell(int income) {
 		this.money += income;
+	}
+
+	/**
+	 * Checks if the given launch mass can be launched
+	 * 
+	 * @param launchMass
+	 * @return
+	 */
+	public boolean canLaunch(int launchMass) {
+		if (this.launchMass >= launchMass) {
+			return true;
+		} else
+			return false;
+	}
+
+	/**
+	 * Decreases the specified launch mass from total launch mass
+	 * 
+	 * @param launchMass
+	 */
+	public void launch(int launchMass) {
+		if (canLaunch(launchMass)) {
+			this.launchMass -= launchMass;
+		}
 	}
 
 	/**
@@ -120,6 +156,23 @@ public class MoonBase implements Serializable {
 	}
 
 	/**
+	 * Checks if any building is under construction
+	 * 
+	 * @param buildingName
+	 * @return
+	 */
+	public boolean isBuildingUnderConstruction(String buildingName) {
+		for (Building b : buildingsUnderConstruction) {
+			if (buildingName.equalsIgnoreCase(b.getBuildingDefinition()
+					.getName())) {
+				Log.i("building under construction: ", buildingName);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Update the buildings which are already constructed
 	 */
 	public void updateConstructedBuildings() {
@@ -134,7 +187,8 @@ public class MoonBase implements Serializable {
 	 * @param resources
 	 * @return
 	 */
-	public boolean canProvideResources(List<SerializablePair<Resource, Integer>> resources) {
+	public boolean canProvideResources(
+			List<SerializablePair<Resource, Integer>> resources) {
 		if (resources == null)
 			return true;
 		if (resources.size() == 0)
@@ -163,7 +217,7 @@ public class MoonBase implements Serializable {
 	}
 
 	/**
-	 * Returns the amoount of resources of given name
+	 * Returns the amount of resources of given name
 	 * 
 	 * @param resourceName
 	 * @return
@@ -182,7 +236,8 @@ public class MoonBase implements Serializable {
 	 * 
 	 * @param inputResources
 	 */
-	public void increaseResources(List<SerializablePair<Resource, Integer>> inputResources) {
+	public void increaseResources(
+			List<SerializablePair<Resource, Integer>> inputResources) {
 		boolean resourceFound = false;
 		for (SerializablePair<Resource, Integer> inputResource : inputResources) {
 			for (int i = 0; i < storedResources.size(); i++) {
@@ -212,7 +267,8 @@ public class MoonBase implements Serializable {
 	 * 
 	 * @param resources
 	 */
-	public void decreaseResources(List<SerializablePair<Resource, Integer>> resources) {
+	public void decreaseResources(
+			List<SerializablePair<Resource, Integer>> resources) {
 		for (SerializablePair<Resource, Integer> requiredResource : resources) {
 			for (int i = 0; i < storedResources.size(); i++) {
 
@@ -356,12 +412,30 @@ public class MoonBase implements Serializable {
 	}
 
 	/**
+	 * Checks if there is at least one building with the specified name that is
+	 * active
+	 * 
+	 * @param buildingName
+	 * @return
+	 */
+	public boolean isBuildingActive(String buildingName) {
+		for (Building b : constructedBuildings) {
+			if (b.getBuildingDefinition().getName().equals(buildingName)
+					&& b.isActive()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Returns outputResources from its active buildings
 	 * 
 	 * @param buildingName
 	 * @return
 	 */
-	public List<SerializablePair<Resource, Integer>> getOutputResources(String buildingName) {
+	public List<SerializablePair<Resource, Integer>> getOutputResources(
+			String buildingName) {
 		int noOfConstructedBuildings = getNoOfActiveBuildings(buildingName);
 		List<SerializablePair<Resource, Integer>> outputResourcesPerBuilding = Buildings
 				.getInstance().getBuilding(buildingName).getOutputResources();
@@ -385,7 +459,8 @@ public class MoonBase implements Serializable {
 		return storedResources;
 	}
 
-	public void setStoredResources(List<SerializablePair<Resource, Integer>> storedResources) {
+	public void setStoredResources(
+			List<SerializablePair<Resource, Integer>> storedResources) {
 		this.storedResources = storedResources;
 	}
 
@@ -440,5 +515,9 @@ public class MoonBase implements Serializable {
 
 	public void setCurrentMonth(int currentMonth) {
 		this.currentMonth = currentMonth;
+	}
+
+	public int getLaunchMass() {
+		return this.launchMass;
 	}
 }

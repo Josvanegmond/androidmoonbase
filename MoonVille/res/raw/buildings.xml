@@ -17,7 +17,7 @@
         amount="0"
         info="Provides electric energy by utilizing sunlight"
         inputPower="0"
-        monetaryCost="20"
+        monetaryCost="1000"
         outputPower="10"
         requiredTurns="2"
         x="80"
@@ -32,7 +32,7 @@
         amount="0"
         info="Produces water from ice"
         inputPower="10"
-        monetaryCost="20"
+        monetaryCost="1000"
         outputPower="0"
         requiredTurns="2"
         x="200"
@@ -54,7 +54,7 @@
         amount="0"
         info="Processes regolith "
         inputPower="20"
-        monetaryCost="20"
+        monetaryCost="1500"
         outputPower="0"
         requiredTurns="4"
         x="280"
@@ -80,7 +80,7 @@
         amount="0"
         info="Utilizes Helium-3 to provide energy"
         inputPower="0"
-        monetaryCost="100"
+        monetaryCost="5000"
         outputPower="50"
         requiredTurns="10"
         x="170"
@@ -102,7 +102,7 @@
         amount="0"
         info="Processes water to yield oxygen and hydrogen"
         inputPower="10"
-        monetaryCost="15"
+        monetaryCost="1000"
         outputPower="0"
         requiredTurns="4"
         x="385"
@@ -135,7 +135,7 @@
         amount="0"
         info="Provides metals and minerals"
         inputPower="50"
-        monetaryCost="25"
+        monetaryCost="1500"
         outputPower="0"
         requiredTurns="5"
         x="535"
@@ -172,7 +172,7 @@
         amount="0"
         info="Produces fuel"
         inputPower="50"
-        monetaryCost="30"
+        monetaryCost="1000"
         outputPower="0"
         requiredTurns="5"
         x="570"
@@ -205,7 +205,7 @@
         amount="0"
         info="Manufactures electronics supply"
         inputPower="20"
-        monetaryCost="10"
+        monetaryCost="2000"
         outputPower="0"
         requiredTurns="3"
         x="670"
@@ -234,7 +234,7 @@
         amount="0"
         info="Manufactures robots"
         inputPower="50"
-        monetaryCost="15"
+        monetaryCost="5000"
         outputPower="0"
         requiredTurns="6"
         x="570"
@@ -262,17 +262,17 @@
             </resource>
         </outputResources>
     </building>
-	
-	<!--Megaprojects-->
-	<building
+
+    <!-- Megaprojects -->
+    <building
         name="Lunar Meteorite Defense System"
         amount="0"
-		type="Megaproject"
         info="Provides protection from meteorites"
-        inputPower="1000"
-        monetaryCost="1500"
+        inputPower="10"
+        monetaryCost="10000"
         outputPower="0"
-        requiredTurns="10"
+        requiredTurns="3"
+        type="Megaproject"
         x="0"
         y="0" >
         <requiredBuildings>
@@ -283,117 +283,115 @@
         <requiredResources>
             <resource
                 name="Metal"
-                amount="200">
+                amount="1" >
             </resource>
             <resource
                 name="Electronics"
-                amount="200" >
+                amount="1" >
             </resource>
-			<resource
+            <resource
                 name="Fuel"
-                amount="200" >
+                amount="1" >
             </resource>
         </requiredResources>
     </building>
-	
-	<building
+    <building
         name="Lunar Space Port"
         amount="0"
-		type="Megaproject"
         info="Launchpad for spaceships"
         inputPower="1000"
-        monetaryCost="1500"
+        monetaryCost="20000"
         outputPower="0"
         requiredTurns="10"
+        type="Megaproject"
         x="0"
         y="0" >
         <requiredBuildings>
             <Building name="Regolith Processor" >
             </Building>
-			<Building name="Robot Factory" >
+            <Building name="Robot Factory" >
             </Building>
-			<Building name="Propellant Factory" >
+            <Building name="Propellant Factory" >
             </Building>
-			<Building name="Nuclear Plant" >
+            <Building name="Nuclear Plant" >
             </Building>
         </requiredBuildings>
 
         <requiredResources>
             <resource
                 name="Metal"
-                amount="200">
+                amount="100" >
             </resource>
             <resource
                 name="Regolith"
-                amount="200" >
+                amount="100" >
             </resource>
-			<resource
+            <resource
                 name="Fuel"
-                amount="200" >
+                amount="100" >
             </resource>
-			<resource
+            <resource
                 name="Robot"
-                amount="200" >
+                amount="100" >
             </resource>
         </requiredResources>
     </building>
-	
-	<building
+    <building
         name="Human Colony"
         amount="0"
-		type="Megaproject"
         info="Base for human settlement"
         inputPower="1000"
-        monetaryCost="2000"
+        monetaryCost="100000"
         outputPower="0"
         requiredTurns="20"
+        type="Megaproject"
         x="0"
         y="0" >
         <requiredBuildings>
             <Building name="MoonBase" >
             </Building>
-			<Building name="Solar Panel Array" >
+            <Building name="Solar Panel Array" >
             </Building>
-			<Building name="Ice Mine" >
+            <Building name="Ice Mine" >
             </Building>
-			<Building name="Water Procesor" >
+            <Building name="Water Procesor" >
             </Building>
-			<Building name="Robot Factory" >
+            <Building name="Robot Factory" >
             </Building>
-			<Building name="Lunar Meteorite Defense System" >
+            <Building name="Lunar Meteorite Defense System" >
             </Building>
-			<Building name="Lunar Space Port" >
+            <Building name="Lunar Space Port" >
             </Building>
         </requiredBuildings>
 
         <requiredResources>
             <resource
                 name="Water"
-                amount="200">
+                amount="100" >
             </resource>
             <resource
                 name="Oxygen"
-                amount="200">
+                amount="100" >
             </resource>
-			<resource
+            <resource
                 name="Regolith"
-                amount="200" >
+                amount="100" >
             </resource>
-			<resource
+            <resource
                 name="Fuel"
-                amount="200" >
+                amount="100" >
             </resource>
-			<resource
+            <resource
                 name="Robot"
-                amount="200" >
+                amount="100" >
             </resource>
-			<resource
+            <resource
                 name="Metal"
-                amount="200" >
+                amount="100" >
             </resource>
-			<resource
+            <resource
                 name="Electronics"
-                amount="200" >
+                amount="100" >
             </resource>
         </requiredResources>
     </building>

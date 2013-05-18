@@ -34,7 +34,7 @@ public class MoonBaseManager {
 	}
 
 	public static void createNewMoonBase(Difficulty diff, Context context) {
-		MoonBaseManager.currentMoonBase = new MoonBase(diff.getMoney());
+		MoonBaseManager.currentMoonBase = new MoonBase(diff.getMoney(), diff.getLaunchMass());
 		MoonBaseManager.currentMoonBase.addPower(1000);// Initial power
 		saveMoonBase(context);
 	}

@@ -1,24 +1,22 @@
-package spaceappschallenge.moonville.xml_parsers;
+package spaceappschallenge.moonville.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
-import spaceappschallenge.moonville.domain.Resource;
 import spaceappschallenge.moonville.miscellaneous.SerializablePair;
 
 /**
- * Provides access to the xml attributes of a building.
- * This is a read-only object, and is made by the xml parser
+ * Provides access to the xml attributes of a building. This is a read-only
+ * object, and is made by the xml parser
  */
-public class BuildingDefinition implements Serializable
-{
+public class BuildingDefinition implements Serializable {
 	private final String name;
 	private final String info;
-	private final List<SerializablePair<Resource,Integer>> requiredResources;
-	private final List<SerializablePair<Resource,Integer>> outputResources;
+	private String type;
+	private final List<SerializablePair<Resource, Integer>> requiredResources;
+	private final List<SerializablePair<Resource, Integer>> outputResources;
 	private final List<String> requiredBuildings;
 	private final int inputPower;
 	private final int outputPower;
@@ -26,27 +24,29 @@ public class BuildingDefinition implements Serializable
 	private final int monetaryCost;
 	private final int xPos, yPos;
 
-	public BuildingDefinition(String name, String info, int inputPower,
-			int outputPower, int monetaryCost,
+	public BuildingDefinition(String name, String info, String type,
+			int inputPower, int outputPower, int monetaryCost,
 			int requiredTurns,
 			ArrayList<SerializablePair<Resource, Integer>> requiredResources,
 			ArrayList<SerializablePair<Resource, Integer>> outputResources,
-			ArrayList<String> requiredBuildings, int xPos,
-			int yPos) {
+			ArrayList<String> requiredBuildings, int xPos, int yPos) {
 		this.name = name;
 		this.info = info;
+		this.type = type;
 		this.inputPower = inputPower;
 		this.outputPower = outputPower;
 		this.monetaryCost = monetaryCost;
 		this.requiredTurns = requiredTurns;
-		this.requiredResources = Collections.unmodifiableList(requiredResources);
+		this.requiredResources = Collections
+				.unmodifiableList(requiredResources);
 		this.outputResources = Collections.unmodifiableList(outputResources);
-		this.requiredBuildings = Collections.unmodifiableList(requiredBuildings);
+		this.requiredBuildings = Collections
+				.unmodifiableList(requiredBuildings);
 		this.xPos = xPos;
 		this.yPos = yPos;
 	}
-	
-	//Setters and Getters
+
+	// Setters and Getters
 	public String getName() {
 		return name;
 	}
@@ -54,13 +54,16 @@ public class BuildingDefinition implements Serializable
 	public String getInfo() {
 		return info;
 	}
+	
+	public String getType(){
+		return type;
+	}
 
-
-	public List<SerializablePair<Resource,Integer>> getRequiredResources() {
+	public List<SerializablePair<Resource, Integer>> getRequiredResources() {
 		return requiredResources;
 	}
 
-	public List<SerializablePair<Resource,Integer>> getOutputResources() {
+	public List<SerializablePair<Resource, Integer>> getOutputResources() {
 		return outputResources;
 	}
 
@@ -75,7 +78,7 @@ public class BuildingDefinition implements Serializable
 	public int getXPos() {
 		return xPos;
 	}
-	
+
 	public int getYPos() {
 		return yPos;
 	}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:orientation="vertical"
+    tools:context=".MegaprojectsListActivity" >
+
+    <LinearLayout
+        android:id="@+id/megaprojectListHLL"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <spaceappschallenge.moonville.ui.FontTextView
+            android:id="@+id/megaprojectBudgetTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Budget: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <spaceappschallenge.moonville.ui.FontTextView
+            android:id="@+id/megaprojectBudgetTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1000"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/megaprojectsListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp">
+        
+    </ListView>
+
+</LinearLayout>
