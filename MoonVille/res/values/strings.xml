@@ -29,6 +29,7 @@
     <string name="required_resources">Required Resources:</string>
     <string name="required_buildings">Required Buildings:</string>
     <string name="output_resources">Output Resources:</string>
-    <string name="title_activity_initial_launch">InitialLaunchActivity</string>
+    <string name="title_activity_initial_launch">Initial Launch</string>
+    <string name="title_activity_research">Research Topics:</string>
 
 </resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<researchList>
+    <research
+        name="Mining"
+        info="Research about mining resources on moon"
+        inputPower="10"
+        monetaryCost="500"
+        requiredTurns="5" >
+    </research>
+    <research
+        name="Material Processing"
+        info="Increases efficiency of production"
+        inputPower="10"
+        monetaryCost="500"
+        requiredTurns="5" >
+    </research>
+    <research
+        name="Energy Production"
+        info="Solar panels and nuclear plants will generate power more efficiently"
+        inputPower="20"
+        monetaryCost="600"
+        requiredTurns="8" >
+    </research>
+    <research
+        name="Defense"
+        amount="0"
+        info="Learn more about defending the moon infrastructure from meteorites and moon dust"
+        inputPower="20"
+        monetaryCost="800"
+        requiredTurns="10" >
+    </research>
+    <research
+        name="Human Settlement"
+        info="Learn more about how humans can settle"
+        inputPower="50"
+        monetaryCost="1000"
+        requiredTurns="15" >
+    </research>
+</researchList>

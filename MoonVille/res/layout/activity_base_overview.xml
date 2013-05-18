@@ -101,6 +101,13 @@
                 android:textSize="@dimen/tinyButtonText" />
 
             <Button
+                android:id="@+id/researchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Research"
+                android:onClick="showResearchScreen" />
+
+            <Button
                 android:id="@+id/baseOverviewMegaProjectsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -38,7 +38,7 @@
         <activity
             android:name="spaceappschallenge.moonville.AllResourcesActivity"
             android:label="@string/title_activity_all_resources" >
-        </activity>
+        </activity>
         -->
 
         <activity
@@ -104,6 +104,16 @@
             android:name="spaceappschallenge.moonville.activities.InitialLaunchActivity"
             android:label="@string/title_activity_initial_launch"
             android:parentActivityName="spaceappschallenge.moonville.activities.GameActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="spaceappschallenge.moonville.activities.GameActivity" />
+        </activity>
+        <activity
+            android:name="spaceappschallenge.moonville.activities.ResearchActivity"
+            android:label="@string/title_activity_research"
+            android:parentActivityName="spaceappschallenge.moonville.activities.GameActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Dialog" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="spaceappschallenge.moonville.activities.GameActivity" />
