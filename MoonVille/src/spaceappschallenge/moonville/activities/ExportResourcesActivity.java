@@ -38,12 +38,9 @@ public class ExportResourcesActivity extends GameActivity {
 	public void updateUI() {
 		if (this.companies.size() > 0) {
 			ImportCompany company = this.companies.get(this.companyIndex);
-			TextView companyName = (TextView) this
-					.findViewById(R.id.companyname);
-			TextView companyInfo = (TextView) this
-					.findViewById(R.id.companyinfo);
-			ListView exportResourceList = (ListView) this
-					.findViewById(R.id.importresourcelist);
+			TextView companyName = (TextView) this.findViewById(R.id.export_company_name);
+			TextView companyInfo = (TextView) this.findViewById(R.id.companyinfo);
+			ListView exportResourceList = (ListView) this.findViewById(R.id.importresourcelist);
 
 			companyName.setText(company.getName());
 			companyInfo.setText(company.getInfo());
