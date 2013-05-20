@@ -172,14 +172,14 @@ public class InitialLaunchListAdapter extends BaseAdapter {
 						toast = Toast.makeText(v.getContext(),
 								"Added: " + launchMass + " KG of "
 										+ resource.getName() + " for $"
-										+ totalCost, 2000);
+										+ totalCost, 5000);
 					} else {
 						toast = Toast.makeText(v.getContext(),
-								"Not enough launch mass!", 2000);
+								"Not enough launch mass!", 5000);
 					}
 				} else {
 					toast = Toast.makeText(v.getContext(),
-							"Can't spend so much!", 2000);
+							"Can't spend so much!", 5000);
 				}
 				toast.show();
 

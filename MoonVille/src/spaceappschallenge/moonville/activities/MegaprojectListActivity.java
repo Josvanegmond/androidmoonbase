@@ -44,7 +44,7 @@ public class MegaprojectListActivity extends GameActivity {
 	public void updateUI() {
 		TextView budgetTextView = (TextView) (this
 				.findViewById(R.id.megaprojectBudgetTextView));
-		budgetTextView.setText(""
+		budgetTextView.setText("$"
 				+ MoonBaseManager.getCurrentMoonBase().getMoney());
 	}
 

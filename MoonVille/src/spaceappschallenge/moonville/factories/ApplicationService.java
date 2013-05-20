@@ -7,6 +7,7 @@ package spaceappschallenge.moonville.factories;
 import spaceappschallenge.moonville.activities.BaseOverviewActivity;
 import spaceappschallenge.moonville.activities.ImportResourcesActivity;
 import spaceappschallenge.moonville.activities.InitialLaunchActivity;
+import spaceappschallenge.moonville.activities.ResearchActivity;
 import android.content.Context;
 import android.util.Log;
 
@@ -19,7 +20,7 @@ public class ApplicationService {
 	private static BaseOverviewActivity baseOverviewActivity;
 	private static ImportResourcesActivity importResourcesActivity;
 	private static InitialLaunchActivity initialLaunchActivity;
-
+	private static ResearchActivity researchActivity;
 	protected ApplicationService() {
 		// just to make sure it can't be instantiated
 	}
@@ -72,6 +73,16 @@ public class ApplicationService {
 			InitialLaunchActivity initialLaunchActivity) {
 		ApplicationService.initialLaunchActivity = initialLaunchActivity;
 	}
+
+	public static ResearchActivity getResearchActivity() {
+		return researchActivity;
+	}
+
+	public static void setResearchActivity(ResearchActivity researchActivity) {
+		ApplicationService.researchActivity = researchActivity;
+	}
+	
+	
 
 }
 // public class ApplicationService extends Application {

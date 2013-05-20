@@ -35,7 +35,7 @@
                 android:id="@+id/il_resourceCostLabelTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cost"
+                android:text="Cost($)"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <spaceappschallenge.moonville.ui.FontTextView
@@ -83,7 +83,7 @@
                 android:id="@+id/resourceLaunchMassLabelTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Launch Mass"
+                android:text="Launch Mass(KG)"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <spaceappschallenge.moonville.ui.FontTextView

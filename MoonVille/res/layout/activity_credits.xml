@@ -4,34 +4,98 @@
     android:layout_height="match_parent"
     tools:context=".CreditsActivity" >
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/creditsScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:orientation="vertical"
         android:layout_margin="10dp" >
 
-        <TextView
-            android:id="@+id/developersTextView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Programmers" />
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/graphicsTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Graphic Designers" 
-            android:layout_marginTop="20dp"/>
-        
-        <TextView
-            android:id="@+id/soundTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sound Engineers" 
-            android:layout_marginTop="20dp"/>
+            <TextView
+                android:id="@+id/developersTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Team Members"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/graphicsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Jos van Egmond (Android + Graphics)"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/soundTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Robik Shrestha (Android + Graphics)"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/soundTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Felix (Android)"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/soundTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Jan-Olaf Becker (Android)"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/soundTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Todd Cowden (Graphics)"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/soundTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Yaritzmar Rosario (Graphics)"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/soundTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Other platforms"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/soundTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Yoseph Haryanto (Phonegap)"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/soundTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Luigi Castiglione (iOS)"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
